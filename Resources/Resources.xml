@@ -1,0 +1,72 @@
+
+<!-- since all this is getting
+pretty complicated, maybe i should use
+different schemes/models?
+-->
+<!--resources model="simple">
+  <res>
+    <name>player_texture</name>
+    <path>player.jpg</path>
+  </res>
+</resources-->
+
+<resources model="full">
+  <def type="shader">
+    <uniform name="in_Position">1</uniform>
+  </def>
+  
+  <res name="shader_heightmap" type="shader">
+    <frag>heightmap.frag</frag>
+    <vert>heightmap.vert</vert>
+  </res>
+  <res name="shader_simple" type="shader">
+    <frag>simple.frag</frag>
+    <vert>simple.vert</vert>
+  </res>
+  <res name="shader_lighting" type="shader">
+  </res>
+
+  <res name="heightmap" type="image_data">
+    <path>heightmap.jpg</path>
+  </res>
+
+  <res name="scene_test_buttefly" type="scene">
+    <dependencies>
+      <dep>heightmap</dep>
+    </dependencies>
+
+    <path>scene.xml</path>
+  </res>
+
+  <!--should files be treated differently?-->
+  <res name="many_files" type="test_resource">
+    <which_file_to_use>2</which_file_to_use>
+    <!--having them in that form allows for
+        easier use of VFS -->
+    <files>
+      <path_1>file1.txt</path_1>
+      <path_2>file2.txt</path_2>
+    </files>
+  </res>
+  
+  <!--embedded data-->
+  <res name="test_resource" type="test_resource">
+    <load_param_1>true</load_param_1>
+    <load_param_2>0.5</load_param_2>
+    <load_param_3>name_of_other_resource</load_param_3>
+
+    <load_passes>
+      <pass name="low">
+        <load_param_4>texture_low</load_param_4>
+      </pass>
+      <pass name="high">
+        <load_param_4>texture_high</load_param_4>
+      </pass>
+    </load_passes>
+  </res>
+
+  <!--outfile data-->
+  <res_link name="test_resource_linked">
+    <path>resource_data.xml</path>
+  </res_link>
+</resources>

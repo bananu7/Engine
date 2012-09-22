@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <button>
+    <size x="180" y="40"/>
+    <position x="200" y="680"/>
+    <caption>ButtonXML</caption>
+  </button>
+  <slider>
+    <size x="200" y="100"/>
+    <position x="400" y="680"/>
+    <horizontal>true</horizontal>
+    <properties max="0" min="100" value="50"/>
+  </slider>
+  <frame>
+    <size x="500" y="500"/>
+    <position x="250" y="50"/>
+    <controls>
+      <button>
+        <position x="10" y="10"/>
+        <caption>FrBt1</caption>
+      </button>
+    </controls>
+  </frame>
+</root>

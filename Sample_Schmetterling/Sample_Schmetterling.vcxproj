@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{85897BF3-5C42-4E59-B58E-50B2BD469986}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Sample_Schmetterling</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SolutionDir)\dependencies\glew-1.5.6\include;$(SolutionDir)\dependencies;$(SolutionDir)\Engine;$(SolutionDir)\Engine\include;$(LUA_DEV)\include;$(VS_DEV)\SFML-PD\include;$(PATH_TO_BOOST);$(SolutionDir)\dependencies\pugixml-1.2\src;$(SolutionDir)\dependencies\FBX\include;$(PHYSX_SDK)\SDKs\PxFoundation;$(PHYSX_SDK)\SDKs\PhysXAPI;$(PHYSX_SDK)\SDKs\PxTask\include;$(PHYSX_SDK)\SDKs\PhysXVisualDebuggerSDK\PVDCommLayer\Public;$(PHYSX_SDK)\SDKs\PhysXProfileSDK\sdk\include;$(PHYSX_SDK)\Samples\PxToolkit\include;$(PHYSX_SDK)\SDKs\PxFoundation\internal\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\Debug;$(VS_DEV)\SFML-PD\lib\Debug;$(PATH_TO_BOOST)\stage\lib;$(SolutionDir)\dependencies\pugixml-1.2\scripts\vs2010\x32;$(PHYSX_SDK)\SDKs\lib\win32;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(SolutionDir)\dependencies\glew-1.5.6\include;$(SolutionDir)\dependencies;$(SolutionDir)\Engine;$(SolutionDir)\Engine\include;$(LUA_DEV)\include;$(VS_DEV)\SFML-PD\include;$(PATH_TO_BOOST);$(SolutionDir)\dependencies\FBX\include;$(PHYSX_SDK)\SDKs\PxFoundation;$(PHYSX_SDK)\SDKs\PhysXAPI;$(PHYSX_SDK)\SDKs\PxTask\include;$(PHYSX_SDK)\SDKs\PhysXVisualDebuggerSDK\PVDCommLayer\Public;$(PHYSX_SDK)\SDKs\PhysXProfileSDK\sdk\include;$(PHYSX_SDK)\Samples\PxToolkit\include;$(PHYSX_SDK)\SDKs\PxFoundation\internal\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\Release;$(VS_DEV)\SFML-PD\lib\Release;$(PATH_TO_BOOST)\stage\lib;$(PHYSX_SDK)\SDKs\lib\win32;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_ITERATOR_DEBUG_LEVEL=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>Engine.lib;sfml-window-d.lib;sfml-system-d.lib;pugixmld.lib;PhysX3_x86.lib;PhysX3ExtensionsDEBUG.lib;PhysX3Cooking_x86.lib;FoundationDEBUG.lib;PhysX3CommonDEBUG.lib;PvdRuntime.lib;PxToolkitDEBUG.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>libcpmt; libcpmtd; libcmt;</IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>Engine.lib;sfml-window.lib;sfml-system.lib;PhysX3_x86.lib;PhysX3Extensions.lib;PhysX3Cooking_x86.lib;Foundation.lib;PhysX3Common.lib;PvdRuntime.lib;PxToolkit.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>libcpmt; libcpmtd; libcmt</IgnoreSpecificDefaultLibraries>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
+      <AddModuleNamesToAssembly>
+      </AddModuleNamesToAssembly>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="EntityFromFbx.cpp" />
+    <ClCompile Include="EntityMgr.cpp" />
+    <ClCompile Include="Font.cpp" />
+    <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="Graph.cpp" />
+    <ClCompile Include="GUI.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Mirror.cpp" />
+    <ClCompile Include="Physics.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Skybox.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="EntityMgr.h" />
+    <ClInclude Include="Font.h" />
+    <ClInclude Include="Ground.h" />
+    <ClInclude Include="Mirror.h" />
+    <ClInclude Include="GUI.h" />
+    <ClInclude Include="Physics.h" />
+    <ClInclude Include="Graph.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Skybox.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Resources\font.frag" />
+    <None Include="..\Resources\font.vert" />
+    <None Include="..\Resources\heightmap.frag" />
+    <None Include="..\Resources\heightmap.vert" />
+    <None Include="..\Resources\interface.frag" />
+    <None Include="..\Resources\interface.vert" />
+    <None Include="..\Resources\texturing.frag" />
+    <None Include="..\Resources\texturing.vert" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

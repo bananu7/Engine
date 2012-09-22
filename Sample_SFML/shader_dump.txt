@@ -1,0 +1,9 @@
+Attributes Count = 2
+0. in_Position 35666(1)
+1. in_TexCoord 35664(1)
+
+Uniforms Count = 4
+0. Bumpmap 35678(1)
+1. ProjectionMatrix 35676(1)
+2. Texture 35678(1)
+3. ViewMatrix 35676(1)
