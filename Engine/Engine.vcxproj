@@ -20,12 +20,14 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>NotSet</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -40,8 +42,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <SourcePath>$(ProjectDir)\src;$(SourcePath)</SourcePath>
-    <LibraryPath>$(SolutionDir)\dependencies\FBX\lib;$(SolutionDir)\dependencies\glew-1.5.6\lib;$(SolutionDir)\dependencies\SOIL\lib;$(PATH_TO_BOOST)\stage\lib;$(SolutionDir)\dependencies\pugixml-1.2\scripts\vs2010\x32;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(LUA_DEV)\include;$(ProjectDir);$(ProjectDir)\include;$(SolutionDir)\dependencies\FBX\include;$(SolutionDir)\dependencies;$(PATH_TO_BOOST);$(SolutionDir)\dependencies\SOIL\include;$(SolutionDir)\dependencies\rapidxml-1.13;$(SolutionDir)\dependencies\glew-1.5.6\include;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\dependencies\FBX\lib;$(SolutionDir)\dependencies\glew-1.9.0\lib;$(SolutionDir)\dependencies\SOIL\lib;$(SolutionDir)\dependencies\boost_1_52_0\stage\lib;$(SolutionDir)\dependencies\pugixml-1.2\scripts\vs2010\x32;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(LUA_DEV)\include;$(ProjectDir);$(ProjectDir)\include;$(SolutionDir)\dependencies;$(SolutionDir)\dependencies\FBX\include;$(BOOST_1_52_0)\;$(SolutionDir)\dependencies\SOIL\include;$(SolutionDir)\dependencies\rapidxml-1.13;$(SolutionDir)\dependencies\glew-1.9.0\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(LUA_DEV)\include;$(PATH_TO_BOOST);$(ProjectDir);$(ProjectDir)\include;$(SolutionDir)\dependencies;$(SolutionDir)\dependencies\SOIL\include;$(SolutionDir)\dependencies\rapidxml-1.13;$(SolutionDir)\dependencies\glew-1.5.6\include;$(SolutionDir)\dependencies\FBX\include;$(IncludePath)</IncludePath>
@@ -53,13 +55,16 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;BOOST_ALL_STATIC_LINK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>
       </AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SOIL.lib;opengl32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>MSVCRTD</IgnoreSpecificDefaultLibraries>
     </Link>
     <Lib>
       <AdditionalDependencies>opengl32.lib;glew32.lib;soil.lib;glu32.lib;fbxsdk-2013.1-mdd.lib;wininet.lib;pugixmld.lib</AdditionalDependencies>

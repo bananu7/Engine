@@ -43,7 +43,7 @@ bool CModelData::_LoadMtl (std::istream& str)
 			if (HaveMat)
 			{
 				m_Materials.insert(
-					make_pair<string, SMaterial>(MatName, TempMat));
+					make_pair(MatName, TempMat));
 			}
 			else
 				HaveMat = true;
@@ -92,7 +92,7 @@ bool CModelData::_LoadMtl (std::istream& str)
 	} while (!(str.eof() || MatCmd == ""));
 	if (HaveMat)
 	{
-		m_Materials.insert(make_pair<string, SMaterial>(MatName, TempMat));
+		m_Materials.insert(make_pair(MatName, TempMat));
 	}
 
 	return true;
@@ -529,7 +529,7 @@ bool CModelData::_LoadFromFBX(const std::string &path)
 		//TempMat.Textures								// not used?
 
 		if (m_Materials.find(m_MaterialName)==m_Materials.end())				// if Material not loaded, load	// not sure if not bottleneck
-			m_Materials.insert(make_pair<string, SMaterial>(m_MaterialName,TempMat));
+			m_Materials.insert(make_pair(m_MaterialName,TempMat));
 	}
 
 	m_Importer->Destroy();												// destroy the importer.

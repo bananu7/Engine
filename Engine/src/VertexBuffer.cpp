@@ -3,7 +3,7 @@
 
 #define BUFFER_OFFSET(i) (reinterpret_cast<void*>(i))
 
-GLuint CVertexBuffer::_GenerateVBOId()
+unsigned int CVertexBuffer::_GenerateVBOId()
 {
 	GLuint id = 0;
 	glGenBuffers(1, &id);
@@ -44,7 +44,7 @@ void CVertexBuffer::LoadData(const void* data, int size)
 	_GuardedUnbind();
 }
 
-void CVertexBuffer::LoadVertices(GLuint number_of_vertices, CVertex* data, GLuint* indices)
+void CVertexBuffer::LoadVertices(unsigned int number_of_vertices, CVertex* data, unsigned int* indices)
 {
 	//za argument przyjmuje wskaznik na tablice struktur przedstawiajacych wierzcholek w formacie
 	//GLfloat x, y, z

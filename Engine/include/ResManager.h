@@ -95,7 +95,7 @@ public:
 				{
 					// Dopisujemy go do listy za³adowanych zasobów
 					boost::shared_ptr<CResource> TempC (Temp);
-					m_Data.insert (std::make_pair<std::string, boost::shared_ptr<CResource>>(ident, TempC));
+					m_Data.insert (std::make_pair(ident, TempC));
 					// I zwracamy, bez dynamic_cast, bo ma ju¿ dobry typ
 					return static_cast<T*>(TempC.get());
 				}

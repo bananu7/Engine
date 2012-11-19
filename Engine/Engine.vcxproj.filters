@@ -41,24 +41,6 @@
     <ClInclude Include="include\Misc.h">
       <Filter>Header Files\Misc</Filter>
     </ClInclude>
-    <ClInclude Include="include\Model.h">
-      <Filter>Header Files\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IModelCooker.h">
-      <Filter>Header Files\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ModelCookerDisplayList.h">
-      <Filter>Header Files\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ModelCookerVBO.h">
-      <Filter>Header Files\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ModelData.h">
-      <Filter>Header Files\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ModelInstance.h">
-      <Filter>Header Files\Model</Filter>
-    </ClInclude>
     <ClInclude Include="include\Option.h">
       <Filter>Header Files\Misc</Filter>
     </ClInclude>
@@ -89,9 +71,6 @@
     <ClInclude Include="include\Game.h">
       <Filter>Header Files\Misc</Filter>
     </ClInclude>
-    <ClInclude Include="include\FrameBuffer.h">
-      <Filter>Header Files\Model</Filter>
-    </ClInclude>
     <ClInclude Include="include\Typedefs.h">
       <Filter>Header Files\Misc</Filter>
     </ClInclude>
@@ -109,12 +88,6 @@
     </ClInclude>
     <ClInclude Include="include\World.h">
       <Filter>Header Files\Model\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="include\VertexBuffer.h">
-      <Filter>Header Files\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="include\VertexAttributeArray.h">
-      <Filter>Header Files\Model</Filter>
     </ClInclude>
     <ClInclude Include="include\Matrix4.h">
       <Filter>Header Files\Misc</Filter>
@@ -137,17 +110,44 @@
     <ClInclude Include="include\GetPosition.h">
       <Filter>Header Files\Model\Fbx</Filter>
     </ClInclude>
+    <ClInclude Include="include\IModelCooker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Vector3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VertexAttributeArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Model.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ModelCookerDisplayList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ModelCookerVBO.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ModelData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="include\ModelFbx.h">
-      <Filter>Header Files\Model</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ModelInstance.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\ShaderSet.h">
-      <Filter>Header Files\Model</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\dependencies\Singleton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Vector3.h">
-      <Filter>Header Files\Model</Filter>
+    <ClInclude Include="include\FrameBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VertexBuffer.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

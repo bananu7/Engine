@@ -1,4 +1,4 @@
-#include <Windows.h>
+#include <windows.h>
 #include <GL/glew.h>
 #include <GL/GLU.h>
 #include <GL/GL.h>

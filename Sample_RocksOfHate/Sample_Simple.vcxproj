@@ -21,12 +21,14 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>NotSet</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -40,7 +42,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)\dependencies\glew-1.5.6\include;$(SolutionDir)\dependencies;$(SolutionDir)\Engine\include;$(LUA_DEV)\include;$(VS_DEV)\SFML-PD\include;($VS_DEV)\boost_svn;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\dependencies\glew-1.5.6\include;$(SolutionDir)\dependencies;$(SolutionDir)\Engine\include;$(LUA_DEV)\include;$(VS_DEV)\SFML-PD\include;($VS_DEV)\boost_svn;$(SolutionDir)\dependencies\boost_1_52_0;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\Debug;$(VS_DEV)\SFML-PD\lib\Debug;$(VS_DEV)\boost_svn\stage\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

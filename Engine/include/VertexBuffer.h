@@ -1,12 +1,15 @@
 #pragma once
 
-#include "stdafx.h"
-
 struct CVertex;
 
 class CVertexBuffer
 {
 public:
+	enum EBufferType
+	{
+		DATA_BUFFER = GL_ARRAY_BUFFER,
+		INDEX_BUFFER = GL_ELEMENT_ARRAY_BUFFER
+	};
 	enum EBufferUsage
 	{
 		STATIC_DRAW = GL_STATIC_DRAW,
@@ -16,27 +19,23 @@ public:
 		DYNAMIC_READ,
 		DYNAMIC_WRITE*/
 	};
-	enum EBufferType
-	{
-		DATA_BUFFER = GL_ARRAY_BUFFER,
-		INDEX_BUFFER = GL_ELEMENT_ARRAY_BUFFER
-	};
+	
 private:
-	GLuint	m_VBOId;
-	GLint	m_savedVBOId;
+	unsigned int m_VBOId;
+	int	m_savedVBOId;
 
 	EBufferUsage m_Usage;
 	EBufferType m_Type;
 
 protected:
-	GLuint	_GenerateVBOId();
+	unsigned int		_GenerateVBOId();
 	void	_GuardedBind();
 	void	_GuardedUnbind();
 public:
 	void Bind();
-	void LoadVertices(GLuint number_of_vertices, CVertex* data, GLuint* indices);
+	void LoadVertices(unsigned int number_of_vertices, CVertex* data, unsigned int* indices);
 	void LoadData (const void* data, int size);
 
-	CVertexBuffer(EBufferType type, EBufferUsage usage);
+	CVertexBuffer(EBufferType type = EBufferType::DATA_BUFFER, EBufferUsage usage = EBufferUsage::STATIC_DRAW);
 	~CVertexBuffer();
 };

@@ -20,12 +20,14 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>NotSet</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -39,7 +41,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)\dependencies\glew-1.5.6\include;$(SolutionDir)\dependencies;$(SolutionDir)\Engine;$(SolutionDir)\Engine\include;$(LUA_DEV)\include;$(VS_DEV)\SFML-PD\include;$(PATH_TO_BOOST);$(SolutionDir)\dependencies\pugixml-1.2\src;$(SolutionDir)\dependencies\FBX\include;$(PHYSX_SDK)\SDKs\PxFoundation;$(PHYSX_SDK)\SDKs\PhysXAPI;$(PHYSX_SDK)\SDKs\PxTask\include;$(PHYSX_SDK)\SDKs\PhysXVisualDebuggerSDK\PVDCommLayer\Public;$(PHYSX_SDK)\SDKs\PhysXProfileSDK\sdk\include;$(PHYSX_SDK)\Samples\PxToolkit\include;$(PHYSX_SDK)\SDKs\PxFoundation\internal\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\dependencies\glew-1.5.6\include;$(SolutionDir)\dependencies;$(SolutionDir)\Engine;$(SolutionDir)\Engine\include;$(LUA_DEV)\include;$(VS_DEV)\SFML-PD\include;$(SolutionDir)\dependencies\boost_1_52_0;$(SolutionDir)\dependencies\pugixml-1.2\src;$(SolutionDir)\dependencies\FBX\include;$(PHYSX_SDK)\SDKs\PxFoundation;$(PHYSX_SDK)\SDKs\PhysXAPI;$(PHYSX_SDK)\SDKs\PxTask\include;$(PHYSX_SDK)\SDKs\PhysXVisualDebuggerSDK\PVDCommLayer\Public;$(PHYSX_SDK)\SDKs\PhysXProfileSDK\sdk\include;$(PHYSX_SDK)\Samples\PxToolkit\include;$(PHYSX_SDK)\SDKs\PxFoundation\internal\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\Debug;$(VS_DEV)\SFML-PD\lib\Debug;$(PATH_TO_BOOST)\stage\lib;$(SolutionDir)\dependencies\pugixml-1.2\scripts\vs2010\x32;$(PHYSX_SDK)\SDKs\lib\win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
