@@ -19,10 +19,10 @@ std::string CShader::Load(SLoadParams const& loadParams)
 	VertFilePath = CResManager::GetSingleton()->GetResourcePath() + VertFilePath;
 
 	m_FragFileData = TextFileRead(FragFilePath.c_str());
-	m_VertFileData = TextFileRead(VertFilePath.c_str());
-
 	if (!m_FragFileData)
 		return string("Error loading fragment shader file");
+
+	m_VertFileData = TextFileRead(VertFilePath.c_str());
 	if (!m_VertFileData)
 		return string("Error loading vertex shader file");
 
@@ -35,15 +35,77 @@ std::string CShader::Load(SLoadParams const& loadParams)
 	m_Attribs["in_Normal"] = 1;
 	m_Attribs["in_TexCoord"] = 2;
 
-	return Compile() ? string("") : string("Compile error");
+	string CompilationResult = Compile();
+
+	return CompilationResult;
 }
 
 void CShader::Unload() 
 { 
 	free (m_FragFileData);
 	free (m_VertFileData);
-	// TODO: destroy opengl programs and shaders
+	glDeleteShader(m_FragNum);
+	glDeleteShader(m_VertNum);
+	glDeleteProgram(m_ProgramNum);
 }
+
+string CShader::Compile()
+{
+	glShaderSource(m_FragNum, 1, static_cast<const GLchar**>(const_cast<const char**>(&m_FragFileData)), NULL);
+	glCompileShader(m_FragNum);
+
+	GLint compiled;
+
+	glGetObjectParameterivARB(m_FragNum, GL_COMPILE_STATUS, &compiled);
+	if (!compiled)
+		return "Fragment shader compilation error : " + _GetInfo(m_FragNum);;
+
+	glShaderSource(m_VertNum, 1, static_cast<const GLchar**>(const_cast<const char**>(&m_VertFileData)), NULL);
+	glCompileShader(m_VertNum);
+
+	glGetObjectParameterivARB(m_VertNum, GL_COMPILE_STATUS, &compiled);
+	if (!compiled)
+		return "Vertex shader compilation error : " + _GetInfo(m_VertNum);;
+
+	// After recompilations, attributes need to be rebound
+	for (auto it = m_Attribs.begin(); it != m_Attribs.end(); ++it)
+	{
+		glBindAttribLocation(m_ProgramNum, it->second, it->first.c_str());
+	}
+
+	// Bind the output
+	glBindFragDataLocation(m_ProgramNum, 0, "out_FragColor");
+
+	unsigned int Shaders[4];
+	GLsizei Count;
+
+	// We don't want to bind the shaders twice, if it's just recompilation
+	glGetAttachedShaders(m_ProgramNum, 4, &Count, Shaders); 
+
+	if (Count == 0)
+	{
+		glAttachShader (m_ProgramNum, m_FragNum);
+		glAttachShader (m_ProgramNum, m_VertNum);
+	}
+	glLinkProgram (m_ProgramNum);
+
+	GLint linked;
+	glGetProgramiv(m_ProgramNum, GL_LINK_STATUS, &linked);
+	if (!linked)
+		return "Program link error : " + _GetInfo(m_ProgramNum);;
+
+	// Success
+	return string();
+}
+
+bool CShader::Validate()
+{
+	int isValid;
+	glValidateProgram(m_ProgramNum);
+	glGetProgramiv(m_ProgramNum, GL_VALIDATE_STATUS, &isValid);
+	return (isValid == GL_TRUE);
+}
+
 
 int CShader::GetAttribLocation (const std::string& name)
 {
@@ -57,13 +119,16 @@ string CShader::_GetInfo(uint32 num)
 
 	glGetShaderiv(num, GL_INFO_LOG_LENGTH , &blen);       
 
-	if (blen > 1)
+	if (blen > 0)
 	{
-		char* compiler_log = (char*)malloc(blen);
+		char* compiler_log = new char [blen];
 
 		glGetInfoLogARB(num, blen, &slen, compiler_log);
-		return string(compiler_log);
-		free (compiler_log);
+
+		string CompilerLogStr (compiler_log);
+		delete[] compiler_log;
+
+		return CompilerLogStr;
 	}
 	return string("No error message");
 }
@@ -133,72 +198,6 @@ void CShader::SetTex (const std::string& name, uint8 texUnitNum)
 
 	glUseProgram(m_ProgramNum);
 	glUniform1i(my_sampler_uniform_location, texUnitNum);
-}
-
-bool CShader::Compile()
-{
-	glShaderSource(m_FragNum, 1, static_cast<const GLchar**>(const_cast<const char**>(&m_FragFileData)), NULL);
-	glCompileShader(m_FragNum);
-
-	GLint compiled;
-
-	ofstream Log ("shader_out.txt", ios::out | ios::app);
-
-	glGetObjectParameterivARB(m_FragNum, GL_COMPILE_STATUS, &compiled);
-	if (!compiled)
-	{
-		string Temp = _GetInfo(m_FragNum);
-		Log << "Frag : " << Temp;
-		return false;
-	}      
-
-	glShaderSource(m_VertNum, 1, static_cast<const GLchar**>(const_cast<const char**>(&m_VertFileData)), NULL);
-	glCompileShader(m_VertNum);
-
-	glGetObjectParameterivARB(m_VertNum, GL_COMPILE_STATUS, &compiled);
-	if (!compiled)
-	{
-		string Temp = _GetInfo(m_VertNum);
-		Log << "Vert: " << Temp;
-		return false;
-	}      
-
-	for (auto it = m_Attribs.begin(); it != m_Attribs.end(); ++it)
-	{
-		glBindAttribLocation(m_ProgramNum, it->second, it->first.c_str());
-	}
-
-	// ...tudziez wyjscie
-	glBindFragDataLocation(m_ProgramNum, 0, "out_FragColor");
-
-	unsigned int Shaders[4];
-	GLsizei Count;
-	glGetAttachedShaders(m_ProgramNum, 4, &Count, Shaders); 
-
-	if (Count == 0)
-	{
-		glAttachShader (m_ProgramNum, m_FragNum);
-		glAttachShader (m_ProgramNum, m_VertNum);
-	}
-	glLinkProgram (m_ProgramNum);
-
-	GLint linked;
-	glGetProgramiv(m_ProgramNum, GL_LINK_STATUS, &linked);
-	if (!linked)
-	{
-		string Temp = _GetInfo(m_ProgramNum);
-		Log << "Prog: " << Temp;
-		return false;
-	}     
-	return true;
-}
-
-bool CShader::Validate()
-{
-	int isValid;
-	glValidateProgram(m_ProgramNum);
-	glGetProgramiv(m_ProgramNum, GL_VALIDATE_STATUS, &isValid);
-	return (isValid == GL_TRUE);
 }
 
 void CShader::DisableAll ()

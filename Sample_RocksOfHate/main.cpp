@@ -28,12 +28,12 @@ int WINAPI WinMain (HINSTANCE hInstance,
 	sf::Window App;
 	{
 		sf::ContextSettings Settings;
-		Settings.DepthBits         = 24; // Request a 24 bits depth buffer
+		Settings.depthBits         = 24; // Request a 24 bits depth buffer
 		//Settings.StencilBits       = 8;  // Request a 8 bits stencil buffer
 		//Settings.AntialiasingLevel = 2;  // Request 2 levels of antialiasing
-		Settings.MajorVersion = 3; // OpenGL 3.2
-		Settings.MinorVersion = 2;															 
-		App.Create(sf::VideoMode(1280,800), "Sample_Simple", 7, Settings);
+		Settings.majorVersion = 3; // OpenGL 3.2
+		Settings.minorVersion = 2;															 
+		App.create(sf::VideoMode(1280,800), "Sample_Simple", 7, Settings);
 
 		CResManager::GetSingleton()->AddCatalogEntry("Ball", SLoadParams("Ball.obj"));
 		CResManager::GetSingleton()->AddCatalogEntry("Ship", SLoadParams("ship.obj"));
@@ -57,13 +57,13 @@ int WINAPI WinMain (HINSTANCE hInstance,
 	for (int i = 0; i < 20; ++i)
 		Emgr.AddObject(new CRock());
 
-	while (App.IsOpened())
+	while (App.isOpen())
 	{
 		// Process events
 		sf::Event Event;
-		while (App.PollEvent(Event))
+		while (App.pollEvent(Event))
 		{
-			switch (Event.Type)
+			switch (Event.type)
 			{
 			case sf::Event::MouseWheelMoved:
 				//Game.MouseWheel(Event.MouseWheel.Delta);
@@ -76,15 +76,15 @@ int WINAPI WinMain (HINSTANCE hInstance,
 
 			// Close window : exit
 			case sf::Event::Closed:
-				App.Close();
+				App.close();
 				break;
 			case sf::Event::KeyPressed:
-				switch (Event.Key.Code)
+				switch (Event.key.code)
 				{
-				case sf::Key::Escape:
-					App.Close();
+				case sf::Keyboard::Escape:
+					App.close();
 					break;
-				case sf::Key::Space:
+				case sf::Keyboard::Space:
 					CBullet* Temp = new CBullet(Player);
 					Emgr.AddObject(Temp);
 					break;
@@ -104,21 +104,20 @@ int WINAPI WinMain (HINSTANCE hInstance,
 			}
 		}
 
-		FrameTimer += Clock.GetElapsedTime();
-		Clock.Reset();
+		FrameTimer += Clock.getElapsedTime().asMilliseconds();
+		Clock.restart();
 		while (FrameTimer > UpdateTime)
 		{
 			FrameTimer -= UpdateTime;
 			Emgr.Update();
 
-			const sf::Input& Input = App.GetInput();
-			if (Input.IsKeyDown(sf::Key::W))
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 				Player->Acc();
-			if (Input.IsKeyDown(sf::Key::A))
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 				Player->Turn(false);
-			if (Input.IsKeyDown(sf::Key::D))
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 				Player->Turn(true);
-			if (Input.IsKeyDown(sf::Key::S))
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 				Player->Dec();
 
 			//Game.Steer(App.GetInput());
@@ -178,8 +177,8 @@ int WINAPI WinMain (HINSTANCE hInstance,
 		//BallModel->Draw();
 		Emgr.Draw();
 
-		App.Display();
-		sf::Sleep(0.001f);
+		App.display();
+		//sf::sleep(sf::Time::Time(0));
 	}
 	// Wersja ze skryptami : u¿ycie CGameObject i tworzenie w³asnych typów w Lua
 	// Wersja bez skryptów : dziedziczenie w³asnych typów po CGameObject

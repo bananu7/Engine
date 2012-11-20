@@ -41,7 +41,7 @@ public:
 
 
 	bool Validate ();
-	bool Compile ();
+	std::string Compile ();
 	
 	static void DisableAll ();
 	

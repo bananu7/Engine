@@ -1,5 +1,5 @@
 #include "Ship.h"
-#include "Model.h"
+#include "ModelFbx.h"
 #include "ResManager.h"
 
 void CShip::Acc()
@@ -43,7 +43,7 @@ void CShip::Update()
 
 CShip::CShip(void)
 {
-	m_Model = CResManager::GetSingleton()->GetResource<CModel>("Ship");
+	m_Model = CResManager::GetSingleton()->GetResource<CModelFbx>("motyl.FBX");
 	//m_Model->SetScale(0.01f);
 	m_MaxAcceleration = 0.01f;
 	m_CollisionLayer = 1;

@@ -163,8 +163,7 @@ public:
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		VAOs[0].Bind();
-		VAOs[0].Draw(0, 9);
-		CheckForGLError();
+		VAOs[0].Draw(0, 3);
 
 		VAOs[1].Bind();
 		VAOs[1].Draw(0, 3);
@@ -202,7 +201,7 @@ int WINAPI WinMain (HINSTANCE hInstance,
 	Shader.Bind();
 	Shader.SetUniformMatrix4("ViewMatrix", CCamera::CreateTranslation(0, 0, -10));
 	Shader.SetUniformMatrix4("ModelMatrix", CMatrix4::CreateIdentity());
-	Shader.SetUniformMatrix4("ProjectionMatrix", CCamera::CreateOrtho(-10, -10, 10, 10, -100, 100));
+	Shader.SetUniformMatrix4("ProjectionMatrix", CCamera::CreateOrtho(-3, -3, 3, 3, -100, 100));
 
 	R.InitData(Shader.GetAttribLocation("in_Color"), Shader.GetAttribLocation("in_Position"));
 

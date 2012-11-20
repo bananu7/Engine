@@ -42,8 +42,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <SourcePath>$(ProjectDir)\src;$(SourcePath)</SourcePath>
-    <LibraryPath>$(SolutionDir)\dependencies\FBX\lib;$(SolutionDir)\dependencies\glew-1.9.0\lib;$(SolutionDir)\dependencies\SOIL\lib;$(SolutionDir)\dependencies\boost_1_52_0\stage\lib;$(SolutionDir)\dependencies\pugixml-1.2\scripts\vs2010\x32;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(LUA_DEV)\include;$(ProjectDir);$(ProjectDir)\include;$(SolutionDir)\dependencies;$(SolutionDir)\dependencies\FBX\include;$(BOOST_1_52_0)\;$(SolutionDir)\dependencies\SOIL\include;$(SolutionDir)\dependencies\rapidxml-1.13;$(SolutionDir)\dependencies\glew-1.9.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(FBX_2013_3)\lib\vs2010\x86;$(SolutionDir)\dependencies\glew-1.9.0\lib;$(SolutionDir)\dependencies\SOIL\lib;$(BOOST_1_52_0)\stage\lib;$(SolutionDir)\dependencies\pugixml-1.2\scripts\vs2010\x32;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(LUA_DEV)\include;$(ProjectDir);$(ProjectDir)\include;$(SolutionDir)\dependencies;$(FBX_2013_3)\include;$(BOOST_1_52_0)\;$(SolutionDir)\dependencies\SOIL\include;$(SolutionDir)\dependencies\rapidxml-1.13;$(SolutionDir)\dependencies\glew-1.9.0\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(LUA_DEV)\include;$(PATH_TO_BOOST);$(ProjectDir);$(ProjectDir)\include;$(SolutionDir)\dependencies;$(SolutionDir)\dependencies\SOIL\include;$(SolutionDir)\dependencies\rapidxml-1.13;$(SolutionDir)\dependencies\glew-1.5.6\include;$(SolutionDir)\dependencies\FBX\include;$(IncludePath)</IncludePath>
@@ -55,7 +55,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;BOOST_ALL_STATIC_LINK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;BOOST_ALL_STATIC_LINK;FBXSDK_SHARED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>
       </AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -67,7 +67,7 @@
       <IgnoreSpecificDefaultLibraries>MSVCRTD</IgnoreSpecificDefaultLibraries>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;soil.lib;glu32.lib;fbxsdk-2013.1-mdd.lib;wininet.lib;pugixmld.lib</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;soil.lib;glu32.lib;fbxsdk-2013.3d.lib;wininet.lib;pugixmld.lib</AdditionalDependencies>
       <AdditionalOptions>/MT %(AdditionalOptions)</AdditionalOptions>
     </Lib>
   </ItemDefinitionGroup>

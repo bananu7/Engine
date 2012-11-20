@@ -128,7 +128,7 @@ public:
 	bool LoadWholeFolder(const std::string& path);
 	inline void AddCatalogEntry (const std::string& ident, SLoadParams params)
 	{
-		if (m_Catalog.find(ident) != m_Catalog.end())
+		if (m_Catalog.find(ident) == m_Catalog.end())
 			m_Catalog.insert(std::make_pair(ident, params));
 	}
 
