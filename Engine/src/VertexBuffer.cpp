@@ -1,4 +1,4 @@
-#include "stdafx.h"
+
 #include "VertexBuffer.h"
 
 #define BUFFER_OFFSET(i) (reinterpret_cast<void*>(i))

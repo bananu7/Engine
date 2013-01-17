@@ -1,7 +1,6 @@
 #pragma once
 #include "Resource.h"
 #include "Exception.h"
-#include "Vector2.h"
 #include <Misc.h>
 
 class CImage :
@@ -10,7 +9,7 @@ class CImage :
 	uint32			m_TexId;
 
 public:
-	std::string Load(SLoadParams const& loadParams);
+	std::string Load(ILoader const& loadParams);
 	bool LoadFromFile (const std::string& path);
 
 	/// Binds to currently active texture unit and doesn't change it.

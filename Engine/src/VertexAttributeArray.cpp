@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+
 #include "VertexAttributeArray.h"
 
 void CVertexAttributeArray::Bind()

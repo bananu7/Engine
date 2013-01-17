@@ -1,4 +1,4 @@
-#include "stdafx.h"
+
 #include "Framebuffer.h"
 #include <iostream>
 using namespace std;

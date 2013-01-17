@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+
 #include "ImageData.h"
 #include "ResManager.h"
 #include <string>
@@ -6,7 +6,7 @@
 
 using std::string;
 
-string CImageData::Load(SLoadParams const& loadParams)
+string CImageData::Load(ILoader const& loadParams)
 {		
 	string Path;
 	if (!loadParams.GetParam("path", Path))

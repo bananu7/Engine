@@ -1,11 +1,11 @@
 #include "Ground.h"
 #include "Vector3.h"
-#include <GL/glew.h>
-#include <SFML/OpenGL.hpp>
 #include "ImageData.h"
 #include "ResManager.h"
 #include "Misc.h"
 #include "Shader.h"
+
+#include <GL/glew.h>
 #include <fstream>
 #include <vector>
 
@@ -31,7 +31,7 @@ void CGround::Draw()
 	//glDrawArrays(GL_POINTS, 0, 4);
 }
 
-std::string CGround::Load(SLoadParams const& loadParams)
+std::string CGround::Load(ILoader const& loadParams)
 {
 	string TempParam;
 

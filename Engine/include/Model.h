@@ -24,7 +24,7 @@ protected:
 public:
 	CShader*					Shader;
 
-	std::string CModel::Load(SLoadParams const& loadParams);
+	std::string CModel::Load(ILoader const& loadParams);
 	void Unload() { }
 
 	inline void SetTransform (const std::string& groupName, const CTransform& t);

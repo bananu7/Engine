@@ -1,4 +1,4 @@
-﻿#include "StdAfx.h"
+﻿
 #include "ModelCookerVBO.h"
 #include "ModelData.h"
 #include "Vector3.h"

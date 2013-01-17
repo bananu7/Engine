@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+
 #include "ModelData.h"
 #include "ResManager.h"
 #include "Image.h"
@@ -84,7 +84,7 @@ bool CModelData::_LoadMtl (std::istream& str)
 		{
 			string TexPath;
 			str >> TexPath;
-			CResManager::GetSingleton()->AddCatalogEntry(MatName, SLoadParams(TexPath));
+			CResManager::GetSingleton()->AddCatalogEntry(MatName, ILoader(TexPath));
 			TempMat.Textures.push_back(CResManager::GetSingleton()->GetResource<CImage>(MatName)->GetTexture());
 			// Below is called just to f*cking update pixels -.-
 			CResManager::GetSingleton()->GetResource<CImage>(MatName)->Bind();

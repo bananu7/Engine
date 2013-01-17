@@ -9,26 +9,20 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="PCH">
-      <UniqueIdentifier>{a8e70f48-306a-4063-a57a-97f6c7224526}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Misc">
       <UniqueIdentifier>{79067ca1-b879-4b79-9772-423fe1ddaa48}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Model">
       <UniqueIdentifier>{0a25f70d-c4e0-432f-b94d-0e0c482c2e28}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Model\Resources">
-      <UniqueIdentifier>{b8caa925-e1b4-4153-8fff-13fafd787644}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Model\Fbx">
       <UniqueIdentifier>{f944c833-a46c-4fc5-bcc4-52b90ff89b3d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Resources">
+      <UniqueIdentifier>{b8caa925-e1b4-4153-8fff-13fafd787644}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
-      <Filter>PCH</Filter>
-    </ClInclude>
     <ClInclude Include="include\Exception.h">
       <Filter>Header Files\Misc</Filter>
     </ClInclude>
@@ -48,19 +42,19 @@
       <Filter>Header Files\Misc</Filter>
     </ClInclude>
     <ClInclude Include="include\ResManager.h">
-      <Filter>Header Files\Model\Resources</Filter>
+      <Filter>Header Files\Resources</Filter>
     </ClInclude>
     <ClInclude Include="include\Resource.h">
-      <Filter>Header Files\Model\Resources</Filter>
+      <Filter>Header Files\Resources</Filter>
     </ClInclude>
     <ClInclude Include="include\Scene.h">
-      <Filter>Header Files\Model\Resources</Filter>
+      <Filter>Header Files\Resources</Filter>
     </ClInclude>
     <ClInclude Include="include\Sky.h">
-      <Filter>Header Files\Model\Resources</Filter>
+      <Filter>Header Files\Resources</Filter>
     </ClInclude>
     <ClInclude Include="include\Shader.h">
-      <Filter>Header Files\Model\Resources</Filter>
+      <Filter>Header Files\Resources</Filter>
     </ClInclude>
     <ClInclude Include="include\GameObject.h">
       <Filter>Header Files\Misc</Filter>
@@ -81,13 +75,13 @@
       <Filter>Header Files\Misc</Filter>
     </ClInclude>
     <ClInclude Include="include\Image.h">
-      <Filter>Header Files\Model\Resources</Filter>
+      <Filter>Header Files\Resources</Filter>
     </ClInclude>
     <ClInclude Include="include\ImageData.h">
-      <Filter>Header Files\Model\Resources</Filter>
+      <Filter>Header Files\Resources</Filter>
     </ClInclude>
     <ClInclude Include="include\World.h">
-      <Filter>Header Files\Model\Resources</Filter>
+      <Filter>Header Files\Resources</Filter>
     </ClInclude>
     <ClInclude Include="include\Matrix4.h">
       <Filter>Header Files\Misc</Filter>
@@ -151,9 +145,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>PCH</Filter>
-    </ClCompile>
     <ClCompile Include="src\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -248,6 +239,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\ShaderSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resource.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

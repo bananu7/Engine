@@ -40,7 +40,7 @@ protected:
 	float m_HScale, m_WScale;
 
 public:
-	std::string Load(SLoadParams const& loadParams);
+	std::string Load(ILoader const& loadParams);
 	void Unload() { }
 	void Draw();
 

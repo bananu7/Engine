@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+
 #include "LightHouse.h"
 
 void CLightHouse::AddLight (SLight light)

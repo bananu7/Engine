@@ -1,4 +1,4 @@
-#include "stdafx.h"
+
 #include "Transform.h"
 
 void CTransform::operator+= (const CTransform& other)

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+
 #include "Game.h"
 #include "Exception.h"
 #include "Misc.h"

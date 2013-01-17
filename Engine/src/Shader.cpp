@@ -1,4 +1,4 @@
-#include "stdafx.h"
+
 #include "Matrix4.h"
 #include "Shader.h"
 #include <fstream>
@@ -7,7 +7,7 @@
 #include "Misc.h"
 using namespace std;
 
-std::string CShader::Load(SLoadParams const& loadParams)
+std::string CShader::Load(ILoader const& loadParams)
 {
 	string FragFilePath, VertFilePath;
 	if (!loadParams.GetParam("frag", FragFilePath))
@@ -15,8 +15,8 @@ std::string CShader::Load(SLoadParams const& loadParams)
 	if (!loadParams.GetParam("vert", VertFilePath))
 		return string("Missing 'vert' load param");
 
-	FragFilePath = CResManager::GetSingleton()->GetResourcePath() + FragFilePath;
-	VertFilePath = CResManager::GetSingleton()->GetResourcePath() + VertFilePath;
+	//FragFilePath = CResManager::GetSingleton()->GetResourcePath() + FragFilePath;
+	//VertFilePath = CResManager::GetSingleton()->GetResourcePath() + VertFilePath;
 
 	m_FragFileData = TextFileRead(FragFilePath.c_str());
 	if (!m_FragFileData)

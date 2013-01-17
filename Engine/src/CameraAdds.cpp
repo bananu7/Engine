@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+
 #include "CameraAdds.h"
 #include "Misc.h"
 

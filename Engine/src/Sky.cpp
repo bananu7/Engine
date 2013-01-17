@@ -1,4 +1,4 @@
-#include "stdafx.h"
+
 #include "Sky.h"
 #include "ResManager.h"
 #include "Image.h"

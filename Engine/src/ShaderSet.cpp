@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+
 #include "ShaderSet.h"
 #include "Shader.h"
 

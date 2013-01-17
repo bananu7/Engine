@@ -1,4 +1,4 @@
-#include "stdafx.h"
+
 #include "World.h"
 #include "Misc.h"
 #include <boost/lexical_cast.hpp>

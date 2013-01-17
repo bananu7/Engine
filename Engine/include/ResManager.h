@@ -10,55 +10,8 @@ template <typename T> class CResPtr;
 
 using std::string;
 
-/*
-class CResCounter
-{
-private:
-	unsigned int m_RefCount;
-	CResource* m_Ptr;
-
-public:
-	bool CanBeDeleted () const { return (m_RefCount == 0); }
-	inline void DecreaseCount() { --m_RefCount; }
-	inline void IncreaseCount() { ++m_RefCount; }
-
-	template<typename T>
-	inline CResPtr<T> GetSpawn()
-	{
-		return (CResPtr<T>(this, m_Ptr));
-		m_RefCount++;
-	}
-
-	CResCounter (CResource* ptr) :
-		m_Ptr(ptr) { }
-};
-
-template<typename T>
-class CResPtr
-{
-private:
-	T* m_Ptr;
-	CResCounter* m_ResCounter;
-
-public:
-	T* operator->() { return m_Ptr; }
-	//const T* operator->() const { return const m_Ptr; }
-	//operator T* () { return m_Ptr; }
-
-	CResPtr(CResCounter* counter, T* ptr): m_ResCounter(counter), m_Ptr(ptr) { }
-	CResPtr(const CResPtr& other)
-	{
-		m_ResCounter = other.m_ResCounter;
-		m_ResCounter->IncreaseCount();
-	}
-	~CResPtr()
-	{
-		m_ResCounter->DecreaseCount();
-	}
-};*/
-
 typedef std::map<std::string, boost::shared_ptr<CResource>> TResMap;
-typedef std::map<std::string, SLoadParams> TCatalogMap;
+typedef std::map<std::string, ILoader> TCatalogMap;
 
 class CResManager :
 	public CSingleton<CResManager>
@@ -126,7 +79,7 @@ public:
 	bool LoadCatalog (const std::string& path);
 	// Zaladuj wszystko z podanego folderu, jesli sciezka pusta, zaladuj resource folder
 	bool LoadWholeFolder(const std::string& path);
-	inline void AddCatalogEntry (const std::string& ident, SLoadParams params)
+	inline void AddCatalogEntry (const std::string& ident, ILoader params)
 	{
 		if (m_Catalog.find(ident) == m_Catalog.end())
 			m_Catalog.insert(std::make_pair(ident, params));

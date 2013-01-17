@@ -16,7 +16,7 @@
 //
 /////////////////////////////////////////////////////////////////////////
 
-#include "stdafx.h"
+
 #include "GetPosition.h"
 
 // Get the global position of the node for the current pose.

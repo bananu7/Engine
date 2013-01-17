@@ -35,11 +35,11 @@ int WINAPI WinMain (HINSTANCE hInstance,
 		Settings.minorVersion = 2;															 
 		App.create(sf::VideoMode(1280,800), "Sample_Simple", 7, Settings);
 
-		CResManager::GetSingleton()->AddCatalogEntry("Ball", SLoadParams("Ball.obj"));
-		CResManager::GetSingleton()->AddCatalogEntry("Ship", SLoadParams("ship.obj"));
-		CResManager::GetSingleton()->AddCatalogEntry("Cube", SLoadParams("Cube.obj"));
+		CResManager::GetSingleton()->AddCatalogEntry("Ball", ILoader("Ball.obj"));
+		CResManager::GetSingleton()->AddCatalogEntry("Ship", ILoader("ship.obj"));
+		CResManager::GetSingleton()->AddCatalogEntry("Cube", ILoader("Cube.obj"));
 
-		CResManager::GetSingleton()->AddCatalogEntry("texturing", SLoadParams("texturing"));
+		CResManager::GetSingleton()->AddCatalogEntry("texturing", ILoader("texturing"));
 		glewInit();
 	}
 

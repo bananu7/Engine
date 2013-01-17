@@ -129,12 +129,12 @@ public:
 
 			VBOs[0].Bind();
 			VBOs[0].LoadData(vert, sizeof(vert));
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0); 
+			glVertexAttribPointer(in_Position, 3, GL_FLOAT, GL_FALSE, 0, 0); 
 			VAOs[0].EnableAttributeArray(0);
  
 			VBOs[1].Bind();
 			VBOs[1].LoadData(colors, sizeof(colors));
-			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
+			glVertexAttribPointer(in_Color, 3, GL_FLOAT, GL_FALSE, 0, 0);
 			VAOs[0].EnableAttributeArray(1);
 		}
 
@@ -193,7 +193,7 @@ int WINAPI WinMain (HINSTANCE hInstance,
 	//InitGL();
 
 	CShader Shader;
-	SLoadParams ShaderPaths;
+	ILoader ShaderPaths;
 	ShaderPaths.Params["vert"] = "simple.vert";
 	ShaderPaths.Params["frag"] = "simple.frag";
 	if (Shader.Load(ShaderPaths) != "")
@@ -203,7 +203,7 @@ int WINAPI WinMain (HINSTANCE hInstance,
 	Shader.SetUniformMatrix4("ModelMatrix", CMatrix4::CreateIdentity());
 	Shader.SetUniformMatrix4("ProjectionMatrix", CCamera::CreateOrtho(-3, -3, 3, 3, -100, 100));
 
-	R.InitData(Shader.GetAttribLocation("in_Color"), Shader.GetAttribLocation("in_Position"));
+	R.InitData(Shader.GetAttribLocation("in_Position"), Shader.GetAttribLocation("in_Color"));
 
 	bool Run = true;
 	do 

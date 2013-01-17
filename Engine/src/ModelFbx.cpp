@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+
 #include <fbxsdk.h>
 #include "ModelFbx.h"
 #include "FbxVboMesh.h"
@@ -24,7 +24,7 @@ void CModelFbx::_InitializeFbxComponents()
 		FbxImporterInstance = FbxImporter::Create(FbxManagerInstance, "");	
 }
 
-std::string CModelFbx::Load(SLoadParams const& loadParams)
+std::string CModelFbx::Load(ILoader const& loadParams)
 {
 	_InitializeFbxComponents();
 

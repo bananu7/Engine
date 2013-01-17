@@ -1,4 +1,4 @@
-#include "stdafx.h"
+
 #include "Scene.h"
 #include "ResManager.h"
 #include "ModelFbx.h"

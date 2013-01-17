@@ -1,4 +1,4 @@
-#include "stdafx.h"
+
 #include "Model.h"
 #include "ResManager.h"
 #include "Image.h"
@@ -13,7 +13,7 @@ using namespace std;
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
-string CModel::Load(SLoadParams const& loadParams)
+string CModel::Load(ILoader const& loadParams)
 {
 	auto const& Iter = loadParams.Params.find("path");
 	if (Iter == loadParams.Params.end())

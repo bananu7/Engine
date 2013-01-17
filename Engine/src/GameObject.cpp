@@ -1,4 +1,4 @@
-#include "stdafx.h"
+
 #include "GameObject.h"
 #include "Image.h"
 #include "ResManager.h"

@@ -52,7 +52,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;BOOST_ALL_STATIC_LINK;FBXSDK_SHARED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -131,7 +131,6 @@
     <ClInclude Include="include\VertexAttributeArray.h" />
     <ClInclude Include="include\VertexBuffer.h" />
     <ClInclude Include="include\World.h" />
-    <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Camera.cpp" />
@@ -157,6 +156,7 @@
     <ClCompile Include="src\ModelData.cpp" />
     <ClCompile Include="src\ModelFbx.cpp" />
     <ClCompile Include="src\ModelInstance.cpp" />
+    <ClCompile Include="src\Resource.cpp" />
     <ClCompile Include="src\ResManager.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
@@ -174,10 +174,6 @@
     <ClCompile Include="src\VertexAttributeArray.cpp" />
     <ClCompile Include="src\VertexBuffer.cpp" />
     <ClCompile Include="src\World.cpp" />
-    <ClCompile Include="stdafx.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />

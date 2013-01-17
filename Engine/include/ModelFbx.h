@@ -22,7 +22,7 @@ protected:
 public:
 	CShader* m_Shader;
 
-	std::string Load(SLoadParams const& loadParams);
+	std::string Load(ILoader const& loadParams);
 	void Draw();
 	void Draw (const CVector3& pos, const CVector3& rot, const CVector3& scale);
 

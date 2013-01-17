@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+
 #include "Matrix4.h"
 
 void CMatrix4::Mult(CMatrix4 const& other)

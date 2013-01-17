@@ -1,4 +1,4 @@
-#include "stdafx.h"
+
 #include "Logger.h"
 #include "Exception.h"
 using namespace std;

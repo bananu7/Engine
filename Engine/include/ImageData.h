@@ -21,7 +21,7 @@ private:
 	uint8* m_Data;
 
 public:
-	std::string Load (SLoadParams const& params);
+	std::string Load (ILoader const& params);
 	inline SPixel GetPixel (int32 x, int32 y) const
 	{
 		if (m_Data)

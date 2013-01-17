@@ -47,7 +47,7 @@ bool CResManager::LoadCatalog(string const& path)
 		string Type = Resource.attribute("type").as_string();
 
 		//TEMP
-		SLoadParams LoadParams;
+		ILoader LoadParams;
 
 		for (xml_node LoadParam = Resource.first_child(); LoadParam; LoadParam = LoadParam.next_sibling())
 		{
@@ -97,7 +97,7 @@ bool CResManager::LoadWholeFolder(const std::string& path)
 			std::string ResourcePath=(It->path().string());
 			// Usuwamy resourcepath
 			ResourcePath=ResourcePath.substr(m_ResourcePath.size(),ResourcePath.size()-m_ResourcePath.size());
-			AddCatalogEntry(ResourceName,SLoadParams(ResourcePath));
+			AddCatalogEntry(ResourceName,ILoader(ResourcePath));
 		}
 		It++;
 	}

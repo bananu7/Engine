@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+
 #include "FbxVboMesh.h"
 #include <fbxsdk.h>
 

@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "Image.h"
 #include <SOIL.h>
 #include <Misc.h>
@@ -6,7 +5,7 @@
 
 using std::string;
 
-std::string CImage::Load(SLoadParams const& loadParams)
+std::string CImage::Load(ILoader const& loadParams)
 {
 	auto const& Iter = loadParams.Params.find("path");
 	if (Iter == loadParams.Params.end())

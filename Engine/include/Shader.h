@@ -19,7 +19,7 @@ protected:
 	std::map<std::string, int> m_UniformCache;
 	
 public:
-	std::string Load(SLoadParams const& loadParams);
+	std::string Load(ILoader const& loadParams);
 	void Unload ();
 
 	void Bind();

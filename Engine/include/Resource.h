@@ -1,23 +1,25 @@
 #pragma once
 #include "Typedefs.h"
 #include <map>
+#include <boost/optional.hpp>
 
-// I've created a struct since it's more flexible
-struct SLoadParams
+class ILoader
+{	
+public:
+	virtual boost::optional<std::string const&> GetParam(std::string const& name) const = 0;
+	virtual boost::optional<std::istream> GetDataStream(std::string const& name) = 0;
+};
+
+class CSimpleFileLoader :
+	public ILoader
 {
 	std::map<std::string, std::string> Params;
-	SLoadParams() { }
-	
-	bool GetParam(std::string const& name, std::string& ret) const
-	{
-		std::map<std::string, std::string>::const_iterator Iter = Params.find(name);
-		if (Iter == Params.end())
-			return false;
-		ret = Iter->second;
-		return true;
-	}
 
-	explicit SLoadParams (std::string const& simplePath)
+public:
+	boost::optional<std::string const&> GetParam(std::string const& name) const override;
+	boost::optional<std::istream> GetDataStream(std::string const& name) override;
+
+	explicit CSimpleFileLoader (std::string const& simplePath)
 	{
 		Params["path"] = simplePath;
 	}
@@ -26,7 +28,7 @@ struct SLoadParams
 class CResource abstract
 {
 public:
-	virtual std::string Load(SLoadParams const& loadParams) abstract;
+	virtual std::string Load(ILoader const& loadParams) abstract;
 	virtual void Unload () abstract;
 	// friend class CResManager;
 	CResource(void) { }
