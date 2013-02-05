@@ -1,19 +1,27 @@
 #include <GL/glew.h>
 #include <fstream>
 #include <string>
-#include "Matrix4.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include "Shader.h"
 #include "ResManager.h"
 #include "Image.h"
 #include "Misc.h"
 using namespace std;
 
+using glm::vec3;
+using glm::vec4;
+using glm::mat4;
+
 std::string CShader::Load(ILoader const& loadParams)
 {
+	// FIXME
 	string FragFilePath, VertFilePath;
-	if (!loadParams.GetParam("frag", FragFilePath))
+	auto FragPath = loadParams.GetParam("frag");
+	auto VertPath = loadParams.GetParam("vert");
+	if (!FragPath)
 		return string("Missing 'frag' load param");
-	if (!loadParams.GetParam("vert", VertFilePath))
+	if (!VertPath)
 		return string("Missing 'vert' load param");
 
 	//FragFilePath = CResManager::GetSingleton()->GetResourcePath() + FragFilePath;
@@ -150,7 +158,7 @@ void CShader::SetUniform1f(const string& name, float a)
 	}
 }
 
-void CShader::SetUniformVector3 (std::string const& name, CVector3 const& vec)
+void CShader::SetUniformVector3 (std::string const& name, vec3 const& vec)
 {
 	GLint Loc = GetUniformLocation(name);
 	if (Loc != -1)
@@ -160,23 +168,23 @@ void CShader::SetUniformVector3 (std::string const& name, CVector3 const& vec)
 	}
 }
 
-void CShader::SetUniformMatrix4 (std::string const& name, CMatrix4 const& mat)
+void CShader::SetUniformMatrix4 (std::string const& name, mat4 const& mat)
 {
 	GLint Loc = GetUniformLocation(name);
 	if (Loc != -1)
 	{
 		Bind();
-		glUniformMatrix4fv(Loc, 1, GL_FALSE, mat.GetRawData());
+		glUniformMatrix4fv(Loc, 1, GL_FALSE, glm::value_ptr(mat));
 	}
 }
 
-void CShader::SetUniformColor (std::string const& name, CColor const& color)
+void CShader::SetUniformColor (std::string const& name, vec4 const& color)
 {
 	GLint Loc = GetUniformLocation(name);
 	if (Loc != -1)
 	{
 		Bind();
-		glUniform4fv (Loc, 1, reinterpret_cast<const float*>(&color));
+		glUniform4fv (Loc, 1, glm::value_ptr(color));
 	}
 }
 
@@ -193,7 +201,7 @@ int CShader::GetUniformLocation (const string& name)
 	}
 }
 
-void CShader::SetTex (const std::string& name, uint8 texUnitNum)
+void CShader::SetTex (const std::string& name, unsigned texUnitNum)
 {
 	int my_sampler_uniform_location = GetUniformLocation(name);
 

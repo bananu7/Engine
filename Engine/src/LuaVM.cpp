@@ -95,21 +95,24 @@ double CLuaVM::GetNumber (int idx)
 	if (lua_isnumber(m_LuaState, idx))
 		return lua_tonumber(m_LuaState, idx);
 	else _CrtDbgBreak(); 
+	return 0.0;
 }
 const char* CLuaVM::GetCString (int idx)
 {
 	if (lua_isstring(m_LuaState, idx))
 		return lua_tostring(m_LuaState, idx);
 	else _CrtDbgBreak();
+	return "";
 }
 bool CLuaVM::GetBoolean (int idx)
 {
 	if (lua_isboolean(m_LuaState, idx))
 		return lua_toboolean(m_LuaState, idx);
 	else _CrtDbgBreak();
+	return false;
 }
 
-CVector2<float> CLuaVM::GetVector2 (int idx)
+/*vec2 CLuaVM::GetVector2 (int idx)
 {
 	CVector2<float> Ret;
 	lua_pushstring (m_LuaState, "x");
@@ -119,7 +122,7 @@ CVector2<float> CLuaVM::GetVector2 (int idx)
 	lua_gettable (m_LuaState, -2);
 	Ret.Y = PopNumber();
 	return Ret;
-}
+}*/
 
 CLuaVM::CLuaVM(void) :
 	m_LuaState(lua_open()) 

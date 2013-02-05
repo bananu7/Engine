@@ -6,6 +6,8 @@
 #include "Camera.h"
 
 using std::string;
+using glm::mat4;
+using glm::vec3;
 
 void CModelFbx::_InitializeFbxComponents()
 {	
@@ -29,9 +31,11 @@ std::string CModelFbx::Load(ILoader const& loadParams)
 	_InitializeFbxComponents();
 
 	m_Scene = FbxScene::Create(FbxManagerInstance, "");
-	std::string Path;
-	loadParams.GetParam("path", Path);
-	if (!FbxImporterInstance->Initialize(Path.c_str(), -1, FbxIOSettingsInstance))
+	// FIXME
+	auto Path = loadParams.GetParam("path");
+	if (!Path)
+		return "missing path parameter";
+	if (!FbxImporterInstance->Initialize(Path.get().c_str(), -1, FbxIOSettingsInstance))
 		return string(FbxImporterInstance->GetLastErrorString());
 	FbxImporterInstance->Import(m_Scene);
 	
@@ -66,13 +70,13 @@ void CModelFbx::Draw()
 	m_Mesh->EndDraw();
 }
 
-void CModelFbx::Draw (const CVector3& pos, const CVector3& rot, const CVector3& scale)
+void CModelFbx::Draw (const vec3& pos, const vec3& rot, const vec3& scale)
 {
-	CMatrix4 PMat = CCamera::CreateTranslation(pos.X, pos.Y, pos.Z);
-	CMatrix4 RMat = CCamera::CreateRotation(rot.X, rot.Y, rot.Z);
-	CMatrix4 SMat = CCamera::CreateScale(scale.X, scale.Y, scale.Z);
-	PMat.Mult(RMat);
-	PMat.Mult(SMat);
+	mat4 PMat = CCamera::CreateTranslation(pos.x, pos.y, pos.z);
+	mat4 RMat = CCamera::CreateRotation(rot.x, rot.y, rot.z);
+	mat4 SMat = CCamera::CreateScale(scale.x, scale.y, scale.z);
+	PMat *= RMat;
+	PMat *= SMat;
 	m_Shader->SetUniformMatrix4("ModelMatrix", PMat);
 	Draw();
 }

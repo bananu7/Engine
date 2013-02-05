@@ -1,13 +1,13 @@
 #pragma once
 #include "Camera.h"
-#include "Vector3.h"
+#include <glm/glm.hpp>
 
 // Kamera do ustawiania celu i pozycji
 class CCameraSimple:
 	public CCamera
 {
 public:
-	CVector3 Target, Position;
+	glm::vec3 Target, Position;
 	
 	void CalculateView();
 };
@@ -20,8 +20,8 @@ public:
 	// Kierunek, w jaki patrzymy
 	// X - obrot wokol osi Y - w radianach
 	// Y - obrot wokol osi X
-	CVector2<float> LookDir;
-	CVector3		Position;
+	glm::vec2 LookDir;
+	glm::vec3 Position;
 
 	void CalculateView();
 	void Fly (float len);
@@ -32,7 +32,7 @@ class CCameraTrack :
 	public CCamera
 {
 public:
-	CVector3 Target;
+	glm::vec3 Target;
 	float Direction, Radius;
 
 	void CalculateView();

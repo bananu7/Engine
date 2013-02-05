@@ -2,6 +2,8 @@
 #include "Resource.h"
 #include "Shader.h"
 #include <fbxsdk.h>
+#include <glm/glm.hpp>
+#include <string>
 
 class CFbxVboMesh;
 
@@ -24,7 +26,7 @@ public:
 
 	std::string Load(ILoader const& loadParams);
 	void Draw();
-	void Draw (const CVector3& pos, const CVector3& rot, const CVector3& scale);
+	void CModelFbx::Draw (const glm::vec3& pos, const glm::vec3& rot, const glm::vec3& scale);
 
 	void SetAnimationPose(int animStack, int animLayer, float time);
 

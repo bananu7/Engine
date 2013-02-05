@@ -1,7 +1,5 @@
-
 #include "ImageData.h"
 #include "ResManager.h"
-#include <string>
 #include <SOIL.h>
 
 using std::string;
@@ -10,7 +8,7 @@ string CImageData::Load(ILoader & loader)
 {		
 	auto & Stream = loader.GetDataStream("main");
 	if (Stream) {
-		auto v = buffer_from_file(Stream.get());
+		auto v = buffer_from_file(*Stream);
 		m_Data = SOIL_load_image_from_memory
 		(
 			v.data(),

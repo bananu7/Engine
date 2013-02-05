@@ -1,6 +1,7 @@
 #pragma once
 #include "resource.h"
 #include <map>
+#include <glm/glm.hpp>
 
 class CVector3;
 class CMatrix4;
@@ -25,9 +26,9 @@ public:
 	void Bind();
 	void SetUniform1f (const std::string& name, float a);
 	void SetTex (const std::string& name, unsigned texUnitNum);
-	void SetUniformVector3 (std::string const& name, CVector3 const& vec);
-	void SetUniformColor (std::string const& name, CColor const& color);
-	void SetUniformMatrix4 (std::string const& name, CMatrix4 const& mat);
+	void SetUniformVector3 (std::string const& name, glm::vec3 const& vec);
+	void SetUniformColor (std::string const& name, glm::vec4 const& color);
+	void SetUniformMatrix4 (std::string const& name, glm::mat4 const& mat);
 
 	int GetUniformLocation (const std::string& name);
 	int GetProgramNum () const { return m_ProgramNum; }

@@ -2,7 +2,7 @@
 #include "ModelCookerDisplayList.h"
 #include "ModelData.h"
 #include <Windows.h>
-#include <GL/GL.h>
+#include <GL/glew.h>
 
 void _ApplyMaterial (CModelData::SMaterial const& material)
 {
@@ -79,19 +79,21 @@ bool CModelCookerDisplayList::Cook (const CModelData& modelData)
 void CModelCookerDisplayList::Draw ()
 {
 	//glEnable(GL_TEXTURE_2D);
-	glColor3f (1.0f, 1.0f, 1.0f);
+	//glColor3f (1.0f, 1.0f, 1.0f);
 	//glCallList(m_ListNumber);
-	glMatrixMode(GL_MODELVIEW);
-	for (auto It = m_Components.begin(); It != m_Components.end(); ++It)
-	{
-		glPushMatrix();
-		CVector3 Temp = It->Center;
+	//glMatrixMode(GL_MODELVIEW);
+	//for (auto It = m_Components.begin(); It != m_Components.end(); ++It)
+	//{
+		// FIXME
+		/*glPushMatrix();
+		vec3 Temp = It->Center;
 		glTranslatef(It->Center.X, It->Center.Y, It->Center.Z);
 		It->Transform.ApplyToOpenGL();
 		glTranslatef(-It->Center.X, -It->Center.Y, -It->Center.Z);
 		glCallList(It->DisplayListNum);
 		glPopMatrix();
-	}
+		*/
+	//}
 }
 
 CModelCookerDisplayList::CModelCookerDisplayList(void)

@@ -56,12 +56,6 @@
     <ClInclude Include="include\GameScripting.hpp">
       <Filter>Header Files\Misc</Filter>
     </ClInclude>
-    <ClInclude Include="include\Game.h">
-      <Filter>Header Files\Misc</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Vector2.h">
-      <Filter>Header Files\Misc</Filter>
-    </ClInclude>
     <ClInclude Include="include\Image.h">
       <Filter>Header Files\Resources</Filter>
     </ClInclude>
@@ -70,9 +64,6 @@
     </ClInclude>
     <ClInclude Include="include\World.h">
       <Filter>Header Files\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Matrix4.h">
-      <Filter>Header Files\Misc</Filter>
     </ClInclude>
     <ClInclude Include="include\LightHouse.h">
       <Filter>Header Files\Misc</Filter>
@@ -93,9 +84,6 @@
       <Filter>Header Files\Model\Fbx</Filter>
     </ClInclude>
     <ClInclude Include="include\IModelCooker.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Vector3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\VertexAttributeArray.h">
@@ -148,12 +136,6 @@
     <ClCompile Include="src\Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Vector2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Vector3.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\LuaVM.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -182,9 +164,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\VertexAttributeArray.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Matrix4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\LightHouse.cpp">

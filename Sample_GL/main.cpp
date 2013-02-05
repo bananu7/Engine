@@ -10,6 +10,9 @@
 
 #include <array>
 #include <vector>
+#include <string>
+#include <map>
+#include <glm/gtc/matrix_transform.hpp>
 
 
 bool	keys[256];			// Array Used For The Keyboard Routine
@@ -193,14 +196,16 @@ int WINAPI WinMain (HINSTANCE hInstance,
 	//InitGL();
 
 	CShader Shader;
-	ILoader ShaderPaths;
-	ShaderPaths.Params["vert"] = "simple.vert";
-	ShaderPaths.Params["frag"] = "simple.frag";
+	std::map<std::string, std::string> Data;
+	Data["vert"] = "simple.vert";
+	Data["frag"] = "simple.frag";
+	CSimpleFileLoader ShaderPaths(Data);
+	
 	if (Shader.Load(ShaderPaths) != "")
 		_CrtDbgBreak();
 	Shader.Bind();
-	Shader.SetUniformMatrix4("ViewMatrix", CCamera::CreateTranslation(0, 0, -10));
-	Shader.SetUniformMatrix4("ModelMatrix", CMatrix4::CreateIdentity());
+	Shader.SetUniformMatrix4("ViewMatrix", glm::translate(glm::mat4(), glm::vec3(0, 0, -10)));
+	Shader.SetUniformMatrix4("ModelMatrix", glm::mat4());
 	Shader.SetUniformMatrix4("ProjectionMatrix", CCamera::CreateOrtho(-3, -3, 3, 3, -100, 100));
 
 	R.InitData(Shader.GetAttribLocation("in_Position"), Shader.GetAttribLocation("in_Color"));

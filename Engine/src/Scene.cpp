@@ -6,30 +6,33 @@
 #include "Image.h"
 #include "Shader.h"
 #include "ShaderSet.h"
-#include <rapidxml.hpp>
+#include <pugixml-1.2/src/pugixml.hpp>
 #include <fstream>
 
 using namespace std;
-using rapidxml::xml_node;
+using pugi::xml_node;
 
 void CScene::SSceneObject::Draw () const
 {
 	Shader->Bind();
 	for(int it= 0, itE=Textures.size(); it!=itE; ++it)
 	{
-		CResManager::GetSingleton()->GetResource<CImage>(Textures[it])->Bind(it);
-		Shader->SetTex("Texture"+boost::lexical_cast<string>(it),it);
+		//FIXME
+		//CResManager::GetSingleton()->GetResource<CImage>(Textures[it])->Bind(it);
+		//Shader->SetTex("Texture"+boost::lexical_cast<string>(it),it);
 	}
 	Model->Draw(Position, Rotation, Scale);
 }
 
 bool CScene::LoadFromFile (const std::string& path)
-{
+{ 
+	// FIXME
+	/*
 	unsigned ObjCount;
 	string ModelName;
 	SSceneObject Temp;
 
-	rapidxml::xml_document<> Doc;
+	pugi::xml_document Doc;
 
 	char* FileData = TextFileRead(path.c_str());
 	if (FileData == NULL)
@@ -38,7 +41,7 @@ bool CScene::LoadFromFile (const std::string& path)
 	Doc.parse<0>(FileData);
 	auto Root = Doc.first_node();
 
-	for (xml_node<>* node = Root->first_node("object"); node != NULL; node = node->next_sibling("object"))
+	for (xml_node node = Root.first_node("object"); node != NULL; node = node.next_sibling("object"))
 	{
 		Temp.Position = CVector3::GetZero();
 		Temp.Rotation = CVector3::GetZero();
@@ -46,21 +49,21 @@ bool CScene::LoadFromFile (const std::string& path)
 
 		ModelName = string(node->first_attribute("type")->value());
 
-		xml_node<>* PositionNode = node->first_node("position");
+		xml_node* PositionNode = node.first_node("position");
 		if (PositionNode)
 		{
-			Temp.Position.X = atof(PositionNode->first_attribute("x")->value());
-			Temp.Position.Y = atof(PositionNode->first_attribute("y")->value());
-			Temp.Position.Z = atof(PositionNode->first_attribute("z")->value());
+			Temp.Position.x = atof(PositionNode->first_attribute("x")->value());
+			Temp.Position.y = atof(PositionNode->first_attribute("y")->value());
+			Temp.Position.z = atof(PositionNode->first_attribute("z")->value());
 		}
-		xml_node<>* RotationNode = node->first_node("rotation");
+		xml_node* RotationNode = node.first_node("rotation");
 		if (RotationNode)
 		{
-			Temp.Rotation.X = atof(RotationNode->first_attribute("x")->value());
-			Temp.Rotation.Y = atof(RotationNode->first_attribute("y")->value());
-			Temp.Rotation.Z = atof(RotationNode->first_attribute("z")->value());
+			Temp.Rotation.x = atof(RotationNode->first_attribute("x")->value());
+			Temp.Rotation.y = atof(RotationNode->first_attribute("y")->value());
+			Temp.Rotation.z = atof(RotationNode->first_attribute("z")->value());
 		}
-		xml_node<>* ScaleNode = node->first_node("scale");
+		xml_node* ScaleNode = node.first_node("scale");
 		if (ScaleNode)
 		{
 			Temp.Scale.X = atof(ScaleNode->first_attribute("x")->value());
@@ -69,7 +72,7 @@ bool CScene::LoadFromFile (const std::string& path)
 		}
 		Temp.Model = CResManager::GetSingleton()->GetResource<CModelFbx>(ModelName);
 
-		xml_node<>* ShaderNode = node->first_node("shader");
+		xml_node* ShaderNode = node->first_node("shader");
 		if (ShaderNode)
 		{
 			string ShaderName = ShaderNode->value();
@@ -99,6 +102,8 @@ bool CScene::LoadFromFile (const std::string& path)
 	
 		m_Objects.insert(new SSceneObject(Temp));
 	}
+	*/
+	return false;
 }
 
 void CScene::Draw ()

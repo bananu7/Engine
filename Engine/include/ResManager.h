@@ -2,6 +2,7 @@
 #include <map>
 #include <exception>
 #include <memory>
+#include <string>
 #include "Resource.h"
 #include "Logger.h"
 
@@ -82,5 +83,7 @@ public:
 		if (m_Catalog.find(ident) == m_Catalog.end())
 			m_Catalog.insert(std::make_pair(ident, loader));
 	}
+
+	CResourceSupply::CResourceSupply();
 };
 

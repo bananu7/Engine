@@ -2,10 +2,11 @@
 #include <string>
 #include <set>
 #include <vector>
-#include "Vector3.h"
+#include <glm/glm.hpp>
 #include "Shader.h"
 #include "ShaderSet.h"
 #include <functional>
+#include <string>
 
 class CModelFbx;
 
@@ -14,11 +15,10 @@ class CScene
 protected:
 	struct SSceneObject
 	{
-		CModelFbx*						Model;
-		CVector3						Position;
-		CVector3						Rotation, Scale;
-		CShader*						Shader;
-		std::vector<std::string>		Textures;
+		CModelFbx* Model;
+		glm::vec3 Position, Rotation, Scale;
+		CShader* Shader;
+		std::vector<std::string> Textures;
 
 		void Draw () const;
 	};

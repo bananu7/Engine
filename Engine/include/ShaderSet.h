@@ -1,6 +1,8 @@
 #pragma once
 #include "Color.h"
-#include <set>
+#include <unordered_set>
+#include <glm/glm.hpp>
+#include <string>
 
 class CShader;
 class CVector3;
@@ -8,14 +10,14 @@ class CMatrix4;
 
 class CShaderSet
 {
-	std::set<CShader*> m_Shaders;
+	std::unordered_set<CShader*> m_Shaders;
 
 public:
 	void SetUniform1f (const std::string& name, float a);
 	void SetTex (const std::string& name, unsigned texUnitNum);
-	void SetUniformVector3 (std::string const& name, CVector3 const& vec);
-	void SetUniformColor (std::string const& name, CColor const& color);
-	void SetUniformMatrix4 (std::string const& name, CMatrix4 const& mat);
+	void SetUniformVector3 (std::string const& name, glm::vec3 const& vec);
+	void SetUniformColor (std::string const& name, glm::vec4 const& color);
+	void SetUniformMatrix4 (std::string const& name, glm::mat4 const& mat);
 
 	void AddShader(CShader* shader);
 

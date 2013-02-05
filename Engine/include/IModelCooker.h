@@ -1,4 +1,6 @@
 #pragma once
+#include <glm/glm.hpp>
+#include <memory>
 
 class CModelData;
 
@@ -10,10 +12,10 @@ protected:
 	struct SCookedComponent 
 	{
 		//CTransform	Transform;
-		float		Scale;
-		const CVector3 Center;
+		float Scale;
+		const glm::vec3 Center;
 
-		SCookedComponent(CVector3 center) :
+		SCookedComponent(glm::vec3 center) :
 			Center(std::move(center)) { }
 	};
 

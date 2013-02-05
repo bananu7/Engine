@@ -1,6 +1,7 @@
 #pragma once
 #include "Resource.h"
 #include <cstdint>
+#include <string>
 
 struct SPixel
 {

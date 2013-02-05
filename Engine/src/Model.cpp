@@ -6,23 +6,27 @@
 #include "ModelCookerVBO.h"
 #include "ModelData.h"
 #include "Shader.h"
-#include "Matrix4.h"
 #include "Camera.h"
 #include "ResManager.h"
 using namespace std;
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
+using glm::vec3;
+using glm::mat4;
+
 string CModel::Load(ILoader const& loadParams)
 {
-	auto const& Iter = loadParams.Params.find("path");
-	if (Iter == loadParams.Params.end())
-		return string("Missing 'path' load param");
-	string const& Path = Iter->second;
+	// FIXME
+	//auto const& Iter = loadParams.Params.find("path");
+	//if (Iter == loadParams.Params.end())
+	//	return string("Missing 'path' load param");
+	// string const& Path = Iter->second;
 
 	CModelData Data;
-	if (!Data.Load(CResManager::GetSingleton()->GetResourcePath() + Path))
-		return string("Error with data loading");
+	// FIXME
+	//if (!Data.Load(CResManager::GetSingleton()->GetResourcePath() + Path))
+	//	return string("Error with data loading");
 
 	//m_Cooker = new CModelCookerDisplayList();
 	m_Cooker = new CModelCookerVBO();
@@ -33,11 +37,11 @@ string CModel::Load(ILoader const& loadParams)
 	return string();
 }
 
-inline void SetTransform (const std::string& groupName, const CTransform& t)
+/*inline void SetTransform (const std::string& groupName, const CTransform& t)
 {
 	// TODO: implement
 	//m_Groups[groupName].Transform = t;
-}
+}*/
 
 void CModel::Draw () const
 {
@@ -48,13 +52,13 @@ void CModel::Draw () const
 	//glPopMatrix();
 }
 
-void CModel::Draw(const CVector3& pos, const CVector3& rot, const CVector3& scale) const
+void CModel::Draw(const vec3& pos, const vec3& rot, const vec3& scale) const
 {
-	CMatrix4 PMat = CCamera::CreateTranslation(pos.X, pos.Y, pos.Z);
-	CMatrix4 RMat = CCamera::CreateRotation(rot.X, rot.Y, rot.Z);
-	CMatrix4 SMat = CCamera::CreateScale(scale.X, scale.Y, scale.Z);
-	PMat.Mult(RMat);
-	PMat.Mult(SMat);
+	mat4 PMat = CCamera::CreateTranslation(pos.x, pos.y, pos.z);
+	mat4 RMat = CCamera::CreateRotation(rot.x, rot.y, rot.z);
+	mat4 SMat = CCamera::CreateScale(scale.x, scale.y, scale.z);
+	PMat *= RMat;
+	PMat *= SMat;
 	Shader->SetUniformMatrix4("ModelMatrix", PMat);
 	Draw();
 }

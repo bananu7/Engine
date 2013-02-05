@@ -3,7 +3,6 @@
 #include <lua.hpp>
 #include <vector>
 #include <functional>
-#include "Vector2.h"
 #include "Option.h"
 
 struct lua_State;
@@ -32,7 +31,8 @@ public:
 	double GetNumber (int idx = -1);
 	const char* GetCString (int idx = -1);
 	bool GetBoolean (int idx = -1);
-	CVector2<float> GetVector2 (int idx = -1);
+	// FIXME ?
+	//CVector2<float> GetVector2 (int idx = -1);
 
 	inline double PopNumber (int idx = -1) { double Ret = GetNumber(idx); lua_pop(m_LuaState, 1); return Ret; }
 	inline const char* PopCString (int idx = -1) { const char* Ret = GetCString(idx); lua_pop(m_LuaState, 1); return Ret; }

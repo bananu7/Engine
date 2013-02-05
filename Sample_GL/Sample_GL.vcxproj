@@ -20,7 +20,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>NotSet</CharacterSet>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>Intel C++ Compiler XE 13.0</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -41,12 +41,12 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)\dependencies\glew-1.9.0\include;$(LUA_DEV)\include;$(SolutionDir)\dependencies\SOIL;$(SolutionDir)\Engine\include;$(ProjectDir);$(BOOST_1_52_0);$(SolutionDir)\dependencies;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\Debug;$(BOOST_1_52_0)\stage\lib\;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\PROJECTS\Engine\Engine\include;C:\PROJECTS\Engine\dependencies\glm-0.9.4.1;C:\PROJECTS\Engine\dependencies\glew-1.9.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\Debug;$(BOOST_1_52_0)\stage\lib\;C:\Program Files (x86)\Intel\Composer XE\compiler\lib\ia32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)\dependencies\glew-1.5.6\include;$(LUA_DEV)\include;$(SolutionDir)\dependencies\SOIL;$(SolutionDir)\Engine\include;$(ProjectDir);$(IncludePath)</IncludePath>
+    <IncludePath>C:\PROJECTS\Engine\Engine\include;C:\PROJECTS\Engine\dependencies\glm-0.9.4.1;C:\PROJECTS\Engine\dependencies\glew-1.9.0\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

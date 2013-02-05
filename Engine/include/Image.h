@@ -1,6 +1,7 @@
 #pragma once
 #include "Resource.h"
 #include <exception>
+#include <string>
 #include <Misc.h>
 
 class CImage :

@@ -1,8 +1,7 @@
 #include "Image.h"
 #include <GL/glew.h>
 #include <SOIL.h>
-#include <Misc.h>
-#include <string>
+#include "Misc.h"
 #include <vector>
 #include <iostream>
 #include <iterator>
@@ -11,9 +10,9 @@ using std::string;
 
 string CImage::Load(ILoader & loader)
 {
-	auto & Stream = loader.GetDataStream("main");
+	auto Stream = loader.GetDataStream("main");
 	if (Stream) {
-		auto v = buffer_from_file(Stream.get());
+		auto v = buffer_from_file(*Stream);
 
 		m_TexId = SOIL_load_OGL_texture_from_memory
 			(

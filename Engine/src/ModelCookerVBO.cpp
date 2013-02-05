@@ -1,28 +1,30 @@
 ﻿
 #include "ModelCookerVBO.h"
 #include "ModelData.h"
-#include "Vector3.h"
-#include "Vector2.h"
+#include <glm/glm.hpp>
+
+using glm::vec3;
+using glm::vec2;
 
 void ComputeTangentBasis(
-      const CVector3& P1, const CVector3& P2, const CVector3& P3, 
-      const CVector2<float>& UV1, const CVector2<float>& UV2, const CVector2<float>& UV3,
-      CVector3 &tangent, CVector3 &bitangent )
+      const vec3& P1, const vec3& P2, const vec3& P3, 
+      const vec2& UV1, const vec2& UV2, const vec2& UV3,
+      vec3 &tangent, vec3 &bitangent )
 {
-   CVector3 Edge1 = P2 - P1;
-   CVector3 Edge2 = P3 - P1;
-   CVector2<float> Edge1uv = UV2 - UV1;
-   CVector2<float> Edge2uv = UV3 - UV1;
+   vec3 Edge1 = P2 - P1;
+   vec3 Edge2 = P3 - P1;
+   vec2 Edge1uv = UV2 - UV1;
+   vec2 Edge2uv = UV3 - UV1;
 
-   float cp = Edge1uv.Y * Edge2uv.X - Edge1uv.X * Edge2uv.Y;
+   float cp = Edge1uv.y * Edge2uv.x - Edge1uv.x * Edge2uv.y;
 
    if ( cp != 0.0f ) {
       float mul = 1.0f / cp;
-      tangent   = (Edge1 * -Edge2uv.Y + Edge2 * Edge1uv.Y) * mul;
-      bitangent = (Edge1 * -Edge2uv.X + Edge2 * Edge1uv.X) * mul;
+      tangent   = (Edge1 * -Edge2uv.y + Edge2 * Edge1uv.y) * mul;
+      bitangent = (Edge1 * -Edge2uv.x + Edge2 * Edge1uv.x) * mul;
 
-      tangent.Normalize();
-      bitangent.Normalize();
+	  glm::normalize(tangent);
+      glm::normalize(bitangent);
    }
 }
 
@@ -69,8 +71,8 @@ bool CModelCookerVBO::Cook(const CModelData& modelData)
 					TempNormals.push_back(Normals[Face->NormIndices[i]]);
 					TempTexCoords.push_back(TexCoords[Face->TexCIndices[i]]);
 				}
-				//CVector3 Tangent, Bitangent;
-				//ComputeTangentBasis(reinterpret_cast<CVector3>(
+				//vec3 Tangent, Bitangent;
+				//ComputeTangentBasis(reinterpret_cast<vec3>(
 			}
 		}
 	}

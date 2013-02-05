@@ -1,6 +1,7 @@
 #pragma once
 #include "IModelCooker.h"
 #include <vector>
+#include <string>
 
 class CModelData;
 
@@ -14,7 +15,7 @@ private:
 	{
 		unsigned int DisplayListNum;
 
-		SCookedComponentDisplayList(CVector3 center, unsigned int dslistnum) :
+		SCookedComponentDisplayList(glm::vec3 center, unsigned int dslistnum) :
 			IModelCooker::SCookedComponent(std::move(center)),
 			DisplayListNum(dslistnum) { }
 	};

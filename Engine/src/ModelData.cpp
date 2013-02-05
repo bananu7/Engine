@@ -6,9 +6,12 @@
 #include "ModelData.h"
 #include "ResManager.h"
 #include "Image.h"
+#include <glm/glm.hpp>
 
 using namespace std;
 using std::string;
+
+using glm::vec3;
 
 bool SkipSpaces (istream& str)
 {
@@ -86,10 +89,11 @@ bool CModelData::_LoadMtl (std::istream& str)
 		{
 			string TexPath;
 			str >> TexPath;
-			CResManager::GetSingleton()->AddCatalogEntry(MatName, ILoader(TexPath));
-			TempMat.Textures.push_back(CResManager::GetSingleton()->GetResource<CImage>(MatName)->GetTexture());
+			// FIXME
+			//CResManager::GetSingleton()->AddCatalogEntry(MatName, ILoader(TexPath));
+			//TempMat.Textures.push_back(CResManager::GetSingleton()->GetResource<CImage>(MatName)->GetTexture());
 			// Below is called just to f*cking update pixels -.-
-			CResManager::GetSingleton()->GetResource<CImage>(MatName)->Bind();
+			//CResManager::GetSingleton()->GetResource<CImage>(MatName)->Bind();
 		}
 	} while (!(str.eof() || MatCmd == ""));
 	if (HaveMat)
@@ -122,8 +126,10 @@ bool CModelData::_LoadFromObj(std::istream& str)
 		{
 			string MatFileName;
 			str >> MatFileName;
-			ifstream MatFile (
-				CResManager::GetSingleton()->GetResourcePath() + MatFileName);
+			// FIXME
+			ifstream MatFile;
+			//ifstream MatFile (
+			//	CResManager::GetSingleton()->GetResourcePath() + MatFileName);
 			if (!MatFile.is_open())
 				return false;
 			_LoadMtl(MatFile);
@@ -219,8 +225,9 @@ bool CModelData::_LoadFromObj(std::istream& str)
 		}
 		else if (Cmd == "gc")
 		{
-			CVector3 GroupCenter;
-			str >> GroupCenter;
+			vec3 GroupCenter;
+			// FIXME
+			//str >> GroupCenter;
 			//dynamic_cast<CGroupBeginning*>(ListElems.back())->SetCenter(GroupCenter);
 		}
 		else
@@ -234,7 +241,7 @@ bool CModelData::_LoadFromObj(std::istream& str)
 
 bool CModelData::_LoadFromFBX(const std::string &path)
 {
-	FbxManager *m_SdkManager= FbxManager::Create();						// create a FBX SdkManager
+/*	FbxManager *m_SdkManager= FbxManager::Create();						// create a FBX SdkManager
 	FbxIOSettings *ios= FbxIOSettings::Create(m_SdkManager, IOSROOT );	// create a FBX IOSettings object
 	
 	// set some IOSettings options 
@@ -273,7 +280,7 @@ bool CModelData::_LoadFromFBX(const std::string &path)
 
 	for (int it= 0, itE= m_ComponentNumber; it<itE; ++it)				// foreach in the array
 	{
-		CVector3 Center;
+		vec3 Center;
 		m_Components.push_back				(m_ComponentName);
 		m_Components.back().Number=			it;
 		m_Components.back().Center=			Center;
@@ -337,7 +344,7 @@ bool CModelData::_LoadFromFBX(const std::string &path)
 			bool ReadStatus;
 			// pytanie - Czy chcemy ladowac calosc od razu? zakladam, ze tak
 			ReadStatus = Cache->Read((unsigned int)pTime.GetFrameCount(), lReadBuf, lVertexCount);
-		}*/
+		}*
 		#pragma endregion
 
 		ControlPointArray	= m_Geometry->GetControlPoints();			// get size and pointer to an array containing all the CP within a geometry
@@ -365,7 +372,7 @@ bool CModelData::_LoadFromFBX(const std::string &path)
 			{
 				
 			}
-			else /*Invalid TexCoord Mapping Mode*/ return false;
+			else /*Invalid TexCoord Mapping Mode* return false;
 		}
 		if (m_Normal != NULL)											// Check Normal Mapping && Reference Modes
 		{
@@ -376,7 +383,7 @@ bool CModelData::_LoadFromFBX(const std::string &path)
 				NormalMappingMode == KFbxLayerElement::eByPolygonVertex)
 			{
 			}
-			else /*Invalid Normal Mapping Mode*/ return false;
+			else /*Invalid Normal Mapping Mode* return false;
 		}
 		if (m_Binormal != NULL)											// Check Binormal Mapping && Reference Modes
 		{
@@ -387,7 +394,7 @@ bool CModelData::_LoadFromFBX(const std::string &path)
 				NormalMappingMode == KFbxLayerElement::eByPolygonVertex)
 			{
 			}
-			else /*Invalid Binormal Mapping Mode*/ return false;
+			else /*Invalid Binormal Mapping Mode* return false;
 		}
 		if (m_Tangent != NULL)											// Check Tangent Mapping && Reference Modes
 		{
@@ -398,7 +405,7 @@ bool CModelData::_LoadFromFBX(const std::string &path)
 				NormalMappingMode == KFbxLayerElement::eByPolygonVertex)
 			{
 			}
-			else /*Invalid Tangent Mapping Mode*/ return false;
+			else /*Invalid Tangent Mapping Mode* return false;
 		}
 
 		#pragma region Loading of polygons
@@ -498,7 +505,7 @@ bool CModelData::_LoadFromFBX(const std::string &path)
 	SMaterial				TempMat;
 	string					m_MaterialName;
 	FbxSurfaceMaterial		*m_Material;
-	FbxColor				*PropertyColor;
+	FbxColor				PropertyColor;
 	for (int it= 0, itE= m_Scene->GetMaterialCount(); it<itE; ++it)
 	{
 		
@@ -507,25 +514,25 @@ bool CModelData::_LoadFromFBX(const std::string &path)
 		m_MaterialName= m_Material->GetNameOnly();
 		TempMat= SMaterial();
 		
-		PropertyColor= &m_Material->FindProperty("AmbientColor").Get<KFbxColor>();
-		TempMat.Ambient[0]= PropertyColor->mRed;
-		TempMat.Ambient[1]= PropertyColor->mGreen;
-		TempMat.Ambient[2]= PropertyColor->mBlue;
-		TempMat.Ambient[3]= PropertyColor->mAlpha;		// not sure here which one
+		PropertyColor = m_Material->FindProperty("AmbientColor").Get<KFbxColor>();
+		TempMat.Ambient[0]= PropertyColor.mRed;
+		TempMat.Ambient[1]= PropertyColor.mGreen;
+		TempMat.Ambient[2]= PropertyColor.mBlue;
+		TempMat.Ambient[3]= PropertyColor.mAlpha;		// not sure here which one
 		//TempMat.Ambient[3]= m_Material->FindProperty("AmbientFactor").Get<double>();
 
-		PropertyColor= &m_Material->FindProperty("DiffuseColor").Get<KFbxColor>();
-		TempMat.Diffuse[0]= PropertyColor->mRed;
-		TempMat.Diffuse[1]= PropertyColor->mGreen;
-		TempMat.Diffuse[2]= PropertyColor->mBlue;
-		TempMat.Diffuse[3]= PropertyColor->mAlpha;		// not sure here which one
+		PropertyColor = m_Material->FindProperty("DiffuseColor").Get<KFbxColor>();
+		TempMat.Diffuse[0]= PropertyColor.mRed;
+		TempMat.Diffuse[1]= PropertyColor.mGreen;
+		TempMat.Diffuse[2]= PropertyColor.mBlue;
+		TempMat.Diffuse[3]= PropertyColor.mAlpha;		// not sure here which one
 		//TempMat.Diffuse[3]= m_Material->FindProperty("DiffuseFactor").Get<double>();
 
-		PropertyColor= &m_Material->FindProperty("SpecularColor").Get<KFbxColor>();
-		TempMat.Specular[0]= PropertyColor->mRed;
-		TempMat.Specular[1]= PropertyColor->mGreen;
-		TempMat.Specular[2]= PropertyColor->mBlue;
-		TempMat.Specular[3]= PropertyColor->mAlpha;		// not sure here which one
+		PropertyColor = m_Material->FindProperty("SpecularColor").Get<KFbxColor>();
+		TempMat.Specular[0]= PropertyColor.mRed;
+		TempMat.Specular[1]= PropertyColor.mGreen;
+		TempMat.Specular[2]= PropertyColor.mBlue;
+		TempMat.Specular[3]= PropertyColor.mAlpha;		// not sure here which one
 		//TempMat.Specular[3]= m_Material->FindProperty("SpecularFactor").Get<double>();
 
 		//TempMat.Textures								// not used?
@@ -556,7 +563,8 @@ bool CModelData::_LoadFromFBX(const std::string &path)
 		 TriangulateRecursive(mScene->GetRootNode());
 	 }
 	 */
-	return true;
+	// FIXME
+	return false;
 }
 
 bool CModelData::Load(std::string const& path)

@@ -15,7 +15,7 @@ private:
 		std::vector<int> GroupEndIndices;
 		CVertexAttributeArray Vao;
 
-		explicit SCookedComponentVBO(CVector3 center) :
+		explicit SCookedComponentVBO(glm::vec3 center) :
 			IModelCooker::SCookedComponent(std::move(center))
 			{ }
 	};

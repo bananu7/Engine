@@ -1,7 +1,8 @@
 #pragma once
 #include <vector>
+#include <string>
 #include <map>
-#include "Vector3.h"
+#include <glm/glm.hpp>
 
 class CModelData
 {
@@ -37,22 +38,22 @@ public:
 	
 	struct SComponent
 	{
-		unsigned int		Number;
-		CVector3			Center;
-		std::string			Name;
+		unsigned int Number;
+		glm::vec3 Center;
+		std::string Name;
 		std::vector<SGroup> Groups;
 
 		SComponent (std::string name) :
 			Name(std::move(name)),
-			Center(CVector3::GetZero()) { }
+			Center(glm::vec3(0.f)) { }
 	};
 
 protected:
-	std::vector<SVector3>				m_Vertices;
-	std::vector<SVector3>				m_Normals;
-	std::vector<SVector2>				m_TexCoords;
-	std::map<std::string, SMaterial>	m_Materials;
-	std::vector<SComponent>				m_Components;
+	std::vector<SVector3> m_Vertices;
+	std::vector<SVector3> m_Normals;
+	std::vector<SVector2> m_TexCoords;
+	std::map<std::string, SMaterial> m_Materials;
+	std::vector<SComponent> m_Components;
 
 	bool CModelData::_LoadFromFBX(const std::string &path);
 	bool _LoadFromObj (std::istream& str);

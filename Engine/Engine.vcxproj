@@ -42,11 +42,11 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <SourcePath>$(ProjectDir)\src;$(SourcePath)</SourcePath>
-    <LibraryPath>$(FBX_2013_3)\lib\vs2010\x86;$(SolutionDir)\dependencies\glew-1.9.0\lib;$(SolutionDir)\dependencies\SOIL\lib;$(BOOST_1_52_0)\stage\lib;$(SolutionDir)\dependencies\pugixml-1.2\scripts\vs2010\x32;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(LUA_DEV)\include;$(ProjectDir);$(ProjectDir)\include;$(SolutionDir)\dependencies;$(FBX_2013_3)\include;$(BOOST_1_52_0)\;$(SolutionDir)\dependencies\SOIL\include;$(SolutionDir)\dependencies\rapidxml-1.13;$(SolutionDir)\dependencies\glew-1.9.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(FBX_2013_3)\lib\vs2010\x86;$(SolutionDir)\dependencies\glew-1.9.0\lib;$(SolutionDir)\dependencies\SOIL\lib;$(SolutionDir)\dependencies\pugixml-1.2\scripts\vs2010\x32;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(LUA_DEV)\include;$(ProjectDir);$(ProjectDir)\include;$(SolutionDir)\dependencies;$(FBX_2013_3)\include;$(BOOST_1_52_0)\;$(SolutionDir)\dependencies\SOIL\include;$(SolutionDir)\dependencies\glew-1.9.0\include;C:\PROJECTS\Engine\dependencies\glm-0.9.4.1;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(LUA_DEV)\include;$(PATH_TO_BOOST);$(ProjectDir);$(ProjectDir)\include;$(SolutionDir)\dependencies;$(SolutionDir)\dependencies\SOIL\include;$(SolutionDir)\dependencies\rapidxml-1.13;$(SolutionDir)\dependencies\glew-1.5.6\include;$(SolutionDir)\dependencies\FBX\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(LUA_DEV)\include;$(BOOST_1_52_0);$(ProjectDir);$(ProjectDir)\include;$(SolutionDir)\dependencies;$(SolutionDir)\dependencies\SOIL\include;$(SolutionDir)\dependencies\glew-1.5.6\include;$(SolutionDir)\dependencies\FBX\include;C:\PROJECTS\Engine\dependencies\glm-0.9.4.1;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\dependencies\glew-1.5.6\lib;$(SolutionDir)\dependencies\SOIL\lib;$(PATH_TO_BOOST)\stage\lib;$(SolutionDir)\dependencies\FBX\lib;$(SolutionDir)\dependencies\pugixml-1.2\scripts\vs2010\x32;$(LibraryPath)</LibraryPath>
     <SourcePath>$(ProjectDir)\src;$(SourcePath)</SourcePath>
   </PropertyGroup>
@@ -55,7 +55,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;BOOST_ALL_STATIC_LINK;FBXSDK_SHARED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;FBXSDK_SHARED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>
       </AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -97,7 +97,6 @@
     <ClInclude Include="include\FbxAnimHelpers.h" />
     <ClInclude Include="include\FbxVboMesh.h" />
     <ClInclude Include="include\FrameBuffer.h" />
-    <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\GameObject.h" />
     <ClInclude Include="include\GameScripting.hpp" />
     <ClInclude Include="include\GetPosition.h" />
@@ -107,7 +106,6 @@
     <ClInclude Include="include\LightHouse.h" />
     <ClInclude Include="include\Logger.h" />
     <ClInclude Include="include\LuaVM.h" />
-    <ClInclude Include="include\Matrix4.h" />
     <ClInclude Include="include\Misc.h" />
     <ClInclude Include="include\Model.h" />
     <ClInclude Include="include\ModelCookerDisplayList.h" />
@@ -120,8 +118,6 @@
     <ClInclude Include="include\Scene.h" />
     <ClInclude Include="include\Shader.h" />
     <ClInclude Include="include\ShaderSet.h" />
-    <ClInclude Include="include\Vector2.h" />
-    <ClInclude Include="include\Vector3.h" />
     <ClInclude Include="include\VertexAttributeArray.h" />
     <ClInclude Include="include\VertexBuffer.h" />
     <ClInclude Include="include\World.h" />
@@ -140,7 +136,6 @@
     <ClCompile Include="src\LuaVM.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\Matrix4.cpp" />
     <ClCompile Include="src\Misc.cpp" />
     <ClCompile Include="src\Model.cpp" />
     <ClCompile Include="src\ModelCookerDisplayList.cpp" />
@@ -155,11 +150,6 @@
     <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\Shader.cpp" />
     <ClCompile Include="src\ShaderSet.cpp" />
-    <ClCompile Include="src\Vector2.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="src\Vector3.cpp" />
     <ClCompile Include="src\VertexAttributeArray.cpp" />
     <ClCompile Include="src\VertexBuffer.cpp" />
     <ClCompile Include="src\World.cpp" />

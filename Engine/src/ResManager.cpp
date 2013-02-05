@@ -2,10 +2,11 @@
 #include "Resource.h"
 #include "Misc.h"
 
-#include <boost\filesystem\operations.hpp>
-#include <boost\filesystem\convenience.hpp>
+#include <boost/filesystem/operations.hpp>
+#include <boost/filesystem/convenience.hpp>
 
 #include <pugixml-1.2/src/pugixml.hpp>
+#include <exception>
 
 using namespace std;
 using pugi::xml_document;
@@ -30,7 +31,7 @@ using pugi::xml_attribute;
 	return true;
 }*/
 
-bool CResManager::LoadCatalog(string const& path)
+bool CResourceSupply::LoadCatalog(string const& path)
 {
 	xml_document Doc;
 	if (Doc.load_file(path.c_str()).status != pugi::status_ok)
@@ -42,8 +43,8 @@ bool CResManager::LoadCatalog(string const& path)
 		string Name = Resource.attribute("name").as_string();
 		string Type = Resource.attribute("type").as_string();
 
-		//TEMP
-		ILoader LoadParams;
+		// FIXME
+		//ILoader LoadParams;
 
 		for (xml_node LoadParam = Resource.first_child(); LoadParam; LoadParam = LoadParam.next_sibling())
 		{
@@ -56,20 +57,20 @@ bool CResManager::LoadCatalog(string const& path)
 				// child value, bo to, co jest w srodku node'a to tzw. node_pcdata
 				string ParamValue = LoadParam.child_value();
 
-				LoadParams.Params[ParamName] = ParamValue;
+			//	LoadParams.Params[ParamName] = ParamValue;
 			//}
 		}
-		m_Catalog[Name] = LoadParams;
+		//m_Catalog[Name] = LoadParams;
 	}
 }
 
-bool CResManager::LoadWholeFolder(const std::string& path)
+bool CResourceSupply::LoadWholeFolder(const std::string& path)
 {
 	boost::filesystem::path LoadPath(m_ResourcePath+path);
 
 	if (!boost::filesystem::exists(LoadPath) || !boost::filesystem::is_directory(LoadPath))
 	{
-		throw EXCEPTION("ResourceManager", "LoadWholeFolder - can't load folder: doesn't exist or isn't directory");
+		throw std::exception("ResourceManager : LoadWholeFolder - can't load folder: doesn't exist or isn't directory");
 		return false; // Is not directory or doesnt exist
 	}
 
@@ -93,7 +94,8 @@ bool CResManager::LoadWholeFolder(const std::string& path)
 			std::string ResourcePath=(It->path().string());
 			// Usuwamy resourcepath
 			ResourcePath=ResourcePath.substr(m_ResourcePath.size(),ResourcePath.size()-m_ResourcePath.size());
-			AddCatalogEntry(ResourceName,ILoader(ResourcePath));
+			// FIXME
+		//	AddCatalogEntry(ResourceName,ILoader(ResourcePath));
 		}
 		It++;
 	}
@@ -101,13 +103,9 @@ bool CResManager::LoadWholeFolder(const std::string& path)
 
 }
 
-CResManager::CResManager(void)
+CResourceSupply::CResourceSupply()
 {
 	m_ResourcePath = "../Resources/";
 	m_ConfigPath = "../Resources/";
 }
 
-
-CResManager::~CResManager(void)
-{
-}

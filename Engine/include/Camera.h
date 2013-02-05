@@ -1,37 +1,33 @@
 #pragma once
-#include "Vector2.h"
-#include "Matrix4.h"
-#include <functional>
-
-class CVector3;
+#include <glm/glm.hpp>
 
 class CCamera
 {
 protected:
-	CMatrix4 m_ProjectionMatrix, m_ViewMatrix;
+	glm::mat4 m_ProjectionMatrix, m_ViewMatrix;
 
 public:
 	// ModelView
-	static CMatrix4 CreateScale (float x, float y, float z);
-	static CMatrix4 CreateRotation (float x, float y, float z);
-	static inline CMatrix4 CreateRotation (CVector3 const& rot);
-	static CMatrix4 CreateTranslation(float x, float y, float z);
-	static inline CMatrix4 CreateTranslation (CVector3 const& vec);
+	static glm::mat4 CreateScale (float x, float y, float z);
+	static glm::mat4 CreateRotation (float x, float y, float z);
+	static inline glm::mat4 CreateRotation (glm::vec3 const& rot);
+	static glm::mat4 CreateTranslation(float x, float y, float z);
+	static inline glm::mat4 CreateTranslation (glm::vec3 const& vec);
 
 	// Projection
-	static CMatrix4 CreateProjection(float fov, float ratio, float nearClip, float farClip);
-	static CMatrix4 CreateModelview(CVector3 const& eye, CVector3 const& target);
-	static CMatrix4 CreateOrtho(float left, float top, float right, float bottom, float znear, float zfar);
-	static CMatrix4 CreateFrustum(float left, float right, float bottom, float top, float znear, float zfar);
+	static glm::mat4 CreateProjection(float fov, float ratio, float nearClip, float farClip);
+	static glm::mat4 CreateModelview(glm::vec3 const& eye, glm::vec3 const& target);
+	static glm::mat4 CreateOrtho(float left, float top, float right, float bottom, float znear, float zfar);
+	static glm::mat4 CreateFrustum(float left, float right, float bottom, float top, float znear, float zfar);
 
-	void SetProjectionMat(CMatrix4 const& mat4) { m_ProjectionMatrix = mat4; }
-	inline CMatrix4 const& GetProjectionMat () const { return m_ProjectionMatrix; }
-	inline CMatrix4 const& GetViewMat () const { return m_ViewMatrix ;}
+	void SetProjectionMat(glm::mat4 const& mat4) { m_ProjectionMatrix = mat4; }
+	inline glm::mat4 const& GetProjectionMat () const { return m_ProjectionMatrix; }
+	inline glm::mat4 const& GetViewMat () const { return m_ViewMatrix ;}
 
 	virtual void CalculateView();
 	virtual void CalculateProjection();
 
-	CCamera(void);
+	CCamera();
 	~CCamera(void);
 };
 
