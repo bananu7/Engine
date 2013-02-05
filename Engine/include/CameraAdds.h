@@ -1,5 +1,6 @@
 #pragma once
 #include "Camera.h"
+#include "Vector3.h"
 
 // Kamera do ustawiania celu i pozycji
 class CCameraSimple:

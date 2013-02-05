@@ -1,10 +1,10 @@
 #pragma once
 #include "Color.h"
-#include "Vector3.h"
-#include "Matrix4.h"
 #include <set>
 
 class CShader;
+class CVector3;
+class CMatrix4;
 
 class CShaderSet
 {
@@ -12,7 +12,7 @@ class CShaderSet
 
 public:
 	void SetUniform1f (const std::string& name, float a);
-	void SetTex (const std::string& name, uint8 texUnitNum);
+	void SetTex (const std::string& name, unsigned texUnitNum);
 	void SetUniformVector3 (std::string const& name, CVector3 const& vec);
 	void SetUniformColor (std::string const& name, CColor const& color);
 	void SetUniformMatrix4 (std::string const& name, CMatrix4 const& mat);

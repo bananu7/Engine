@@ -1,10 +1,10 @@
 #pragma once
-#include "Typedefs.h"
-#include "Vector2.h"
-#include "Option.h"
+#include <string>
 #include <lua.hpp>
 #include <vector>
 #include <functional>
+#include "Vector2.h"
+#include "Option.h"
 
 struct lua_State;
 

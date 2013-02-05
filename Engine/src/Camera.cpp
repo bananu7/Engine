@@ -1,5 +1,5 @@
-
 #include "Camera.h"
+#include "Vector3.h"
 
 #define M_PI       3.14159265358979323846
 
@@ -29,6 +29,11 @@ CMatrix4 CCamera::CreateRotation (float x, float y, float z)
 	return RotX;
 }
 
+CMatrix4 CCamera::CreateRotation(CVector3 const& rot)
+{
+	return CreateRotation(rot.X, rot.Y, rot.Z);
+}
+
 CMatrix4 CCamera::CreateTranslation(float x, float y, float z)
 {
 	CMatrix4 Temp = CMatrix4::CreateIdentity();
@@ -37,11 +42,15 @@ CMatrix4 CCamera::CreateTranslation(float x, float y, float z)
 	Temp.Data[14] = z;
 	return Temp;
 }
+CMatrix4 CCamera::CreateTranslation(CVector3 const& vec)
+{
+	return CreateTranslation(vec.X, vec.Y, vec.Z); 
+}
 
 CMatrix4 CCamera::CreateProjection(float fov, float ratio, float nearClip, float farClip)
 {
 	CMatrix4 Temp = CMatrix4::CreateIdentity();
-	float f = 1.0f / tan (fov * (M_PI / 360.0));
+	float f = 1.0f / tan (fov * (M_PI / 360.0f));
 
     Temp.Data[0] = f / ratio;
     Temp.Data[1 * 4 + 1] = f;

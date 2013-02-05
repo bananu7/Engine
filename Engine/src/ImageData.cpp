@@ -6,19 +6,19 @@
 
 using std::string;
 
-string CImageData::Load(ILoader const& loadParams)
+string CImageData::Load(ILoader & loader)
 {		
-	string Path;
-	if (!loadParams.GetParam("path", Path))
-		return string("Missing loading param 'path'");
-	Path = CResManager::GetSingleton()->GetResourcePath() + Path;
-
-	m_Data = SOIL_load_image
-	(
-		Path.c_str(),
-		&m_Width, &m_Height, &m_Channels,
-		SOIL_LOAD_AUTO
-	);
+	auto & Stream = loader.GetDataStream("main");
+	if (Stream) {
+		auto v = buffer_from_file(Stream.get());
+		m_Data = SOIL_load_image_from_memory
+		(
+			v.data(),
+			v.size(),
+			&m_Width, &m_Height, &m_Channels,
+			SOIL_LOAD_AUTO
+		);
+	}
 	return (m_Data != 0) ? string() : string("Error with loading image");
 }
 

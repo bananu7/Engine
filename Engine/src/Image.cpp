@@ -1,33 +1,37 @@
 #include "Image.h"
+#include <GL/glew.h>
 #include <SOIL.h>
 #include <Misc.h>
 #include <string>
+#include <vector>
+#include <iostream>
+#include <iterator>
 
 using std::string;
 
-std::string CImage::Load(ILoader const& loadParams)
+string CImage::Load(ILoader & loader)
 {
-	auto const& Iter = loadParams.Params.find("path");
-	if (Iter == loadParams.Params.end())
-		return string("Missing 'path' load param");
-	string Path = Iter->second;
-	Path = "../Resources/" + Path;
+	auto & Stream = loader.GetDataStream("main");
+	if (Stream) {
+		auto v = buffer_from_file(Stream.get());
 
-	m_TexId = SOIL_load_OGL_texture
-		(
-			Path.c_str(),
-			SOIL_LOAD_AUTO,
-			SOIL_CREATE_NEW_ID,
-			SOIL_FLAG_MIPMAPS
-		);
+		m_TexId = SOIL_load_OGL_texture_from_memory
+			(
+				v.data(),
+				v.size(),
+				SOIL_LOAD_AUTO,
+				SOIL_CREATE_NEW_ID,
+				SOIL_FLAG_MIPMAPS
+			);
 
-	Bind();
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
+		Bind();
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
+	}
 
 	return (m_TexId != 0) ? std::string() : std::string("General Error");
 }
@@ -37,7 +41,7 @@ void CImage::Bind()
 	glBindTexture(GL_TEXTURE_2D, m_TexId);
 }
 
-void CImage::Bind(uint8 textureUnitNum)
+void CImage::Bind(int textureUnitNum)
 {
 	glActiveTexture (GL_TEXTURE0 + textureUnitNum);
 	glBindTexture(GL_TEXTURE_2D, m_TexId);

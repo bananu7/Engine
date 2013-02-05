@@ -1,6 +1,6 @@
-
 #include "FbxVboMesh.h"
 #include <fbxsdk.h>
+#include <GL/glew.h>
 
 const int TRIANGLE_VERTEX_COUNT = 3;
 

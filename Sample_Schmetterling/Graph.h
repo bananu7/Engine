@@ -15,8 +15,8 @@ protected:
 	CColor					m_Color;
 
 	std::vector<double>		m_Data;		//!< \protected Stored data
-	CVector2<float64>		m_Bounds;	//!< \protected Bounds of graph
-	uint32					m_StepX;	//!< \protected Step of graph
+	CVector2<double>		m_Bounds;	//!< \protected Bounds of graph
+	unsigned				m_StepX;	//!< \protected Step of graph
 
 public:
 	void CGraph::Draw();

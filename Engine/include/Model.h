@@ -4,7 +4,6 @@
 #include <vector>
 #include "Vector3.h"
 #include "Resource.h"
-#include "Transform.h"
 #include "IModelCooker.h"
 
 class CModelData;
@@ -27,7 +26,6 @@ public:
 	std::string CModel::Load(ILoader const& loadParams);
 	void Unload() { }
 
-	inline void SetTransform (const std::string& groupName, const CTransform& t);
 	inline void SetScale (float scale) { m_Scale = scale; }
 	void Draw () const;
 	void Draw (const CVector3& pos, const CVector3& rot, const CVector3& scale) const;

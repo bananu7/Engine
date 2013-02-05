@@ -13,7 +13,7 @@ public:
 	float DotProduct (const CVector3& b);
 	void Normalize () { float L = sqrtf(X*X+Y*Y+Z*Z); X /= L; Y /= L; Z /= L;}
 	float Lenght (const CVector3& other) const;
-	
+	 
 	CVector3 operator+ (const CVector3& a) const { return CVector3(X+a.X, Y+a.Y, Z+a.Z); }
 	CVector3 operator- (const CVector3& a) const { return CVector3(X-a.X, Y-a.Y, Z-a.Z); }
 	CVector3 operator- (void) const { return CVector3(-X, -Y, -Z); }

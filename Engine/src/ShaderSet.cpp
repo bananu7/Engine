@@ -8,7 +8,7 @@ void CShaderSet::SetUniform1f (const std::string& name, float a)
 		(*It)->SetUniform1f(name, a);
 }
 
-void CShaderSet::SetTex (const std::string& name, uint8 texUnitNum)
+void CShaderSet::SetTex (const std::string& name, unsigned texUnitNum)
 {
 	for (auto It = m_Shaders.begin(); It != m_Shaders.end(); ++It)
 		(*It)->SetTex(name, texUnitNum);

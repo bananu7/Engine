@@ -1,9 +1,11 @@
+#include <string>
+#include <fstream>
+
+#include <fbxsdk.h>
 
 #include "ModelData.h"
 #include "ResManager.h"
 #include "Image.h"
-#include <fstream>
-#include <fbxsdk.h>
 
 using namespace std;
 using std::string;

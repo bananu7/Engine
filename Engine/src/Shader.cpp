@@ -1,7 +1,8 @@
-
+#include <GL/glew.h>
+#include <fstream>
+#include <string>
 #include "Matrix4.h"
 #include "Shader.h"
-#include <fstream>
 #include "ResManager.h"
 #include "Image.h"
 #include "Misc.h"
@@ -112,7 +113,7 @@ int CShader::GetAttribLocation (const std::string& name)
 	return glGetAttribLocation(m_ProgramNum, name.c_str());
 }
 
-string CShader::_GetInfo(uint32 num)
+string CShader::_GetInfo(unsigned num)
 {
 	GLint blen = 0;	
 	GLsizei slen = 0;

@@ -68,7 +68,7 @@ void CWorld::CreateLocalPlayer (uint8 id)
 	m_NetworkPlayers.Add(id, m_LocalPlayer);
 }*/
 //-------------------------------------------------------------
-CGameObject* CWorld::GetObjectById (uint32 id)
+CGameObject* CWorld::GetObjectById (unsigned id)
 {
 	auto It = m_Objects.find(id);
 	if (It != m_Objects.end())

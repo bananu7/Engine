@@ -20,7 +20,7 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>Intel C++ Compiler XE 13.0</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -91,7 +91,6 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\dependencies\Singleton.h" />
     <ClInclude Include="include\Camera.h" />
     <ClInclude Include="include\CameraAdds.h" />
     <ClInclude Include="include\Color.h" />
@@ -115,16 +114,12 @@
     <ClInclude Include="include\ModelCookerVBO.h" />
     <ClInclude Include="include\ModelData.h" />
     <ClInclude Include="include\ModelFbx.h" />
-    <ClInclude Include="include\ModelInstance.h" />
     <ClInclude Include="include\Option.h" />
     <ClInclude Include="include\ResManager.h" />
     <ClInclude Include="include\Resource.h" />
     <ClInclude Include="include\Scene.h" />
     <ClInclude Include="include\Shader.h" />
     <ClInclude Include="include\ShaderSet.h" />
-    <ClInclude Include="include\Sky.h" />
-    <ClInclude Include="include\Transform.h" />
-    <ClInclude Include="include\Typedefs.h" />
     <ClInclude Include="include\Vector2.h" />
     <ClInclude Include="include\Vector3.h" />
     <ClInclude Include="include\VertexAttributeArray.h" />
@@ -137,8 +132,6 @@
     <ClCompile Include="src\FbxAnimHelpers.cpp" />
     <ClCompile Include="src\FbxVboMesh.cpp" />
     <ClCompile Include="src\FrameBuffer.cpp" />
-    <ClCompile Include="src\Game.cpp" />
-    <ClCompile Include="src\GameObject.cpp" />
     <ClCompile Include="src\GetPosition.cxx" />
     <ClCompile Include="src\Image.cpp" />
     <ClCompile Include="src\ImageData.cpp" />
@@ -154,17 +147,14 @@
     <ClCompile Include="src\ModelCookerVBO.cpp" />
     <ClCompile Include="src\ModelData.cpp" />
     <ClCompile Include="src\ModelFbx.cpp" />
-    <ClCompile Include="src\ModelInstance.cpp" />
-    <ClCompile Include="src\Resource.cpp" />
     <ClCompile Include="src\ResManager.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\Resource.cpp" />
     <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\Shader.cpp" />
     <ClCompile Include="src\ShaderSet.cpp" />
-    <ClCompile Include="src\Sky.cpp" />
-    <ClCompile Include="src\Transform.cpp" />
     <ClCompile Include="src\Vector2.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>

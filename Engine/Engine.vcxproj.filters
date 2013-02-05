@@ -47,9 +47,6 @@
     <ClInclude Include="include\Scene.h">
       <Filter>Header Files\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="include\Sky.h">
-      <Filter>Header Files\Resources</Filter>
-    </ClInclude>
     <ClInclude Include="include\Shader.h">
       <Filter>Header Files\Resources</Filter>
     </ClInclude>
@@ -62,13 +59,7 @@
     <ClInclude Include="include\Game.h">
       <Filter>Header Files\Misc</Filter>
     </ClInclude>
-    <ClInclude Include="include\Typedefs.h">
-      <Filter>Header Files\Misc</Filter>
-    </ClInclude>
     <ClInclude Include="include\Vector2.h">
-      <Filter>Header Files\Misc</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Transform.h">
       <Filter>Header Files\Misc</Filter>
     </ClInclude>
     <ClInclude Include="include\Image.h">
@@ -125,13 +116,7 @@
     <ClInclude Include="include\ModelFbx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\ModelInstance.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\ShaderSet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\dependencies\Singleton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\FrameBuffer.h">
@@ -163,12 +148,6 @@
     <ClCompile Include="src\Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Sky.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Transform.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Vector2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -178,16 +157,10 @@
     <ClCompile Include="src\LuaVM.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Misc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Image.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\World.cpp">
@@ -200,9 +173,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\ModelCookerDisplayList.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ModelInstance.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\ModelCookerVBO.cpp">

@@ -2,7 +2,6 @@
 #include <vector>
 #include <map>
 #include "Vector3.h"
-#include "Transform.h"
 
 class CModelData
 {

@@ -1,11 +1,10 @@
 #pragma once
-#include "Vector3.h"
 #include "Vector2.h"
-#include "Singleton.h"
 #include "Matrix4.h"
 #include <functional>
 
-// It stores only matrices - general purpose
+class CVector3;
+
 class CCamera
 {
 protected:
@@ -15,9 +14,9 @@ public:
 	// ModelView
 	static CMatrix4 CreateScale (float x, float y, float z);
 	static CMatrix4 CreateRotation (float x, float y, float z);
-	static inline CMatrix4 CreateRotation (CVector3 const& rot) { return CreateRotation(rot.X, rot.Y, rot.Z); }
+	static inline CMatrix4 CreateRotation (CVector3 const& rot);
 	static CMatrix4 CreateTranslation(float x, float y, float z);
-	static inline CMatrix4 CreateTranslation (CVector3 const& vec) { return CreateTranslation(vec.X, vec.Y, vec.Z); }
+	static inline CMatrix4 CreateTranslation (CVector3 const& vec);
 
 	// Projection
 	static CMatrix4 CreateProjection(float fov, float ratio, float nearClip, float farClip);

@@ -1,5 +1,5 @@
 #pragma once
-#include "Typedefs.h"
+#include <string>
 #include <list>
 #include <map>
 #include "GameScripting.hpp"
@@ -12,25 +12,20 @@ private:
 	static const float UPDATE_INTERVAL;
 
 protected:
-	//CPlayer*							m_LocalPlayer;
-	std::map<uint32, CGameObject*>		m_Objects;
+	std::map<unsigned, CGameObject*> m_Objects;
 
-	void _LoadMap(void);
+	void _LoadMap();
 
 public:
 
-	void Load (void);
+	void Load();
 	std::vector<SUpdateData> Update ();
-	//TEMP:
 	
-	void Draw (void);
+	void Draw();
 
-	//CPlayer* GetLocalPlayer(void) const;
-	//void CreateLocalPlayer (uint8 id = 1);
-
-	CGameObject* GetObjectById (uint32 id);
+	CGameObject* GetObjectById (unsigned id);
 	void AddObject (CGameObject* obj);
 
 	CWorld();
-	virtual ~CWorld(void);
+	virtual ~CWorld();
 };

@@ -1,5 +1,4 @@
 #pragma once
-#include "Transform.h"
 
 class CModelData;
 
@@ -10,7 +9,7 @@ class IModelCooker //interface
 protected:
 	struct SCookedComponent 
 	{
-		CTransform	Transform;
+		//CTransform	Transform;
 		float		Scale;
 		const CVector3 Center;
 

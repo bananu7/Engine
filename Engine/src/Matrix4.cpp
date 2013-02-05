@@ -1,9 +1,11 @@
-
 #include "Matrix4.h"
+#include <memory>
+
+using std::array;
 
 void CMatrix4::Mult(CMatrix4 const& other)
 {
-	float res[16];
+	array<float, 16> res;
  
 	for (int i = 0; i < 4; ++i) {
 		for (int j = 0; j < 4; ++j) {
@@ -13,7 +15,7 @@ void CMatrix4::Mult(CMatrix4 const& other)
 			}
 		}
 	}
-	memcpy(Data, res, 16 * sizeof(float));
+	Data = res;
 }
 
 CMatrix4 CMatrix4::CreateIdentity()
@@ -26,7 +28,7 @@ CMatrix4 CMatrix4::CreateIdentity()
 
 void CMatrix4::SetZero()
 {
-	memset(Data, 0, sizeof(float)*16);
+	Data.fill(0.f);
 }
 
 CMatrix4::CMatrix4(void)

@@ -5,13 +5,9 @@
 #include <boost\filesystem\operations.hpp>
 #include <boost\filesystem\convenience.hpp>
 
-#include <rapidxml-1.13/rapidxml.hpp>
 #include <pugixml-1.2/src/pugixml.hpp>
 
 using namespace std;
-/*using rapidxml::xml_node;
-using rapidxml::xml_attribute;
-using rapidxml::xml_document;*/
 using pugi::xml_document;
 using pugi::xml_node;
 using pugi::xml_attribute;

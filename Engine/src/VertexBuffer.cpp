@@ -1,5 +1,5 @@
-
 #include "VertexBuffer.h"
+#include <GL/glew.h>
 
 #define BUFFER_OFFSET(i) (reinterpret_cast<void*>(i))
 

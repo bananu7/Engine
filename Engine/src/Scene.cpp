@@ -25,7 +25,7 @@ void CScene::SSceneObject::Draw () const
 
 bool CScene::LoadFromFile (const std::string& path)
 {
-	uint32 ObjCount;
+	unsigned ObjCount;
 	string ModelName;
 	SSceneObject Temp;
 

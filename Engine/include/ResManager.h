@@ -1,20 +1,18 @@
 #pragma once
-#include "Typedefs.h"
-#include "Singleton.h"
-#include "Exception.h"
-#include "Logger.h"
 #include <map>
-#include <boost/smart_ptr.hpp>
+#include <exception>
+#include <memory>
 #include "Resource.h"
+#include "Logger.h"
+
 template <typename T> class CResPtr;
 
 using std::string;
 
-typedef std::map<std::string, boost::shared_ptr<CResource>> TResMap;
-typedef std::map<std::string, ILoader> TCatalogMap;
+typedef std::map<std::string, std::shared_ptr<CResource>> TResMap;
+typedef std::map<std::string, std::unique_ptr<ILoader>> TCatalogMap;
 
-class CResManager :
-	public CSingleton<CResManager>
+class CResourceSupply
 {
 protected:
 	TResMap		m_Data;
@@ -79,13 +77,10 @@ public:
 	bool LoadCatalog (const std::string& path);
 	// Zaladuj wszystko z podanego folderu, jesli sciezka pusta, zaladuj resource folder
 	bool LoadWholeFolder(const std::string& path);
-	inline void AddCatalogEntry (const std::string& ident, ILoader params)
+	inline void AddCatalogEntry (const std::string& ident, std::unique_ptr<ILoader> loader)
 	{
 		if (m_Catalog.find(ident) == m_Catalog.end())
-			m_Catalog.insert(std::make_pair(ident, params));
+			m_Catalog.insert(std::make_pair(ident, loader));
 	}
-
-	CResManager(void);
-	~CResManager(void);
 };
 

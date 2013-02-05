@@ -1,6 +1,7 @@
-
+#include <string>
+#include <exception>
+#include <cstdint>
 #include "Logger.h"
-#include "Exception.h"
 using namespace std;
 
 void CLogger::_DebugFileOpen()
@@ -17,7 +18,7 @@ void CLogger::_DebugFileClose()
 		m_TxtLogFile.close();
 }
 //---------------------------------------------------------------------------------------------
-void CLogger::Enable (uint8 flags, const std::string& fileName)
+void CLogger::Enable (uint8_t flags, const std::string& fileName)
 {
 	m_LogFlags = flags;
 	m_FileName = fileName;
@@ -51,12 +52,6 @@ bool CLogger::Log (const string& text, bool expr, bool enforce)
 	return expr;
 }
 
-void CLogger::Log (const CException& e)
-{
-	_DebugFileOpen();
-	m_TxtLogFile << "[EXCP] \t"<<e.Component<<" : "<<e.FullDesc<<" ["<<e.File<<":"<<e.Line<<"]\n";
-	_DebugFileClose();
-}
 //---------------------------------------------------------------------------------------------
 CLogger::CLogger(void)
 {

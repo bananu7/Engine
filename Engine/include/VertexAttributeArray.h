@@ -1,5 +1,4 @@
 #pragma once
-#include "Typedefs.h"
 
 class CVertexAttributeArray
 {
@@ -9,9 +8,9 @@ private:
 public:
 	void Bind();
 	void Draw(int startIx, int endIx);
-	void EnableAttributeArray(uint32 index);
+	void EnableAttributeArray(unsigned index);
 
-	static uint32 GetMaxVertexAttributes();
+	static unsigned GetMaxVertexAttributes();
 
 	CVertexAttributeArray(void);
 	~CVertexAttributeArray(void);

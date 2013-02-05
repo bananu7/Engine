@@ -1,4 +1,4 @@
-
+#include <GL/glew.h>
 #include "VertexAttributeArray.h"
 
 void CVertexAttributeArray::Bind()
@@ -15,15 +15,15 @@ void CVertexAttributeArray::Draw(int startIx, int endIx)
 	glDrawArrays(GL_TRIANGLES, startIx, endIx);
 }
 
-void CVertexAttributeArray::EnableAttributeArray(uint32 index)
+void CVertexAttributeArray::EnableAttributeArray(unsigned index)
 {
 	Bind();
 	glEnableVertexAttribArray(index);
 }
 
-uint32 CVertexAttributeArray::GetMaxVertexAttributes()
+unsigned CVertexAttributeArray::GetMaxVertexAttributes()
 {
-	int32 Count;
+	GLint Count;
 	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &Count);
 	return Count;
 }
