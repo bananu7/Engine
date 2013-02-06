@@ -13,27 +13,23 @@ using glm::vec3;
 using glm::vec4;
 using glm::mat4;
 
+template<class T> T& as_lvalue(T&& v){ return v; }
+
 std::string CShader::Load(ILoader const& loadParams)
 {
-	// FIXME
-	string FragFilePath, VertFilePath;
-	auto FragPath = loadParams.GetParam("frag");
-	auto VertPath = loadParams.GetParam("vert");
-	if (!FragPath)
-		return string("Missing 'frag' load param");
-	if (!VertPath)
-		return string("Missing 'vert' load param");
+	//FIXME
+	auto Frag = loadParams.GetRawData("frag");
+	if (!Frag)
+		return string("Error in getting fragment shader data");
 
-	//FragFilePath = CResManager::GetSingleton()->GetResourcePath() + FragFilePath;
-	//VertFilePath = CResManager::GetSingleton()->GetResourcePath() + VertFilePath;
+	auto Vert = loadParams.GetRawData("vert");
+	if (!Vert)
+		return string("Error in gettin vertex shader data");
 
-	m_FragFileData = TextFileRead(FragFilePath.c_str());
-	if (!m_FragFileData)
-		return string("Error loading fragment shader file");
-
-	m_VertFileData = TextFileRead(VertFilePath.c_str());
-	if (!m_VertFileData)
-		return string("Error loading vertex shader file");
+	m_FragFileData.clear();
+	m_VertFileData.clear();
+	std::copy(Frag.get().begin(), Frag.get().end(), std::back_inserter(m_FragFileData));
+	std::copy(Vert.get().begin(), Vert.get().end(), std::back_inserter(m_VertFileData));
 
 	m_FragNum = glCreateShader(GL_FRAGMENT_SHADER);		
 	m_VertNum = glCreateShader(GL_VERTEX_SHADER);
@@ -51,8 +47,6 @@ std::string CShader::Load(ILoader const& loadParams)
 
 void CShader::Unload() 
 { 
-	free (m_FragFileData);
-	free (m_VertFileData);
 	glDeleteShader(m_FragNum);
 	glDeleteShader(m_VertNum);
 	glDeleteProgram(m_ProgramNum);
@@ -60,7 +54,7 @@ void CShader::Unload()
 
 string CShader::Compile()
 {
-	glShaderSource(m_FragNum, 1, static_cast<const GLchar**>(const_cast<const char**>(&m_FragFileData)), NULL);
+	glShaderSource(m_FragNum, 1, static_cast<const GLchar**>(&as_lvalue(m_FragFileData.data())), NULL);
 	glCompileShader(m_FragNum);
 
 	GLint compiled;
@@ -69,7 +63,7 @@ string CShader::Compile()
 	if (!compiled)
 		return "Fragment shader compilation error : " + _GetInfo(m_FragNum);;
 
-	glShaderSource(m_VertNum, 1, static_cast<const GLchar**>(const_cast<const char**>(&m_VertFileData)), NULL);
+	glShaderSource(m_VertNum, 1, static_cast<const GLchar**>(&as_lvalue(m_VertFileData.data())), NULL);
 	glCompileShader(m_VertNum);
 
 	glGetObjectParameterivARB(m_VertNum, GL_COMPILE_STATUS, &compiled);

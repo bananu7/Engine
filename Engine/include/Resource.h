@@ -11,7 +11,8 @@ class ILoader
 {	
 public:
 	virtual boost::optional<std::string const&> GetParam(std::string const& name) const = 0;
-	virtual std::unique_ptr<std::istream> GetDataStream(std::string const& name) = 0;
+	virtual std::unique_ptr<std::istream> GetDataStream(std::string const& name) const = 0;
+	virtual boost::optional<std::vector<unsigned char>> GetRawData(std::string const& name) const = 0;
 };
 
 class CSimpleFileLoader :
@@ -21,7 +22,8 @@ class CSimpleFileLoader :
 
 public:
 	boost::optional<std::string const&> GetParam(std::string const& name) const override;
-	std::unique_ptr<std::istream> GetDataStream(std::string const& name) override;
+	std::unique_ptr<std::istream> GetDataStream(std::string const& name) const override;
+	boost::optional<std::vector<unsigned char>> GetRawData(std::string const& name) const override;
 	explicit CSimpleFileLoader::CSimpleFileLoader (std::string const& simplePath);
 	explicit CSimpleFileLoader::CSimpleFileLoader (std::map<std::string, std::string> const& data);
 };

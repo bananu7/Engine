@@ -10,14 +10,13 @@ using std::string;
 
 string CImage::Load(ILoader & loader)
 {
-	auto Stream = loader.GetDataStream("main");
-	if (Stream) {
-		auto v = buffer_from_file(*Stream);
+	auto v = loader.GetRawData("main");
+	if (v) {
 
 		m_TexId = SOIL_load_OGL_texture_from_memory
 			(
-				v.data(),
-				v.size(),
+				v.get().data(),
+				v.get().size(),
 				SOIL_LOAD_AUTO,
 				SOIL_CREATE_NEW_ID,
 				SOIL_FLAG_MIPMAPS

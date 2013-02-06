@@ -43,10 +43,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <SourcePath>$(ProjectDir)\src;$(SourcePath)</SourcePath>
     <LibraryPath>$(FBX_2013_3)\lib\vs2010\x86;$(SolutionDir)\dependencies\glew-1.9.0\lib;$(SolutionDir)\dependencies\SOIL\lib;$(SolutionDir)\dependencies\pugixml-1.2\scripts\vs2010\x32;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(LUA_DEV)\include;$(ProjectDir);$(ProjectDir)\include;$(SolutionDir)\dependencies;$(FBX_2013_3)\include;$(BOOST_1_52_0)\;$(SolutionDir)\dependencies\SOIL\include;$(SolutionDir)\dependencies\glew-1.9.0\include;C:\PROJECTS\Engine\dependencies\glm-0.9.4.1;$(IncludePath)</IncludePath>
+    <IncludePath>$(LUA_DEV)\include;$(ProjectDir);$(ProjectDir)\include;$(SolutionDir)\dependencies;$(FBX_2013_3)\include;$(BOOST_1_52_0)\;$(SolutionDir)\dependencies\SOIL\include;$(SolutionDir)\dependencies\glew-1.9.0\include;$(SolutionDir)\dependencies\glm-0.9.4.1;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(LUA_DEV)\include;$(BOOST_1_52_0);$(ProjectDir);$(ProjectDir)\include;$(SolutionDir)\dependencies;$(SolutionDir)\dependencies\SOIL\include;$(SolutionDir)\dependencies\glew-1.5.6\include;$(SolutionDir)\dependencies\FBX\include;C:\PROJECTS\Engine\dependencies\glm-0.9.4.1;$(IncludePath)</IncludePath>
+    <IncludePath>$(LUA_DEV)\include;$(BOOST_1_52_0);$(ProjectDir);$(ProjectDir)\include;$(SolutionDir)\dependencies;$(SolutionDir)\dependencies\SOIL\include;$(SolutionDir)\dependencies\glew-1.5.6\include;$(SolutionDir)\dependencies\FBX\include;$(SolutionDir)\Engine\dependencies\glm-0.9.4.1;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\dependencies\glew-1.5.6\lib;$(SolutionDir)\dependencies\SOIL\lib;$(PATH_TO_BOOST)\stage\lib;$(SolutionDir)\dependencies\FBX\lib;$(SolutionDir)\dependencies\pugixml-1.2\scripts\vs2010\x32;$(LibraryPath)</LibraryPath>
     <SourcePath>$(ProjectDir)\src;$(SourcePath)</SourcePath>
   </PropertyGroup>

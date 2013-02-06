@@ -11,6 +11,7 @@
 #include <array>
 #include <vector>
 #include <string>
+#include <exception>
 #include <map>
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -201,8 +202,8 @@ int WINAPI WinMain (HINSTANCE hInstance,
 	Data["frag"] = "simple.frag";
 	CSimpleFileLoader ShaderPaths(Data);
 	
-	if (Shader.Load(ShaderPaths) != "")
-		_CrtDbgBreak();
+	std::string Result = Shader.Load(ShaderPaths);
+	if (Result != "") throw std::exception(Result.c_str());
 	Shader.Bind();
 	Shader.SetUniformMatrix4("ViewMatrix", glm::translate(glm::mat4(), glm::vec3(0, 0, -10)));
 	Shader.SetUniformMatrix4("ModelMatrix", glm::mat4());

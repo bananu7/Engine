@@ -11,9 +11,9 @@ class CShader :
 	public CResource
 {
 protected:
-	char*	m_FragFileData, *m_VertFileData;
-	unsigned	m_FragNum, m_VertNum;
-	unsigned	m_ProgramNum;
+	std::vector<char> m_FragFileData, m_VertFileData;
+	unsigned m_FragNum, m_VertNum;
+	unsigned m_ProgramNum;
 
 	std::string _GetInfo(unsigned num);
 	std::map<std::string, int> m_Attribs;
