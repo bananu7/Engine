@@ -1,6 +1,0 @@
-"Ball", "Ball.obj"
-	CResManager::GetSingleton()->AddCatalogEntry("Cube", "simple_cube.obj");
-	CResManager::GetSingleton()->AddCatalogEntry("shader", "texturing");
-	CResManager::GetSingleton()->AddCatalogEntry("crate_tex", "crate_512.jpg");
-	CResManager::GetSingleton()->AddCatalogEntry("grass_tex", "grass_tex.jpg");
-	CResManager::GetSingleton()->AddCatalogEntry("rock_tex", "rock_tex.jpg");

@@ -1,8 +1,0 @@
-Attributes Count = 2
-0. in_Position 35666(1)
-1. in_TexCoord 35664(1)
-
-Uniforms Count = 3
-0. ProjectionMatrix 35676(1)
-1. Texture 35678(1)
-2. ViewMatrix 35676(1)
