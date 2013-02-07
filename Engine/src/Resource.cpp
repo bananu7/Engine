@@ -43,11 +43,11 @@ std::unique_ptr<std::istream> CSimpleFileLoader::GetDataStream(std::string const
 {
 	auto Iter = Params.find(name);
 	if (Iter == Params.end())
-		return nullptr;
+		return unique_ptr<ifstream>();
 
 	std::unique_ptr<ifstream> FileStream (new ifstream(Iter->second));
 	if (FileStream->bad())
-		return nullptr;
+		return unique_ptr<ifstream>();
 
 	return std::move(FileStream);
 }
@@ -56,7 +56,7 @@ boost::optional<std::vector<unsigned char>> CSimpleFileLoader::GetRawData(std::s
 {
 	auto Iter = Params.find(name);
 	if (Iter == Params.end())
-		boost::none;
+		return boost::none;
 
 	ifstream FileStream(Iter->second.c_str(), ios::binary);
 	if (!FileStream)
@@ -71,4 +71,30 @@ boost::optional<std::vector<unsigned char>> CSimpleFileLoader::GetRawData(std::s
 		);
 
 	return boost::optional<std::vector<unsigned char>>(Temp);
+}
+
+CSimpleDirectLoader::CSimpleDirectLoader (TDataMap const& data)
+{
+	Data.insert(data.begin(), data.end());
+}
+
+boost::optional<std::string const&> CSimpleDirectLoader::GetParam(std::string const& name) const
+{
+	//FIXME - should simple, direct loader be able to handle params? I think yes
+	return boost::none;
+}
+
+std::unique_ptr<std::istream> CSimpleDirectLoader::GetDataStream(std::string const& name) const
+{
+	// FIXME
+	return std::move(unique_ptr<istream>(new ifstream()));
+}
+
+boost::optional<std::vector<unsigned char>> CSimpleDirectLoader::GetRawData(std::string const& name) const
+{
+	auto Iter = Data.find(name);
+	if (Iter == Data.end())
+		return boost::none;
+
+	return boost::optional<std::vector<unsigned char>>(Iter->second);
 }

@@ -24,6 +24,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sample_Schmetterling", "Sam
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sample_GLUT", "Sample_GLUT\Sample_GLUT.vcxproj", "{2F0B859E-0219-4172-9264-9267D25E6041}"
+	ProjectSection(ProjectDependencies) = postProject
+		{72FB8CF7-682D-4505-B521-3997FA9A26C2} = {72FB8CF7-682D-4505-B521-3997FA9A26C2}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

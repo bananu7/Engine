@@ -41,7 +41,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)\Engine\include;$(SolutionDir)\Engine\dependencies\glm-0.9.4.1;$(SolutionDir)\Engine\dependencies\glew-1.9.0\include;C:\PROJECTS\Engine\dependencies\freeglut\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\Engine\include;$(SolutionDir)\dependencies\glm-0.9.4.1;$(SolutionDir)\dependencies\glew-1.9.0\include;$(SolutionDir)\dependencies\freeglut\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\Debug;$(BOOST_1_52_0)\stage\lib\;C:\Program Files (x86)\Intel\Composer XE\compiler\lib\ia32;C:\PROJECTS\Engine\dependencies\freeglut\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -56,6 +56,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Cpp0xSupport>true</Cpp0xSupport>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

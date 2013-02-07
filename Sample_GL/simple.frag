@@ -1,5 +1,5 @@
-#version 330
- 
+#version 330 core
+
 in  vec3 ex_Color;
 out vec4 out_Color;
  

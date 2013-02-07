@@ -1,11 +1,12 @@
 #include <GL/glew.h>
 #include <GL/glut.h>
 #include <GL/freeglut.h>
-#include <GL/GL.h>
 #include <string>
 #include <iostream>
 #include <array>
 #include <vector>
+
+#include "Shader.h"
  
 void keyboard(unsigned char key, int x, int y);
 void display(void);
@@ -25,6 +26,10 @@ enum EShaderNames {
 //GL_, GL_TESS_CONTROL_SHADER, GL_TESS_EVALUATION_SHADER, GL_GEOMETRY_SHADER, or GL_FRAGMENT_SHADER.
 #define NL "\n"
  
+using std::vector;
+using std::string;
+using std::unique_ptr;
+
 template<class T> T& as_lvalue(T&& v){ return v; }
  
 void CheckForError()
@@ -59,8 +64,12 @@ void init ()
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
  
     CheckForError();
+}
  
-    programId = glCreateProgram();
+
+void initShaders()
+{
+	programId = glCreateProgram();
  
     shaderIds[VERTEX_SHADER_ID] = glCreateShader(GL_VERTEX_SHADER);
     shaderIds[TESSELATION_SHADER_ID] = glCreateShader(GL_TESS_EVALUATION_SHADER);
@@ -89,9 +98,10 @@ void init ()
             "#version 400 core"
 		  NL"in vec3 out_position;"
 		  NL"uniform float bias;"
+		  NL"out vec4 out_Color;"
           NL"void main () {"
-        //NL"    gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);"
-		  NL"    gl_FragColor = vec4(out_position.zxy + bias, 1.0);"
+        //NL"    out_Color = vec4(0.0, 1.0, 0.0, 1.0);"
+		  NL"    out_Color = vec4(out_position.zxy + bias, 1.0);"
           NL"}";
  
     ShaderSources[GEOMETRY_SHADER_ID] =
@@ -133,6 +143,8 @@ void init ()
         glAttachShader(programId, shaderIds[i]);
     }
 
+	glBindFragDataLocation(programId, 0, "out_Color");
+
     CheckForError();
  
     glLinkProgram(programId);
@@ -150,7 +162,44 @@ void init ()
  
     glUseProgram(programId);
 }
+
+CShader Shader;
+
+void initShadersEngine()
+{
+	CSimpleDirectLoader::TDataMap Data;
+	std::string Frag = 
+            "#version 400 core"
+		  NL"in vec3 out_position;"
+		  NL"uniform float bias;"
+		  NL"out vec4 out_Color;"
+          NL"void main () {"
+        //NL"    out_Color = vec4(0.0, 1.0, 0.0, 1.0);"
+		  NL"    out_Color = vec4(out_position.zxy + bias, 1.0);"
+          NL"}";
+
+	std::string Vert = 
+            "#version 400 core"
+          NL"precision highp float;"
+          NL"layout(location = 0) in vec3 position;"
+		  NL"out vec3 out_position;"
+          NL"void main () {"
+		  NL"    out_position = position;"
+          NL"    gl_Position = vec4(position, 1.0);"
+          NL"}";
+	
+	using uc = unsigned char;
+
+	Data["frag"] = vector<uc> (Frag.begin(), Frag.end());
+	Data["vert"] = vector<uc> (Vert.begin(), Vert.end());
  
+	auto Loader = CSimpleDirectLoader(Data);
+	string Result = Shader.Load(Loader);
+	if (!Result.empty())
+		_CrtDbgBreak();
+	Shader.Bind();
+}
+
 #ifdef _WINDOWS
 int WINAPI WinMain (HINSTANCE hInstance,
                     HINSTANCE hPrevInstance,
@@ -168,7 +217,8 @@ int main(int argc, char** argv)
     glutInit(&argc, argv);
     
     glutInitContextVersion (4,0);
-    //glutInitContextProfile(GLUT_CORE_PROFILE);
+	glutInitContextFlags(GLUT_FORWARD_COMPATIBLE);
+    glutInitContextProfile(GLUT_CORE_PROFILE);
     glutCreateWindow("GLUT Test");
  
     glewExperimental=TRUE;
@@ -185,6 +235,8 @@ int main(int argc, char** argv)
         _CrtDbgBreak();
  
     init();
+	//initShaders();
+	initShadersEngine();
  
     glutKeyboardFunc(&keyboard);
     glutDisplayFunc(&display);

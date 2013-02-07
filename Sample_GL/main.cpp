@@ -13,6 +13,7 @@
 #include <string>
 #include <exception>
 #include <map>
+#include <fstream>
 #include <glm/gtc/matrix_transform.hpp>
 
 
@@ -203,7 +204,14 @@ int WINAPI WinMain (HINSTANCE hInstance,
 	CSimpleFileLoader ShaderPaths(Data);
 	
 	std::string Result = Shader.Load(ShaderPaths);
-	if (Result != "") throw std::exception(Result.c_str());
+	if (Result != "") 
+	{
+		{
+			std::ofstream Log ("log.txt");
+			Log << Result;
+		}
+		throw std::exception(Result.c_str());
+	}
 	Shader.Bind();
 	Shader.SetUniformMatrix4("ViewMatrix", glm::translate(glm::mat4(), glm::vec3(0, 0, -10)));
 	Shader.SetUniformMatrix4("ModelMatrix", glm::mat4());

@@ -81,7 +81,7 @@ public:
 	inline void AddCatalogEntry (const std::string& ident, std::unique_ptr<ILoader> loader)
 	{
 		if (m_Catalog.find(ident) == m_Catalog.end())
-			m_Catalog.insert(std::make_pair(ident, loader));
+			m_Catalog.insert(std::make_pair(ident, std::move(loader)));
 	}
 
 	CResourceSupply::CResourceSupply();

@@ -15,6 +15,18 @@ using glm::mat4;
 
 template<class T> T& as_lvalue(T&& v){ return v; }
 
+void glShaderSource_engine (GLuint shader, std::string const& shaderSource)
+{
+	const GLchar* Ptr = shaderSource.c_str();
+	glShaderSource(shader, 1, &Ptr, nullptr);
+}
+
+void glShaderSource_engine (GLuint shader, std::vector<char> const& shaderSource)
+{
+	const GLchar* Ptr = &shaderSource[0];
+	glShaderSource(shader, 1, &Ptr, nullptr);
+}
+
 std::string CShader::Load(ILoader const& loadParams)
 {
 	//FIXME
@@ -30,6 +42,9 @@ std::string CShader::Load(ILoader const& loadParams)
 	m_VertFileData.clear();
 	std::copy(Frag.get().begin(), Frag.get().end(), std::back_inserter(m_FragFileData));
 	std::copy(Vert.get().begin(), Vert.get().end(), std::back_inserter(m_VertFileData));
+
+	m_FragFileData.push_back(0);
+	m_VertFileData.push_back(0);
 
 	m_FragNum = glCreateShader(GL_FRAGMENT_SHADER);		
 	m_VertNum = glCreateShader(GL_VERTEX_SHADER);
@@ -54,20 +69,20 @@ void CShader::Unload()
 
 string CShader::Compile()
 {
-	glShaderSource(m_FragNum, 1, static_cast<const GLchar**>(&as_lvalue(m_FragFileData.data())), NULL);
+	glShaderSource_engine(m_FragNum, m_FragFileData);
 	glCompileShader(m_FragNum);
 
 	GLint compiled;
 
-	glGetObjectParameterivARB(m_FragNum, GL_COMPILE_STATUS, &compiled);
-	if (!compiled)
+	glGetShaderiv(m_FragNum, GL_COMPILE_STATUS, &compiled);
+	if (compiled != GL_TRUE)
 		return "Fragment shader compilation error : " + _GetInfo(m_FragNum);;
 
-	glShaderSource(m_VertNum, 1, static_cast<const GLchar**>(&as_lvalue(m_VertFileData.data())), NULL);
+	glShaderSource_engine(m_VertNum, m_VertFileData);
 	glCompileShader(m_VertNum);
 
-	glGetObjectParameterivARB(m_VertNum, GL_COMPILE_STATUS, &compiled);
-	if (!compiled)
+	glGetShaderiv(m_VertNum, GL_COMPILE_STATUS, &compiled);
+	if (compiled != GL_TRUE)
 		return "Vertex shader compilation error : " + _GetInfo(m_VertNum);;
 
 	// After recompilations, attributes need to be rebound
