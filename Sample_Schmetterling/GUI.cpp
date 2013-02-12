@@ -149,5 +149,5 @@ CBox::CBox(float X, float Y,
 	m_X= X;
 	m_Y= Y;
 	m_Shader = CResManager::GetSingleton()->GetResource<CShader>("shader_interface");
-	m_Shader->SetUniformMatrix4("ProjectionMatrix",*CGUI::GetSingleton()->GetProjectionMatrix());
+	m_Shader->SetUniform("ProjectionMatrix",*CGUI::GetSingleton()->GetProjectionMatrix());
 }

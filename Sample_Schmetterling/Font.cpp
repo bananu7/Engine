@@ -19,7 +19,7 @@ void CFont::Draw()
 	m_Shader->Bind();
 	m_Font->Bind(0);
 	m_Shader->SetTex("Texture",0);
-	m_Shader->SetUniformColor("Color",m_Color);
+	m_Shader->SetUniform("Color",m_Color);
 
 	std::vector<CVector2<float>> Vertices (4,CVector2<float>(0.f,0.f));
 	std::vector<CVector2<float>> UVs (4,CVector2<float>(0.f,0.f));
@@ -101,5 +101,5 @@ CFont::CFont(float X, float Y,const string &FontName, CColor Color, CVector2<flo
 	m_Y = Y;
 	m_Font	= CResManager::GetSingleton()->GetResource<CImage>(FontName);
 	m_Shader= CResManager::GetSingleton()->GetResource<CShader>("shader_font");
-	m_Shader->SetUniformMatrix4("ProjectionMatrix",*CGUI::GetSingleton()->GetProjectionMatrix());
+	m_Shader->SetUniform("ProjectionMatrix",*CGUI::GetSingleton()->GetProjectionMatrix());
 }

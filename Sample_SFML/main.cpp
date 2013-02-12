@@ -83,19 +83,19 @@ int WINAPI WinMain (HINSTANCE hInstance,
 			MatSpecular(.9f, .9f, 0.9f);
 
 	PMatrix = CCamera::CreateProjection(45, 16.f/10.f, 0.1f, 1000.f);
-	Shader->SetUniformMatrix4("ProjectionMatrix", PMatrix);
+	Shader->SetUniform("ProjectionMatrix", PMatrix);
 
 	SMatrix = CMatrix4::CreateIdentity();
 	SMatrix = CCamera::CreateScale(2.0, 2.0, 2.0);
 
-	Shader->SetUniformVector3("LightPosition", LightPosition);
-	Shader->SetUniformColor("Light0.Ambient", LightAmbient);
-	Shader->SetUniformColor("Light0.Diffuse", LightDiffuse);
-	Shader->SetUniformColor("Light0.Specular", LightSpecular);
+	Shader->SetUniform("LightPosition", LightPosition);
+	Shader->SetUniform("Light0.Ambient", LightAmbient);
+	Shader->SetUniform("Light0.Diffuse", LightDiffuse);
+	Shader->SetUniform("Light0.Specular", LightSpecular);
 
-	Shader->SetUniformColor("FrontMaterial.Ambient", MatAmbient);
-	Shader->SetUniformColor("FrontMaterial.Diffuse", MatDiffuse);
-	Shader->SetUniformColor("FrontMaterial.Specular", MatSpecular);
+	Shader->SetUniform("FrontMaterial.Ambient", MatAmbient);
+	Shader->SetUniform("FrontMaterial.Diffuse", MatDiffuse);
+	Shader->SetUniform("FrontMaterial.Specular", MatSpecular);
 
 	while (App.IsOpened())
 	{

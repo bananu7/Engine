@@ -15,7 +15,7 @@ void CGraph::Draw()
 	//glEnable(GL_TEXTURE_2D);
 	m_Vao.Bind();
 	m_Shader->Bind();
-	//m_Shader->SetUniformColor("Color",m_Color);
+	//m_Shader->SetUniform("Color",m_Color);
 
 	// Przesuwamy sie na dol, bo rysujemy do gory (wyzej - wieksze y)
 	
@@ -122,7 +122,7 @@ CGraph::CGraph(float X, float Y, float Width, float Height,
 	m_X= X;
 	m_Y= Y;
 	m_Shader = CResManager::GetSingleton()->GetResource<CShader>("shader_interface");
-	m_Shader->SetUniformMatrix4("ProjectionMatrix",*CGUI::GetSingleton()->GetProjectionMatrix());
+	m_Shader->SetUniform("ProjectionMatrix",*CGUI::GetSingleton()->GetProjectionMatrix());
 	//m_ControlWithFocus = 0;
 	//m_LastCommand = m_LastCommands.end();
 	//m_LogFile.open ("guilog.txt", ios::out | ios::trunc);

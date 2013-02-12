@@ -10,7 +10,7 @@ class CImage :
 	unsigned m_TexId;
 
 public:
-	std::string Load(ILoader & loader);
+	std::string Load(ILoader const& loader);
 	
 	/// Binds to currently active texture unit and doesn't change it.
 	void Bind ();

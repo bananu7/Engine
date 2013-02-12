@@ -126,14 +126,14 @@ int WINAPI WinMain (HINSTANCE hInstance,
 	Shader->BindAttribLocation("in_TexCoord", 2);
 	Shader->Compile();
 
-	ShaderSet.SetUniformVector3("LightPosition", LightPosition);
-	ShaderSet.SetUniformColor("Light0.Ambient", LightAmbient);
-	ShaderSet.SetUniformColor("Light0.Diffuse", LightDiffuse);
-	ShaderSet.SetUniformColor("Light0.Specular", LightSpecular);
+	ShaderSet.SetUniform("LightPosition", LightPosition);
+	ShaderSet.SetUniform("Light0.Ambient", LightAmbient);
+	ShaderSet.SetUniform("Light0.Diffuse", LightDiffuse);
+	ShaderSet.SetUniform("Light0.Specular", LightSpecular);
 
-	ShaderSet.SetUniformColor("FrontMaterial.Ambient", MatAmbient);
-	ShaderSet.SetUniformColor("FrontMaterial.Diffuse", MatDiffuse);
-	ShaderSet.SetUniformColor("FrontMaterial.Specular", MatSpecular);
+	ShaderSet.SetUniform("FrontMaterial.Ambient", MatAmbient);
+	ShaderSet.SetUniform("FrontMaterial.Diffuse", MatDiffuse);
+	ShaderSet.SetUniform("FrontMaterial.Specular", MatSpecular);
 	bool Valid = Light->Validate();
 
 	// Kamera
@@ -158,7 +158,7 @@ int WINAPI WinMain (HINSTANCE hInstance,
 
 	ShaderSet.SetTex("Bumpmap",GroundTextures.size());
 	
-	ShaderSet.SetUniformMatrix4("ProjectionMatrix", PMatrix);
+	ShaderSet.SetUniform("ProjectionMatrix", PMatrix);
 
 	CameraFly.Position = CVector3(50.f, 150.f, 10.f);
 	Camera.Target = CVector3(10.f, 10.f, 10.f);
@@ -322,13 +322,13 @@ int WINAPI WinMain (HINSTANCE hInstance,
 		
 		glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		ShaderSet.SetUniform1f("Mood", m_Mood);
-		ShaderSet.SetUniformMatrix4("ProjectionMatrix", PMatrix);
-		ShaderSet.SetUniformMatrix4("ModelMatrix", CMatrix4::CreateIdentity());
-		ShaderSet.SetUniformMatrix4("ViewMatrix", VMatrix);
+		ShaderSet.SetUniform("Mood", m_Mood);
+		ShaderSet.SetUniform("ProjectionMatrix", PMatrix);
+		ShaderSet.SetUniform("ModelMatrix", CMatrix4::CreateIdentity());
+		ShaderSet.SetUniform("ViewMatrix", VMatrix);
 
 		// FIRST PASS
-		ShaderSet.SetUniformMatrix4("ProjectionMatrix", PMatrix);
+		ShaderSet.SetUniform("ProjectionMatrix", PMatrix);
 		Shader->Bind();
 		for (int it= 0,itE= GroundTextures.size(); it<itE; ++it)
 			GroundTextures[it]->Bind(it);
@@ -391,8 +391,8 @@ int WINAPI WinMain (HINSTANCE hInstance,
 			CMatrix4 ProjView = CCamera::CreateRotation(XRotFactor, TheAnswerToLifeUniverseAndEverything, 0.f);
 			NewPMatrix.Mult(ProjView);
 
-			ShaderSet.SetUniformMatrix4("ViewMatrix", VMatrix);
-			ShaderSet.SetUniformMatrix4("ProjectionMatrix", NewPMatrix);
+			ShaderSet.SetUniform("ViewMatrix", VMatrix);
+			ShaderSet.SetUniform("ProjectionMatrix", NewPMatrix);
 
 			Shader->Bind();
 			for (int it= 0,itE= GroundTextures.size(); it<itE; ++it)
@@ -410,8 +410,8 @@ int WINAPI WinMain (HINSTANCE hInstance,
 		CameraFly.LookDir = OldLookDir;
 		CameraFly.CalculateView();
 		VMatrix = CameraFly.GetViewMat();
-		ShaderSet.SetUniformMatrix4("ViewMatrix", VMatrix);
-		ShaderSet.SetUniformMatrix4("ProjectionMatrix", PMatrix);
+		ShaderSet.SetUniform("ViewMatrix", VMatrix);
+		ShaderSet.SetUniform("ProjectionMatrix", PMatrix);
 		//Mirror.Draw();
 
 		// GUI
@@ -458,7 +458,7 @@ int WINAPI WinMain (HINSTANCE hInstance,
 		
 		LightPosition.X+=2.f;
 		if (LightPosition.X >= 1000.f) LightPosition = CVector3(0.f, 500.f, 500.f);
-		ShaderSet.SetUniformVector3("LightPosition", LightPosition);
+		ShaderSet.SetUniform("LightPosition", LightPosition);
 		
 		if		(test >= 5.f) otest =-.5f;
 		else if (test <=-5.f) otest = .5f;

@@ -567,9 +567,9 @@ bool CModelData::_LoadFromFBX(const std::string &path)
 	return false;
 }
 
-bool CModelData::Load(std::string const& path)
+string CModelData::Load(ILoader const& loader)
 {
-	ifstream F (path);
+	/*ifstream F (path);
 	if (!F.is_open())
 		return false;
 
@@ -581,7 +581,9 @@ bool CModelData::Load(std::string const& path)
 	else if (Ext == "obj")
 		return _LoadFromObj(F);
 	else 
-		return false;
+		return false;*/
+	// FIXME
+	return string();
 }
 
 CModelData::CModelData(void)

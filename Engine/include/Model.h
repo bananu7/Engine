@@ -1,35 +1,35 @@
 #pragma once
-#include <string>
-#include <map>
+#include <memory>
 #include <vector>
-#include "Resource.h"
-#include "IModelCooker.h"
+#include <glm/glm.hpp>
+#include <boost/ptr_container/ptr_vector.hpp>
+#include "VertexBuffer.h"
 
 class CModelData;
 class CShader;
 
+// It's constructed from CModelData
+// It's the highest abstraction on the displayed object
+
+class CNode 
+{
+public:
+	glm::vec3 m_Rotation, m_Position, m_Scale;
+};
+
 class CModel :
-	public CResource
+	protected CNode
 {
 protected:
-	IModelCooker* m_Cooker;
-
 	unsigned int m_DefaultGroup;
-	float m_Scale;
-
-	bool _LoadFromCollada (const std::string& filename);
+	boost::ptr_vector<CVertexBuffer> m_Vbos;
 
 public:
-	CShader* Shader;
+	std::shared_ptr<CShader> Shader;
 
-	std::string CModel::Load(ILoader const& loadParams);
-	void Unload() { }
-
-	inline void SetScale (float scale) { m_Scale = scale; }
 	void Draw () const;
 	void Draw (const glm::vec3 const& pos, glm::vec3 const& rot, glm::vec3 const& scale) const;
 
-	CModel(void);
-	~CModel(void);
+	CModel(CModelData const& data);
 };
 

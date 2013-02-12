@@ -95,6 +95,7 @@
     <ClInclude Include="include\Camera.h" />
     <ClInclude Include="include\CameraAdds.h" />
     <ClInclude Include="include\Color.h" />
+    <ClInclude Include="include\Engine.h" />
     <ClInclude Include="include\FbxAnimHelpers.h" />
     <ClInclude Include="include\FbxVboMesh.h" />
     <ClInclude Include="include\FrameBuffer.h" />

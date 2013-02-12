@@ -10,6 +10,7 @@
 using namespace std;
 
 using glm::vec3;
+using glm::vec2;
 using glm::vec4;
 using glm::mat4;
 
@@ -51,9 +52,10 @@ std::string CShader::Load(ILoader const& loadParams)
 
 	m_ProgramNum = glCreateProgram();
 
-	m_Attribs["in_Position"] = 0;
-	m_Attribs["in_Normal"] = 1;
-	m_Attribs["in_TexCoord"] = 2;
+	// Those are no longer needed with (location)
+	/*m_VertexAttribs["in_Position"] = 0;
+	m_VertexAttribs["in_Normal"] = 1;
+	m_VertexAttribs["in_TexCoord"] = 2;*/
 
 	string CompilationResult = Compile();
 
@@ -86,7 +88,7 @@ string CShader::Compile()
 		return "Vertex shader compilation error : " + _GetInfo(m_VertNum);;
 
 	// After recompilations, attributes need to be rebound
-	for (auto it = m_Attribs.begin(); it != m_Attribs.end(); ++it)
+	for (auto it = m_VertexAttribs.begin(); it != m_VertexAttribs.end(); ++it)
 	{
 		glBindAttribLocation(m_ProgramNum, it->second, it->first.c_str());
 	}
@@ -157,7 +159,7 @@ void CShader::Bind()
 	//glEnable(GL_FRAGMENT_PROGRAM_ARB);
 }
 
-void CShader::SetUniform1f(const string& name, float a)
+void CShader::SetUniform(const string& name, float a)
 {
 	GLint Loc = GetUniformLocation(name);
 	if (Loc != -1)
@@ -167,17 +169,27 @@ void CShader::SetUniform1f(const string& name, float a)
 	}
 }
 
-void CShader::SetUniformVector3 (std::string const& name, vec3 const& vec)
+void CShader::SetUniform (std::string const& name, vec2 const& vec)
 {
 	GLint Loc = GetUniformLocation(name);
 	if (Loc != -1)
 	{
 		Bind();
-		glUniform3fv (Loc, 1, reinterpret_cast<const float*>(&vec));
+		glUniform2fv (Loc, 1, glm::value_ptr(vec));
 	}
 }
 
-void CShader::SetUniformMatrix4 (std::string const& name, mat4 const& mat)
+void CShader::SetUniform (std::string const& name, vec3 const& vec)
+{
+	GLint Loc = GetUniformLocation(name);
+	if (Loc != -1)
+	{
+		Bind();
+		glUniform3fv (Loc, 1, glm::value_ptr(vec));
+	}
+}
+
+void CShader::SetUniform (std::string const& name, mat4 const& mat)
 {
 	GLint Loc = GetUniformLocation(name);
 	if (Loc != -1)
@@ -187,7 +199,7 @@ void CShader::SetUniformMatrix4 (std::string const& name, mat4 const& mat)
 	}
 }
 
-void CShader::SetUniformColor (std::string const& name, vec4 const& color)
+void CShader::SetUniform (std::string const& name, vec4 const& color)
 {
 	GLint Loc = GetUniformLocation(name);
 	if (Loc != -1)
@@ -225,7 +237,7 @@ void CShader::DisableAll ()
 
 void CShader::BindAttribLocation (std::string const& name, int location)
 {
-	m_Attribs[name] = location;
+	m_VertexAttribs[name] = location;
 }
 
 void CShader::DebugDump()

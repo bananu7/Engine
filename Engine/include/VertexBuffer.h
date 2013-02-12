@@ -1,9 +1,11 @@
 #pragma once
 #include <GL/glew.h>
+#include <boost/noncopyable.hpp>
 
 struct CVertex;
 
-class CVertexBuffer
+class CVertexBuffer :
+	boost::noncopyable
 {
 public:
 	enum EBufferType
@@ -29,9 +31,10 @@ private:
 	EBufferType m_Type;
 
 protected:
-	unsigned int		_GenerateVBOId();
-	void	_GuardedBind();
-	void	_GuardedUnbind();
+	void _GenerateVBOId();
+	void _GuardedBind();
+	void _GuardedUnbind();
+	void _UpdateCachedValue();
 public:
 	void Bind();
 	void LoadVertices(unsigned int number_of_vertices, CVertex* data, unsigned int* indices);

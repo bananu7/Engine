@@ -9,19 +9,19 @@ using glm::mat4;
 
 mat4 CCamera::CreateRotation (float x, float y, float z)
 {
-	mat4 Temp;
-	glm::rotate(Temp, x, glm::vec3(1.f, 0.f, 0.f));
-	glm::rotate(Temp, y, glm::vec3(0.f, 1.f, 0.f));
-	glm::rotate(Temp, z, glm::vec3(0.f, 0.f, 1.f));
+	mat4 Temp(1.0);
+	Temp = glm::rotate(Temp, x, glm::vec3(1.f, 0.f, 0.f));
+	Temp = glm::rotate(Temp, y, glm::vec3(0.f, 1.f, 0.f));
+	Temp = glm::rotate(Temp, z, glm::vec3(0.f, 0.f, 1.f));
 	return Temp;
 }
 
 mat4 CCamera::CreateRotation(vec3 const& rot)
 {
-	mat4 Temp;
-	glm::rotate(Temp, rot.x, glm::vec3(1.f, 0.f, 0.f));
-	glm::rotate(Temp, rot.y, glm::vec3(0.f, 1.f, 0.f));
-	glm::rotate(Temp, rot.z, glm::vec3(0.f, 0.f, 1.f));
+	mat4 Temp(1.0);
+	Temp = glm::rotate(Temp, rot.x, glm::vec3(1.f, 0.f, 0.f));
+	Temp = glm::rotate(Temp, rot.y, glm::vec3(0.f, 1.f, 0.f));
+	Temp = glm::rotate(Temp, rot.z, glm::vec3(0.f, 0.f, 1.f));
 	return Temp;
 }
 

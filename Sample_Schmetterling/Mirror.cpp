@@ -45,7 +45,7 @@ void CMirror::Init()
 	m_TexVbo.LoadData(TexCoords, sizeof(float) * 2 * 4);
 
 	m_Shader->SetTex("Screen", 0);
-	m_Shader->SetUniformMatrix4("ModelMatrix", CMatrix4::CreateIdentity());
+	m_Shader->SetUniform("ModelMatrix", CMatrix4::CreateIdentity());
 }
 
 void CMirror::Bind()

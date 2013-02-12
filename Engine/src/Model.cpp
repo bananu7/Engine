@@ -14,8 +14,7 @@ using namespace std;
 
 using glm::vec3;
 using glm::mat4;
-
-string CModel::Load(ILoader const& loadParams)
+/*string CModel::Load(ILoader const& loadParams)
 {
 	// FIXME
 	//auto const& Iter = loadParams.Params.find("path");
@@ -35,7 +34,7 @@ string CModel::Load(ILoader const& loadParams)
 		return string("Error with cooking");
 
 	return string();
-}
+}*/
 
 /*inline void SetTransform (const std::string& groupName, const CTransform& t)
 {
@@ -45,11 +44,7 @@ string CModel::Load(ILoader const& loadParams)
 
 void CModel::Draw () const
 {
-	//glMatrixMode(GL_MODELVIEW);
-	//glPushMatrix();
-	//glScalef(m_Scale, m_Scale, m_Scale);
-	m_Cooker->Draw();
-	//glPopMatrix();
+	//m_Cooker->Draw();
 }
 
 void CModel::Draw(const vec3& pos, const vec3& rot, const vec3& scale) const
@@ -59,15 +54,10 @@ void CModel::Draw(const vec3& pos, const vec3& rot, const vec3& scale) const
 	mat4 SMat = CCamera::CreateScale(scale.x, scale.y, scale.z);
 	PMat *= RMat;
 	PMat *= SMat;
-	Shader->SetUniformMatrix4("ModelMatrix", PMat);
+	Shader->SetUniform("ModelMatrix", PMat);
 	Draw();
 }
-CModel::CModel(void)
-{
-	m_Scale = 1.0f;
-}
 
-
-CModel::~CModel(void)
+CModel::CModel(CModelData const& data)
 {
 }

@@ -16,7 +16,7 @@ protected:
 	unsigned m_ProgramNum;
 
 	std::string _GetInfo(unsigned num);
-	std::map<std::string, int> m_Attribs;
+	std::map<std::string, int> m_VertexAttribs;
 	std::map<std::string, int> m_UniformCache;
 	
 public:
@@ -24,11 +24,12 @@ public:
 	void Unload ();
 
 	void Bind();
-	void SetUniform1f (const std::string& name, float a);
+	void SetUniform (const std::string& name, float a);
 	void SetTex (const std::string& name, unsigned texUnitNum);
-	void SetUniformVector3 (std::string const& name, glm::vec3 const& vec);
-	void SetUniformColor (std::string const& name, glm::vec4 const& color);
-	void SetUniformMatrix4 (std::string const& name, glm::mat4 const& mat);
+	void SetUniform (std::string const& name, glm::vec2 const& vec);
+	void SetUniform (std::string const& name, glm::vec3 const& vec);
+	void SetUniform (std::string const& name, glm::vec4 const& color);
+	void SetUniform (std::string const& name, glm::mat4 const& mat);
 
 	int GetUniformLocation (const std::string& name);
 	int GetProgramNum () const { return m_ProgramNum; }

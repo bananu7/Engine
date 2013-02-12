@@ -3,8 +3,14 @@
 #include <string>
 #include <map>
 #include <glm/glm.hpp>
+#include "Resource.h"
 
-class CModelData
+// It's data loaded from file
+
+class ILoader;
+
+class CModelData : 
+	public CResource
 {
 public:
 // TODO - zamienic na definicje cross-compiler
@@ -55,7 +61,7 @@ protected:
 	std::map<std::string, SMaterial> m_Materials;
 	std::vector<SComponent> m_Components;
 
-	bool CModelData::_LoadFromFBX(const std::string &path);
+	bool _LoadFromFBX(const std::string &path);
 	bool _LoadFromObj (std::istream& str);
 	bool _LoadMtl (std::istream& str);
 
@@ -66,7 +72,7 @@ public:
 	inline const std::map<std::string, SMaterial>& GetMaterials() const { return m_Materials; }
 	inline const std::vector<SComponent>& GetComponents() const { return m_Components; }
 
-	bool Load (std::string const& path);
+	std::string Load(ILoader const& loadParams);
 	// Can be used in Cookers for :
 	//   Return as OpenGL VBO - shader rendering
 	//   Return as Displaylist - pre-2.0 shaderless rendering

@@ -77,7 +77,7 @@ void CModelFbx::Draw (const vec3& pos, const vec3& rot, const vec3& scale)
 	mat4 SMat = CCamera::CreateScale(scale.x, scale.y, scale.z);
 	PMat *= RMat;
 	PMat *= SMat;
-	m_Shader->SetUniformMatrix4("ModelMatrix", PMat);
+	m_Shader->SetUniform("ModelMatrix", PMat);
 	Draw();
 }
 

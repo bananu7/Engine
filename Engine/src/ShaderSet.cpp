@@ -6,10 +6,10 @@ using glm::vec3;
 using glm::vec4;
 using glm::mat4;
 
-void CShaderSet::SetUniform1f (const std::string& name, float a)
+void CShaderSet::SetUniform (const std::string& name, float a)
 {
 	for (auto It = m_Shaders.begin(); It != m_Shaders.end(); ++It)
-		(*It)->SetUniform1f(name, a);
+		(*It)->SetUniform(name, a);
 }
 
 void CShaderSet::SetTex (const std::string& name, unsigned texUnitNum)
@@ -18,22 +18,22 @@ void CShaderSet::SetTex (const std::string& name, unsigned texUnitNum)
 		(*It)->SetTex(name, texUnitNum);
 }
 
-void CShaderSet::SetUniformVector3 (std::string const& name, vec3 const& vec)
+void CShaderSet::SetUniform (std::string const& name, vec3 const& vec)
 {
 	for (auto It = m_Shaders.begin(); It != m_Shaders.end(); ++It)
-		(*It)->SetUniformVector3(name, vec);
+		(*It)->SetUniform(name, vec);
 }
 
-void CShaderSet::SetUniformColor (std::string const& name, vec4 const& color)
+void CShaderSet::SetUniform (std::string const& name, vec4 const& color)
 {
 	for (auto It = m_Shaders.begin(); It != m_Shaders.end(); ++It)
-		(*It)->SetUniformColor(name, color);
+		(*It)->SetUniform(name, color);
 }
 
-void CShaderSet::SetUniformMatrix4 (std::string const& name, mat4 const& mat)
+void CShaderSet::SetUniform (std::string const& name, mat4 const& mat)
 {
 	for (auto It = m_Shaders.begin(); It != m_Shaders.end(); ++It)
-		(*It)->SetUniformMatrix4(name, mat);
+		(*It)->SetUniform(name, mat);
 }
 
 void CShaderSet::AddShader(CShader* shader)

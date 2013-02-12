@@ -1,10 +1,10 @@
 #include <GL/glew.h>
-#include <GL/glut.h>
 #include <GL/freeglut.h>
 #include <string>
 #include <iostream>
 #include <array>
 #include <vector>
+#include <list>
 
 #include "Shader.h"
  
@@ -165,19 +165,33 @@ void initShaders()
 
 CShader Shader;
 
+class CRenderPass
+{
+	// input - vertices
+	// vertex shader 1
+	// fragment shader 1 -- we have to assume nontrivial
+	// output stage - either screen or fbo
+
+	/*
+		shader.output += shadertarget::Screen
+		shader.output += shadertarget::Fbo(myFbo);
+
+		Using different output pretty much means:
+		it's always one FBO, with multiple color attachments
+
+			Buffer.attach(texture for attch0, text for attch1 ... etc)
+			glDrawBuffers(COLOR_ATTCH_0, COLOR_ATTCH_1 ...etc)
+	
+
+		if the shader has fbo output, it has to be remembered which color attachments it's using
+	*/
+
+	std::list<CShader> shaders;
+};
+
 void initShadersEngine()
 {
 	CSimpleDirectLoader::TDataMap Data;
-	std::string Frag = 
-            "#version 400 core"
-		  NL"in vec3 out_position;"
-		  NL"uniform float bias;"
-		  NL"out vec4 out_Color;"
-          NL"void main () {"
-        //NL"    out_Color = vec4(0.0, 1.0, 0.0, 1.0);"
-		  NL"    out_Color = vec4(out_position.zxy + bias, 1.0);"
-          NL"}";
-
 	std::string Vert = 
             "#version 400 core"
           NL"precision highp float;"
@@ -188,6 +202,16 @@ void initShadersEngine()
           NL"    gl_Position = vec4(position, 1.0);"
           NL"}";
 	
+	std::string Frag = 
+            "#version 400 core"
+		  NL"in vec3 out_position;"
+		  NL"uniform float bias;"
+		  NL"out vec4 out_Color;"
+          NL"void main () {"
+        //NL"    out_Color = vec4(0.0, 1.0, 0.0, 1.0);"
+		  NL"    out_Color = vec4(out_position.zxy + bias, 1.0);"
+          NL"}";
+
 	using uc = unsigned char;
 
 	Data["frag"] = vector<uc> (Frag.begin(), Frag.end());

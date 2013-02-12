@@ -213,9 +213,9 @@ int WINAPI WinMain (HINSTANCE hInstance,
 		throw std::exception(Result.c_str());
 	}
 	Shader.Bind();
-	Shader.SetUniformMatrix4("ViewMatrix", glm::translate(glm::mat4(), glm::vec3(0, 0, -10)));
-	Shader.SetUniformMatrix4("ModelMatrix", glm::mat4());
-	Shader.SetUniformMatrix4("ProjectionMatrix", CCamera::CreateOrtho(-3, -3, 3, 3, -100, 100));
+	Shader.SetUniform("ViewMatrix", glm::translate(glm::mat4(), glm::vec3(0, 0, -10)));
+	Shader.SetUniform("ModelMatrix", glm::mat4());
+	Shader.SetUniform("ProjectionMatrix", CCamera::CreateOrtho(-3, -3, 3, 3, -100, 100));
 
 	R.InitData(Shader.GetAttribLocation("in_Position"), Shader.GetAttribLocation("in_Color"));
 

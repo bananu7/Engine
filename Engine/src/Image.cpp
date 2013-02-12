@@ -8,9 +8,9 @@
 
 using std::string;
 
-string CImage::Load(ILoader & loader)
+string CImage::Load(ILoader const& loader)
 {
-	auto v = loader.GetRawData("main");
+	auto v = loader.GetRawData("path");
 	if (v) {
 
 		m_TexId = SOIL_load_OGL_texture_from_memory

@@ -14,17 +14,17 @@ CFramebuffer::CFramebuffer()
 
 CFramebuffer::~CFramebuffer() 
 {
-  glDeleteFramebuffersEXT(1, &m_fboId);
+  glDeleteFramebuffers(1, &m_fboId);
 }
 
 void CFramebuffer::Bind() 
 {
-  glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fboId);
+  glBindFramebuffer(GL_FRAMEBUFFER_EXT, m_fboId);
 }
 
 void CFramebuffer::Disable() 
 {
-  glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+  glBindFramebuffer(GL_FRAMEBUFFER_EXT, 0);
 }
 
 void
@@ -58,7 +58,7 @@ CFramebuffer::AttachTextures( int numTextures, GLenum texTarget[], GLuint texId[
 {
   for(int i = 0; i < numTextures; ++i) {
     AttachTexture( texTarget[i], texId[i], 
-                   attachment ? attachment[i] : (GL_COLOR_ATTACHMENT0_EXT + i), 
+                   attachment ? attachment[i] : (GL_COLOR_ATTACHMENT0 + i), 
                    mipLevel ? mipLevel[i] : 0, 
                    zSlice ? zSlice[i] : 0 );
   }
@@ -73,8 +73,8 @@ CFramebuffer::AttachRenderBuffer( GLuint buffId, GLenum attachment )
   if( GetAttachedId(attachment) != buffId ) {
 #endif
 
-    glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, attachment, 
-                                 GL_RENDERBUFFER_EXT, buffId);
+    glFramebufferRenderbufferEXT(GL_FRAMEBUFFER, attachment, 
+                                 GL_RENDERBUFFER, buffId);
 
 #ifndef NDEBUG
   }
@@ -93,7 +93,7 @@ CFramebuffer::AttachRenderBuffers( int numBuffers, GLuint buffId[], GLenum attac
 {
   for(int i = 0; i < numBuffers; ++i) {
     AttachRenderBuffer( buffId[i], 
-                        attachment ? attachment[i] : (GL_COLOR_ATTACHMENT0_EXT + i) );
+                        attachment ? attachment[i] : (GL_COLOR_ATTACHMENT0 + i) );
   }
 }
 
