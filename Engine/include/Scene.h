@@ -8,14 +8,14 @@
 #include <functional>
 #include <string>
 
-class CModelFbx;
+class CModel;
 
 class CScene
 {
 protected:
 	struct SSceneObject
 	{
-		CModelFbx* Model;
+		CModel* Model;
 		glm::vec3 Position, Rotation, Scale;
 		CShader* Shader;
 		std::vector<std::string> Textures;

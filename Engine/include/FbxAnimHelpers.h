@@ -1,4 +1,7 @@
 #pragma once
+
+#ifdef ENGINE_USE_FBX
+
 #include <fbxsdk.h>
 #include "GetPosition.h"
 
@@ -35,3 +38,5 @@ void ReadVertexCacheData(FbxMesh* pMesh,
 void MatrixScale(FbxAMatrix& pMatrix, double pValue);
 void MatrixAddToDiagonal(FbxAMatrix& pMatrix, double pValue);
 void MatrixAdd(FbxAMatrix& pDstMatrix, FbxAMatrix& pSrcMatrix);
+
+#endif

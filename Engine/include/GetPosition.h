@@ -8,10 +8,12 @@ provided at the time of installation or download, or which otherwise accompanies
 this software in either electronic or hard copy form.
 
 ****************************************************************************************/
- 
+
 #ifndef _GET_POSITION_H
 #define _GET_POSITION_H
- 
+
+#ifdef ENGINE_USE_FBX
+
 #include <fbxsdk.h>
 
 FbxAMatrix GetGlobalPosition(FbxNode* pNode, 
@@ -22,7 +24,6 @@ FbxAMatrix GetPoseMatrix(FbxPose* pPose,
                           int pNodeIndex);
 FbxAMatrix GetGeometry(FbxNode* pNode);
 
+#endif
+
 #endif // #ifndef _GET_POSITION_H
-
-
-

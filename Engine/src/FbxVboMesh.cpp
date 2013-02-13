@@ -1,3 +1,6 @@
+
+#ifdef ENGINE_USE_FBX
+
 #include "FbxVboMesh.h"
 #include <fbxsdk.h>
 #include <GL/glew.h>
@@ -404,3 +407,5 @@ void CFbxVboMesh::EndDraw() const
 
     // Pop OpenGL attributes.
 }
+
+#endif

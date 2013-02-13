@@ -5,7 +5,7 @@
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/convenience.hpp>
 
-#include <pugixml-1.2/src/pugixml.hpp>
+#include <pugixml.hpp>
 #include <exception>
 
 using namespace std;
@@ -62,6 +62,8 @@ bool CResourceSupply::LoadCatalog(string const& path)
 		}
 		//m_Catalog[Name] = LoadParams;
 	}
+	// FIXME
+	return false;
 }
 
 bool CResourceSupply::LoadWholeFolder(const std::string& path)

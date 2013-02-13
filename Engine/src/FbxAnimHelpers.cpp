@@ -1,5 +1,6 @@
 #include "FbxAnimHelpers.h"
 
+#ifdef ENGINE_USE_FBX
 
 //Compute the transform matrix that the cluster will transform the vertex.
 void ComputeClusterDeformation(FbxAMatrix& pGlobalPosition, 
@@ -492,3 +493,5 @@ void MatrixAdd(FbxAMatrix& pDstMatrix, FbxAMatrix& pSrcMatrix)
         }
     }
 }
+
+#endif

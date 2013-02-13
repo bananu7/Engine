@@ -1,8 +1,6 @@
 #include <string>
 #include <fstream>
 
-#include <fbxsdk.h>
-
 #include "ModelData.h"
 #include "ResManager.h"
 #include "Image.h"

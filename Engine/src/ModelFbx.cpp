@@ -1,5 +1,8 @@
 
+#ifdef ENGINE_USE_FBX
+
 #include <fbxsdk.h>
+
 #include "ModelFbx.h"
 #include "FbxVboMesh.h"
 #include "FbxAnimHelpers.h"
@@ -8,6 +11,7 @@
 using std::string;
 using glm::mat4;
 using glm::vec3;
+
 
 void CModelFbx::_InitializeFbxComponents()
 {	
@@ -163,3 +167,5 @@ CModelFbx::~CModelFbx(void)
 FbxManager* CModelFbx::FbxManagerInstance;
 FbxIOSettings* CModelFbx::FbxIOSettingsInstance;
 FbxImporter* CModelFbx::FbxImporterInstance;
+
+#endif

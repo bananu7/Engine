@@ -1,4 +1,7 @@
 #pragma once
+
+#ifdef ENGINE_USE_FBX
+
 #include "Resource.h"
 #include "Shader.h"
 #include <fbxsdk.h>
@@ -36,3 +39,4 @@ public:
 	~CModelFbx(void);
 };
 
+#endif

@@ -1,4 +1,7 @@
 #pragma once
+
+#ifdef ENGINE_USE_FBX
+
 #include "VertexAttributeArray.h"
 #include "VertexBuffer.h"
 #include <fbxsdk.h>
@@ -43,3 +46,5 @@ private:
     bool mHasUV;
     bool mAllByControlPoint; // Save data in VBO by control point or by polygon vertex.
 };
+
+#endif

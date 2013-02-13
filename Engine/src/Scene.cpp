@@ -6,7 +6,7 @@
 #include "Image.h"
 #include "Shader.h"
 #include "ShaderSet.h"
-#include <pugixml-1.2/src/pugixml.hpp>
+#include <pugixml.hpp>
 #include <fstream>
 
 using namespace std;

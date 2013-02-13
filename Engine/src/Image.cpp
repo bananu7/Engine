@@ -12,11 +12,12 @@ string CImage::Load(ILoader const& loader)
 {
 	auto v = loader.GetRawData("path");
 	if (v) {
+		auto const& v_d = v.get();
 
 		m_TexId = SOIL_load_OGL_texture_from_memory
 			(
-				v.get().data(),
-				v.get().size(),
+				v_d.data(),
+				v_d.size(),
 				SOIL_LOAD_AUTO,
 				SOIL_CREATE_NEW_ID,
 				SOIL_FLAG_MIPMAPS

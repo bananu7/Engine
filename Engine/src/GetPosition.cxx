@@ -16,6 +16,7 @@
 //
 /////////////////////////////////////////////////////////////////////////
 
+#ifdef ENGINE_USE_FBX
 
 #include "GetPosition.h"
 
@@ -102,3 +103,4 @@ FbxAMatrix GetGeometry(FbxNode* pNode)
     return FbxAMatrix(lT, lR, lS);
 }
 
+#endif
