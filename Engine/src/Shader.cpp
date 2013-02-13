@@ -226,7 +226,7 @@ void CShader::SetTex (const std::string& name, unsigned texUnitNum)
 {
 	int my_sampler_uniform_location = GetUniformLocation(name);
 
-	glUseProgram(m_ProgramNum);
+	Bind();
 	glUniform1i(my_sampler_uniform_location, texUnitNum);
 }
 

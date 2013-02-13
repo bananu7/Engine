@@ -1,6 +1,5 @@
 #include "ImageData.h"
 #include "ResManager.h"
-#include <SOIL.h>
 
 using std::string;
 

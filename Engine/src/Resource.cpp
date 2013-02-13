@@ -9,7 +9,7 @@ std::vector<unsigned char> buffer_from_file(std::istream& stream)
 {
     typedef std::istream::pos_type pos_type; 
     typedef std::istream::off_type off_type;
-    typedef std::istream_iterator<char> i_iter;
+    typedef std::istream_iterator<unsigned char> i_iter;
  
     std::vector<unsigned char> ret;
     stream >> std::noskipws;
@@ -61,9 +61,6 @@ boost::optional<std::vector<unsigned char>> CSimpleFileLoader::GetRawData(std::s
 	ifstream FileStream(Iter->second.c_str(), ios::binary);
 	if (!FileStream)
 		return boost::none;
-
-	char C;
-	FileStream >> C;
 
 	vector<unsigned char> Temp(
         (std::istreambuf_iterator<char>(FileStream)),
