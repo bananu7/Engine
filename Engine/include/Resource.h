@@ -32,8 +32,8 @@ class CSimpleDirectLoader :
 	public ILoader
 {
 public:
-	using TDataVal = std::vector<unsigned char>;
-	using TDataMap = std::map<std::string, TDataVal>;
+	typedef std::vector<unsigned char> TDataVal;
+	typedef std::map<std::string, TDataVal> TDataMap;
 
 private:
 	TDataMap Data;

@@ -20,7 +20,7 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>Intel C++ Compiler XE 13.0</PlatformToolset>
+    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -104,7 +104,6 @@
     <ClInclude Include="include\GameScripting.hpp" />
     <ClInclude Include="include\GetPosition.h" />
     <ClInclude Include="include\Image.h" />
-    <ClInclude Include="include\ImageData.h" />
     <ClInclude Include="include\IModelCooker.h" />
     <ClInclude Include="include\LightHouse.h" />
     <ClInclude Include="include\Logger.h" />
@@ -118,7 +117,6 @@
     <ClInclude Include="include\Option.h" />
     <ClInclude Include="include\ResManager.h" />
     <ClInclude Include="include\Resource.h" />
-    <ClInclude Include="include\Scene.h" />
     <ClInclude Include="include\Shader.h" />
     <ClInclude Include="include\ShaderSet.h" />
     <ClInclude Include="include\VertexAttributeArray.h" />
@@ -133,10 +131,6 @@
     <ClCompile Include="src\FrameBuffer.cpp" />
     <ClCompile Include="src\GetPosition.cxx" />
     <ClCompile Include="src\Image.cpp" />
-    <ClCompile Include="src\ImageData.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="src\LightHouse.cpp" />
     <ClCompile Include="src\Logger.cpp" />
     <ClCompile Include="src\LuaVM.cpp">
@@ -153,10 +147,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Resource.cpp" />
-    <ClCompile Include="src\Scene.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="src\Shader.cpp" />
     <ClCompile Include="src\ShaderSet.cpp" />
     <ClCompile Include="src\VertexAttributeArray.cpp" />
