@@ -46,8 +46,8 @@
     <IncludePath>$(LUA_DEV)\include;$(ProjectDir);$(ProjectDir)\include;$(FBX_2013_3)\include;$(BOOST_1_52_0)\;$(SolutionDir)\dependencies\glew-1.9.0\include;$(SolutionDir)\dependencies\glm-0.9.4.1;$(SolutionDir)\dependencies\pugixml-1.2\src;$(SolutionDir)\dependencies\FreeImage\Dist;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(BOOST_1_52_0);$(ProjectDir);$(ProjectDir)\include;$(SolutionDir)\dependencies\FBX\include;$(SolutionDir)\dependencies\glew-1.5.6\include;$(SolutionDir)\dependencies\glm-0.9.4.1;$(SolutionDir)\dependencies\Lua-5.1\include;$(SolutionDir)\dependencies\SOIL\include;C:\PROJECTS\Engine\dependencies\pugixml-1.2\src;$(IncludePath)</IncludePath>
-    <LibraryPath>$(BOOST_1_52_0)\stage\lib;$(SolutionDir)\dependencies\SOIL\lib;$(SolutionDir)\dependencies\glew-1.5.6\lib;$(SolutionDir)\dependencies\pugixml-1.2\scripts\vs2010\x32;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(BOOST_1_52_0);$(ProjectDir);$(ProjectDir)\include;$(SolutionDir)\dependencies\FBX\include;$(SolutionDir)\dependencies\glew-1.5.6\include;$(SolutionDir)\dependencies\glm-0.9.4.1;$(SolutionDir)\dependencies\Lua-5.1\include;$(SolutionDir)\dependencies\FreeImage\Dist;$(SolutionDir)\dependencies\pugixml-1.2\src;$(IncludePath)</IncludePath>
+    <LibraryPath>$(BOOST_1_52_0)\stage\lib;$(SolutionDir)\dependencies\FreeImage\Dist;$(SolutionDir)\dependencies\glew-1.5.6\lib;$(SolutionDir)\dependencies\pugixml-1.2\scripts\vs2010\x32;$(LibraryPath)</LibraryPath>
     <SourcePath>$(ProjectDir)\src;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -89,7 +89,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>soil.lib;opengl32.lib;glew32.lib;wininet.lib;pugixml.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>freeimage.lib;opengl32.lib;glew32.lib;wininet.lib;pugixml.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -135,6 +135,7 @@
     <ClCompile Include="src\Image.cpp" />
     <ClCompile Include="src\ImageData.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="src\LightHouse.cpp" />
     <ClCompile Include="src\Logger.cpp" />

@@ -19,13 +19,15 @@ template<class T> T& as_lvalue(T&& v){ return v; }
 void glShaderSource_engine (GLuint shader, std::string const& shaderSource)
 {
 	const GLchar* Ptr = shaderSource.c_str();
-	glShaderSource(shader, 1, &Ptr, nullptr);
+	const GLint size = shaderSource.size();
+	glShaderSource(shader, 1, &Ptr, &size);
 }
 
 void glShaderSource_engine (GLuint shader, std::vector<char> const& shaderSource)
 {
 	const GLchar* Ptr = &shaderSource[0];
-	glShaderSource(shader, 1, &Ptr, nullptr);
+	const GLint size = shaderSource.size();
+	glShaderSource(shader, 1, &Ptr, &size);
 }
 
 std::string CShader::Load(ILoader const& loadParams)
