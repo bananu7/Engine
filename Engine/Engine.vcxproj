@@ -68,7 +68,7 @@
       <IgnoreSpecificDefaultLibraries>MSVCRTD</IgnoreSpecificDefaultLibraries>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;FreeImage.lib;glu32.lib;fbxsdk-2013.3d.lib;wininet.lib;pugixmld.lib</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;FreeImage.lib;glu32.lib;wininet.lib;pugixmld.lib</AdditionalDependencies>
       <AdditionalOptions>/MT %(AdditionalOptions)</AdditionalOptions>
     </Lib>
   </ItemDefinitionGroup>
