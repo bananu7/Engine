@@ -1,5 +1,6 @@
-
 #include "LuaVM.h"
+
+#ifdef ENGINE_USE_LUA
 
 using namespace std;
 
@@ -134,3 +135,5 @@ CLuaVM::~CLuaVM(void)
 {
 	lua_close(m_LuaState);
 }
+
+#endif

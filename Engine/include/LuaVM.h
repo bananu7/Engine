@@ -1,4 +1,7 @@
 #pragma once
+
+#ifdef ENGINE_USE_LUA
+
 #include <string>
 #include <lua.hpp>
 #include <vector>
@@ -50,3 +53,5 @@ public:
 	CLuaVM();
 	virtual ~CLuaVM();
 };
+
+#endif
