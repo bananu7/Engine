@@ -43,7 +43,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <SourcePath>$(ProjectDir)\src;$(SourcePath)</SourcePath>
     <LibraryPath>$(FBX_2013_3)\lib\vs2010\x86;$(SolutionDir)\dependencies\glew-1.9.0\lib;$(SolutionDir)\dependencies\FreeImage\Dist;$(SolutionDir)\dependencies\pugixml-1.2\scripts\vs2010\x32;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(ProjectDir);$(ProjectDir)\include;$(FBX_2013_3)\include;$(SolutionDir)\dependencies\FreeImage\Dist;$(SolutionDir)\dependencies\glew-1.9.0\include;$(SolutionDir)\dependencies\glm-0.9.4.1;$(SolutionDir)\dependencies\Lua-5.1\include;$(SolutionDir)\dependencies\pugixml-1.2\src;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);$(ProjectDir)\include;$(FBX_2013_3)\include;$(SolutionDir)\dependencies\FreeImage\Dist;$(SolutionDir)\dependencies\glew-1.9.0\include;$(SolutionDir)\dependencies\glm-0.9.4.1;$(SolutionDir)\dependencies\Lua-5.1\include;$(SolutionDir)\dependencies\pugixml-1.2\src;$(SolutionDir)\dependencies\SFML-2.0\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(ProjectDir);$(ProjectDir)\include;$(SolutionDir)\dependencies\FBX\include;$(SolutionDir)\dependencies\glew-1.5.6\include;$(SolutionDir)\dependencies\glm-0.9.4.1;$(SolutionDir)\dependencies\Lua-5.1\include;$(SolutionDir)\dependencies\FreeImage\Dist;$(SolutionDir)\dependencies\pugixml-1.2\src;$(IncludePath)</IncludePath>
@@ -55,7 +55,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;FBXSDK_SHARED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>
       </AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -68,7 +68,7 @@
       <IgnoreSpecificDefaultLibraries>MSVCRTD</IgnoreSpecificDefaultLibraries>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;FreeImage.lib;glu32.lib;wininet.lib;pugixmld.lib</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;FreeImage.lib;glu32.lib;wininet.lib;pugixmld.lib;winmm.lib</AdditionalDependencies>
       <AdditionalOptions>/MT %(AdditionalOptions)</AdditionalOptions>
     </Lib>
   </ItemDefinitionGroup>
@@ -93,6 +93,8 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\dependencies\SFML-2.0\include\SFML\System.hpp" />
+    <ClInclude Include="..\dependencies\SFML-2.0\include\SFML\Window.hpp" />
     <ClInclude Include="include\Camera.h" />
     <ClInclude Include="include\CameraAdds.h" />
     <ClInclude Include="include\Color.h" />
@@ -124,6 +126,35 @@
     <ClInclude Include="include\World.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\dependencies\SFML-2.0\src\System\Clock.cpp" />
+    <ClCompile Include="..\dependencies\SFML-2.0\src\System\Err.cpp" />
+    <ClCompile Include="..\dependencies\SFML-2.0\src\System\Lock.cpp" />
+    <ClCompile Include="..\dependencies\SFML-2.0\src\System\Mutex.cpp" />
+    <ClCompile Include="..\dependencies\SFML-2.0\src\System\Sleep.cpp" />
+    <ClCompile Include="..\dependencies\SFML-2.0\src\System\String.cpp" />
+    <ClCompile Include="..\dependencies\SFML-2.0\src\System\Thread.cpp" />
+    <ClCompile Include="..\dependencies\SFML-2.0\src\System\ThreadLocal.cpp" />
+    <ClCompile Include="..\dependencies\SFML-2.0\src\System\Time.cpp" />
+    <ClCompile Include="..\dependencies\SFML-2.0\src\System\Win32\ClockImpl.cpp" />
+    <ClCompile Include="..\dependencies\SFML-2.0\src\System\Win32\MutexImpl.cpp" />
+    <ClCompile Include="..\dependencies\SFML-2.0\src\System\Win32\SleepImpl.cpp" />
+    <ClCompile Include="..\dependencies\SFML-2.0\src\System\Win32\ThreadImpl.cpp" />
+    <ClCompile Include="..\dependencies\SFML-2.0\src\System\Win32\ThreadLocalImpl.cpp" />
+    <ClCompile Include="..\dependencies\SFML-2.0\src\Window\Context.cpp" />
+    <ClCompile Include="..\dependencies\SFML-2.0\src\Window\GlContext.cpp" />
+    <ClCompile Include="..\dependencies\SFML-2.0\src\Window\GlResource.cpp" />
+    <ClCompile Include="..\dependencies\SFML-2.0\src\Window\Joystick.cpp" />
+    <ClCompile Include="..\dependencies\SFML-2.0\src\Window\JoystickManager.cpp" />
+    <ClCompile Include="..\dependencies\SFML-2.0\src\Window\Keyboard.cpp" />
+    <ClCompile Include="..\dependencies\SFML-2.0\src\Window\Mouse.cpp" />
+    <ClCompile Include="..\dependencies\SFML-2.0\src\Window\VideoMode.cpp" />
+    <ClCompile Include="..\dependencies\SFML-2.0\src\Window\Win32\InputImpl.cpp" />
+    <ClCompile Include="..\dependencies\SFML-2.0\src\Window\Win32\JoystickImpl.cpp" />
+    <ClCompile Include="..\dependencies\SFML-2.0\src\Window\Win32\VideoModeImpl.cpp" />
+    <ClCompile Include="..\dependencies\SFML-2.0\src\Window\Win32\WglContext.cpp" />
+    <ClCompile Include="..\dependencies\SFML-2.0\src\Window\Win32\WindowImplWin32.cpp" />
+    <ClCompile Include="..\dependencies\SFML-2.0\src\Window\Window.cpp" />
+    <ClCompile Include="..\dependencies\SFML-2.0\src\Window\WindowImpl.cpp" />
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\CameraAdds.cpp" />
     <ClCompile Include="src\FbxAnimHelpers.cpp" />
