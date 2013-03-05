@@ -2,14 +2,14 @@
 #include "Framebuffer.h"
 #include "VertexBuffer.h"
 
-class CShader;
+class Program;
 
 class CMirror
 {
 	unsigned int m_TextureNum, m_DepthBufferNum;
 	CFramebuffer m_Fbo;
 	CVertexBuffer m_Vbo, m_TexVbo;
-	CShader* m_Shader;
+	Program* m_Shader;
 
 public:
 	void Init();
@@ -17,7 +17,7 @@ public:
 	void Unbind();
 	void Draw();
 
-	CMirror(CShader* shader);
+	CMirror(Program* shader);
 	~CMirror(void);
 };
 

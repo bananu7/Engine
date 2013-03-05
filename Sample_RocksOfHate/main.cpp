@@ -44,7 +44,7 @@ int WINAPI WinMain (HINSTANCE hInstance,
 	}
 
 	InitializeGL();
-	//CResManager::GetSingleton()->GetResource<CShader>("texturing")->Bind();
+	//CResManager::GetSingleton()->GetResource<Program>("texturing")->Bind();
 
 	float FrameTimer = 0.f;
 	const float UpdateTime = 1.f/30.f;
@@ -125,9 +125,9 @@ int WINAPI WinMain (HINSTANCE hInstance,
 		}
 		glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		//glEnable (GL_TEXTURE_2D);
-		//CResManager::GetSingleton()->GetResource<CShader>("shader")->Bind();
+		//CResManager::GetSingleton()->GetResource<Program>("shader")->Bind();
 		//Game.Draw();
-		//CShader::DisableAll();
+		//Program::DisableAll();
 
 		//App.SaveGLStates();
 		//CGUI::GetSingleton()->Draw();

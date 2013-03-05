@@ -53,7 +53,7 @@ int WINAPI WinMain (HINSTANCE hInstance,
 	glClearColor(0.5f, 0.f, 0.f, 1.f);
 	glColor4f (1.f, 1.f, 1.f, 1.f);
 
-	CShader* Shader = CResManager::GetSingleton()->GetResource<CShader>("shader");
+	Program* Shader = CResManager::GetSingleton()->GetResource<Program>("shader");
 	CImage* Deski = CResManager::GetSingleton()->GetResource<CImage>("crate_tex");
 	CImage* Trawa = CResManager::GetSingleton()->GetResource<CImage>("grass_tex");
 	CImage* Skaly = CResManager::GetSingleton()->GetResource<CImage>("rock_tex");

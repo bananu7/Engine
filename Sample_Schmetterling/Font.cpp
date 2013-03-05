@@ -100,6 +100,6 @@ CFont::CFont(float X, float Y,const string &FontName, CColor Color, CVector2<flo
 	m_X = X;
 	m_Y = Y;
 	m_Font	= CResManager::GetSingleton()->GetResource<CImage>(FontName);
-	m_Shader= CResManager::GetSingleton()->GetResource<CShader>("shader_font");
+	m_Shader= CResManager::GetSingleton()->GetResource<Program>("shader_font");
 	m_Shader->SetUniform("ProjectionMatrix",*CGUI::GetSingleton()->GetProjectionMatrix());
 }

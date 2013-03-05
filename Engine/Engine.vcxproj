@@ -20,7 +20,7 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>Intel C++ Compiler XE 13.0</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -95,6 +95,7 @@
   <ItemGroup>
     <ClInclude Include="..\dependencies\SFML-2.0\include\SFML\System.hpp" />
     <ClInclude Include="..\dependencies\SFML-2.0\include\SFML\Window.hpp" />
+    <ClInclude Include="Config.h" />
     <ClInclude Include="include\Camera.h" />
     <ClInclude Include="include\CameraAdds.h" />
     <ClInclude Include="include\Color.h" />
@@ -179,7 +180,9 @@
     </ClCompile>
     <ClCompile Include="src\Resource.cpp" />
     <ClCompile Include="src\Shader.cpp" />
-    <ClCompile Include="src\ShaderSet.cpp" />
+    <ClCompile Include="src\ShaderSet.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\VertexAttributeArray.cpp" />
     <ClCompile Include="src\VertexBuffer.cpp" />
     <ClCompile Include="src\World.cpp" />

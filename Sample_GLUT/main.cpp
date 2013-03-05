@@ -163,7 +163,7 @@ void initShaders()
     glUseProgram(programId);
 }
 
-CShader Shader;
+Program Shader;
 
 class CRenderPass
 {
@@ -186,7 +186,7 @@ class CRenderPass
 		if the shader has fbo output, it has to be remembered which color attachments it's using
 	*/
 
-	std::list<CShader> shaders;
+	std::list<Program> shaders;
 };
 
 void initShadersEngine()

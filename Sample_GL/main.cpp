@@ -197,7 +197,7 @@ int WINAPI WinMain (HINSTANCE hInstance,
 	R.Benchmark();
 	//InitGL();
 
-	CShader Shader;
+	Program Shader;
 	std::map<std::string, std::string> Data;
 	Data["vert"] = "simple.vert";
 	Data["frag"] = "simple.frag";

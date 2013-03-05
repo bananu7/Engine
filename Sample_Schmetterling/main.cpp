@@ -74,16 +74,16 @@ int WINAPI WinMain (HINSTANCE hInstance,
 	bool BindMouse = true;
 	sf::Clock Clock;
 
-	CShaderSet ShaderSet;
-	CShader* Light = CResManager::GetSingleton()->GetResource<CShader>("shader_light");
-	CShader* Shader = CResManager::GetSingleton()->GetResource<CShader>("shader_heightmap");
-	CShader* Simple = CResManager::GetSingleton()->GetResource<CShader>("shader_simple");
-	CShader* Texturing = CResManager::GetSingleton()->GetResource<CShader>("shader_texturing");
+	ProgramSet ShaderSet;
+	Program* Light = CResManager::GetSingleton()->GetResource<Program>("shader_light");
+	Program* Shader = CResManager::GetSingleton()->GetResource<Program>("shader_heightmap");
+	Program* Simple = CResManager::GetSingleton()->GetResource<Program>("shader_simple");
+	Program* Texturing = CResManager::GetSingleton()->GetResource<Program>("shader_texturing");
 	ShaderSet.AddShader(Light);
 	ShaderSet.AddShader(Shader);
 	ShaderSet.AddShader(Simple);
 	ShaderSet.AddShader(Texturing);
-	ShaderSet.AddShader(CResManager::GetSingleton()->GetResource<CShader>("shader_mirror"));
+	ShaderSet.AddShader(CResManager::GetSingleton()->GetResource<Program>("shader_mirror"));
 
 	#pragma region Initialization
 	glEnable (GL_DEPTH_TEST);
@@ -228,7 +228,7 @@ int WINAPI WinMain (HINSTANCE hInstance,
 	float m_Mood= 1.f;		// values from 0 to 1
 	float m_MoodBool= 1.f;
 	float m_MoodChangeRate= .001f;
-	CMirror Mirror(CResManager::GetSingleton()->GetResource<CShader>("shader_mirror"));
+	CMirror Mirror(CResManager::GetSingleton()->GetResource<Program>("shader_mirror"));
 	Mirror.Init();
 
 	while (App.IsOpened())
@@ -340,7 +340,7 @@ int WINAPI WinMain (HINSTANCE hInstance,
 		CResManager::GetSingleton()->GetResource<CImage>("texture_motyl")->Bind(0);
 		CResManager::GetSingleton()->GetResource<CImage>("texture_motyl")->Bind(1);
 		Player.Draw();
-		CShader::DisableAll();
+		Program::DisableAll();
 
 		// SECOND PASS
 		
@@ -415,7 +415,7 @@ int WINAPI WinMain (HINSTANCE hInstance,
 		//Mirror.Draw();
 
 		// GUI
-		CShader::DisableAll();
+		Program::DisableAll();
 		ConsolePtr->Set("Player's Mood == ");
 		ConsolePtr->Push(boost::lexical_cast<std::string>(m_Mood));
 		CGUI::GetSingleton()->Draw();

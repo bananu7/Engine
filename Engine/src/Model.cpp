@@ -10,7 +10,7 @@
 #include "ResManager.h"
 using namespace std;
 
-#define BUFFER_OFFSET(i) ((char *)NULL + (i))
+namespace engine {
 
 using glm::vec3;
 using glm::mat4;
@@ -61,3 +61,5 @@ void CModel::Draw(const vec3& pos, const vec3& rot, const vec3& scale) const
 CModel::CModel(CModelData const& data)
 {
 }
+
+} // namespace engine

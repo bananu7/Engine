@@ -8,7 +8,7 @@
 
 void CGraph::Draw()
 {
-	//CShader::DisableAll();
+	//Program::DisableAll();
 	m_Bounds.X = 0.f;
 	m_Bounds.Y = 10.f;
 
@@ -121,7 +121,7 @@ CGraph::CGraph(float X, float Y, float Width, float Height,
 {
 	m_X= X;
 	m_Y= Y;
-	m_Shader = CResManager::GetSingleton()->GetResource<CShader>("shader_interface");
+	m_Shader = CResManager::GetSingleton()->GetResource<Program>("shader_interface");
 	m_Shader->SetUniform("ProjectionMatrix",*CGUI::GetSingleton()->GetProjectionMatrix());
 	//m_ControlWithFocus = 0;
 	//m_LastCommand = m_LastCommands.end();

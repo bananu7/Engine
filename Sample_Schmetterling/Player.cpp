@@ -62,7 +62,7 @@ CPlayer::CPlayer(void):
 {
 	//m_Texture = CResManager::GetSingleton()->GetResource<CImage>("texture_motyl");
 	m_ModelFbx = CResManager::GetSingleton()->GetResource<CModelFbx>("cube_fbx");
-	m_ModelFbx->m_Shader = CResManager::GetSingleton()->GetResource<CShader>("shader_texturing");
+	m_ModelFbx->m_Shader = CResManager::GetSingleton()->GetResource<Program>("shader_texturing");
 	//m_Model->SetScale(0.01f);
 	m_Position = CVector3(150.f, 150.f, 150.f);
 	m_MaxAcceleration = 10.f;

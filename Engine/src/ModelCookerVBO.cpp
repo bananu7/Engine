@@ -105,7 +105,7 @@ bool CModelCookerVBO::Cook(const CModelData& modelData)
 		// pozwalająca przekazywać tak naprawdę dowolne dane. Shader
 		// wymaga jednak odpowiedniego "nazwania" każdego strumienia danych.
 		
-		// W tej chwili owo "nazwanie" wykonywane jest przy ladowaniu CShadera
+		// W tej chwili owo "nazwanie" wykonywane jest przy ladowaniu Programa
 
 		m_VerticesVbo.Bind();
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);

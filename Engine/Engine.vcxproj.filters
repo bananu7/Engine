@@ -137,6 +137,9 @@
     <ClInclude Include="..\dependencies\SFML-2.0\include\SFML\Window.hpp">
       <Filter>SFML\include</Filter>
     </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Camera.cpp">

@@ -25,7 +25,7 @@ protected:
 	FbxScene* m_Scene;
 
 public:
-	CShader* m_Shader;
+	Program* m_Shader;
 
 	std::string Load(ILoader const& loadParams);
 	void Draw();

@@ -9,7 +9,7 @@
 void CGUI::Draw()
 {
 	//glDisable (GL_TEXTURE_2D);
-	//CShader::DisableAll();
+	//Program::DisableAll();
 	for (auto it= m_Elements.begin(), itE= m_Elements.end(); it!=itE; ++it)
 		(*it).second->Draw();
 	//glEnable (GL_TEXTURE_2D);
@@ -148,6 +148,6 @@ CBox::CBox(float X, float Y,
 {
 	m_X= X;
 	m_Y= Y;
-	m_Shader = CResManager::GetSingleton()->GetResource<CShader>("shader_interface");
+	m_Shader = CResManager::GetSingleton()->GetResource<Program>("shader_interface");
 	m_Shader->SetUniform("ProjectionMatrix",*CGUI::GetSingleton()->GetProjectionMatrix());
 }

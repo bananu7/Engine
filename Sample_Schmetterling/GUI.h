@@ -14,7 +14,7 @@ protected:
 	bool					m_Hidden;
 	int						m_ID;
 	float					m_X,m_Y;
-	CShader*				m_Shader;
+	Program*				m_Shader;
 	CVertexBuffer			m_VerticesVbo;
 	CVertexBuffer			m_NormalsVbo;
 	CVertexBuffer			m_UVsVbo;

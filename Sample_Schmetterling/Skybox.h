@@ -13,7 +13,7 @@ class CSkybox:
 {
 protected:
 	std::vector<CImage*>	m_Texture;
-	CShader*				m_Shader;
+	Program*				m_Shader;
 	CVertexBuffer			m_VerticesVbo;
 	CVertexBuffer			m_NormalsVbo;
 	CVertexBuffer			m_UVsVbo;
@@ -40,7 +40,7 @@ public:
 		m_UVsVbo(CVertexBuffer::DATA_BUFFER, CVertexBuffer::STATIC_DRAW),
 		m_IndicesVbo(CVertexBuffer::INDEX_BUFFER, CVertexBuffer::STATIC_DRAW)
 	{
-		m_Shader = CResManager::GetSingleton()->GetResource<CShader>("shader_texturing");
+		m_Shader = CResManager::GetSingleton()->GetResource<Program>("shader_texturing");
 		m_Texture.push_back(CResManager::GetSingleton()->GetResource<CImage>("skybox_tex_good"));
 		m_Texture.push_back(CResManager::GetSingleton()->GetResource<CImage>("skybox_tex_evil"));
 	}

@@ -85,7 +85,7 @@ void CMirror::Draw()
 	glDrawArrays(GL_QUADS, 0, 4);
 }
 
-CMirror::CMirror(CShader* shader):
+CMirror::CMirror(Program* shader):
 	m_Vbo(CVertexBuffer::DATA_BUFFER, CVertexBuffer::STATIC_DRAW),
 	m_TexVbo(CVertexBuffer::DATA_BUFFER, CVertexBuffer::STATIC_DRAW),
 	m_Shader(shader)

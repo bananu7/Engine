@@ -4,13 +4,13 @@
 #include <glm/glm.hpp>
 #include <string>
 
-class CShader;
+class Program;
 class CVector3;
 class CMatrix4;
 
-class CShaderSet
+class ProgramSet
 {
-	std::unordered_set<CShader*> m_Shaders;
+	std::unordered_set<Program*> m_Shaders;
 
 public:
 	void SetUniform (const std::string& name, float a);
@@ -19,9 +19,9 @@ public:
 	void SetUniform (std::string const& name, glm::vec4 const& color);
 	void SetUniform (std::string const& name, glm::mat4 const& mat);
 
-	void AddShader(CShader* shader);
+	void AddShader(Program* shader);
 
-	CShaderSet(void);
-	~CShaderSet(void);
+	ProgramSet(void);
+	~ProgramSet(void);
 };
 

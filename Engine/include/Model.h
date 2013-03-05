@@ -5,8 +5,10 @@
 #include <boost/ptr_container/ptr_vector.hpp>
 #include "VertexBuffer.h"
 
+namespace engine {
+
 class CModelData;
-class CShader;
+class Program;
 
 // It's constructed from CModelData
 // It's the highest abstraction on the displayed object
@@ -25,11 +27,12 @@ protected:
 	boost::ptr_vector<CVertexBuffer> m_Vbos;
 
 public:
-	std::shared_ptr<CShader> Shader;
+	std::shared_ptr<Program> Shader;
 
 	void Draw () const;
-	void Draw (const glm::vec3 const& pos, glm::vec3 const& rot, glm::vec3 const& scale) const;
+	void Draw (glm::vec3 const& pos, glm::vec3 const& rot, glm::vec3 const& scale) const;
 
 	CModel(CModelData const& data);
 };
 
+} // namespace engine

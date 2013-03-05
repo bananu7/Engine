@@ -1,5 +1,4 @@
 #include <GL/glew.h>
-#include <fstream>
 #include <string>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -7,6 +6,9 @@
 #include "ResManager.h"
 #include "Image.h"
 #include "Misc.h"
+
+namespace engine {
+
 using namespace std;
 
 using glm::vec3;
@@ -14,127 +16,57 @@ using glm::vec2;
 using glm::vec4;
 using glm::mat4;
 
+namespace {
+
 template<class T> T& as_lvalue(T&& v){ return v; }
 
-void glShaderSource_engine (GLuint shader, std::string const& shaderSource)
-{
-	const GLchar* Ptr = shaderSource.c_str();
-	const GLint size = shaderSource.size();
-	glShaderSource(shader, 1, &Ptr, &size);
 }
 
-void glShaderSource_engine (GLuint shader, std::vector<char> const& shaderSource)
+std::string Program::Link()
 {
-	const GLchar* Ptr = &shaderSource[0];
-	const GLint size = shaderSource.size();
-	glShaderSource(shader, 1, &Ptr, &size);
-}
-
-std::string CShader::Load(ILoader const& loadParams)
-{
-	//FIXME
-	auto Frag = loadParams.GetRawData("frag");
-	if (!Frag)
-		return string("Error in getting fragment shader data");
-
-	auto Vert = loadParams.GetRawData("vert");
-	if (!Vert)
-		return string("Error in gettin vertex shader data");
-
-	m_FragFileData.clear();
-	m_VertFileData.clear();
-	std::copy(Frag.get().begin(), Frag.get().end(), std::back_inserter(m_FragFileData));
-	std::copy(Vert.get().begin(), Vert.get().end(), std::back_inserter(m_VertFileData));
-
-	m_FragFileData.push_back(0);
-	m_VertFileData.push_back(0);
-
-	m_FragNum = glCreateShader(GL_FRAGMENT_SHADER);		
-	m_VertNum = glCreateShader(GL_VERTEX_SHADER);
-
-	m_ProgramNum = glCreateProgram();
-
-	// Those are no longer needed with (location)
-	/*m_VertexAttribs["in_Position"] = 0;
-	m_VertexAttribs["in_Normal"] = 1;
-	m_VertexAttribs["in_TexCoord"] = 2;*/
-
-	string CompilationResult = Compile();
-
-	return CompilationResult;
-}
-
-void CShader::Unload() 
-{ 
-	glDeleteShader(m_FragNum);
-	glDeleteShader(m_VertNum);
-	glDeleteProgram(m_ProgramNum);
-}
-
-string CShader::Compile()
-{
-	glShaderSource_engine(m_FragNum, m_FragFileData);
-	glCompileShader(m_FragNum);
-
-	GLint compiled;
-
-	glGetShaderiv(m_FragNum, GL_COMPILE_STATUS, &compiled);
-	if (compiled != GL_TRUE)
-		return "Fragment shader compilation error : " + _GetInfo(m_FragNum);;
-
-	glShaderSource_engine(m_VertNum, m_VertFileData);
-	glCompileShader(m_VertNum);
-
-	glGetShaderiv(m_VertNum, GL_COMPILE_STATUS, &compiled);
-	if (compiled != GL_TRUE)
-		return "Vertex shader compilation error : " + _GetInfo(m_VertNum);;
-
 	// After recompilations, attributes need to be rebound
-	for (auto it = m_VertexAttribs.begin(); it != m_VertexAttribs.end(); ++it)
+	for (auto const& attrib : m_vertexAttribs)
 	{
-		glBindAttribLocation(m_ProgramNum, it->second, it->first.c_str());
+		glBindAttribLocation(m_id, attrib.second, attrib.first.c_str());
 	}
 
 	// Bind the output
-	glBindFragDataLocation(m_ProgramNum, 0, "out_FragColor");
+	glBindFragDataLocation(m_id, 0, "out_FragColor");
 
 	unsigned int Shaders[4];
 	GLsizei Count;
 
 	// We don't want to bind the shaders twice, if it's just recompilation
-	glGetAttachedShaders(m_ProgramNum, 4, &Count, Shaders); 
+	glGetAttachedShaders(m_id, 4, &Count, Shaders); 
 
-	if (Count == 0)
-	{
-		glAttachShader (m_ProgramNum, m_FragNum);
-		glAttachShader (m_ProgramNum, m_VertNum);
-	}
-	glLinkProgram (m_ProgramNum);
+	if (m_vertexShader)
+		glAttachShader(m_id, m_vertexShader->getId());
+	glLinkProgram (m_id);
 
 	GLint linked;
-	glGetProgramiv(m_ProgramNum, GL_LINK_STATUS, &linked);
+	glGetProgramiv(m_id, GL_LINK_STATUS, &linked);
 	if (!linked)
-		return "Program link error : " + _GetInfo(m_ProgramNum);;
+		return "Program link error : " + _getInfo(m_id);;
 
 	// Success
 	return string();
 }
 
-bool CShader::Validate()
+bool Program::Validate() const
 {
 	int isValid;
-	glValidateProgram(m_ProgramNum);
-	glGetProgramiv(m_ProgramNum, GL_VALIDATE_STATUS, &isValid);
+	glValidateProgram(m_id);
+	glGetProgramiv(m_id, GL_VALIDATE_STATUS, &isValid);
 	return (isValid == GL_TRUE);
 }
 
 
-int CShader::GetAttribLocation (const std::string& name)
+int Program::GetAttribLocation (const std::string& name)
 {
-	return glGetAttribLocation(m_ProgramNum, name.c_str());
+	return glGetAttribLocation(m_id, name.c_str());
 }
 
-string CShader::_GetInfo(unsigned num)
+string Program::_getInfo(unsigned num)
 {
 	GLint blen = 0;	
 	GLsizei slen = 0;
@@ -155,13 +87,13 @@ string CShader::_GetInfo(unsigned num)
 	return string("No error message");
 }
 
-void CShader::Bind()
+void Program::Bind()
 {
-	glUseProgram(m_ProgramNum);
+	glUseProgram(m_id);
 	//glEnable(GL_FRAGMENT_PROGRAM_ARB);
 }
 
-void CShader::SetUniform(const string& name, float a)
+void Program::SetUniform(const string& name, float a)
 {
 	GLint Loc = GetUniformLocation(name);
 	if (Loc != -1)
@@ -171,7 +103,7 @@ void CShader::SetUniform(const string& name, float a)
 	}
 }
 
-void CShader::SetUniform (std::string const& name, vec2 const& vec)
+void Program::SetUniform (std::string const& name, vec2 const& vec)
 {
 	GLint Loc = GetUniformLocation(name);
 	if (Loc != -1)
@@ -181,7 +113,7 @@ void CShader::SetUniform (std::string const& name, vec2 const& vec)
 	}
 }
 
-void CShader::SetUniform (std::string const& name, vec3 const& vec)
+void Program::SetUniform (std::string const& name, vec3 const& vec)
 {
 	GLint Loc = GetUniformLocation(name);
 	if (Loc != -1)
@@ -191,7 +123,7 @@ void CShader::SetUniform (std::string const& name, vec3 const& vec)
 	}
 }
 
-void CShader::SetUniform (std::string const& name, mat4 const& mat)
+void Program::SetUniform (std::string const& name, mat4 const& mat)
 {
 	GLint Loc = GetUniformLocation(name);
 	if (Loc != -1)
@@ -201,7 +133,7 @@ void CShader::SetUniform (std::string const& name, mat4 const& mat)
 	}
 }
 
-void CShader::SetUniform (std::string const& name, vec4 const& color)
+void Program::SetUniform (std::string const& name, vec4 const& color)
 {
 	GLint Loc = GetUniformLocation(name);
 	if (Loc != -1)
@@ -211,20 +143,20 @@ void CShader::SetUniform (std::string const& name, vec4 const& color)
 	}
 }
 
-int CShader::GetUniformLocation (const string& name)
+int Program::GetUniformLocation (const string& name)
 {
-	auto Iter = m_UniformCache.find(name);
-	if (Iter != m_UniformCache.end())
+	auto Iter = m_uniformCache.find(name);
+	if (Iter != m_uniformCache.end())
 		return Iter->second;
 	else
 	{
-		int Location = glGetUniformLocation(m_ProgramNum, name.c_str());
-		m_UniformCache.insert(std::make_pair(name, Location));
+		int Location = glGetUniformLocation(m_id, name.c_str());
+		m_uniformCache.insert(std::make_pair(name, Location));
 		return Location;
 	}
 }
 
-void CShader::SetTex (const std::string& name, unsigned texUnitNum)
+void Program::SetTex (const std::string& name, unsigned texUnitNum)
 {
 	int my_sampler_uniform_location = GetUniformLocation(name);
 
@@ -232,49 +164,41 @@ void CShader::SetTex (const std::string& name, unsigned texUnitNum)
 	glUniform1i(my_sampler_uniform_location, texUnitNum);
 }
 
-void CShader::DisableAll ()
+void Program::DisableAll ()
 {
 	glUseProgram (0);
 }
 
-void CShader::BindAttribLocation (std::string const& name, int location)
+void Program::BindAttribLocation (std::string const& name, int location)
 {
-	m_VertexAttribs[name] = location;
+	m_vertexAttribs[name] = location;
 }
 
-void CShader::DebugDump()
+void Program::DebugDump(std::ostream& Out)
 {
 	int count;
 	const int MAX_NAME_SIZE = 30;
 	char Name[MAX_NAME_SIZE];
 	int Len, Size;
 	GLenum Type;
-	std::ofstream Out ("shader_dump.txt");
 
-	glGetObjectParameterivARB (m_ProgramNum, GL_OBJECT_ACTIVE_ATTRIBUTES_ARB, &count);
+	glGetObjectParameterivARB (m_id, GL_OBJECT_ACTIVE_ATTRIBUTES_ARB, &count);
 	Out << "Attributes Count = " << count << endl;
 	for (int i = 0; i < count; ++i)
 	{
-		glGetActiveAttrib (m_ProgramNum, i, MAX_NAME_SIZE, &Len, &Size, &Type, Name);
+		glGetActiveAttrib (m_id, i, MAX_NAME_SIZE, &Len, &Size, &Type, Name);
 		Out << i << ". " << Name << " " << Type << "(" << Size << ")\n"; 
 	}
 
 	Out << endl;
 	
-	glGetObjectParameterivARB (m_ProgramNum, GL_OBJECT_ACTIVE_UNIFORMS_ARB, &count);
+	glGetObjectParameterivARB (m_id, GL_OBJECT_ACTIVE_UNIFORMS_ARB, &count);
 	Out << "Uniforms Count = " << count << endl;
 	for (int i = 0; i < count; ++i)
 	{		
-		glGetActiveUniform (m_ProgramNum, i, MAX_NAME_SIZE, &Len, &Size, &Type, Name);
+		glGetActiveUniform (m_id, i, MAX_NAME_SIZE, &Len, &Size, &Type, Name);
 		Out << i << ". " << Name << " " << Type << "(" << Size << ")\n"; 
 	}
 }
 
-CShader::CShader(void)
-{
-}
-
-
-CShader::~CShader(void)
-{
-}
+} // namespace engine
