@@ -4,6 +4,8 @@
 #include <glm/glm.hpp>
 #include <string>
 
+namespace engine {
+
 class Program;
 class CVector3;
 class CMatrix4;
@@ -25,3 +27,4 @@ public:
 	~ProgramSet(void);
 };
 
+} // namespace engine

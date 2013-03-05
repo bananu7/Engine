@@ -8,6 +8,8 @@
 #include <pugixml.hpp>
 #include <exception>
 
+namespace engine {
+
 using namespace std;
 using pugi::xml_document;
 using pugi::xml_node;
@@ -111,3 +113,4 @@ CResourceSupply::CResourceSupply()
 	m_ConfigPath = "../Resources/";
 }
 
+} // namespace engine

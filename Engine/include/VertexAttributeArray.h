@@ -1,5 +1,7 @@
 #pragma once
 
+namespace engine {
+
 class CVertexAttributeArray
 {
 private:
@@ -16,3 +18,4 @@ public:
 	~CVertexAttributeArray(void);
 };
 
+} // namespace engine

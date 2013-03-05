@@ -1,5 +1,7 @@
 #pragma once
 
+namespace engine {
+
 struct SOption
 {
 	union
@@ -19,3 +21,5 @@ struct SOption
 	operator int() { return Number.Int; }
 	operator std::string() { return String; }
 };
+
+} // namespace engine

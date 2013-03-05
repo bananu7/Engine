@@ -2,6 +2,9 @@
 #include "Misc.h"
 #include <cmath>
 #include <cstdlib>
+
+namespace engine {
+
 using namespace std;
 #pragma warning(disable: 4244)
 
@@ -150,3 +153,5 @@ string CutSection (string& base, const char delim, const char* whiteSpace)
 	if (It != base.end()) base.erase(It);
 	return Return;
 }
+
+} // namespace engine

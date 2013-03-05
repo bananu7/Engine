@@ -3,6 +3,8 @@
 #include <vector>
 #include <string>
 
+namespace engine {
+
 class CModelData;
 
 // Implementacja cookera modeli pod OpenGL < 2.0, bez shaderow.
@@ -30,3 +32,4 @@ public:
 	~CModelCookerDisplayList(void);
 };
 
+} // namespace engine

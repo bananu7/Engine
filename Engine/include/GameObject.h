@@ -2,6 +2,8 @@
 #include <glm/glm.hpp>
 // TODO :model fizyczny |  #include "Entity.h"
 
+namespace engine {
+
 class CSprite;
 class CAnimationSet;
 
@@ -40,3 +42,4 @@ public:
 	virtual ~CGameObject(void);
 };
 
+} // namespace engine

@@ -5,6 +5,8 @@
 #include <fbxsdk.h>
 #include <GL/glew.h>
 
+namespace engine {
+
 const int TRIANGLE_VERTEX_COUNT = 3;
 
 // Four floats for every position.
@@ -407,5 +409,7 @@ void CFbxVboMesh::EndDraw() const
 
     // Pop OpenGL attributes.
 }
+
+} // namespace engine
 
 #endif

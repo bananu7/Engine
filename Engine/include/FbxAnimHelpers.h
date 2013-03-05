@@ -39,4 +39,6 @@ void MatrixScale(FbxAMatrix& pMatrix, double pValue);
 void MatrixAddToDiagonal(FbxAMatrix& pMatrix, double pValue);
 void MatrixAdd(FbxAMatrix& pDstMatrix, FbxAMatrix& pSrcMatrix);
 
+} // namespace engine
+
 #endif

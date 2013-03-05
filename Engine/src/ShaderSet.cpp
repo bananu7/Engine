@@ -2,6 +2,8 @@
 #include "ShaderSet.h"
 #include "Shader.h"
 
+namespace engine {
+
 using glm::vec3;
 using glm::vec4;
 using glm::mat4;
@@ -49,3 +51,5 @@ ProgramSet::ProgramSet(void)
 ProgramSet::~ProgramSet(void)
 {
 }
+
+} // namespace engine

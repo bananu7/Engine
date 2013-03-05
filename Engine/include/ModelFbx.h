@@ -2,6 +2,8 @@
 
 #ifdef ENGINE_USE_FBX
 
+namespace engine {
+
 #include "Resource.h"
 #include "Shader.h"
 #include <fbxsdk.h>
@@ -38,5 +40,7 @@ public:
 	CModelFbx(void);
 	~CModelFbx(void);
 };
+
+} // namespace engine
 
 #endif

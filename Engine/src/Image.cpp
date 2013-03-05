@@ -8,6 +8,8 @@
 #include "FreeImage.h"
 #include <cstdio>
 
+namespace engine {
+
 using std::string;
 
 string CImage::Load(ILoader const& loader)
@@ -111,3 +113,5 @@ CImage::~CImage()
 	if (m_TexId != 0)
 		glDeleteTextures( 1, &m_TexId );
 }
+
+} // namespace engine

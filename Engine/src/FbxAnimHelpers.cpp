@@ -2,6 +2,8 @@
 
 #ifdef ENGINE_USE_FBX
 
+namespace engine {
+
 //Compute the transform matrix that the cluster will transform the vertex.
 void ComputeClusterDeformation(FbxAMatrix& pGlobalPosition, 
 							   FbxMesh* pMesh,
@@ -493,5 +495,7 @@ void MatrixAdd(FbxAMatrix& pDstMatrix, FbxAMatrix& pSrcMatrix)
         }
     }
 }
+
+} // namespace engine
 
 #endif

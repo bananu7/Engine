@@ -4,6 +4,8 @@
 #include "VertexBuffer.h"
 #include <vector>
 
+namespace engine {
+
 class CModelCookerVBO :
 	public IModelCooker
 {
@@ -33,3 +35,4 @@ public:
 	~CModelCookerVBO(void);
 };
 
+} // namespace engine

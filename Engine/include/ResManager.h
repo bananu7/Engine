@@ -6,6 +6,8 @@
 #include "Resource.h"
 #include "Logger.h"
 
+namespace engine {
+
 template <typename T> class CResPtr;
 
 using std::string;
@@ -87,3 +89,4 @@ public:
 	CResourceSupply::CResourceSupply();
 };
 
+} // namespace engine

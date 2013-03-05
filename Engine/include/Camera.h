@@ -1,6 +1,8 @@
 #pragma once
 #include <glm/glm.hpp>
 
+namespace engine {
+
 class CCamera
 {
 protected:
@@ -31,3 +33,4 @@ public:
 	~CCamera(void);
 };
 
+} // namespace engine

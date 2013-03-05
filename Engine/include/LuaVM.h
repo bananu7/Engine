@@ -2,6 +2,8 @@
 
 #ifdef ENGINE_USE_LUA
 
+namespace engine {
+
 #include <string>
 #include <lua.hpp>
 #include <vector>
@@ -53,5 +55,7 @@ public:
 	CLuaVM();
 	virtual ~CLuaVM();
 };
+
+} // namespace engine
 
 #endif

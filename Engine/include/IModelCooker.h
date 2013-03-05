@@ -2,6 +2,8 @@
 #include <glm/glm.hpp>
 #include <memory>
 
+namespace engine {
+
 class CModelData;
 
 // Interfejs do cookowania danych modelu - czyli zamiany ich na postac, ktora
@@ -27,3 +29,4 @@ public:
 	virtual ~IModelCooker(void) { }
 };
 
+} // namespace engine

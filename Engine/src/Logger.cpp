@@ -2,6 +2,9 @@
 #include <exception>
 #include <cstdint>
 #include "Logger.h"
+
+namespace engine {
+
 using namespace std;
 
 void CLogger::_DebugFileOpen()
@@ -60,3 +63,5 @@ CLogger::CLogger(void)
 CLogger::~CLogger(void)
 {
 }
+
+} // namespace engine

@@ -3,6 +3,8 @@
 #include <fstream>
 #include <string>
 
+namespace engine {
+
 using namespace std;
 
 std::vector<unsigned char> buffer_from_file(std::istream& stream)
@@ -95,3 +97,5 @@ boost::optional<std::vector<unsigned char>> CSimpleDirectLoader::GetRawData(std:
 
 	return boost::optional<std::vector<unsigned char>>(Iter->second);
 }
+
+} // namespace engine

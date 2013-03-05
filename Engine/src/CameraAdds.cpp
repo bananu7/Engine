@@ -2,6 +2,8 @@
 #include "Misc.h"
 #include <glm/gtc/matrix_transform.hpp>
 
+namespace engine {
+
 using glm::vec3;
 using glm::mat4;
 
@@ -63,3 +65,5 @@ void CCameraTrack::CalculateView()
 	Delta.z = Radius * sinf(Direction/* + M_PI * .5f*/);
 	m_ViewMatrix = CCamera::CreateModelview(Delta + Target, Target);
 }
+
+} // namespace engine

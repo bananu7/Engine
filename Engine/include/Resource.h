@@ -7,6 +7,8 @@
 #include <iterator>
 #include <string>
 
+namespace engine {
+
 class ILoader
 {	
 public:
@@ -57,3 +59,5 @@ public:
 	CResource(void) { }
 	virtual ~CResource(void) { }
 };
+
+} // namespace engine

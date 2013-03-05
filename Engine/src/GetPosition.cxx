@@ -18,6 +18,8 @@
 
 #ifdef ENGINE_USE_FBX
 
+namespace engine {
+
 #include "GetPosition.h"
 
 // Get the global position of the node for the current pose.
@@ -102,5 +104,7 @@ FbxAMatrix GetGeometry(FbxNode* pNode)
 
     return FbxAMatrix(lT, lR, lS);
 }
+
+} // namespace engine
 
 #endif

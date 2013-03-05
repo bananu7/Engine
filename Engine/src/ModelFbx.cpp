@@ -8,6 +8,8 @@
 #include "FbxAnimHelpers.h"
 #include "Camera.h"
 
+namespace engine {
+
 using std::string;
 using glm::mat4;
 using glm::vec3;
@@ -167,5 +169,7 @@ CModelFbx::~CModelFbx(void)
 FbxManager* CModelFbx::FbxManagerInstance;
 FbxIOSettings* CModelFbx::FbxIOSettingsInstance;
 FbxImporter* CModelFbx::FbxImporterInstance;
+
+} // namespace engine
 
 #endif

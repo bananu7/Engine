@@ -2,6 +2,8 @@
 #include "Camera.h"
 #include <glm/glm.hpp>
 
+namespace engine {
+
 // Kamera do ustawiania celu i pozycji
 class CCameraSimple:
 	public CCamera
@@ -52,3 +54,5 @@ class CCameraWalk
 	// sampler do ziemi
 public:
 };
+
+} // namespace engine

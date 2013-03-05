@@ -5,6 +5,9 @@
 #include "ResManager.h"
 #include "Game.h"
 #include "GameObject.h"
+
+namespace engine {
+
 using namespace std;
 //-------------------------------------------------------------
 void CWorld::_LoadMap()
@@ -100,3 +103,5 @@ CWorld::~CWorld(void)
 }
 
 const float CWorld::UPDATE_INTERVAL = 0.016f;
+
+} // namespace engine

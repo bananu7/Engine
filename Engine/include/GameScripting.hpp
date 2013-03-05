@@ -2,6 +2,8 @@
 #include "Option.h"
 #include <vector>
 
+namespace engine {
+
 enum EUpdateDataType
 {
 	PLAYER_MOVEMENT,
@@ -19,3 +21,5 @@ struct SUpdateData
 	SUpdateData (EUpdateDataType type, const std::vector<SOption>& params):
 		Type(type), Params(params) { }
 };
+
+} // namespace engine

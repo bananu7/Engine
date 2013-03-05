@@ -1,6 +1,8 @@
 #include <GL/glew.h>
 #include "VertexAttributeArray.h"
 
+namespace engine {
+
 void CVertexAttributeArray::Bind()
 {
 	if (m_Id == 0)
@@ -37,3 +39,5 @@ CVertexAttributeArray::~CVertexAttributeArray(void)
 {
 	glDeleteVertexArrays(1, &m_Id);
 }
+
+} // namespace engine

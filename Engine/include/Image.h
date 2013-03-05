@@ -4,6 +4,8 @@
 #include <string>
 #include <Misc.h>
 
+namespace engine {
+
 class CImage :
 	public CResource
 {
@@ -27,3 +29,4 @@ public:
 	~CImage();
 };
 
+} // namespace engine

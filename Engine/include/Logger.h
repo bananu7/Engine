@@ -2,7 +2,7 @@
 #include <cstdint>
 #include <fstream>
 
-class CException;
+namespace engine {
 
 enum ELogOutput : uint8_t
 {
@@ -32,3 +32,5 @@ public:
 	CLogger(void);
 	~CLogger(void);
 };
+
+} // namespace engine

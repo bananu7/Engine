@@ -2,6 +2,8 @@
 
 #ifdef ENGINE_USE_LUA
 
+namespace engine {
+
 using namespace std;
 
 bool CLuaVM::Load (const string& path)
@@ -135,5 +137,7 @@ CLuaVM::~CLuaVM(void)
 {
 	lua_close(m_LuaState);
 }
+
+} // namespace engine
 
 #endif

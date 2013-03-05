@@ -5,6 +5,8 @@
 #include <glm/glm.hpp>
 #include "Resource.h"
 
+namespace engine {
+
 // It's data loaded from file
 
 class ILoader;
@@ -81,3 +83,4 @@ public:
 	~CModelData(void);
 };
 
+} // namespace engine

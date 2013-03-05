@@ -3,6 +3,8 @@
 #include "ModelData.h"
 #include <glm/glm.hpp>
 
+namespace engine {
+
 using glm::vec3;
 using glm::vec2;
 
@@ -147,3 +149,5 @@ CModelCookerVBO::CModelCookerVBO(void):
 CModelCookerVBO::~CModelCookerVBO(void)
 {
 }
+
+} // namespace engine

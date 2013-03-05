@@ -47,4 +47,6 @@ private:
     bool mAllByControlPoint; // Save data in VBO by control point or by polygon vertex.
 };
 
+} // namespace engine
+
 #endif

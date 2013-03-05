@@ -4,6 +4,8 @@
 #include <map>
 #include "GameScripting.hpp"
 
+namespace engine {
+
 class CGameObject;
 
 class CWorld
@@ -29,3 +31,5 @@ public:
 	CWorld();
 	virtual ~CWorld();
 };
+
+} // namespace engine

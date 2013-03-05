@@ -4,6 +4,8 @@
 
 #define M_PI       3.14159265358979323846
 
+namespace engine {
+
 using glm::vec3;
 using glm::mat4;
 
@@ -75,3 +77,5 @@ CCamera::CCamera(void)
 CCamera::~CCamera(void)
 {
 }
+
+} // namespace engine

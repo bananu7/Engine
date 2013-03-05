@@ -1,11 +1,12 @@
 #pragma once
-#include "Color.h"
 #include <glm/glm.hpp>
 #include <list>
 
+namespace engine {
+
 struct SLight
 {
-	CColor Ambient, Diffuse, Specular;
+	glm::vec4 Ambient, Diffuse, Specular;
 	glm::vec3 Position;
 	// float Attennuation;
 	// float spotlight cutoff
@@ -23,3 +24,4 @@ public:
 	~CLightHouse(void);
 };
 
+} // namespace engine

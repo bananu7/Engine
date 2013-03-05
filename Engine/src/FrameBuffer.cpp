@@ -1,6 +1,9 @@
 
 #include "Framebuffer.h"
 #include <iostream>
+
+namespace engine {
+
 using namespace std;
 
 CFramebuffer::CFramebuffer()
@@ -295,4 +298,4 @@ GLint CFramebuffer::GetAttachedZSlice( GLenum attachment )
 }
 
 
-
+} // namespace engine

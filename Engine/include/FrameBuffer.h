@@ -58,6 +58,9 @@ Performance Notes:
       // OpenGL framebuffer.
       CFramebuffer::Disable();
 */
+
+namespace engine {
+
 class CFramebuffer
 {
 public:
@@ -164,4 +167,4 @@ private:
   GLint  m_savedFboId;
 };
 
-
+} // namespace engine

@@ -2,6 +2,8 @@
 #pragma once
 #include <list>
 
+namespace engine {
+
 const long double M_PI			= 3.1415926535897932384626433;
 const float DESIRED_DELTA		= 0.0166667f;
 const long double DEGREE_TO_RAD	= 0.01745329251994329576923690;//768489
@@ -56,3 +58,4 @@ inline float InvSqrt(const float number)
 float odl_od1_do2 (float X1, float Y1, float X2, float Y2);
 float kat_od1_do2 (float X1, float Y1, float X2, float Y2);
 
+} // namespace engine

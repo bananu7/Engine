@@ -6,6 +6,8 @@
 #include "Image.h"
 #include <glm/glm.hpp>
 
+namespace engine {
+
 using namespace std;
 using std::string;
 
@@ -592,3 +594,5 @@ CModelData::CModelData(void)
 CModelData::~CModelData(void)
 {
 }
+
+} // namespace engine

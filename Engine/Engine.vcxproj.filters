@@ -83,9 +83,6 @@
     <ClInclude Include="include\LightHouse.h">
       <Filter>Header Files\Misc</Filter>
     </ClInclude>
-    <ClInclude Include="include\Color.h">
-      <Filter>Header Files\Misc</Filter>
-    </ClInclude>
     <ClInclude Include="include\CameraAdds.h">
       <Filter>Header Files\Misc</Filter>
     </ClInclude>

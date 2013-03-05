@@ -4,6 +4,8 @@
 #include <Windows.h>
 #include <GL/glew.h>
 
+namespace engine {
+
 void _ApplyMaterial (CModelData::SMaterial const& material)
 {
 	glMaterialfv(GL_FRONT, GL_AMBIENT, material.Ambient);
@@ -104,3 +106,5 @@ CModelCookerDisplayList::CModelCookerDisplayList(void)
 CModelCookerDisplayList::~CModelCookerDisplayList(void)
 {
 }
+
+} // namespace engine

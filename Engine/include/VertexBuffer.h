@@ -2,6 +2,8 @@
 #include <GL/glew.h>
 #include <boost/noncopyable.hpp>
 
+namespace engine {
+
 struct CVertex;
 
 class CVertexBuffer :
@@ -37,9 +39,10 @@ protected:
 	void _UpdateCachedValue();
 public:
 	void Bind();
-	void LoadVertices(unsigned int number_of_vertices, CVertex* data, unsigned int* indices);
 	void LoadData (const void* data, int size);
 
 	CVertexBuffer(EBufferType type = EBufferType::DATA_BUFFER, EBufferUsage usage = EBufferUsage::STATIC_DRAW);
 	~CVertexBuffer();
 };
+
+} // namespace engine
