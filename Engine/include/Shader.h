@@ -18,6 +18,8 @@ void glShaderSource_engine (GLuint shader, std::vector<char> const& shaderSource
 
 }
 
+using std::string;
+
 template<typename T>
 class Shader :
 	public CResource
@@ -37,8 +39,9 @@ public:
 		std::copy(rawData.get().begin(), rawData.get().end(), std::back_inserter(m_source));
 		m_source.push_back(0);
 
-		m_id = glCreateShader(T::_type);
+		m_id = glCreateShader(T::_getType());
 	}
+	Shader(ILoader const& loader) { Load(loader); }
 	
 	std::string Shader::Status() const
 	{
@@ -46,15 +49,21 @@ public:
 
 		glGetShaderiv(id, GL_COMPILE_STATUS, &compiled);
 		if (compiled != GL_TRUE)
-			return T::_name + " compilation error : " + _getInfo(m_id);
+			return T::_getName() + " compilation error : " + _getInfo(m_id);
 	}
 	std::string Compile ()
 	{
-		glShaderSource_engine(id, source);
-		glCompileShader(id);
+		glShaderSource_engine(m_id, m_source);
+		glCompileShader(m_id);
 	}
+	void Unload ()
+	{
+		glDeleteShader(m_id);
+	}	
 
-	explicit operator bool() const
+	~Shader () { Unload(); }
+
+	explicit operator bool()
 	{
 		// if the returned string is empty, no errors occured.
 		return Validate().empty();
@@ -66,24 +75,21 @@ protected:
 
 class VertexShader : public Shader<VertexShader>
 {
-	static const std::string _name;
-	static const GLint _type;
+	static const std::string _getName() { return "Vertex Shader"; }
+	static const GLint _getType() { return GL_VERTEX_SHADER; }
 public:
 	VertexShader() : Shader() { }
+	VertexShader(ILoader const& loader) : Shader(loader) { }
 };
-const std::string VertexShader::_name = "Vertex Shader";
-const GLint VertexShader::_type = GL_VERTEX_SHADER;
 
 class FragmentShader : public Shader<FragmentShader>
 {
-	static const std::string _name;
-	static const GLint _type;
+	static const std::string _getName() { return "Fragment Shader"; }
+	static const GLint _getType() { return GL_FRAGMENT_SHADER; }
 public:
 	FragmentShader() : Shader() { }
+	FragmentShader(ILoader const& loader) : Shader(loader) { }
 };
-const std::string FragmentShader::_name = "Fragment Shader";
-const GLint FragmentShader::_type = GL_FRAGMENT_SHADER;
-
 
 class Program
 {
@@ -127,13 +133,15 @@ public:
 
 	bool Validate () const;
 	std::string Link();
-	explicit operator bool() const;
+	explicit operator bool();
 };
 
 namespace {
 
 void glShaderSource_engine (GLuint shader, std::string const& shaderSource)
 {
+	if (shaderSource.empty())
+		throw std::exception("Empty shader passed to `glShaderSource`");
 	const GLchar* ptr = shaderSource.c_str();
 	const GLint size = shaderSource.size();
 	glShaderSource(shader, 1, &ptr, &size);
@@ -141,6 +149,8 @@ void glShaderSource_engine (GLuint shader, std::string const& shaderSource)
 
 void glShaderSource_engine (GLuint shader, std::vector<char> const& shaderSource)
 {
+	if (shaderSource.empty())
+		throw std::exception("Empty shader passed to `glShaderSource`");
 	const GLchar* ptr = &shaderSource[0];
 	const GLint size = shaderSource.size();
 	glShaderSource(shader, 1, &ptr, &size);
