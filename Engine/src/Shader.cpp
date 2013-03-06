@@ -22,8 +22,30 @@ template<class T> T& as_lvalue(T&& v){ return v; }
 
 }
 
+std::string Program::_getInfo(unsigned num)
+	{
+		GLint blen = 0;	
+		GLsizei slen = 0;
+
+		glGetShaderiv(num, GL_INFO_LOG_LENGTH , &blen);       
+
+		if (blen > 0)
+		{
+			char* compiler_log = new char [blen];
+
+			glGetInfoLogARB(num, blen, &slen, compiler_log);
+
+			std::string CompilerLogStr (compiler_log);
+			delete[] compiler_log;
+
+			return CompilerLogStr;
+		}
+		return std::string("No error message");
+	}
+
 std::string Program::Link()
 {
+	_generateId();
 	// After recompilations, attributes need to be rebound
 	for (auto const& attrib : m_vertexAttribs)
 	{
@@ -39,21 +61,22 @@ std::string Program::Link()
 	// We don't want to bind the shaders twice, if it's just recompilation
 	glGetAttachedShaders(m_id, 4, &Count, Shaders); 
 
-	if (m_vertexShader)
-		glAttachShader(m_id, m_vertexShader->getId());
+/*	if (m_vertexShader)
+		glAttachShader(m_id, m_vertexShader->getId());*/
 	glLinkProgram (m_id);
 
 	GLint linked;
 	glGetProgramiv(m_id, GL_LINK_STATUS, &linked);
-	if (!linked)
+	if (linked != GL_TRUE)
 		return "Program link error : " + _getInfo(m_id);;
 
 	// Success
 	return string();
 }
 
-bool Program::Validate() const
+bool Program::Validate()
 {
+	_generateId();
 	int isValid;
 	glValidateProgram(m_id);
 	glGetProgramiv(m_id, GL_VALIDATE_STATUS, &isValid);
@@ -66,29 +89,9 @@ int Program::GetAttribLocation (const std::string& name)
 	return glGetAttribLocation(m_id, name.c_str());
 }
 
-string Program::_getInfo(unsigned num)
-{
-	GLint blen = 0;	
-	GLsizei slen = 0;
-
-	glGetShaderiv(num, GL_INFO_LOG_LENGTH , &blen);       
-
-	if (blen > 0)
-	{
-		char* compiler_log = new char [blen];
-
-		glGetInfoLogARB(num, blen, &slen, compiler_log);
-
-		string CompilerLogStr (compiler_log);
-		delete[] compiler_log;
-
-		return CompilerLogStr;
-	}
-	return string("No error message");
-}
-
 void Program::Bind()
 {
+	_generateId();
 	glUseProgram(m_id);
 	//glEnable(GL_FRAGMENT_PROGRAM_ARB);
 }
@@ -150,6 +153,7 @@ int Program::GetUniformLocation (const string& name)
 		return Iter->second;
 	else
 	{
+		_generateId();
 		int Location = glGetUniformLocation(m_id, name.c_str());
 		m_uniformCache.insert(std::make_pair(name, Location));
 		return Location;
@@ -199,6 +203,11 @@ void Program::DebugDump(std::ostream& Out)
 		glGetActiveUniform (m_id, i, MAX_NAME_SIZE, &Len, &Size, &Type, Name);
 		Out << i << ". " << Name << " " << Type << "(" << Size << ")\n"; 
 	}
+}
+
+Program::operator bool()
+{
+	return Validate();
 }
 
 } // namespace engine

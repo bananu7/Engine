@@ -57,19 +57,19 @@ public:
 				{
 					// £adowanie siê nie powiod³o
 					
-					throw EXCEPTION ("Resource Manager", "Loading of asset "+ident+" failed : "+Result);
+					throw EXCEPTION ("Resource Manager : Loading of asset "+ident+" failed : "+Result);
 					return 0;
 				}
 			}
 			else
 			{
 				// Nie mamy zasobu w katalogu
-				throw EXCEPTION ("Resource Manager", "Unknown asset "+ident);
+				throw EXCEPTION ("Resource Manager : Unknown asset "+ident);
 				return 0;
 			}
 		}
 	}
-	catch (CException& e)
+	catch (std::exception const& e)
 	{
 		LOG(e);
 		_CrtDbgBreak();

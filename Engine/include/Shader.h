@@ -4,6 +4,8 @@
 #include <glm/glm.hpp>
 #include <GL/glew.h>
 #include <ostream>
+#include <string>
+#include <boost/noncopyable.hpp>
 
 namespace engine {
 
@@ -18,28 +20,52 @@ void glShaderSource_engine (GLuint shader, std::vector<char> const& shaderSource
 
 }
 
-using std::string;
-
 template<typename T>
 class Shader :
 	public CResource
 {
+protected:
 	GLuint m_id;
 	std::vector<char> m_source;
+
+	std::string _getInfo(unsigned num) const
+	{
+		GLint blen = 0;	
+		GLsizei slen = 0;
+
+		glGetShaderiv(num, GL_INFO_LOG_LENGTH , &blen);       
+
+		if (blen > 0)
+		{
+			char* compiler_log = new char [blen];
+
+			glGetInfoLogARB(num, blen, &slen, compiler_log);
+
+			std::string CompilerLogStr (compiler_log);
+			delete[] compiler_log;
+
+			return CompilerLogStr;
+		}
+		return std::string("No error message");
+	}
 
 public:
 	GLuint getId () const { return m_id; }
 
 	std::string Load (ILoader const& loadParams)
 	{
-		auto rawData = loadParams.GetRawData("frag");
+		auto rawData = loadParams.GetRawData("data");
 		if (!rawData)
-			return string("Error in getting fragment shader data");
+			return std::string("Error in getting fragment shader data");
 		m_source.clear();
-		std::copy(rawData.get().begin(), rawData.get().end(), std::back_inserter(m_source));
+
+		auto const& data = rawData.get();
+
+		std::copy(data.begin(), data.end(), std::back_inserter(m_source));
 		m_source.push_back(0);
 
 		m_id = glCreateShader(T::_getType());
+		return std::string();
 	}
 	Shader(ILoader const& loader) { Load(loader); }
 	
@@ -47,14 +73,17 @@ public:
 	{
 		GLint compiled;
 
-		glGetShaderiv(id, GL_COMPILE_STATUS, &compiled);
+		glGetShaderiv(m_id, GL_COMPILE_STATUS, &compiled);
 		if (compiled != GL_TRUE)
 			return T::_getName() + " compilation error : " + _getInfo(m_id);
+
+		return std::string();
 	}
 	std::string Compile ()
 	{
 		glShaderSource_engine(m_id, m_source);
 		glCompileShader(m_id);
+		return Status();
 	}
 	void Unload ()
 	{
@@ -63,37 +92,36 @@ public:
 
 	~Shader () { Unload(); }
 
-	explicit operator bool()
-	{
-		// if the returned string is empty, no errors occured.
-		return Validate().empty();
-	}
-
 protected:
 	Shader() { }
 };
 
-class VertexShader : public Shader<VertexShader>
+class VertexShader : public Shader<VertexShader>, public boost::noncopyable
 {
 	static const std::string _getName() { return "Vertex Shader"; }
 	static const GLint _getType() { return GL_VERTEX_SHADER; }
 public:
 	VertexShader() : Shader() { }
 	VertexShader(ILoader const& loader) : Shader(loader) { }
+
+	explicit operator bool() { return Status().empty(); }
 };
 
-class FragmentShader : public Shader<FragmentShader>
+class FragmentShader : public Shader<FragmentShader>, public boost::noncopyable
 {
 	static const std::string _getName() { return "Fragment Shader"; }
 	static const GLint _getType() { return GL_FRAGMENT_SHADER; }
+
 public:
 	FragmentShader() : Shader() { }
 	FragmentShader(ILoader const& loader) : Shader(loader) { }
+
+	explicit operator bool() { return Status().empty(); }
 };
 
-class Program
+class Program : public boost::noncopyable
 {
-	unsigned m_id;
+	GLuint m_id;
 
 	std::string _getInfo(unsigned num);
 	std::map<std::string, int> m_vertexAttribs;
@@ -102,6 +130,11 @@ class Program
 	std::shared_ptr<VertexShader> m_vertexShader;
 	std::shared_ptr<FragmentShader> m_fragmentShader;
 	
+	void _generateId () {
+		if (!m_id)
+			m_id = glCreateProgram();
+	}
+
 public:
 	void Unload ();
 
@@ -119,10 +152,20 @@ public:
 	void BindAttribLocation (const std::string& name, int location);
 
 	void AttachShader(std::shared_ptr<VertexShader> shader) {
+		_generateId();
+
+		if (!shader->Status().empty())
+			throw std::runtime_error("Trying to attach a shader that's not compiled");
+
 		m_vertexShader = std::move(shader);
 		glAttachShader(m_id, m_vertexShader->getId());
 	}
 	void AttachShader(std::shared_ptr<FragmentShader> shader) {
+		_generateId();
+
+		if (!shader->Status().empty())
+			throw std::runtime_error("Trying to attach a shader that's not compiled");
+
 		m_fragmentShader = std::move(shader);
 		glAttachShader(m_id, m_fragmentShader->getId());
 	}
@@ -131,9 +174,16 @@ public:
 
 	void DebugDump (std::ostream&);
 
-	bool Validate () const;
+	bool Validate ();
 	std::string Link();
 	explicit operator bool();
+
+	Program() : m_id(0) {
+	}
+
+	~Program() {
+		glDeleteProgram(m_id);
+	}
 };
 
 namespace {
