@@ -175,10 +175,10 @@ std::string CGround::Load(ILoader const& loadParams)
 }
 
 CGround::CGround(void):
-	m_VerticesVbo(CVertexBuffer::DATA_BUFFER, CVertexBuffer::STATIC_DRAW),
-	m_NormalsVbo(CVertexBuffer::DATA_BUFFER, CVertexBuffer::STATIC_DRAW),
-	m_TexCoordsVbo(CVertexBuffer::DATA_BUFFER, CVertexBuffer::STATIC_DRAW),
-	m_IndicesVbo(CVertexBuffer::INDEX_BUFFER, CVertexBuffer::STATIC_DRAW)
+	m_VerticesVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW),
+	m_NormalsVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW),
+	m_TexCoordsVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW),
+	m_IndicesVbo(VertexBuffer::INDEX_BUFFER, VertexBuffer::STATIC_DRAW)
 {
 	m_TileSize = 1.f;
 }

@@ -103,11 +103,9 @@
     <ClInclude Include="include\FbxVboMesh.h" />
     <ClInclude Include="include\FrameBuffer.h" />
     <ClInclude Include="include\GameObject.h" />
-    <ClInclude Include="include\GameScripting.hpp" />
     <ClInclude Include="include\GetPosition.h" />
     <ClInclude Include="include\Image.h" />
     <ClInclude Include="include\IModelCooker.h" />
-    <ClInclude Include="include\LightHouse.h" />
     <ClInclude Include="include\Logger.h" />
     <ClInclude Include="include\LuaVM.h" />
     <ClInclude Include="include\Misc.h" />
@@ -162,7 +160,6 @@
     <ClCompile Include="src\FrameBuffer.cpp" />
     <ClCompile Include="src\GetPosition.cxx" />
     <ClCompile Include="src\Image.cpp" />
-    <ClCompile Include="src\LightHouse.cpp" />
     <ClCompile Include="src\Logger.cpp" />
     <ClCompile Include="src\LuaVM.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>

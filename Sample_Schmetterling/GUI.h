@@ -15,10 +15,10 @@ protected:
 	int						m_ID;
 	float					m_X,m_Y;
 	Program*				m_Shader;
-	CVertexBuffer			m_VerticesVbo;
-	CVertexBuffer			m_NormalsVbo;
-	CVertexBuffer			m_UVsVbo;
-	CVertexAttributeArray	m_Vao;
+	VertexBuffer			m_VerticesVbo;
+	VertexBuffer			m_NormalsVbo;
+	VertexBuffer			m_UVsVbo;
+	VertexAttributeArray	m_Vao;
 
 public:
 	virtual void Draw() { } // must be declared in child!
@@ -37,9 +37,9 @@ public:
 	friend class CGraph;
 
 	CGUIElement():
-		m_VerticesVbo(CVertexBuffer::DATA_BUFFER, CVertexBuffer::STATIC_DRAW),
-		m_NormalsVbo(CVertexBuffer::DATA_BUFFER, CVertexBuffer::STATIC_DRAW),
-		m_UVsVbo(CVertexBuffer::DATA_BUFFER, CVertexBuffer::STATIC_DRAW)
+		m_VerticesVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW),
+		m_NormalsVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW),
+		m_UVsVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW)
 	{
 		Show();
 	}

@@ -1,18 +1,23 @@
 #pragma once
 #include "Resource.h"
-#include <exception>
 #include <string>
 #include <Misc.h>
+#include <boost/range.hpp>
+#include <boost/noncopyable.hpp>
 
 namespace engine {
 
-class CImage :
-	public CResource
+class Image : public boost::noncopyable
 {
 	unsigned m_TexId;
 
+	static Image Image::_internalLoad(std::vector<unsigned char>&& data);
+
 public:
-	std::string Load(ILoader const& loader);
+	template<class Range>
+	static Image Load (Range&& range) {
+		return std::move(_internalLoad(std::vector<unsigned char>(boost::begin(range), boost::end(range))));
+	}
 	
 	/// Binds to currently active texture unit and doesn't change it.
 	void Bind ();
@@ -25,8 +30,10 @@ public:
 
 	inline unsigned GetTexture () const { return m_TexId; }
 
-	CImage();
-	~CImage();
+	Image();
+	Image(Image&& other);
+	Image& operator=(Image&& other);
+	~Image();
 };
 
 } // namespace engine

@@ -56,55 +56,13 @@ float Average (float a, float b)
 int Random (int range_min, int range_max)
 {
 	return (rand()%(range_max-range_min))+range_min;
-	// Powiedz mi potem po co takie komplikacje, zamieniam na krotsze i szybsze
-	/*
-	  float u = (double)rand() / (RAND_MAX + 1) * (range_max - range_min)
-			+ range_min;
-//int u = (int)(((rand() / RAND_MAX) * (max - min)) + min);
-	return Rnd(u);
-	*/
 }
 
 float Random ()
 {
 	return rand() / (float)(RAND_MAX+1); // (0,1)
 }
-
-//---------------------------------------------------------------------------------------
-float odl_od1_do2 (float X1, float Y1, float X2, float Y2)
-{	
-	return (sqrt ( Sqre(abs (X1-X2)) 
-				 + Sqre(abs (Y1-Y2)) ));
-}
-//---------------------------------------------
-float kat_od1_do2 (float X1, float Y1, float X2, float Y2)
-{   
-	float l;
-
-	if (X1 == X2)
-	{
-	 if (Y2 < Y1)
-		 return 0.0f;     
-	 else
-		 return 180.0f;
-	}
-
-	if (Y1 == Y2)
-	{
-	 if (X2 < X1)
-		 return 270.0f;     
-	 else
-		 return 90.0f;
-	}
-
-	l = atan2f ( (Y2-Y1), (X2-X1) );
-	//TODO
-//	l *= 180/3.14;
-	l += 90;
-	if (l<0) l += 360.0f;
-		   
-	return l;
-}       
+    
 //================================================================
 string ToLower (const string& in)
 {

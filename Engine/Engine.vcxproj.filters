@@ -71,17 +71,11 @@
     <ClInclude Include="include\GameObject.h">
       <Filter>Header Files\Misc</Filter>
     </ClInclude>
-    <ClInclude Include="include\GameScripting.hpp">
-      <Filter>Header Files\Misc</Filter>
-    </ClInclude>
     <ClInclude Include="include\Image.h">
       <Filter>Header Files\Resources</Filter>
     </ClInclude>
     <ClInclude Include="include\World.h">
       <Filter>Header Files\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="include\LightHouse.h">
-      <Filter>Header Files\Misc</Filter>
     </ClInclude>
     <ClInclude Include="include\CameraAdds.h">
       <Filter>Header Files\Misc</Filter>
@@ -182,9 +176,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\VertexAttributeArray.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\LightHouse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\CameraAdds.cpp">

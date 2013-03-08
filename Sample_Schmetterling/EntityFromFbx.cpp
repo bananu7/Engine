@@ -8,8 +8,8 @@ using namespace std;
 using namespace physx;
 
 #pragma pack (push, 1) 
-struct SVector3 { float X, Y, Z; SVector3() { } };
-struct SVector2 { float U, V;  };
+struct Vector3 { float X, Y, Z; Vector3() { } };
+struct Vector2 { float U, V;  };
 #pragma pack (pop)
 
 bool CPhysics::LoadTriangleMesh(std::string const& path, CVector3 const& pos)
@@ -41,7 +41,7 @@ bool CPhysics::LoadTriangleMesh(std::string const& path, CVector3 const& pos)
 
 	for (int it= 0, itE= m_ComponentNumber; it<itE; ++it)				// foreach in the array
 	{
-		SVector3 Vert;
+		Vector3 Vert;
 		m_Geometry			= m_Scene->GetGeometry(it);
 		FbxMesh* m_Mesh = static_cast<FbxMesh*>(m_Geometry);
 

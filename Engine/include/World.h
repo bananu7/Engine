@@ -2,34 +2,33 @@
 #include <string>
 #include <list>
 #include <map>
-#include "GameScripting.hpp"
 
 namespace engine {
 
-class CGameObject;
+class GameObject;
 
-class CWorld
+class World
 {
 private:
 	static const float UPDATE_INTERVAL;
 
 protected:
-	std::map<unsigned, CGameObject*> m_Objects;
+	std::map<unsigned, GameObject*> m_Objects;
 
 	void _LoadMap();
 
 public:
 
 	void Load();
-	std::vector<SUpdateData> Update ();
+//	std::vector<SUpdateData> Update ();
 	
 	void Draw();
 
-	CGameObject* GetObjectById (unsigned id);
-	void AddObject (CGameObject* obj);
+	GameObject* GetObjectById (unsigned id);
+	void AddObject (GameObject* obj);
 
-	CWorld();
-	virtual ~CWorld();
+	World();
+	virtual ~World();
 };
 
 } // namespace engine

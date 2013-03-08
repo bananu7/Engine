@@ -7,8 +7,8 @@ class Program;
 class CMirror
 {
 	unsigned int m_TextureNum, m_DepthBufferNum;
-	CFramebuffer m_Fbo;
-	CVertexBuffer m_Vbo, m_TexVbo;
+	Framebuffer m_Fbo;
+	VertexBuffer m_Vbo, m_TexVbo;
 	Program* m_Shader;
 
 public:

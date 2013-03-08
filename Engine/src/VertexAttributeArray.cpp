@@ -3,7 +3,7 @@
 
 namespace engine {
 
-void CVertexAttributeArray::Bind()
+void VertexAttributeArray::Bind()
 {
 	if (m_Id == 0)
 		glGenVertexArrays(1, &m_Id);
@@ -11,31 +11,31 @@ void CVertexAttributeArray::Bind()
 	glBindVertexArray(m_Id);
 }
 
-void CVertexAttributeArray::Draw(int startIx, int endIx)
+void VertexAttributeArray::Draw(int startIx, int endIx)
 {
 	Bind();
 	glDrawArrays(GL_TRIANGLES, startIx, endIx);
 }
 
-void CVertexAttributeArray::EnableAttributeArray(unsigned index)
+void VertexAttributeArray::EnableAttributeArray(unsigned index)
 {
 	Bind();
 	glEnableVertexAttribArray(index);
 }
 
-unsigned CVertexAttributeArray::GetMaxVertexAttributes()
+unsigned VertexAttributeArray::GetMaxVertexAttributes()
 {
 	GLint Count;
 	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &Count);
 	return Count;
 }
 
-CVertexAttributeArray::CVertexAttributeArray(void) :
+VertexAttributeArray::VertexAttributeArray(void) :
 	m_Id(0)
 {
 }
 
-CVertexAttributeArray::~CVertexAttributeArray(void)
+VertexAttributeArray::~VertexAttributeArray(void)
 {
 	glDeleteVertexArrays(1, &m_Id);
 }

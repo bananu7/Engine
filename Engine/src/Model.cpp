@@ -14,7 +14,7 @@ namespace engine {
 
 using glm::vec3;
 using glm::mat4;
-/*string CModel::Load(ILoader const& loadParams)
+/*string Model::Load(ILoader const& loadParams)
 {
 	// FIXME
 	//auto const& Iter = loadParams.Params.find("path");
@@ -22,13 +22,13 @@ using glm::mat4;
 	//	return string("Missing 'path' load param");
 	// string const& Path = Iter->second;
 
-	CModelData Data;
+	ModelData Data;
 	// FIXME
 	//if (!Data.Load(CResManager::GetSingleton()->GetResourcePath() + Path))
 	//	return string("Error with data loading");
 
 	//m_Cooker = new CModelCookerDisplayList();
-	m_Cooker = new CModelCookerVBO();
+	m_Cooker = new ModelCookerVBO();
 	
 	if (!m_Cooker->Cook(Data))
 		return string("Error with cooking");
@@ -42,23 +42,23 @@ using glm::mat4;
 	//m_Groups[groupName].Transform = t;
 }*/
 
-void CModel::Draw () const
+void Model::Draw () const
 {
 	//m_Cooker->Draw();
 }
 
-void CModel::Draw(const vec3& pos, const vec3& rot, const vec3& scale) const
+void Model::Draw(const vec3& pos, const vec3& rot, const vec3& scale) const
 {
-	mat4 PMat = CCamera::CreateTranslation(pos.x, pos.y, pos.z);
-	mat4 RMat = CCamera::CreateRotation(rot.x, rot.y, rot.z);
-	mat4 SMat = CCamera::CreateScale(scale.x, scale.y, scale.z);
+	mat4 PMat = Camera::CreateTranslation(pos.x, pos.y, pos.z);
+	mat4 RMat = Camera::CreateRotation(rot.x, rot.y, rot.z);
+	mat4 SMat = Camera::CreateScale(scale.x, scale.y, scale.z);
 	PMat *= RMat;
 	PMat *= SMat;
 	Shader->SetUniform("ModelMatrix", PMat);
 	Draw();
 }
 
-CModel::CModel(CModelData const& data)
+Model::Model(ModelData const& data)
 {
 }
 

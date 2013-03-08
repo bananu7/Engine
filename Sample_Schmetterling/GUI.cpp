@@ -50,11 +50,11 @@ bool CGUI::Inititalise(float Width, float Height)
 {
 	m_Width = Width;
 	m_Height = Height;
-	m_Ortho = (CCamera::CreateOrtho(0,0,m_Width,m_Height,-1,1));
+	m_Ortho = (Camera::CreateOrtho(0,0,m_Width,m_Height,-1,1));
 	return true;
 }
 CGUI::CGUI():
-	m_Ortho(CCamera::CreateOrtho(0,0,m_Width,m_Height,-1,1))
+	m_Ortho(Camera::CreateOrtho(0,0,m_Width,m_Height,-1,1))
 {
 	m_ElementsCount = 0;
 }

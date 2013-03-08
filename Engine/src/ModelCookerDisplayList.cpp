@@ -6,7 +6,7 @@
 
 namespace engine {
 
-void _ApplyMaterial (CModelData::SMaterial const& material)
+void _ApplyMaterial (ModelData::Material const& material)
 {
 	glMaterialfv(GL_FRONT, GL_AMBIENT, material.Ambient);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, material.Diffuse);
@@ -28,7 +28,7 @@ void _ApplyMaterial (CModelData::SMaterial const& material)
 	}
 }
 
-bool CModelCookerDisplayList::Cook (const CModelData& modelData)
+bool ModelCookerDisplayList::Cook (const ModelData& modelData)
 {
 //	m_Components.clear();
 
@@ -43,7 +43,7 @@ bool CModelCookerDisplayList::Cook (const CModelData& modelData)
 	for (auto Cmp = Components.begin(); Cmp != Components.end(); ++Cmp)
 	{
 		// Ka¿dy komponent to 1 displaylista
-		m_Components.push_back(SCookedComponentDisplayList(Cmp->Center, glGenLists(1)));
+		m_Components.push_back(CookedComponentDisplayList(Cmp->Center, glGenLists(1)));
 		glNewList(m_Components.back().DisplayListNum, GL_COMPILE);
 		
 		for (auto Group = Cmp->Groups.begin(); Group != Cmp->Groups.end(); ++Group)
@@ -64,10 +64,10 @@ bool CModelCookerDisplayList::Cook (const CModelData& modelData)
 					auto const& TexCoord = TexCoords[Face->TexCIndices[i]];
 					glTexCoord2f(TexCoord.U, TexCoord.V);
 
-					CModelData::SVector3 const& Normal = Normals[Face->NormIndices[i]];
+					ModelData::Vector3 const& Normal = Normals[Face->NormIndices[i]];
 					glNormal3f(Normal.X, Normal.Y, Normal.Z);
 
-					CModelData::SVector3 const& Vertex = Vertices[Face->VertIndices[i]];
+					ModelData::Vector3 const& Vertex = Vertices[Face->VertIndices[i]];
 					glVertex3f(Vertex.X, Vertex.Y, Vertex.Z);	
 				}
 			}
@@ -78,7 +78,7 @@ bool CModelCookerDisplayList::Cook (const CModelData& modelData)
 	return true;
 }
 
-void CModelCookerDisplayList::Draw ()
+void ModelCookerDisplayList::Draw ()
 {
 	//glEnable(GL_TEXTURE_2D);
 	//glColor3f (1.0f, 1.0f, 1.0f);
@@ -98,12 +98,12 @@ void CModelCookerDisplayList::Draw ()
 	//}
 }
 
-CModelCookerDisplayList::CModelCookerDisplayList(void)
+ModelCookerDisplayList::ModelCookerDisplayList(void)
 {
 }
 
 
-CModelCookerDisplayList::~CModelCookerDisplayList(void)
+ModelCookerDisplayList::~ModelCookerDisplayList(void)
 {
 }
 

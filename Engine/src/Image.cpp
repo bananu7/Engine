@@ -11,9 +11,12 @@
 namespace engine {
 
 using std::string;
+using std::runtime_error;
 
-string CImage::Load(ILoader const& loader)
+Image Image::_internalLoad(std::vector<unsigned char>&& vd)
 {
+	Image temporary;
+
 	//image format
 	FREE_IMAGE_FORMAT fif = FIF_UNKNOWN;
 	//pointer to the image, once loaded
@@ -28,12 +31,6 @@ string CImage::Load(ILoader const& loader)
 	GLuint image_format = GL_BGRA;
 	GLuint level = 0;
 	GLuint border = 0;
-	
-	// TEMP
-	//const char* path = "../data/Untitled.png";
-
-	auto v = loader.GetRawData("path");
-	auto & vd = v.get();
 
 	auto fm = FreeImage_OpenMemory(vd.data(), vd.size());
 
@@ -46,7 +43,7 @@ string CImage::Load(ILoader const& loader)
 	//	fif = FreeImage_GetFIFFromFilename(filename);
 	//if still unkown, return failure
 	if(fif == FIF_UNKNOWN)
-		return "Failed to deduce filetype";
+		throw runtime_error("Failed to deduce filetype");
 
 	//check that the plugin has reading capabilities and load the file
 	if(FreeImage_FIFSupportsReading(fif))
@@ -54,7 +51,7 @@ string CImage::Load(ILoader const& loader)
 	//	dib = FreeImage_Load(fif, path);
 	//if the image failed to load, return failure
 	if(!dib)
-		return "Image failed to load";
+		throw runtime_error("Image failed to load");
 
 	FreeImage_FlipVertical(dib); 
 	dib = FreeImage_ConvertTo32Bits(dib);
@@ -66,12 +63,12 @@ string CImage::Load(ILoader const& loader)
 	height = FreeImage_GetHeight(dib);
 	//if this somehow one of these failed (they shouldn't), return failure
 	if((bits == 0) || (width == 0) || (height == 0))
-		return "Image checking failed";
+		throw runtime_error("Image checking failed");
 
 	//generate an OpenGL texture ID for this texture
-	glGenTextures(1, &m_TexId);
+	glGenTextures(1, &temporary.m_TexId);
 	//bind to the new texture ID
-	Bind();
+	temporary.Bind();
 	//store the texture data for OpenGL use
 	glTexImage2D(GL_TEXTURE_2D, level, internal_format, width, height,
 		border, image_format, GL_UNSIGNED_BYTE, bits);
@@ -82,33 +79,44 @@ string CImage::Load(ILoader const& loader)
 	FreeImage_CloseMemory(fm);
 	
 	//return success
-	return "";
+	return std::move(temporary);
 }
 
-void CImage::Bind()
+void Image::Bind()
 {
 	glBindTexture(GL_TEXTURE_2D, m_TexId);
 }
 
-void CImage::Bind(int textureUnitNum)
+void Image::Bind(int textureUnitNum)
 {
 	glActiveTexture (GL_TEXTURE0 + textureUnitNum);
 	glBindTexture(GL_TEXTURE_2D, m_TexId);
 }
 
-int CImage::GetWidth()
+int Image::GetWidth()
 {
 	int size;
 	glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &size);
 	return size;
 }
 
-CImage::CImage() :
+Image::Image() :
 	m_TexId(0)
 {
 }
 
-CImage::~CImage()
+Image::Image(Image&& other) {
+	m_TexId = other.m_TexId;
+	other.m_TexId = 0;
+}
+
+Image& Image::operator= (Image&& other) {
+	m_TexId = other.m_TexId;
+	other.m_TexId = 0;
+}
+
+
+Image::~Image()
 {
 	if (m_TexId != 0)
 		glDeleteTextures( 1, &m_TexId );

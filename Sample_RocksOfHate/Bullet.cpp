@@ -14,7 +14,7 @@ CBullet::CBullet(const CEntity* where)
 
 	m_CollisionLayer = 3;
 
-	m_Model = CResManager::GetSingleton()->GetResource<CModel>("Ball");
+	m_Model = CResManager::GetSingleton()->GetResource<Model>("Ball");
 }
 
 

@@ -33,6 +33,8 @@ using pugi::xml_attribute;
 	return true;
 }*/
 
+/*
+
 bool CResourceSupply::LoadCatalog(string const& path)
 {
 	xml_document Doc;
@@ -112,5 +114,5 @@ CResourceSupply::CResourceSupply()
 	m_ResourcePath = "../Resources/";
 	m_ConfigPath = "../Resources/";
 }
-
+*/
 } // namespace engine

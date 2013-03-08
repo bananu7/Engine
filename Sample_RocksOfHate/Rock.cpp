@@ -13,7 +13,7 @@ CRock::CRock(void)
 
 	m_CollisionLayer = 2;
 
-	m_Model = CResManager::GetSingleton()->GetResource<CModel>("Ball");
+	m_Model = CResManager::GetSingleton()->GetResource<Model>("Ball");
 	//m_Model->SetScale(0.005f);
 }
 

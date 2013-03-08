@@ -12,7 +12,7 @@ enum ELogOutput : uint8_t
 	HTML	= 8
 };
 
-class CLogger
+class Logger
 {
 protected:
 	uint8_t			m_LogFlags;
@@ -29,8 +29,8 @@ public:
 	void Log (const std::string& text);
 	bool Log (const std::string& text, bool expr, bool enforce = true);
 
-	CLogger(void);
-	~CLogger(void);
+	Logger(void);
+	~Logger(void);
 };
 
 } // namespace engine

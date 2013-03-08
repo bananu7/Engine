@@ -78,9 +78,9 @@ void CModelFbx::Draw()
 
 void CModelFbx::Draw (const vec3& pos, const vec3& rot, const vec3& scale)
 {
-	mat4 PMat = CCamera::CreateTranslation(pos.x, pos.y, pos.z);
-	mat4 RMat = CCamera::CreateRotation(rot.x, rot.y, rot.z);
-	mat4 SMat = CCamera::CreateScale(scale.x, scale.y, scale.z);
+	mat4 PMat = Camera::CreateTranslation(pos.x, pos.y, pos.z);
+	mat4 RMat = Camera::CreateRotation(rot.x, rot.y, rot.z);
+	mat4 SMat = Camera::CreateScale(scale.x, scale.y, scale.z);
 	PMat *= RMat;
 	PMat *= SMat;
 	m_Shader->SetUniform("ModelMatrix", PMat);

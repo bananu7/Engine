@@ -12,7 +12,7 @@ namespace engine {
 
 struct lua_State;
 
-class CLuaVM
+class LuaVM
 {
 protected:
 	lua_State *m_LuaState;
@@ -52,8 +52,8 @@ public:
 
 	// implicitly act as a lua_State pointer
 	inline operator lua_State*() { return m_LuaState; }
-	CLuaVM();
-	virtual ~CLuaVM();
+	LuaVM();
+	virtual ~LuaVM();
 };
 
 } // namespace engine

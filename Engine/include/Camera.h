@@ -3,7 +3,7 @@
 
 namespace engine {
 
-class CCamera
+class Camera
 {
 protected:
 	glm::mat4 m_ProjectionMatrix, m_ViewMatrix;
@@ -29,8 +29,8 @@ public:
 	virtual void CalculateView();
 	virtual void CalculateProjection();
 
-	CCamera();
-	~CCamera(void);
+	Camera();
+	~Camera(void);
 };
 
 } // namespace engine

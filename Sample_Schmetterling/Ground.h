@@ -5,7 +5,7 @@
 #include "Vector3.h"
 #include "Resource.h"
 
-class CModel;
+class Model;
 class CImageData;
 
 class CGround : 
@@ -32,9 +32,9 @@ protected:
 		float GetHeight (unsigned int i, unsigned int k) const;
 	} m_HeightMap;
 
-	CVertexBuffer m_VerticesVbo, m_NormalsVbo, m_TexCoordsVbo;
-	CVertexBuffer m_IndicesVbo;
-	CVertexAttributeArray m_Vao;
+	VertexBuffer m_VerticesVbo, m_NormalsVbo, m_TexCoordsVbo;
+	VertexBuffer m_IndicesVbo;
+	VertexAttributeArray m_Vao;
 
 	float	 m_TileSize;
 	float m_HScale, m_WScale;

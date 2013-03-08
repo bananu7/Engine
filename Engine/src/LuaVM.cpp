@@ -6,7 +6,7 @@ namespace engine {
 
 using namespace std;
 
-bool CLuaVM::Load (const string& path)
+bool LuaVM::Load (const string& path)
 {
 	if (luaL_loadfile (m_LuaState, path.c_str()) == 0)
 		return true;
@@ -14,7 +14,7 @@ bool CLuaVM::Load (const string& path)
 		return false;
 }
 
-void CLuaVM::_ErrorFunc (int errCode)
+void LuaVM::_ErrorFunc (int errCode)
 {
 	if (errCode != 0)
 	{
@@ -26,14 +26,14 @@ void CLuaVM::_ErrorFunc (int errCode)
 	}
 }
 
-//void CLuaVM::Execute (const std::string& funcName, const std::vector<SOption>& params)
-void CLuaVM::Start ()
+//void LuaVM::Execute (const std::string& funcName, const std::vector<SOption>& params)
+void LuaVM::Start ()
 {
 	// Wywo³anie g³ównego programu skryptu
 	_ErrorFunc (lua_pcall(m_LuaState, 0, LUA_MULTRET, 0));
 }
 
-void CLuaVM::ExecuteFunc (const string& funcName, const vector<string>& params)
+void LuaVM::ExecuteFunc (const string& funcName, const vector<string>& params)
 {
 	// £adujemy funckjê
 	lua_getglobal (m_LuaState, funcName.c_str());
@@ -46,7 +46,7 @@ void CLuaVM::ExecuteFunc (const string& funcName, const vector<string>& params)
 	_ErrorFunc (lua_pcall(m_LuaState, params.size(), LUA_MULTRET, 0));
 }
 
-void CLuaVM::Execute (const string& code)
+void LuaVM::Execute (const string& code)
 {
 	// £adujemy kod
 	_ErrorFunc(luaL_loadstring (m_LuaState, code.c_str()));
@@ -54,14 +54,14 @@ void CLuaVM::Execute (const string& code)
 //	int Ret3 = lua_gettop (m_LuaState);
 }
 
-void CLuaVM::RegisterFunction (TLuaFunction func, const std::string& name)
+void LuaVM::RegisterFunction (TLuaFunction func, const std::string& name)
 {
 //	lua_pushcfunction (m_LuaState, func.target<int(lua_State*)>());
 	lua_pushcfunction (m_LuaState, func);
 	lua_setglobal (m_LuaState, name.c_str());
 }
 
-string CLuaVM::DumpStack (void)
+string LuaVM::DumpStack (void)
 {
 	string Ret;
 	int i;
@@ -93,21 +93,21 @@ string CLuaVM::DumpStack (void)
 	return Ret;
 }
 
-double CLuaVM::GetNumber (int idx)
+double LuaVM::GetNumber (int idx)
 {
 	if (lua_isnumber(m_LuaState, idx))
 		return lua_tonumber(m_LuaState, idx);
 	else _CrtDbgBreak(); 
 	return 0.0;
 }
-const char* CLuaVM::GetCString (int idx)
+const char* LuaVM::GetCString (int idx)
 {
 	if (lua_isstring(m_LuaState, idx))
 		return lua_tostring(m_LuaState, idx);
 	else _CrtDbgBreak();
 	return "";
 }
-bool CLuaVM::GetBoolean (int idx)
+bool LuaVM::GetBoolean (int idx)
 {
 	if (lua_isboolean(m_LuaState, idx))
 		return lua_toboolean(m_LuaState, idx);
@@ -115,7 +115,7 @@ bool CLuaVM::GetBoolean (int idx)
 	return false;
 }
 
-/*vec2 CLuaVM::GetVector2 (int idx)
+/*vec2 LuaVM::GetVector2 (int idx)
 {
 	CVector2<float> Ret;
 	lua_pushstring (m_LuaState, "x");
@@ -127,13 +127,13 @@ bool CLuaVM::GetBoolean (int idx)
 	return Ret;
 }*/
 
-CLuaVM::CLuaVM(void) :
+LuaVM::LuaVM(void) :
 	m_LuaState(lua_open()) 
 {
 	luaL_openlibs(m_LuaState);
 }
 
-CLuaVM::~CLuaVM(void)
+LuaVM::~LuaVM(void)
 {
 	lua_close(m_LuaState);
 }

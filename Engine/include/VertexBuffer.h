@@ -6,7 +6,7 @@ namespace engine {
 
 struct CVertex;
 
-class CVertexBuffer :
+class VertexBuffer :
 	boost::noncopyable
 {
 public:
@@ -41,8 +41,8 @@ public:
 	void Bind();
 	void LoadData (const void* data, int size);
 
-	CVertexBuffer(EBufferType type = EBufferType::DATA_BUFFER, EBufferUsage usage = EBufferUsage::STATIC_DRAW);
-	~CVertexBuffer();
+	VertexBuffer(EBufferType type = EBufferType::DATA_BUFFER, EBufferUsage usage = EBufferUsage::STATIC_DRAW);
+	~VertexBuffer();
 };
 
 } // namespace engine

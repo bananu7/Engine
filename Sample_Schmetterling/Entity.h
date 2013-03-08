@@ -1,14 +1,14 @@
 #pragma once
 #include "Vector3.h"
 
-class CModel;
+class Model;
 
 class CEntity abstract
 {
 protected:
 	CVector3	m_Position, m_Rotation;
 	CVector3	m_Velocity, m_RotVelocity;
-	CModel*		m_Model;
+	Model*		m_Model;
 	char		m_CollisionLayer;
 
 public:

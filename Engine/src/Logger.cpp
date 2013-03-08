@@ -7,7 +7,7 @@ namespace engine {
 
 using namespace std;
 
-void CLogger::_DebugFileOpen()
+void Logger::_DebugFileOpen()
 {
 	if (m_LogFlags & ELogOutput::DEBUG)
 	{
@@ -15,13 +15,13 @@ void CLogger::_DebugFileOpen()
 	}
 }
 
-void CLogger::_DebugFileClose()
+void Logger::_DebugFileClose()
 {
 	if (m_LogFlags & ELogOutput::DEBUG)
 		m_TxtLogFile.close();
 }
 //---------------------------------------------------------------------------------------------
-void CLogger::Enable (uint8_t flags, const std::string& fileName)
+void Logger::Enable (uint8_t flags, const std::string& fileName)
 {
 	m_LogFlags = flags;
 	m_FileName = fileName;
@@ -33,19 +33,19 @@ void CLogger::Enable (uint8_t flags, const std::string& fileName)
 	_DebugFileClose();
 }
 
-void CLogger::Disable (void)
+void Logger::Disable (void)
 {
 	
 }
 //---------------------------------------------------------------------------------------------
-void CLogger::Log(const string& text)
+void Logger::Log(const string& text)
 {
 	_DebugFileOpen();
 	m_TxtLogFile << "[INFO] \t" << text;
 	_DebugFileClose();
 }
 
-bool CLogger::Log (const string& text, bool expr, bool enforce)
+bool Logger::Log (const string& text, bool expr, bool enforce)
 {
 	_DebugFileOpen();
 	if (expr) m_TxtLogFile << "[FAIL] \t";
@@ -56,11 +56,11 @@ bool CLogger::Log (const string& text, bool expr, bool enforce)
 }
 
 //---------------------------------------------------------------------------------------------
-CLogger::CLogger(void)
+Logger::Logger(void)
 {
 }
 
-CLogger::~CLogger(void)
+Logger::~Logger(void)
 {
 }
 

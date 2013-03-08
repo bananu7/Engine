@@ -5,8 +5,8 @@
 namespace engine {
 
 // Kamera do ustawiania celu i pozycji
-class CCameraSimple:
-	public CCamera
+class CameraSimple:
+	public Camera
 {
 public:
 	glm::vec3 Target, Position;
@@ -15,8 +15,8 @@ public:
 };
 
 // Kamera do latania jak przy komendzie 'fly' w FPS-ach
-class CCameraFly :
-	public CCamera
+class CameraFly :
+	public Camera
 {
 public:
 	// Kierunek, w jaki patrzymy
@@ -31,7 +31,7 @@ public:
 };
 
 class CCameraTrack :
-	public CCamera
+	public Camera
 {
 public:
 	glm::vec3 Target;
@@ -41,15 +41,15 @@ public:
 };
 
 // Kamera do obracania sie wokol obiektu - dobra to testow i podgladow
-class CCameraSpherical :
-	public CCamera
+class CameraSpherical :
+	public Camera
 {
 public:
 };
 
 // Kamera, ktora automatycznie ustala wysokosc, na jakiej sie znajdujemy
 // na podstawie terenu
-class CCameraWalk
+class CameraWalk
 {
 	// sampler do ziemi
 public:

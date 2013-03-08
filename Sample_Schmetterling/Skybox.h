@@ -14,11 +14,11 @@ class CSkybox:
 protected:
 	std::vector<CImage*>	m_Texture;
 	Program*				m_Shader;
-	CVertexBuffer			m_VerticesVbo;
-	CVertexBuffer			m_NormalsVbo;
-	CVertexBuffer			m_UVsVbo;
-	CVertexBuffer			m_IndicesVbo;
-	CVertexAttributeArray	m_Vao;
+	VertexBuffer			m_VerticesVbo;
+	VertexBuffer			m_NormalsVbo;
+	VertexBuffer			m_UVsVbo;
+	VertexBuffer			m_IndicesVbo;
+	VertexAttributeArray	m_Vao;
 	// position of upper north western vertex
 	float					m_X;
 	float					m_Y;
@@ -35,10 +35,10 @@ public:
 	CSkybox* Init(float WSize, float HSize);
 
 	CSkybox():
-		m_VerticesVbo(CVertexBuffer::DATA_BUFFER, CVertexBuffer::STATIC_DRAW),
-		m_NormalsVbo(CVertexBuffer::DATA_BUFFER, CVertexBuffer::STATIC_DRAW),
-		m_UVsVbo(CVertexBuffer::DATA_BUFFER, CVertexBuffer::STATIC_DRAW),
-		m_IndicesVbo(CVertexBuffer::INDEX_BUFFER, CVertexBuffer::STATIC_DRAW)
+		m_VerticesVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW),
+		m_NormalsVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW),
+		m_UVsVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW),
+		m_IndicesVbo(VertexBuffer::INDEX_BUFFER, VertexBuffer::STATIC_DRAW)
 	{
 		m_Shader = CResManager::GetSingleton()->GetResource<Program>("shader_texturing");
 		m_Texture.push_back(CResManager::GetSingleton()->GetResource<CImage>("skybox_tex_good"));

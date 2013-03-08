@@ -7,29 +7,29 @@ namespace engine {
 using glm::vec3;
 using glm::mat4;
 
-void CCameraSimple::CalculateView()
+void CameraSimple::CalculateView()
 {
 	m_ViewMatrix = CreateModelview(Position, Target);
 }
 
-void CCameraFly::CalculateView()
+void CameraFly::CalculateView()
 {
-	mat4 RMatrix = CCamera::CreateRotation(LookDir.y, LookDir.x, 0.f);
-	mat4 TMatrix = CCamera::CreateTranslation(-Position.x, -Position.y, -Position.z);
+	mat4 RMatrix = Camera::CreateRotation(LookDir.y, LookDir.x, 0.f);
+	mat4 TMatrix = Camera::CreateTranslation(-Position.x, -Position.y, -Position.z);
 	m_ViewMatrix = mat4(1.0);
 	m_ViewMatrix = glm::rotate(m_ViewMatrix, LookDir.x, vec3(1., 0., 0.));
 	m_ViewMatrix = glm::rotate(m_ViewMatrix, LookDir.y, vec3(0., 1., 0.));
 	m_ViewMatrix = glm::translate(m_ViewMatrix, -Position);
 	//m_ViewMatrix *= RMatrix;
 }
-void CCameraFly::Fly (float len)
+void CameraFly::Fly (float len)
 {
 //	float Pi = 3.14159f;
 //	Position.x += cosf(LookDir.x - Pi/2.f) * len;
 //	Position.z += sinf(LookDir.x - Pi/2.f) * len;
 
 
-	mat4 RMatrix = CCamera::CreateRotation(LookDir.x, LookDir.y, 0.f);
+	mat4 RMatrix = Camera::CreateRotation(LookDir.x, LookDir.y, 0.f);
 	vec3 Norm (0.f, 0.f, -1.f);
 	vec3 Delta;
 
@@ -43,9 +43,9 @@ void CCameraFly::Fly (float len)
 	Position += Delta;
 }
 
-void CCameraFly::Strafe(float left)
+void CameraFly::Strafe(float left)
 {
-	mat4 RMatrix = CCamera::CreateRotation(LookDir.x, LookDir.y + M_PI * 0.5f, 0.f);
+	mat4 RMatrix = Camera::CreateRotation(LookDir.x, LookDir.y + M_PI * 0.5f, 0.f);
 	vec3 Delta(0.f);
 
 	// MAGIC - do not touch
@@ -63,7 +63,7 @@ void CCameraTrack::CalculateView()
 	Delta.y = 5.0f;
 	Delta.x = Radius * cosf(Direction/* + M_PI * .5f*/);
 	Delta.z = Radius * sinf(Direction/* + M_PI * .5f*/);
-	m_ViewMatrix = CCamera::CreateModelview(Delta + Target, Target);
+	m_ViewMatrix = Camera::CreateModelview(Delta + Target, Target);
 }
 
 } // namespace engine

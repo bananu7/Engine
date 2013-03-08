@@ -24,7 +24,7 @@ int WINAPI WinMain (HINSTANCE hInstance,
 					LPSTR lpCmdLine,
 					int iCmdShow)
 {
-	CLogger::GetSingleton()->Enable(CONSOLE | TXT);
+	Logger::GetSingleton()->Enable(CONSOLE | TXT);
 	sf::Window App;
 	{
 		sf::ContextSettings Settings;
@@ -141,7 +141,7 @@ int WINAPI WinMain (HINSTANCE hInstance,
 
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		/*CCamera::SphericalProjection(
+		/*Camera::SphericalProjection(
 			CVector3(0.f,0.f,0.f),
 			0.f,
 			CVector2<float>(0.5f, .5f),
@@ -159,7 +159,7 @@ int WINAPI WinMain (HINSTANCE hInstance,
 
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		CCamera::SphericalProjection(
+		Camera::SphericalProjection(
 			CVector3(0.f, 0.f, 0.f),
 			0.f,
 			CVector2<float>(MouseX, MouseY),
@@ -180,8 +180,8 @@ int WINAPI WinMain (HINSTANCE hInstance,
 		App.display();
 		//sf::sleep(sf::Time::Time(0));
 	}
-	// Wersja ze skryptami : u¿ycie CGameObject i tworzenie w³asnych typów w Lua
-	// Wersja bez skryptów : dziedziczenie w³asnych typów po CGameObject
+	// Wersja ze skryptami : u¿ycie GameObject i tworzenie w³asnych typów w Lua
+	// Wersja bez skryptów : dziedziczenie w³asnych typów po GameObject
 
 	/*CGame::GetSingleton()->Init(lpCmdLine);
 	CGame::GetSingleton()->Go();

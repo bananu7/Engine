@@ -4,18 +4,18 @@
 
 namespace engine {
 
-class CSprite;
-class CAnimationSet;
+class Sprite;
+class AnimationSet;
 
-class CGameObject
+class GameObject
 {
 private:
 	unsigned m_Id; // unikalny per poziom
 
 protected:
 	// TODO : model fizyczny | CEntity* m_Body;
-	CAnimationSet* m_AnimSet;
-	CSprite* m_Sprite;
+	AnimationSet* m_AnimSet;
+	Sprite* m_Sprite;
 	float m_Direction;
 	float m_AnimationProgress;
 	unsigned m_AnimationState;
@@ -38,8 +38,8 @@ public:
 	virtual inline void SetDirection (const float direction) { m_Direction = direction; }
 	inline void SetAnimationState (unsigned animState) { m_AnimationState = animState; }
 
-	CGameObject(unsigned id, const std::string& type, unsigned kind);
-	virtual ~CGameObject(void);
+	GameObject(unsigned id, const std::string& type, unsigned kind);
+	virtual ~GameObject(void);
 };
 
 } // namespace engine

@@ -21,7 +21,7 @@ int WINAPI WinMain (HINSTANCE hInstance,
 	//cuInit(0);
 	const int ScreenW = 1024;
 	const int ScreenH = 720;
-	CLogger::GetSingleton()->Enable(CONSOLE | TXT);
+	Logger::GetSingleton()->Enable(CONSOLE | TXT);
 	sf::Window App;
 	sf::ContextSettings Settings;
 	Settings.DepthBits         = 24; // Request a 24 bits depth buffer
@@ -35,7 +35,7 @@ int WINAPI WinMain (HINSTANCE hInstance,
 	int Err = glGetError();
 
 	//CResManager::GetSingleton()->AddCatalogEntry("normal_map", "normal.jpg");
-	auto BallModel = CResManager::GetSingleton()->GetResource<CModel>("Cube");
+	auto BallModel = CResManager::GetSingleton()->GetResource<Model>("Cube");
 
 	float FrameTimer = 0.f;
 	const float UpdateTime = 1.f/30.f;
@@ -82,11 +82,11 @@ int WINAPI WinMain (HINSTANCE hInstance,
 			MatDiffuse(1.0f, 1.0f, 1.0f),
 			MatSpecular(.9f, .9f, 0.9f);
 
-	PMatrix = CCamera::CreateProjection(45, 16.f/10.f, 0.1f, 1000.f);
+	PMatrix = Camera::CreateProjection(45, 16.f/10.f, 0.1f, 1000.f);
 	Shader->SetUniform("ProjectionMatrix", PMatrix);
 
 	SMatrix = CMatrix4::CreateIdentity();
-	SMatrix = CCamera::CreateScale(2.0, 2.0, 2.0);
+	SMatrix = Camera::CreateScale(2.0, 2.0, 2.0);
 
 	Shader->SetUniform("LightPosition", LightPosition);
 	Shader->SetUniform("Light0.Ambient", LightAmbient);
@@ -152,7 +152,7 @@ int WINAPI WinMain (HINSTANCE hInstance,
 
 		CVector3 Eye (MouseX, MouseY, 5);
 		CVector3 Center (0.5, 0.5, 0.5);
-		VMatrix = CCamera::CreateModelview(Eye, Center);
+		VMatrix = Camera::CreateModelview(Eye, Center);
 		VMatrix.Mult(SMatrix);
 		glUniformMatrix4fv(VMatLoc, 1, GL_FALSE, VMatrix.GetRawData());
 		
@@ -161,8 +161,8 @@ int WINAPI WinMain (HINSTANCE hInstance,
 		App.Display();
 		sf::Sleep(0.001f);
 	}
-	// Wersja ze skryptami : u¿ycie CGameObject i tworzenie w³asnych typów w Lua
-	// Wersja bez skryptów : dziedziczenie w³asnych typów po CGameObject
+	// Wersja ze skryptami : u¿ycie GameObject i tworzenie w³asnych typów w Lua
+	// Wersja bez skryptów : dziedziczenie w³asnych typów po GameObject
 
 	return 0;
 }

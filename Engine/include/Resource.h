@@ -6,58 +6,12 @@
 #include <vector>
 #include <iterator>
 #include <string>
-
-namespace engine {
-
-class ILoader
-{	
-public:
-	virtual boost::optional<std::string const&> GetParam(std::string const& name) const = 0;
-	virtual std::unique_ptr<std::istream> GetDataStream(std::string const& name) const = 0;
-	virtual boost::optional<std::vector<unsigned char>> GetRawData(std::string const& name) const = 0;
-};
-
-class CSimpleFileLoader :
-	public ILoader
-{
-	std::map<std::string, std::string> Params;
-
-public:
-	boost::optional<std::string const&> GetParam(std::string const& name) const override;
-	std::unique_ptr<std::istream> GetDataStream(std::string const& name) const override;
-	boost::optional<std::vector<unsigned char>> GetRawData(std::string const& name) const override;
-	explicit CSimpleFileLoader::CSimpleFileLoader (std::string const& simplePath);
-	explicit CSimpleFileLoader::CSimpleFileLoader (std::map<std::string, std::string> const& data);
-};
-
-class CSimpleDirectLoader :
-	public ILoader
-{
-public:
-	typedef std::vector<unsigned char> TDataVal;
-	typedef std::map<std::string, TDataVal> TDataMap;
-
-private:
-	TDataMap Data;
-
-public:
-	boost::optional<std::string const&> GetParam(std::string const& name) const override;
-	std::unique_ptr<std::istream> GetDataStream(std::string const& name) const override;
-	boost::optional<std::vector<unsigned char>> GetRawData(std::string const& name) const override;
-
-	explicit CSimpleDirectLoader (TDataMap const& data);
-};
+#include <unordered_map>
  
 std::vector<unsigned char> buffer_from_file(std::istream& stream);
 
-class CResource abstract
-{
-public:
-	virtual std::string Load(ILoader const& loadParams) abstract;
-	virtual void Unload () abstract;
-	// friend class CResManager;
-	CResource(void) { }
-	virtual ~CResource(void) { }
-};
+namespace engine {
+
+
 
 } // namespace engine

@@ -112,8 +112,8 @@ void CheckForGLError()
 
 class CSampleRenderer : boost::noncopyable
 {
-	std::array<CVertexAttributeArray, 2> VAOs;
-	std::array<CVertexBuffer, 3> VBOs;
+	std::array<VertexAttributeArray, 2> VAOs;
+	std::array<VertexBuffer, 3> VBOs;
 
 public:
 	void InitData(int in_Position, int in_Color)
@@ -215,7 +215,7 @@ int WINAPI WinMain (HINSTANCE hInstance,
 	Shader.Bind();
 	Shader.SetUniform("ViewMatrix", glm::translate(glm::mat4(), glm::vec3(0, 0, -10)));
 	Shader.SetUniform("ModelMatrix", glm::mat4());
-	Shader.SetUniform("ProjectionMatrix", CCamera::CreateOrtho(-3, -3, 3, 3, -100, 100));
+	Shader.SetUniform("ProjectionMatrix", Camera::CreateOrtho(-3, -3, 3, 3, -100, 100));
 
 	R.InitData(Shader.GetAttribLocation("in_Position"), Shader.GetAttribLocation("in_Color"));
 

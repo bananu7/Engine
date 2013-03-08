@@ -6,7 +6,7 @@ namespace engine {
 
 using namespace std;
 
-CFramebuffer::CFramebuffer()
+Framebuffer::Framebuffer()
   : m_fboId(_GenerateFboId()),
     m_savedFboId(0)
 {
@@ -15,23 +15,23 @@ CFramebuffer::CFramebuffer()
   _GuardedUnbind();
 }
 
-CFramebuffer::~CFramebuffer() 
+Framebuffer::~Framebuffer() 
 {
   glDeleteFramebuffers(1, &m_fboId);
 }
 
-void CFramebuffer::Bind() 
+void Framebuffer::Bind() 
 {
   glBindFramebuffer(GL_FRAMEBUFFER_EXT, m_fboId);
 }
 
-void CFramebuffer::Disable() 
+void Framebuffer::Disable() 
 {
   glBindFramebuffer(GL_FRAMEBUFFER_EXT, 0);
 }
 
 void
-CFramebuffer::AttachTexture( GLenum texTarget, GLuint texId, 
+Framebuffer::AttachTexture( GLenum texTarget, GLuint texId, 
                                   GLenum attachment, int mipLevel, int zSlice )
 {
   _GuardedBind();
@@ -46,7 +46,7 @@ CFramebuffer::AttachTexture( GLenum texTarget, GLuint texId,
 #ifndef NDEBUG
   }
   else {
-    cerr << "CFramebuffer::AttachTexture PERFORMANCE WARNING:\n"
+    cerr << "Framebuffer::AttachTexture PERFORMANCE WARNING:\n"
       << "\tRedundant bind of texture (id = " << texId << ").\n"
       << "\tHINT : Compile with -DNDEBUG to remove this warning.\n";
   }
@@ -56,7 +56,7 @@ CFramebuffer::AttachTexture( GLenum texTarget, GLuint texId,
 }
 
 void
-CFramebuffer::AttachTextures( int numTextures, GLenum texTarget[], GLuint texId[],
+Framebuffer::AttachTextures( int numTextures, GLenum texTarget[], GLuint texId[],
                                   GLenum attachment[], int mipLevel[], int zSlice[] )
 {
   for(int i = 0; i < numTextures; ++i) {
@@ -68,7 +68,7 @@ CFramebuffer::AttachTextures( int numTextures, GLenum texTarget[], GLuint texId[
 }
 
 void
-CFramebuffer::AttachRenderBuffer( GLuint buffId, GLenum attachment )
+Framebuffer::AttachRenderBuffer( GLuint buffId, GLenum attachment )
 {
   _GuardedBind();
 
@@ -82,7 +82,7 @@ CFramebuffer::AttachRenderBuffer( GLuint buffId, GLenum attachment )
 #ifndef NDEBUG
   }
   else {
-    cerr << "CFramebuffer::AttachRenderBuffer PERFORMANCE WARNING:\n"
+    cerr << "Framebuffer::AttachRenderBuffer PERFORMANCE WARNING:\n"
       << "\tRedundant bind of Renderbuffer (id = " << buffId << ")\n"
       << "\tHINT : Compile with -DNDEBUG to remove this warning.\n";
   }
@@ -92,7 +92,7 @@ CFramebuffer::AttachRenderBuffer( GLuint buffId, GLenum attachment )
 }
 
 void
-CFramebuffer::AttachRenderBuffers( int numBuffers, GLuint buffId[], GLenum attachment[] )
+Framebuffer::AttachRenderBuffers( int numBuffers, GLuint buffId[], GLenum attachment[] )
 {
   for(int i = 0; i < numBuffers; ++i) {
     AttachRenderBuffer( buffId[i], 
@@ -101,7 +101,7 @@ CFramebuffer::AttachRenderBuffers( int numBuffers, GLuint buffId[], GLenum attac
 }
 
 void
-CFramebuffer::Unattach( GLenum attachment )
+Framebuffer::Unattach( GLenum attachment )
 {
   _GuardedBind();
   GLenum type = GetAttachedType(attachment);
@@ -116,13 +116,13 @@ CFramebuffer::Unattach( GLenum attachment )
     AttachTexture( GL_TEXTURE_2D, 0, attachment );
     break;
   default:
-    cerr << "CFramebuffer::unbind_attachment ERROR: Unknown attached resource type\n";
+    cerr << "Framebuffer::unbind_attachment ERROR: Unknown attached resource type\n";
   }
   _GuardedUnbind();
 }
 
 void
-CFramebuffer::UnattachAll()
+Framebuffer::UnattachAll()
 {
   int numAttachments = GetMaxColorAttachments();
   for(int i = 0; i < numAttachments; ++i) {
@@ -130,21 +130,21 @@ CFramebuffer::UnattachAll()
   }
 }
 
-GLint CFramebuffer::GetMaxColorAttachments()
+GLint Framebuffer::GetMaxColorAttachments()
 {
   GLint maxAttach = 0;
   glGetIntegerv( GL_MAX_COLOR_ATTACHMENTS_EXT, &maxAttach );
   return maxAttach;
 }
 
-GLuint CFramebuffer::_GenerateFboId()
+GLuint Framebuffer::_GenerateFboId()
 {
   GLuint id = 0;
   glGenFramebuffersEXT(1, &id);
   return id;
 }
 
-void CFramebuffer::_GuardedBind() 
+void Framebuffer::_GuardedBind() 
 {
   // Only binds if m_fboId is different than the currently bound FBO
   glGetIntegerv( GL_FRAMEBUFFER_BINDING_EXT, &m_savedFboId );
@@ -153,7 +153,7 @@ void CFramebuffer::_GuardedBind()
   }
 }
 
-void CFramebuffer::_GuardedUnbind() 
+void Framebuffer::_GuardedUnbind() 
 {
   // Returns FBO binding to the previously enabled FBO
   if (m_fboId != (GLuint)m_savedFboId) {
@@ -162,7 +162,7 @@ void CFramebuffer::_GuardedUnbind()
 }
 
 void
-CFramebuffer::_FramebufferTextureND( GLenum attachment, GLenum texTarget,
+Framebuffer::_FramebufferTextureND( GLenum attachment, GLenum texTarget,
                                          GLuint texId, int mipLevel,
                                          int zSlice )
 {
@@ -182,7 +182,7 @@ CFramebuffer::_FramebufferTextureND( GLenum attachment, GLenum texTarget,
 }
 
 #ifndef NDEBUG
-bool CFramebuffer::IsValid( ostream& ostr )
+bool Framebuffer::IsValid( ostream& ostr )
 {
   _GuardedBind();
 
@@ -241,7 +241,7 @@ bool CFramebuffer::IsValid( ostream& ostr )
 #endif // NDEBUG
 
 /// Accessors
-GLenum CFramebuffer::GetAttachedType( GLenum attachment )
+GLenum Framebuffer::GetAttachedType( GLenum attachment )
 {
   // Returns GL_RENDERBUFFER_EXT or GL_TEXTURE
   _GuardedBind();
@@ -253,7 +253,7 @@ GLenum CFramebuffer::GetAttachedType( GLenum attachment )
   return GLenum(type);
 }
 
-GLuint CFramebuffer::GetAttachedId( GLenum attachment )
+GLuint Framebuffer::GetAttachedId( GLenum attachment )
 {
   _GuardedBind();
   GLint id = 0;
@@ -264,7 +264,7 @@ GLuint CFramebuffer::GetAttachedId( GLenum attachment )
   return GLuint(id);
 }
 
-GLint CFramebuffer::GetAttachedMipLevel( GLenum attachment )
+GLint Framebuffer::GetAttachedMipLevel( GLenum attachment )
 {
   _GuardedBind();
   GLint level = 0;
@@ -275,7 +275,7 @@ GLint CFramebuffer::GetAttachedMipLevel( GLenum attachment )
   return level;
 }
 
-GLint CFramebuffer::GetAttachedCubeFace( GLenum attachment )
+GLint Framebuffer::GetAttachedCubeFace( GLenum attachment )
 {
   _GuardedBind();
   GLint level = 0;
@@ -286,7 +286,7 @@ GLint CFramebuffer::GetAttachedCubeFace( GLenum attachment )
   return level;
 }
 
-GLint CFramebuffer::GetAttachedZSlice( GLenum attachment )
+GLint Framebuffer::GetAttachedZSlice( GLenum attachment )
 {
   _GuardedBind();
   GLint slice = 0;

@@ -30,7 +30,7 @@ void ComputeTangentBasis(
    }
 }
 
-bool CModelCookerVBO::Cook(const CModelData& modelData)
+bool ModelCookerVBO::Cook(const ModelData& modelData)
 {
 	auto const& Components = modelData.GetComponents();
 	auto const& Materials = modelData.GetMaterials();
@@ -47,16 +47,16 @@ bool CModelCookerVBO::Cook(const CModelData& modelData)
 	// Nie wszystkie sa oczywiscie wykorzystywane, ale i tak rozmiar danych wzrasta do
 	// (3+3+2) * ilosc_trojkatow * 3. Poprzednio udawalo sie zaoszczedzic tak naprawde niewiele.
 
-	std::vector<CModelData::SVector3> TempVerts;
-	std::vector<CModelData::SVector3> TempNormals;
-	std::vector<CModelData::SVector2> TempTexCoords;
+	std::vector<ModelData::Vector3> TempVerts;
+	std::vector<ModelData::Vector3> TempNormals;
+	std::vector<ModelData::Vector2> TempTexCoords;
 	// Do bumpmappingu
-	//std::vector<CModelData::SVector3> TempTangents, TempBitangents;
+	//std::vector<ModelData::Vector3> TempTangents, TempBitangents;
 
 	std::vector<int> TempIndices;
 	// Tymczasowe zmienne alokuję na zewnątrz pętli
-	CModelData::SVector3 Temp3;
-	CModelData::SVector3 Temp2;
+	ModelData::Vector3 Temp3;
+	ModelData::Vector3 Temp2;
 
 	for (auto Cmp = Components.begin(); Cmp != Components.end(); ++Cmp)
 	{
@@ -82,17 +82,17 @@ bool CModelCookerVBO::Cook(const CModelData& modelData)
 	// Teraz, kiedy juz stworzylismy sobie tymczasowe dane w przestrzeni, mozemy skopiowac
 	// je (sic!) do pamieci karty graficznej - przysiegam, ze to juz ostatnie kopiowanie
 	m_VerticesVbo.LoadData(&(TempVerts[0]),
-		sizeof(CModelData::SVector3) * TempVerts.size());
+		sizeof(ModelData::Vector3) * TempVerts.size());
 	m_NormalsVbo.LoadData(&(TempNormals[0]),
-		sizeof(CModelData::SVector3) * TempNormals.size());
+		sizeof(ModelData::Vector3) * TempNormals.size());
 	m_TexCoordsVbo.LoadData(&(TempTexCoords[0]),
-		sizeof(CModelData::SVector2) * TempTexCoords.size());
+		sizeof(ModelData::Vector2) * TempTexCoords.size());
 
 	// Teraz, kiedy mam juz dane odpowiednio zapakowane do VBO...
 	// Tworzymy VAO per komponent
 	for (auto Cmp = Components.begin(); Cmp != Components.end(); ++Cmp)
 	{
-		m_Components.push_back(SCookedComponentVBO(Cmp->Center));
+		m_Components.push_back(CookedComponentVBO(Cmp->Center));
 		m_Components.back().VertCount = TempVerts.size();
 		// Bindujemy VAO komponentu
 		m_Components.back().Vao.Bind();
@@ -125,7 +125,7 @@ bool CModelCookerVBO::Cook(const CModelData& modelData)
 	return true;
 }
 
-void CModelCookerVBO::Draw ()
+void ModelCookerVBO::Draw ()
 {
 	// Zakładamy, że jedyne co może się zmieniać w grupie, to dane vec4/vec3/float
 	// Samplery pozostają stałe co do komponentu
@@ -138,15 +138,15 @@ void CModelCookerVBO::Draw ()
 	}
 }
 
-CModelCookerVBO::CModelCookerVBO(void):
-	m_VerticesVbo(CVertexBuffer::DATA_BUFFER, CVertexBuffer::STATIC_DRAW),
-	m_NormalsVbo(CVertexBuffer::DATA_BUFFER, CVertexBuffer::STATIC_DRAW),
-	m_TexCoordsVbo(CVertexBuffer::DATA_BUFFER, CVertexBuffer::STATIC_DRAW)
+ModelCookerVBO::ModelCookerVBO(void):
+	m_VerticesVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW),
+	m_NormalsVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW),
+	m_TexCoordsVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW)
 {
 }
 
 
-CModelCookerVBO::~CModelCookerVBO(void)
+ModelCookerVBO::~ModelCookerVBO(void)
 {
 }
 

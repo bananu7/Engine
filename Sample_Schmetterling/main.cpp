@@ -33,7 +33,7 @@ int WINAPI WinMain (HINSTANCE hInstance,
 {
 	const int ScreenW = 1024;
 	const int ScreenH = 720;
-	CLogger::GetSingleton()->Enable(CONSOLE | TXT);
+	Logger::GetSingleton()->Enable(CONSOLE | TXT);
 	sf::Window App;
 	sf::ContextSettings Settings;
 	Settings.DepthBits         = 24; // Request a 24 bits depth buffer
@@ -47,7 +47,7 @@ int WINAPI WinMain (HINSTANCE hInstance,
 	CResManager::GetSingleton()->LoadCatalog("../Resources/Resources_sample_Butterfly.xml");
 
 	CCameraTrack		Camera;
-	CCameraFly			CameraFly;
+	CameraFly			CameraFly;
 	CScene				Scene;
 
 	CGround* Ground = CResManager::GetSingleton()->GetResource<CGround>("ground");
@@ -137,9 +137,9 @@ int WINAPI WinMain (HINSTANCE hInstance,
 	bool Valid = Light->Validate();
 
 	// Kamera
-	Camera.SetProjectionMat(CCamera::CreateProjection(45, 16.f/10.f, 0.01f, 2000.f));
+	Camera.SetProjectionMat(Camera::CreateProjection(45, 16.f/10.f, 0.01f, 2000.f));
 	Camera.CalculateProjection();
-	CameraFly.SetProjectionMat(CCamera::CreateProjection(45, 16.f/10.f, 0.01f, 2000.f));
+	CameraFly.SetProjectionMat(Camera::CreateProjection(45, 16.f/10.f, 0.01f, 2000.f));
 	CameraFly.CalculateProjection();
 	const CMatrix4& PMatrix = Camera.GetProjectionMat();
 
@@ -364,7 +364,7 @@ int WINAPI WinMain (HINSTANCE hInstance,
 			const float MirrorPosY = 150.f;
 			const float MirrorPosX = 0.f;
 
-			VMatrix = CCamera::CreateModelview(
+			VMatrix = Camera::CreateModelview(
 				CVector3(-CameraFly.Position.X, CameraFly.Position.Y, CameraFly.Position.Z),
 				CVector3(MirrorPosX + MirrorSize*0.5f, MirrorPosY + MirrorSize*0.5f, 0.f)
 				);
@@ -377,7 +377,7 @@ int WINAPI WinMain (HINSTANCE hInstance,
 
 			float znear = CVector3(MirrorPosX+MirrorSize*0.5f, MirrorPosY+MirrorSize*0.5f, 0.f).Lenght(CameraFly.Position);
 
-			CMatrix4 NewPMatrix = CCamera::CreateFrustum(
+			CMatrix4 NewPMatrix = Camera::CreateFrustum(
 				left,
 				right,			
 				bottom,
@@ -388,7 +388,7 @@ int WINAPI WinMain (HINSTANCE hInstance,
 			float TheAnswerToLifeUniverseAndEverything = atan2f(MirrorPosX+MirrorSize*0.5f-CameraFly.Position.X, CameraFly.Position.Z);
 			float XRotFactor = atan2f(MirrorPosY+MirrorSize*0.5f-CameraFly.Position.Y, CameraFly.Position.Z);
 
-			CMatrix4 ProjView = CCamera::CreateRotation(XRotFactor, TheAnswerToLifeUniverseAndEverything, 0.f);
+			CMatrix4 ProjView = Camera::CreateRotation(XRotFactor, TheAnswerToLifeUniverseAndEverything, 0.f);
 			NewPMatrix.Mult(ProjView);
 
 			ShaderSet.SetUniform("ViewMatrix", VMatrix);

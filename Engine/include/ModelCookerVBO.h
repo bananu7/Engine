@@ -6,33 +6,35 @@
 
 namespace engine {
 
-class CModelCookerVBO :
-	public IModelCooker
+class ModelData;
+
+class ModelCookerVBO :
+	public ModelCooker
 {
 private:
-	struct SCookedComponentVBO :
-		public IModelCooker::SCookedComponent
+	struct CookedComponentVBO :
+		public ModelCooker::CookedComponent
 	{
 		int VertCount;
 		std::vector<int> GroupEndIndices;
-		CVertexAttributeArray Vao;
+		VertexAttributeArray Vao;
 
-		explicit SCookedComponentVBO(glm::vec3 center) :
-			IModelCooker::SCookedComponent(std::move(center))
+		explicit CookedComponentVBO(glm::vec3 center) :
+			ModelCooker::CookedComponent(std::move(center))
 			{ }
 	};
 
-	CVertexBuffer m_VerticesVbo, m_NormalsVbo, m_TexCoordsVbo;
+	VertexBuffer m_VerticesVbo, m_NormalsVbo, m_TexCoordsVbo;
 	// For bumpmapping
-	//CVertexBuffer m_TangentsVbo, m_BitangentsVbo;
-	std::vector<SCookedComponentVBO> m_Components;
+	//VertexBuffer m_TangentsVbo, m_BitangentsVbo;
+	std::vector<CookedComponentVBO> m_Components;
 
 public:
-	bool Cook (const CModelData& data);
+	bool Cook (const ModelData& data);
 	void Draw ();
 
-	CModelCookerVBO(void);
-	~CModelCookerVBO(void);
+	ModelCookerVBO(void);
+	~ModelCookerVBO(void);
 };
 
 } // namespace engine

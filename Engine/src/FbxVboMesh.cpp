@@ -17,10 +17,10 @@ const int NORMAL_STRIDE = 3;
 const int UV_STRIDE = 2;
 
 CFbxVboMesh::CFbxVboMesh() : mHasNormal(false), mHasUV(false), mAllByControlPoint(true),
-	m_VertsVbo(CVertexBuffer::DATA_BUFFER, CVertexBuffer::DYNAMIC_DRAW),
-	m_NormalsVbo(CVertexBuffer::DATA_BUFFER, CVertexBuffer::STATIC_DRAW),
-	m_TexCoordsVbo(CVertexBuffer::DATA_BUFFER, CVertexBuffer::STATIC_DRAW),
-	m_IndexVbo(CVertexBuffer::INDEX_BUFFER, CVertexBuffer::STATIC_DRAW)
+	m_VertsVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::DYNAMIC_DRAW),
+	m_NormalsVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW),
+	m_TexCoordsVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW),
+	m_IndexVbo(VertexBuffer::INDEX_BUFFER, VertexBuffer::STATIC_DRAW)
 {
 }
 

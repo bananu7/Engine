@@ -5,7 +5,7 @@
 
 namespace engine {
 
-void CVertexBuffer::_UpdateCachedValue()
+void VertexBuffer::_UpdateCachedValue()
 {
 	switch (m_Type)
 	{
@@ -18,12 +18,12 @@ void CVertexBuffer::_UpdateCachedValue()
 	}
 }
 
-void CVertexBuffer::_GenerateVBOId()
+void VertexBuffer::_GenerateVBOId()
 {
 	glGenBuffers(1, &m_VBOId);
 }
 
-void CVertexBuffer::_GuardedBind()
+void VertexBuffer::_GuardedBind()
 {
 	_UpdateCachedValue();
 	if (m_VBOId == 0)
@@ -33,13 +33,13 @@ void CVertexBuffer::_GuardedBind()
 		glBindBuffer(m_Type, m_VBOId);
 }
 
-void CVertexBuffer::_GuardedUnbind()
+void VertexBuffer::_GuardedUnbind()
 {
 	if(m_VBOId != (GLuint)m_savedVBOId)
 		glBindBuffer(m_Type, (GLuint)m_savedVBOId);
 }
 
-void CVertexBuffer::Bind()
+void VertexBuffer::Bind()
 {
 	if (m_VBOId == 0)
 		_GenerateVBOId();
@@ -47,14 +47,14 @@ void CVertexBuffer::Bind()
 	glBindBuffer(m_Type, m_VBOId);
 }
 
-void CVertexBuffer::LoadData(const void* data, int size)
+void VertexBuffer::LoadData(const void* data, int size)
 {
 	_GuardedBind();
 	glBufferData(m_Type, size, data, m_Usage);
 	_GuardedUnbind();
 }
 
-CVertexBuffer::CVertexBuffer(EBufferType type, EBufferUsage usage): 
+VertexBuffer::VertexBuffer(EBufferType type, EBufferUsage usage): 
 	m_Type(type),
 	m_Usage(usage),
 	m_VBOId(0),
@@ -63,7 +63,7 @@ CVertexBuffer::CVertexBuffer(EBufferType type, EBufferUsage usage):
 	_UpdateCachedValue();
 }
 
-CVertexBuffer::~CVertexBuffer()
+VertexBuffer::~VertexBuffer()
 {
 	glDeleteBuffers(1, &m_VBOId);
 }

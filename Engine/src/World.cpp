@@ -10,11 +10,11 @@ namespace engine {
 
 using namespace std;
 //-------------------------------------------------------------
-void CWorld::_LoadMap()
+void World::_LoadMap()
 {
 }
 //-------------------------------------------------------------
-void CWorld::Load ()
+void World::Load ()
 {
 	/*_LoadMap();
 	CVector2<float> Temp (500.0f, 500.0f);
@@ -22,7 +22,7 @@ void CWorld::Load ()
 	m_Map->Load();*/
 }
 //-------------------------------------------------------------
-void CWorld::Draw ()
+void World::Draw ()
 {
 /*	if (m_LocalPlayer)
 		m_Map->Draw (m_LocalPlayer->GetPosition());
@@ -41,37 +41,19 @@ void CWorld::Draw ()
 }
 
 //-------------------------------------------------------------
-std::vector<SUpdateData> CWorld::Update ()
-{
-	std::vector<SUpdateData> UpdateData;
 
-	for (auto It = m_Objects.begin(); It != m_Objects.end(); It++)
-	{
-		It->second->Update(UPDATE_INTERVAL);
-	}
-
-	// TODO :steer
-/*	if (m_LocalPlayer)
-	{
-		m_LocalPlayer->Steer(dt);
-	}*/
-
-	//m_ShotManager->Update(dt);
-	return UpdateData;
-}
-
-/*CPlayer* CWorld::GetLocalPlayer(void) const
+/*CPlayer* World::GetLocalPlayer(void) const
 {
 	return m_LocalPlayer;
 }
 //-------------------------------------------------------------
-void CWorld::CreateLocalPlayer (uint8 id)
+void World::CreateLocalPlayer (uint8 id)
 {
 	m_LocalPlayer = new CPlayer(id, this);
 	m_NetworkPlayers.Add(id, m_LocalPlayer);
 }*/
 //-------------------------------------------------------------
-CGameObject* CWorld::GetObjectById (unsigned id)
+GameObject* World::GetObjectById (unsigned id)
 {
 	auto It = m_Objects.find(id);
 	if (It != m_Objects.end())
@@ -79,7 +61,7 @@ CGameObject* CWorld::GetObjectById (unsigned id)
 	else
 		return 0;
 }
-void CWorld::AddObject (CGameObject* obj)
+void World::AddObject (GameObject* obj)
 {
 	auto It = m_Objects.find(obj->GetId());
 	if (It != m_Objects.end())
@@ -88,12 +70,12 @@ void CWorld::AddObject (CGameObject* obj)
 		m_Objects[obj->GetId()] = obj;
 }
 //-------------------------------------------------------------
-CWorld::CWorld()
+World::World()
 {
 	//m_LocalPlayer = 0;
 }
 
-CWorld::~CWorld(void)
+World::~World(void)
 {
 	for (auto It = m_Objects.begin(); It != m_Objects.end(); It++)
 	{
@@ -102,6 +84,6 @@ CWorld::~CWorld(void)
 	m_Objects.clear();
 }
 
-const float CWorld::UPDATE_INTERVAL = 0.016f;
+const float World::UPDATE_INTERVAL = 0.016f;
 
 } // namespace engine

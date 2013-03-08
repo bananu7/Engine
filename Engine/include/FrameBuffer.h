@@ -4,7 +4,7 @@
 #include <iostream>
 
 /*!
-CFramebuffer Class. This class encapsulates the CFramebuffer
+Framebuffer Class. This class encapsulates the Framebuffer
 (FBO) OpenGL spec. See the official spec at:
 	http://oss.sgi.com/projects/ogl-sample/registry/EXT/framebuffer_object.txt
 
@@ -20,7 +20,7 @@ Performance Notes:
   1) It is more efficient (but not required) to call Bind() 
      on an FBO before making multiple method calls. For example:
 		
-      CFramebuffer fbo;
+      Framebuffer fbo;
       fbo.Bind();
       fbo.AttachTexture(GL_TEXTURE_2D, texId0, GL_COLOR_ATTACHMENT0_EXT);
       fbo.AttachTexture(GL_TEXTURE_2D, texId1, GL_COLOR_ATTACHMENT1_EXT);
@@ -29,7 +29,7 @@ Performance Notes:
     To provide a complete encapsulation, the following usage
     pattern works correctly but is less efficient:
 
-      CFramebuffer fbo;
+      Framebuffer fbo;
       // NOTE : No Bind() call
       fbo.AttachTexture(GL_TEXTURE_2D, texId0, GL_COLOR_ATTACHMENT0_EXT);
       fbo.AttachTexture(GL_TEXTURE_2D, texId1, GL_COLOR_ATTACHMENT1_EXT);
@@ -38,7 +38,7 @@ Performance Notes:
     The first usage pattern binds the FBO only once, whereas
     the second usage binds/unbinds the FBO for each method call.
 
-  2) Use CFramebuffer::Disable() sparingly. We have intentionally
+  2) Use Framebuffer::Disable() sparingly. We have intentionally
      left out an "Unbind()" method because it is largely unnecessary
      and encourages rendundant Bind/Unbind coding. Binding an FBO is
      usually much faster than enabling/disabling a pbuffer, but is
@@ -46,7 +46,7 @@ Performance Notes:
      and a visible OpenGL framebuffer, the following usage pattern 
      is recommended:
 
-      CFramebuffer fbo1, fbo2;
+      Framebuffer fbo1, fbo2;
       fbo1.Bind();
         ... Render ...
       // NOTE : No Unbind/Disable here...
@@ -56,17 +56,17 @@ Performance Notes:
 
       // Disable FBO rendering and return to visible window
       // OpenGL framebuffer.
-      CFramebuffer::Disable();
+      Framebuffer::Disable();
 */
 
 namespace engine {
 
-class CFramebuffer
+class Framebuffer
 {
 public:
   /// Ctor/Dtor
-  CFramebuffer();
-  virtual ~CFramebuffer();
+  Framebuffer();
+  virtual ~Framebuffer();
 
   /// Bind this FBO as current render target
   void Bind();

@@ -2,9 +2,9 @@
 #include <string>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include "Shader.h"
+#include "shader.h"
 #include "ResManager.h"
-#include "Image.h"
+#include "image.h"
 #include "Misc.h"
 
 namespace engine {

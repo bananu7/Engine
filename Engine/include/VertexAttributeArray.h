@@ -2,7 +2,7 @@
 
 namespace engine {
 
-class CVertexAttributeArray
+class VertexAttributeArray
 {
 private:
 	unsigned int m_Id;
@@ -14,8 +14,8 @@ public:
 
 	static unsigned GetMaxVertexAttributes();
 
-	CVertexAttributeArray(void);
-	~CVertexAttributeArray(void);
+	VertexAttributeArray(void);
+	~VertexAttributeArray(void);
 };
 
 } // namespace engine

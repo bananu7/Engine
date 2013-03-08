@@ -5,31 +5,31 @@
 
 namespace engine {
 
-class CModelData;
+class ModelData;
 
 // Implementacja cookera modeli pod OpenGL < 2.0, bez shaderow.
-class CModelCookerDisplayList 
-	: public IModelCooker
+class ModelCookerDisplayList 
+	: public ModelCooker
 {
 private:
-	struct SCookedComponentDisplayList :
-		public IModelCooker::SCookedComponent
+	struct CookedComponentDisplayList :
+		public ModelCooker::CookedComponent
 	{
 		unsigned int DisplayListNum;
 
-		SCookedComponentDisplayList(glm::vec3 center, unsigned int dslistnum) :
-			IModelCooker::SCookedComponent(std::move(center)),
+		CookedComponentDisplayList(glm::vec3 center, unsigned int dslistnum) :
+			ModelCooker::CookedComponent(std::move(center)),
 			DisplayListNum(dslistnum) { }
 	};
 
-	std::vector<SCookedComponentDisplayList> m_Components;
+	std::vector<CookedComponentDisplayList> m_Components;
 
 public:
-	bool Cook (const CModelData& data);
+	bool Cook (const ModelData& data);
 	void Draw ();
 
-	CModelCookerDisplayList(void);
-	~CModelCookerDisplayList(void);
+	ModelCookerDisplayList(void);
+	~ModelCookerDisplayList(void);
 };
 
 } // namespace engine

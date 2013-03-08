@@ -28,11 +28,11 @@ bool SkipSpaces (istream& str)
 		return true; // There is still something we can read
 }
 
-bool CModelData::_LoadMtl (std::istream& str)
+bool ModelData::_LoadMtl (std::istream& str)
 {
 	bool HaveMat = false;
 	string MatName;
-	SMaterial TempMat;
+	Material TempMat;
 	string MatCmd;
 	do
 	{
@@ -104,12 +104,12 @@ bool CModelData::_LoadMtl (std::istream& str)
 	return true;
 }
 
-bool CModelData::_LoadFromObj(std::istream& str)
+bool ModelData::_LoadFromObj(std::istream& str)
 {
 	//str >> skipws;
 	string Cmd;
-	SVector3 Temp;
-	SVector2 Temp2;
+	Vector3 Temp;
+	Vector2 Temp2;
 
 	// Ladowanie odbywa sie zawsze do ostatniego utworzonego komponentu i grupy
 	// Jesli ich brakuje, sa automatycznie tworzone
@@ -164,7 +164,7 @@ bool CModelData::_LoadFromObj(std::istream& str)
 		else if (Cmd == "f")
 		{	
 			char C;
-			SFace TempFace;
+			Face TempFace;
 			for (unsigned int i = 0; i < 3; ++i)
 			{
 				// Odejmujemy 1, bo w .obj sa numerowane od 1
@@ -187,7 +187,7 @@ bool CModelData::_LoadFromObj(std::istream& str)
 			// Brak materialu
 			if (m_Components.back().Groups.empty())
 			{
-				SMaterial TempMat;
+				Material TempMat;
 				TempMat.Ambient[0] = 0.3;
 				TempMat.Ambient[1] = 0.3;
 				TempMat.Ambient[2] = 0.3;
@@ -239,7 +239,7 @@ bool CModelData::_LoadFromObj(std::istream& str)
 	return true;
 }
 
-bool CModelData::_LoadFromFBX(const std::string &path)
+bool ModelData::_LoadFromFBX(const std::string &path)
 {
 /*	FbxManager *m_SdkManager= FbxManager::Create();						// create a FBX SdkManager
 	FbxIOSettings *ios= FbxIOSettings::Create(m_SdkManager, IOSROOT );	// create a FBX IOSettings object
@@ -285,8 +285,8 @@ bool CModelData::_LoadFromFBX(const std::string &path)
 		m_Components.back().Number=			it;
 		m_Components.back().Center=			Center;
 
-		SVector3 Vert, Norm, Bnor, Tang;
-		SVector2 TexC;
+		Vector3 Vert, Norm, Bnor, Tang;
+		Vector2 TexC;
 		m_Geometry			= m_Scene->GetGeometry(it);
 		FbxMesh* m_Mesh = static_cast<FbxMesh*>(m_Geometry);
 
@@ -414,7 +414,7 @@ bool CModelData::_LoadFromFBX(const std::string &path)
 		int PolygonCount = m_Mesh->GetPolygonCount();
 		for (int polygon = 0; polygon < PolygonCount; ++polygon)
 		{
-			SFace Face;
+			Face Face;
 			int lPolygonSize = m_Mesh->GetPolygonSize(polygon);
 			if (lPolygonSize == 3) // accept only triangles
 			{
@@ -502,7 +502,7 @@ bool CModelData::_LoadFromFBX(const std::string &path)
 	}
 
 	// Wczytywanie Materialow
-	SMaterial				TempMat;
+	Material				TempMat;
 	string					m_MaterialName;
 	FbxSurfaceMaterial		*m_Material;
 	FbxColor				PropertyColor;
@@ -512,7 +512,7 @@ bool CModelData::_LoadFromFBX(const std::string &path)
 		m_Material= m_Scene->GetMaterial(it);
 		// multiple GetNames, change if neccessary
 		m_MaterialName= m_Material->GetNameOnly();
-		TempMat= SMaterial();
+		TempMat= Material();
 		
 		PropertyColor = m_Material->FindProperty("AmbientColor").Get<KFbxColor>();
 		TempMat.Ambient[0]= PropertyColor.mRed;
@@ -567,31 +567,12 @@ bool CModelData::_LoadFromFBX(const std::string &path)
 	return false;
 }
 
-string CModelData::Load(ILoader const& loader)
-{
-	/*ifstream F (path);
-	if (!F.is_open())
-		return false;
-
-	int ExtLoc = path.find_last_of('.');
-	string Ext = path.substr(ExtLoc+1);
-
-	if (Ext == "fbx")
-		return _LoadFromFBX(path);
-	else if (Ext == "obj")
-		return _LoadFromObj(F);
-	else 
-		return false;*/
-	// FIXME
-	return string();
-}
-
-CModelData::CModelData(void)
+ModelData::ModelData(void)
 {
 }
 
 
-CModelData::~CModelData(void)
+ModelData::~ModelData(void)
 {
 }
 

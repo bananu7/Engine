@@ -60,7 +60,7 @@ void CMirror::Bind()
 
 void CMirror::Unbind()
 {
-	CFramebuffer::Disable();
+	Framebuffer::Disable();
 }
 
 void CMirror::Draw()
@@ -70,7 +70,7 @@ void CMirror::Draw()
 	
 	glBindVertexArray(0);
 	
-	CFramebuffer::Disable();
+	Framebuffer::Disable();
 	m_Shader->Bind();
 
 	m_Vbo.Bind();
@@ -86,8 +86,8 @@ void CMirror::Draw()
 }
 
 CMirror::CMirror(Program* shader):
-	m_Vbo(CVertexBuffer::DATA_BUFFER, CVertexBuffer::STATIC_DRAW),
-	m_TexVbo(CVertexBuffer::DATA_BUFFER, CVertexBuffer::STATIC_DRAW),
+	m_Vbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW),
+	m_TexVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW),
 	m_Shader(shader)
 {
 }

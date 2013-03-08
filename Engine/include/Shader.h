@@ -21,12 +21,11 @@ void glShaderSource_engine (GLuint shader, std::vector<char> const& shaderSource
 }
 
 template<typename T>
-class Shader :
-	public CResource
+class shader
 {
 protected:
 	GLuint m_id;
-	std::vector<char> m_source;
+	std::string m_source;
 
 	std::string _getInfo(unsigned num) const
 	{
@@ -52,24 +51,23 @@ protected:
 public:
 	GLuint getId () const { return m_id; }
 
-	std::string Load (ILoader const& loadParams)
+	template<typename Range>
+	static T Load (Range const& range)
 	{
-		auto rawData = loadParams.GetRawData("data");
-		if (!rawData)
-			return std::string("Error in getting fragment shader data");
-		m_source.clear();
+		T temp;
 
-		auto const& data = rawData.get();
+		temp.m_source = std::string(boost::begin(range), boost::end(range));
+		temp.m_id = glCreateShader(T::_getType());
 
-		std::copy(data.begin(), data.end(), std::back_inserter(m_source));
-		m_source.push_back(0);
-
-		m_id = glCreateShader(T::_getType());
-		return std::string();
+		return std::move(temp);
 	}
-	Shader(ILoader const& loader) { Load(loader); }
+	template<typename Range>
+	shader(Range const& range) {
+		m_source = std::string(boost::begin(range), boost::end(range));
+		m_id = glCreateShader(T::_getType());
+	}
 	
-	std::string Shader::Status() const
+	std::string shader::Status() const
 	{
 		GLint compiled;
 
@@ -90,31 +88,41 @@ public:
 		glDeleteShader(m_id);
 	}	
 
-	~Shader () { Unload(); }
+	~shader () { Unload(); }
 
 protected:
-	Shader() { }
+	shader() { }
 };
 
-class VertexShader : public Shader<VertexShader>, public boost::noncopyable
+class VertexShader : public shader<VertexShader>, public boost::noncopyable
 {
-	static const std::string _getName() { return "Vertex Shader"; }
+	static const std::string _getName() { return "Vertex shader"; }
 	static const GLint _getType() { return GL_VERTEX_SHADER; }
 public:
-	VertexShader() : Shader() { }
-	VertexShader(ILoader const& loader) : Shader(loader) { }
+	VertexShader() : shader() { }
+	template<typename Range>
+	VertexShader(Range range) : shader(range) { }
+	VertexShader(VertexShader&& other) {
+		m_source = std::move(other.m_source);
+		m_id = other.m_id;
+	}
 
 	explicit operator bool() { return Status().empty(); }
 };
 
-class FragmentShader : public Shader<FragmentShader>, public boost::noncopyable
+class FragmentShader : public shader<FragmentShader>, public boost::noncopyable
 {
-	static const std::string _getName() { return "Fragment Shader"; }
+	static const std::string _getName() { return "Fragment shader"; }
 	static const GLint _getType() { return GL_FRAGMENT_SHADER; }
 
 public:
-	FragmentShader() : Shader() { }
-	FragmentShader(ILoader const& loader) : Shader(loader) { }
+	FragmentShader() : shader() { }
+	template<typename Range>
+	FragmentShader(Range range) : shader(range) { }
+	FragmentShader(FragmentShader&& other) {
+		m_source = std::move(other.m_source);
+		m_id = other.m_id;
+	}
 
 	explicit operator bool() { return Status().empty(); }
 };
