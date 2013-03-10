@@ -23,7 +23,7 @@ class ResourceCache {
     template<typename T> struct derived : public base{
         T resource;
         derived(T t)
-            : t(std::move(resource)) 
+            : resource(std::move(t)) 
         {}
     };
     std::unordered_map<std::string, std::unique_ptr<base>> models;
@@ -39,7 +39,7 @@ public:
     }
     template<typename T, typename Range>
 	T* Get(std::string name, Range r) {
-        auto p = Get(name); if (p) return p;
+        auto p = Get<T>(name); if (p) return p;
         return &(models[name] = make_unique<derived<T>>(T::Load(r)))->resource;
     }
     void Unload(std::string name) {

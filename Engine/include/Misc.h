@@ -4,7 +4,7 @@
 
 namespace engine {
 
-const long double M_PI			= 3.1415926535897932384626433;
+const long double PI			= 3.1415926535897932384626433;
 const float DESIRED_DELTA		= 0.0166667f;
 const long double DEGREE_TO_RAD	= 0.01745329251994329576923690;//768489
 const long double RAD_TO_DEGREE	= 57.295779513082320876798154;//814105

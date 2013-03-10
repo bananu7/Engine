@@ -4,6 +4,8 @@
 #include <vector>
 #include <iostream>
 #include <iterator>
+#include <exception>
+#include <stdexcept>
 
 #include "FreeImage.h"
 #include <cstdio>
@@ -113,6 +115,7 @@ Image::Image(Image&& other) {
 Image& Image::operator= (Image&& other) {
 	m_TexId = other.m_TexId;
 	other.m_TexId = 0;
+	return *this;
 }
 
 

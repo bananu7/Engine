@@ -1,6 +1,7 @@
 #include <string>
 #include <exception>
 #include <cstdint>
+#include "Config.h"
 #include "Logger.h"
 
 namespace engine {
@@ -27,7 +28,7 @@ void Logger::Enable (uint8_t flags, const std::string& fileName)
 	m_FileName = fileName;
 	m_TxtLogFile.open (m_FileName, ios::out);
 	if (!m_TxtLogFile.is_open())
-		_CrtDbgBreak();
+		BREAKPOINT();
 	
 	Log ("Passive Destruction Log Starting\n");
 	_DebugFileClose();

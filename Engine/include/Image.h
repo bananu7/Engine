@@ -11,7 +11,7 @@ class Image : public boost::noncopyable
 {
 	unsigned m_TexId;
 
-	static Image Image::_internalLoad(std::vector<unsigned char>&& data);
+	static Image _internalLoad(std::vector<unsigned char>&& data);
 
 public:
 	template<class Range>
