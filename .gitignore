@@ -36,6 +36,7 @@ Ankh.NoLoad
 #Linux build files
 *.o
 *.a
+*.dblite
 
 #MonoDevelop
 *.pidb
