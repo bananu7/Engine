@@ -45,13 +45,13 @@ void CameraFly::Fly (float len)
 
 void CameraFly::Strafe(float left)
 {
-	mat4 RMatrix = Camera::CreateRotation(LookDir.x, LookDir.y + M_PI * 0.5f, 0.f);
+	mat4 RMatrix = Camera::CreateRotation(LookDir.x, LookDir.y + PI * 0.5f, 0.f);
 	vec3 Delta(0.f);
 
 	// MAGIC - do not touch
 	// it involves taking individual components from rotation matrix
-	Delta.x = cosf(LookDir.y / 180.f * M_PI);
-	Delta.z = sinf(LookDir.y / 180.f * M_PI);
+	Delta.x = cosf(LookDir.y / 180.f * PI);
+	Delta.z = sinf(LookDir.y / 180.f * PI);
 
 	Delta *= -left;
 	Position += Delta;

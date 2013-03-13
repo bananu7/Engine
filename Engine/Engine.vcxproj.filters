@@ -74,9 +74,6 @@
     <ClInclude Include="include\Image.h">
       <Filter>Header Files\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="include\World.h">
-      <Filter>Header Files\Resources</Filter>
-    </ClInclude>
     <ClInclude Include="include\CameraAdds.h">
       <Filter>Header Files\Misc</Filter>
     </ClInclude>
@@ -158,9 +155,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Image.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\World.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\ModelData.cpp">

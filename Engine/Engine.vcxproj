@@ -121,7 +121,6 @@
     <ClInclude Include="include\ShaderSet.h" />
     <ClInclude Include="include\VertexAttributeArray.h" />
     <ClInclude Include="include\VertexBuffer.h" />
-    <ClInclude Include="include\World.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\dependencies\SFML-2.0\src\System\Clock.cpp" />
@@ -181,7 +180,6 @@
     </ClCompile>
     <ClCompile Include="src\VertexAttributeArray.cpp" />
     <ClCompile Include="src\VertexBuffer.cpp" />
-    <ClCompile Include="src\World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
