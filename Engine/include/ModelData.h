@@ -65,7 +65,7 @@ protected:
 public:
 	//FIXME
 	template<typename Range>
-	static ModelData Load(Range r) { return ModelData; }
+	static ModelData Load(Range r) { return ModelData(); }
 
 	inline const std::vector<Vector3>& GetVertices() const { return m_Vertices; }
 	inline const std::vector<Vector3>& GetNormals() const { return m_Normals; }

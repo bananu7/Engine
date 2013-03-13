@@ -1,11 +1,15 @@
 #pragma once
-#include "resource.h"
 #include <map>
 #include <glm/glm.hpp>
 #include <GL/glew.h>
 #include <ostream>
 #include <string>
+#include <exception>
+#include <stdexcept>
 #include <boost/noncopyable.hpp>
+#include <boost/range.hpp>
+#include <vector>
+#include <memory>
 
 namespace engine {
 
@@ -21,7 +25,7 @@ void glShaderSource_engine (GLuint shader, std::vector<char> const& shaderSource
 }
 
 template<typename T>
-class shader
+class Shader
 {
 protected:
 	GLuint m_id;
@@ -62,12 +66,12 @@ public:
 		return std::move(temp);
 	}
 	template<typename Range>
-	shader(Range const& range) {
+	Shader(Range const& range) {
 		m_source = std::string(boost::begin(range), boost::end(range));
 		m_id = glCreateShader(T::_getType());
 	}
 	
-	std::string shader::Status() const
+	std::string Status() const
 	{
 		GLint compiled;
 
@@ -88,41 +92,45 @@ public:
 		glDeleteShader(m_id);
 	}	
 
-	~shader () { Unload(); }
+	~Shader () { Unload(); }
 
 protected:
-	shader() { }
+	Shader() { }
 };
 
-class VertexShader : public shader<VertexShader>, public boost::noncopyable
+class VertexShader : public Shader<VertexShader>, public boost::noncopyable
 {
 	static const std::string _getName() { return "Vertex shader"; }
 	static const GLint _getType() { return GL_VERTEX_SHADER; }
 public:
-	VertexShader() : shader() { }
+	VertexShader() : Shader() { }
 	template<typename Range>
-	VertexShader(Range range) : shader(range) { }
+	VertexShader(Range range) : Shader(range) { }
 	VertexShader(VertexShader&& other) {
 		m_source = std::move(other.m_source);
 		m_id = other.m_id;
 	}
+	
+	friend class Shader;
 
 	explicit operator bool() { return Status().empty(); }
 };
 
-class FragmentShader : public shader<FragmentShader>, public boost::noncopyable
+class FragmentShader : public Shader<FragmentShader>, public boost::noncopyable
 {
 	static const std::string _getName() { return "Fragment shader"; }
 	static const GLint _getType() { return GL_FRAGMENT_SHADER; }
 
 public:
-	FragmentShader() : shader() { }
+	FragmentShader() : Shader() { }
 	template<typename Range>
-	FragmentShader(Range range) : shader(range) { }
+	FragmentShader(Range range) : Shader(range) { }
 	FragmentShader(FragmentShader&& other) {
 		m_source = std::move(other.m_source);
 		m_id = other.m_id;
 	}
+
+	friend class Shader;
 
 	explicit operator bool() { return Status().empty(); }
 };
@@ -199,7 +207,7 @@ namespace {
 void glShaderSource_engine (GLuint shader, std::string const& shaderSource)
 {
 	if (shaderSource.empty())
-		throw std::exception("Empty shader passed to `glShaderSource`");
+		throw std::runtime_error("Empty shader passed to `glShaderSource`");
 	const GLchar* ptr = shaderSource.c_str();
 	const GLint size = shaderSource.size();
 	glShaderSource(shader, 1, &ptr, &size);
@@ -208,7 +216,7 @@ void glShaderSource_engine (GLuint shader, std::string const& shaderSource)
 void glShaderSource_engine (GLuint shader, std::vector<char> const& shaderSource)
 {
 	if (shaderSource.empty())
-		throw std::exception("Empty shader passed to `glShaderSource`");
+		throw std::runtime_error("Empty shader passed to `glShaderSource`");
 	const GLchar* ptr = &shaderSource[0];
 	const GLint size = shaderSource.size();
 	glShaderSource(shader, 1, &ptr, &size);

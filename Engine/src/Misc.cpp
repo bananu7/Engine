@@ -2,6 +2,8 @@
 #include "Misc.h"
 #include <cmath>
 #include <cstdlib>
+#include <cstdio>
+#include <string>
 
 namespace engine {
 
@@ -64,10 +66,10 @@ float Random ()
 }
     
 //================================================================
-string ToLower (const string& in)
+std::string ToLower (const string& in)
 {
 	string Temp;
-	for (string::const_iterator It = in.begin(); It != in.end(); It++)
+	for (auto It = in.begin(); It != in.end(); It++)
 	{
 		const char TempC = *It;
 		if (TempC >= 'A' && TempC <= 'Z')
@@ -78,38 +80,5 @@ string ToLower (const string& in)
 	return Temp;
 }
 //================================================================
-string CutSection (string& base, const char delim, const char* whiteSpace)
-{
-	string Return;
-	string::iterator It = base.begin();
-	// Ignoruje spacje na poczatku.
-	for (; 
-			(
-				(It != base.end())
-			&& 
-				(strchr(whiteSpace, *It))
-			);
-			It++
-		)
-	{
-		base.erase(It);
-	}
-	// Wycina sekcje az do kropki.
-	for (; 
-			(
-				(It != base.end())
-			&&
-				(!strchr(whiteSpace, *It))
-			&&
-				((*It)!=delim)
-			);
-		)
-	{
-		Return += *It;
-		base.erase(It);
-	}
-	if (It != base.end()) base.erase(It);
-	return Return;
-}
 
 } // namespace engine

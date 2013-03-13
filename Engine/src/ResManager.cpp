@@ -5,15 +5,15 @@
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/convenience.hpp>
 
-#include <pugixml.hpp>
+//#include <pugixml.hpp>
 #include <exception>
 
 namespace engine {
 
 using namespace std;
-using pugi::xml_document;
-using pugi::xml_node;
-using pugi::xml_attribute;
+//using pugi::xml_document;
+//using pugi::xml_node;
+//using pugi::xml_attribute;
 
 /*bool CResManager::LoadCatalog (const string& path)
 {

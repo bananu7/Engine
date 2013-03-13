@@ -1,7 +1,6 @@
 
 #include "ModelCookerDisplayList.h"
 #include "ModelData.h"
-#include <Windows.h>
 #include <GL/glew.h>
 
 namespace engine {

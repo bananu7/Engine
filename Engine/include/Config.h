@@ -11,6 +11,8 @@
 #endif
 
 #ifdef MINICRAFT_LINUX
-	#define BREAKPOINT() __asm { int 3 }
+	// this has to stay here until I find something normal -.-
+	#include <signal.h>
+	#define BREAKPOINT() raise(SIGTRAP)
 #endif
 

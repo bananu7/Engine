@@ -5,6 +5,8 @@
 #include <memory>
 #include <iostream>
 #include <iterator>
+#include <exception>
+#include <stdexcept>
 
 #include "FreeImage.h"
 #include <cstdio>

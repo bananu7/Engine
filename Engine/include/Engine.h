@@ -2,7 +2,7 @@
 
 #include "VertexAttributeArray.h"
 #include "VertexBuffer.h"
-#include "shader.h"
+#include "Shader.h"
 #include "Camera.h"
 
 #include "ModelData.h"

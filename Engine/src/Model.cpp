@@ -1,6 +1,5 @@
 
 #include "Model.h"
-#include "ResManager.h"
 #include "Image.h"
 #include "ModelCookerDisplayList.h"
 #include "ModelCookerVBO.h"

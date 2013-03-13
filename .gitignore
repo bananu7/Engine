@@ -3,6 +3,7 @@
 #OS junk files
 [Tt]humbs.db
 *.DS_Store
+*.swp
 
 #Visual Studio files
 *.[Oo]bj
@@ -31,6 +32,11 @@ obj/
 [Dd]ebug*/
 [Rr]elease*/
 Ankh.NoLoad
+
+#Linux build files
+*.o
+*.a
+*.dblite
 
 #MonoDevelop
 *.pidb
