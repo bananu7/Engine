@@ -2,11 +2,12 @@
 
 #include <GL/glew.h>
 #include <iostream>
+#include "gl_id.h"
 
 /*!
 Framebuffer Class. This class encapsulates the Framebuffer
 (FBO) OpenGL spec. See the official spec at:
-	http://oss.sgi.com/projects/ogl-sample/registry/EXT/framebuffer_object.txt
+    http://oss.sgi.com/projects/ogl-sample/registry/EXT/framebuffer_object.txt
 
 for details.
 
@@ -19,7 +20,7 @@ are a complete replacement for pbuffers.
 Performance Notes:
   1) It is more efficient (but not required) to call Bind() 
      on an FBO before making multiple method calls. For example:
-		
+        
       Framebuffer fbo;
       fbo.Bind();
       fbo.AttachTexture(GL_TEXTURE_2D, texId0, GL_COLOR_ATTACHMENT0_EXT);
@@ -163,8 +164,8 @@ protected:
   static GLuint _GenerateFboId();
 
 private:
-  GLuint m_fboId;
-  GLint  m_savedFboId;
+  gl_id m_fboId;
+  gl_id m_savedFboId;
 };
 
 } // namespace engine

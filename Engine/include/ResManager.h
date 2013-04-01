@@ -29,7 +29,7 @@ class ResourceCache {
     std::unordered_map<std::string, std::unique_ptr<base>> models;
 public:
     template<typename T>
-	T* Get(std::string name) {
+    T* Get(std::string name) {
         if (models.find(name) != models.end()) {
             if (auto p = dynamic_cast<derived<T>*>(models[name].get())) {
                 return &p->resource;
@@ -38,7 +38,7 @@ public:
         return nullptr;
     }
     template<typename T, typename Range>
-	T* Get(std::string name, Range r) {
+    T* Get(std::string name, Range r) {
         auto p = Get<T>(name); if (p) return p;
         return &(models[name] = make_unique<derived<T>>(T::Load(r)))->resource;
     }
@@ -59,7 +59,7 @@ class ResourceCache {
     std::unordered_map<std::string, std::unique_ptr<base>> models;
 public:
     template<typename T>
-	T* Get(std::string name) {
+    T* Get(std::string name) {
         if (models.find(name) != models.end()) {
             if (auto p = dynamic_cast<derived<T>*>(models[name].get())) {
                 return &p->resource;
@@ -68,10 +68,10 @@ public:
         return nullptr;
     }
     template<typename T, typename... Args>
-	T* Get(std::string name, Args&&... args) {
+    T* Get(std::string name, Args&&... args) {
         auto p = Get(name); 
-		if (p)
-			return p;
+        if (p)
+            return p;
         return &(models[name] = make_unique<derived<T>>(T::Load(std::forward<Args>(args)...)))->resource;
     }
     void Unload(std::string name) {

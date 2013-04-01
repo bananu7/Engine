@@ -25,123 +25,123 @@ void ComputeTangentBasis(
       tangent   = (Edge1 * -Edge2uv.y + Edge2 * Edge1uv.y) * mul;
       bitangent = (Edge1 * -Edge2uv.x + Edge2 * Edge1uv.x) * mul;
 
-	  glm::normalize(tangent);
+      glm::normalize(tangent);
       glm::normalize(bitangent);
    }
 }
 
 bool ModelCookerVBO::Cook(const ModelData& modelData)
 {
-	auto const& Components = modelData.GetComponents();
-	auto const& Materials = modelData.GetMaterials();
-	auto const& Vertices = modelData.GetVertices();
-	auto const& Normals = modelData.GetNormals();
-	auto const& TexCoords = modelData.GetTexCoords();
+    auto const& Components = modelData.GetComponents();
+    auto const& Materials = modelData.GetMaterials();
+    auto const& Vertices = modelData.GetVertices();
+    auto const& Normals = modelData.GetNormals();
+    auto const& TexCoords = modelData.GetTexCoords();
 
-	// Ładujemy dane do odpowiednich VBO
-	// Musimy stworzyc wszystkie wierzcholki jako pojedyncze instancje
+    // Ładujemy dane do odpowiednich VBO
+    // Musimy stworzyc wszystkie wierzcholki jako pojedyncze instancje
 
-	// Wierzcholki, normalne i texcoordy sa poukladane wzgledem wystepowania na scianach
-	// Kazdy wierzcholek, jaki pojawia sie na scianie, tworzy inna kombinacje V/N/T
-	// Kazda z tych kombinacji musi miec swoje pole(indeks)
-	// Nie wszystkie sa oczywiscie wykorzystywane, ale i tak rozmiar danych wzrasta do
-	// (3+3+2) * ilosc_trojkatow * 3. Poprzednio udawalo sie zaoszczedzic tak naprawde niewiele.
+    // Wierzcholki, normalne i texcoordy sa poukladane wzgledem wystepowania na scianach
+    // Kazdy wierzcholek, jaki pojawia sie na scianie, tworzy inna kombinacje V/N/T
+    // Kazda z tych kombinacji musi miec swoje pole(indeks)
+    // Nie wszystkie sa oczywiscie wykorzystywane, ale i tak rozmiar danych wzrasta do
+    // (3+3+2) * ilosc_trojkatow * 3. Poprzednio udawalo sie zaoszczedzic tak naprawde niewiele.
 
-	std::vector<ModelData::Vector3> TempVerts;
-	std::vector<ModelData::Vector3> TempNormals;
-	std::vector<ModelData::Vector2> TempTexCoords;
-	// Do bumpmappingu
-	//std::vector<ModelData::Vector3> TempTangents, TempBitangents;
+    std::vector<ModelData::Vector3> TempVerts;
+    std::vector<ModelData::Vector3> TempNormals;
+    std::vector<ModelData::Vector2> TempTexCoords;
+    // Do bumpmappingu
+    //std::vector<ModelData::Vector3> TempTangents, TempBitangents;
 
-	std::vector<int> TempIndices;
-	// Tymczasowe zmienne alokuję na zewnątrz pętli
-	ModelData::Vector3 Temp3;
-	ModelData::Vector3 Temp2;
+    std::vector<int> TempIndices;
+    // Tymczasowe zmienne alokuję na zewnątrz pętli
+    ModelData::Vector3 Temp3;
+    ModelData::Vector3 Temp2;
 
-	for (auto Cmp = Components.begin(); Cmp != Components.end(); ++Cmp)
-	{
-		for (auto Grp = Cmp->Groups.begin(); Grp != Cmp->Groups.end(); ++Grp)
-		{			
-			for (auto Face = Grp->Faces.begin(); Face != Grp->Faces.end(); ++Face)
-			{
-				// Uzywam 3 buforow, bo sa bardziej elastycznym rozwiazaniem
-				// Umozliwiaja np. animacje samych pozycji, pozostawiajac
-				// dwa pozostale bufory w spokoju.
-				for (int i = 0; i < 3; ++i)
-				{
-					TempVerts.push_back(Vertices[Face->VertIndices[i]]);
-					TempNormals.push_back(Normals[Face->NormIndices[i]]);
-					TempTexCoords.push_back(TexCoords[Face->TexCIndices[i]]);
-				}
-				//vec3 Tangent, Bitangent;
-				//ComputeTangentBasis(reinterpret_cast<vec3>(
-			}
-		}
-	}
+    for (auto Cmp = Components.begin(); Cmp != Components.end(); ++Cmp)
+    {
+        for (auto Grp = Cmp->Groups.begin(); Grp != Cmp->Groups.end(); ++Grp)
+        {			
+            for (auto Face = Grp->Faces.begin(); Face != Grp->Faces.end(); ++Face)
+            {
+                // Uzywam 3 buforow, bo sa bardziej elastycznym rozwiazaniem
+                // Umozliwiaja np. animacje samych pozycji, pozostawiajac
+                // dwa pozostale bufory w spokoju.
+                for (int i = 0; i < 3; ++i)
+                {
+                    TempVerts.push_back(Vertices[Face->VertIndices[i]]);
+                    TempNormals.push_back(Normals[Face->NormIndices[i]]);
+                    TempTexCoords.push_back(TexCoords[Face->TexCIndices[i]]);
+                }
+                //vec3 Tangent, Bitangent;
+                //ComputeTangentBasis(reinterpret_cast<vec3>(
+            }
+        }
+    }
 
-	// Teraz, kiedy juz stworzylismy sobie tymczasowe dane w przestrzeni, mozemy skopiowac
-	// je (sic!) do pamieci karty graficznej - przysiegam, ze to juz ostatnie kopiowanie
-	m_VerticesVbo.LoadData(&(TempVerts[0]),
-		sizeof(ModelData::Vector3) * TempVerts.size());
-	m_NormalsVbo.LoadData(&(TempNormals[0]),
-		sizeof(ModelData::Vector3) * TempNormals.size());
-	m_TexCoordsVbo.LoadData(&(TempTexCoords[0]),
-		sizeof(ModelData::Vector2) * TempTexCoords.size());
+    // Teraz, kiedy juz stworzylismy sobie tymczasowe dane w przestrzeni, mozemy skopiowac
+    // je (sic!) do pamieci karty graficznej - przysiegam, ze to juz ostatnie kopiowanie
+    m_VerticesVbo.LoadData(&(TempVerts[0]),
+        sizeof(ModelData::Vector3) * TempVerts.size());
+    m_NormalsVbo.LoadData(&(TempNormals[0]),
+        sizeof(ModelData::Vector3) * TempNormals.size());
+    m_TexCoordsVbo.LoadData(&(TempTexCoords[0]),
+        sizeof(ModelData::Vector2) * TempTexCoords.size());
 
-	// Teraz, kiedy mam juz dane odpowiednio zapakowane do VBO...
-	// Tworzymy VAO per komponent
-	for (auto Cmp = Components.begin(); Cmp != Components.end(); ++Cmp)
-	{
-		m_Components.push_back(CookedComponentVBO(Cmp->Center));
-		m_Components.back().VertCount = TempVerts.size();
-		// Bindujemy VAO komponentu
-		m_Components.back().Vao.Bind();
-		// Bindujemy 3 nasze strumyczki danych
-		// I teraz uwaga - pierwszy parametr do glVertexAttribPointer
-		// teoretycznie powinien zostac pobrany z shadera(programu) 
-		// za pomoca glGetAttribLocation(), ale nie mam pojecia, jak to sie odnosi
-		// do tworzenia naszego obiektu -.-
+    // Teraz, kiedy mam juz dane odpowiednio zapakowane do VBO...
+    // Tworzymy VAO per komponent
+    for (auto Cmp = Components.begin(); Cmp != Components.end(); ++Cmp)
+    {
+        m_Components.push_back(CookedComponentVBO(Cmp->Center));
+        m_Components.back().VertCount = TempVerts.size();
+        // Bindujemy VAO komponentu
+        m_Components.back().Vao.Bind();
+        // Bindujemy 3 nasze strumyczki danych
+        // I teraz uwaga - pierwszy parametr do glVertexAttribPointer
+        // teoretycznie powinien zostac pobrany z shadera(programu) 
+        // za pomoca glGetAttribLocation(), ale nie mam pojecia, jak to sie odnosi
+        // do tworzenia naszego obiektu -.-
 
-		// Kiedys zamiast glVertexAttribPointer byloby np. glVertexPointer.
-		// Zostalo to jednak zastapiane przez bardziej ogólną wersję,
-		// pozwalająca przekazywać tak naprawdę dowolne dane. Shader
-		// wymaga jednak odpowiedniego "nazwania" każdego strumienia danych.
-		
-		// W tej chwili owo "nazwanie" wykonywane jest przy ladowaniu Programa
+        // Kiedys zamiast glVertexAttribPointer byloby np. glVertexPointer.
+        // Zostalo to jednak zastapiane przez bardziej ogólną wersję,
+        // pozwalająca przekazywać tak naprawdę dowolne dane. Shader
+        // wymaga jednak odpowiedniego "nazwania" każdego strumienia danych.
+        
+        // W tej chwili owo "nazwanie" wykonywane jest przy ladowaniu Programa
 
-		m_VerticesVbo.Bind();
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-		glEnableVertexAttribArray(0);
+        m_VerticesVbo.Bind();
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+        glEnableVertexAttribArray(0);
 
-		m_NormalsVbo.Bind();
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
-		glEnableVertexAttribArray(1);
+        m_NormalsVbo.Bind();
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
+        glEnableVertexAttribArray(1);
 
-		m_TexCoordsVbo.Bind();
-		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, 0);
-		glEnableVertexAttribArray(2);
-	}
+        m_TexCoordsVbo.Bind();
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, 0);
+        glEnableVertexAttribArray(2);
+    }
 
-	return true;
+    return true;
 }
 
 void ModelCookerVBO::Draw ()
 {
-	// Zakładamy, że jedyne co może się zmieniać w grupie, to dane vec4/vec3/float
-	// Samplery pozostają stałe co do komponentu
-	for (auto Cmp = m_Components.begin(); Cmp != m_Components.end(); ++Cmp)
-	{
-		Cmp->Vao.Bind();
-		// Tutaj wstawic ewentualne glVertexAttrib*()
-		// Jak na przyklad transformacje grup w animacji
-		glDrawArrays(GL_TRIANGLES, 0, Cmp->VertCount);
-	}
+    // Zakładamy, że jedyne co może się zmieniać w grupie, to dane vec4/vec3/float
+    // Samplery pozostają stałe co do komponentu
+    for (auto Cmp = m_Components.begin(); Cmp != m_Components.end(); ++Cmp)
+    {
+        Cmp->Vao.Bind();
+        // Tutaj wstawic ewentualne glVertexAttrib*()
+        // Jak na przyklad transformacje grup w animacji
+        glDrawArrays(GL_TRIANGLES, 0, Cmp->VertCount);
+    }
 }
 
 ModelCookerVBO::ModelCookerVBO(void):
-	m_VerticesVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW),
-	m_NormalsVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW),
-	m_TexCoordsVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW)
+    m_VerticesVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW),
+    m_NormalsVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW),
+    m_TexCoordsVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW)
 {
 }
 

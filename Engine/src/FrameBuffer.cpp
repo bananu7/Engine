@@ -17,7 +17,7 @@ Framebuffer::Framebuffer()
 
 Framebuffer::~Framebuffer() 
 {
-  glDeleteFramebuffers(1, &m_fboId);
+  glDeleteFramebuffers(1, m_fboId.get_ptr());
 }
 
 void Framebuffer::Bind() 
@@ -147,8 +147,10 @@ GLuint Framebuffer::_GenerateFboId()
 void Framebuffer::_GuardedBind() 
 {
   // Only binds if m_fboId is different than the currently bound FBO
-  glGetIntegerv( GL_FRAMEBUFFER_BINDING_EXT, &m_savedFboId );
-  if (m_fboId != (GLuint)m_savedFboId) {
+  int temp;
+  glGetIntegerv( GL_FRAMEBUFFER_BINDING_EXT, &temp );
+  m_savedFboId = static_cast<GLuint>(temp);
+  if (m_fboId != m_savedFboId) {
     glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fboId);
   }
 }
@@ -156,8 +158,8 @@ void Framebuffer::_GuardedBind()
 void Framebuffer::_GuardedUnbind() 
 {
   // Returns FBO binding to the previously enabled FBO
-  if (m_fboId != (GLuint)m_savedFboId) {
-    glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, (GLuint)m_savedFboId);
+  if (m_fboId != m_savedFboId) {
+    glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_savedFboId);
   }
 }
 

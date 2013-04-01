@@ -46,7 +46,7 @@
     <IncludePath>$(ProjectDir);$(ProjectDir)\include;$(FBX_2013_3)\include;$(SolutionDir)\dependencies\FreeImage\Dist;$(SolutionDir)\dependencies\glew-1.9.0\include;$(SolutionDir)\dependencies\glm-0.9.4.1;$(SolutionDir)\dependencies\Lua-5.1\include;$(SolutionDir)\dependencies\pugixml-1.2\src;$(SolutionDir)\dependencies\SFML-2.0\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(ProjectDir);$(ProjectDir)\include;$(SolutionDir)\dependencies\FBX\include;$(SolutionDir)\dependencies\glew-1.5.6\include;$(SolutionDir)\dependencies\glm-0.9.4.1;$(SolutionDir)\dependencies\Lua-5.1\include;$(SolutionDir)\dependencies\FreeImage\Dist;$(SolutionDir)\dependencies\pugixml-1.2\src;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);$(ProjectDir)\include;$(FBX_2013_3)\include;$(SolutionDir)\dependencies\FreeImage\Dist;$(SolutionDir)\dependencies\glew-1.9.0\include;$(SolutionDir)\dependencies\glm-0.9.4.1;$(SolutionDir)\dependencies\Lua-5.1\include;$(SolutionDir)\dependencies\pugixml-1.2\src;$(SolutionDir)\dependencies\SFML-2.0\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(BOOST_1_52_0)\stage\lib;$(SolutionDir)\dependencies\FreeImage\Dist;$(SolutionDir)\dependencies\glew-1.5.6\lib;$(SolutionDir)\dependencies\pugixml-1.2\scripts\vs2010\x32;$(LibraryPath)</LibraryPath>
     <SourcePath>$(ProjectDir)\src;$(SourcePath)</SourcePath>
   </PropertyGroup>
@@ -79,7 +79,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Cpp0xSupport>true</Cpp0xSupport>
     </ClCompile>
     <Link>
@@ -89,21 +89,23 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>freeimage.lib;opengl32.lib;glew32.lib;wininet.lib;pugixml.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;FreeImage.lib;glu32.lib;wininet.lib;pugixml.lib;winmm.lib</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>msvcprt</IgnoreSpecificDefaultLibraries>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\dependencies\SFML-2.0\include\SFML\System.hpp" />
     <ClInclude Include="..\dependencies\SFML-2.0\include\SFML\Window.hpp" />
-    <ClInclude Include="Config.h" />
     <ClInclude Include="include\Camera.h" />
     <ClInclude Include="include\CameraAdds.h" />
+    <ClInclude Include="include\Config.h" />
     <ClInclude Include="include\Engine.h" />
     <ClInclude Include="include\FbxAnimHelpers.h" />
     <ClInclude Include="include\FbxVboMesh.h" />
     <ClInclude Include="include\FrameBuffer.h" />
     <ClInclude Include="include\GameObject.h" />
     <ClInclude Include="include\GetPosition.h" />
+    <ClInclude Include="include\gl_id.h" />
     <ClInclude Include="include\Image.h" />
     <ClInclude Include="include\IModelCooker.h" />
     <ClInclude Include="include\Logger.h" />

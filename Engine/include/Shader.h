@@ -6,10 +6,10 @@
 #include <string>
 #include <exception>
 #include <stdexcept>
-#include <boost/noncopyable.hpp>
 #include <boost/range.hpp>
 #include <vector>
 #include <memory>
+#include "gl_id.h"
 
 namespace engine {
 
@@ -28,7 +28,7 @@ template<typename T>
 class Shader
 {
 protected:
-	GLuint m_id;
+	gl_id m_id;
 	std::string m_source;
 
 	std::string _getInfo(unsigned num) const
@@ -76,8 +76,10 @@ public:
 		GLint compiled;
 
 		glGetShaderiv(m_id, GL_COMPILE_STATUS, &compiled);
-		if (compiled != GL_TRUE)
-			return T::_getName() + " compilation error : " + _getInfo(m_id);
+		if (compiled != GL_TRUE) {
+			std::string ret = T::_getName() + " compilation error : " + _getInfo(m_id);
+			return ret;
+		}
 
 		return std::string();
 	}
@@ -98,7 +100,7 @@ protected:
 	Shader() { }
 };
 
-class VertexShader : public Shader<VertexShader>, public boost::noncopyable
+class VertexShader : public Shader<VertexShader>
 {
 	static const std::string _getName() { return "Vertex shader"; }
 	static const GLint _getType() { return GL_VERTEX_SHADER; }
@@ -108,7 +110,7 @@ public:
 	VertexShader(Range range) : Shader(range) { }
 	VertexShader(VertexShader&& other) {
 		m_source = std::move(other.m_source);
-		m_id = other.m_id;
+		m_id = std::move(other.m_id);
 	}
 	
 	friend class Shader;
@@ -116,7 +118,7 @@ public:
 	explicit operator bool() { return Status().empty(); }
 };
 
-class FragmentShader : public Shader<FragmentShader>, public boost::noncopyable
+class FragmentShader : public Shader<FragmentShader>
 {
 	static const std::string _getName() { return "Fragment shader"; }
 	static const GLint _getType() { return GL_FRAGMENT_SHADER; }
@@ -127,7 +129,7 @@ public:
 	FragmentShader(Range range) : Shader(range) { }
 	FragmentShader(FragmentShader&& other) {
 		m_source = std::move(other.m_source);
-		m_id = other.m_id;
+		m_id = std::move(other.m_id);
 	}
 
 	friend class Shader;
@@ -135,9 +137,9 @@ public:
 	explicit operator bool() { return Status().empty(); }
 };
 
-class Program : public boost::noncopyable
+class Program
 {
-	GLuint m_id;
+	gl_id m_id;
 
 	std::string _getInfo(unsigned num);
 	std::map<std::string, int> m_vertexAttribs;
@@ -163,7 +165,7 @@ public:
 	void SetUniform (std::string const& name, glm::mat4 const& mat);
 
 	int GetUniformLocation (const std::string& name);
-	int GetProgramNum () const { return m_id; }
+	GLuint GetProgramNum () const { return m_id; }
 	int GetAttribLocation (const std::string& name);
 	void BindAttribLocation (const std::string& name, int location);
 

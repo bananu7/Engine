@@ -125,8 +125,11 @@
     <ClInclude Include="..\dependencies\SFML-2.0\include\SFML\Window.hpp">
       <Filter>SFML\include</Filter>
     </ClInclude>
-    <ClInclude Include="Config.h">
+    <ClInclude Include="include\Config.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gl_id.h">
+      <Filter>Header Files\Misc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

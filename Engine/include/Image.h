@@ -3,37 +3,37 @@
 #include <string>
 #include <Misc.h>
 #include <boost/range.hpp>
-#include <boost/noncopyable.hpp>
+#include "gl_id.h"
 
 namespace engine {
 
-class Image : public boost::noncopyable
+class Image
 {
-	unsigned m_TexId;
+    gl_id m_TexId;
 
-	static Image _internalLoad(std::vector<unsigned char>&& data);
+    static Image _internalLoad(std::vector<unsigned char>&& data);
 
 public:
-	template<class Range>
-	static Image Load (Range&& range) {
-		return std::move(_internalLoad(std::vector<unsigned char>(boost::begin(range), boost::end(range))));
-	}
-	
-	/// Binds to currently active texture unit and doesn't change it.
-	void Bind ();
-	/// Binds to given texture unit, active texture unit is changed to the one given
-	void Bind (int textureUnitNum);
+    template<class Range>
+    static Image Load (Range&& range) {
+        return std::move(_internalLoad(std::vector<unsigned char>(boost::begin(range), boost::end(range))));
+    }
+    
+    /// Binds to currently active texture unit and doesn't change it.
+    void Bind ();
+    /// Binds to given texture unit, active texture unit is changed to the one given
+    void Bind (int textureUnitNum);
 
-	void Unload (void) { }
+    void Unload (void) { }
 
-	int GetWidth();
+    int GetWidth();
 
-	inline unsigned GetTexture () const { return m_TexId; }
+    inline unsigned GetTexture () const { return m_TexId; }
 
-	Image();
-	Image(Image&& other);
-	Image& operator=(Image&& other);
-	~Image();
+    Image();
+    Image(Image&& other);
+    Image& operator=(Image&& other);
+    ~Image();
 };
 
 } // namespace engine
