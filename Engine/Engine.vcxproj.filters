@@ -42,6 +42,9 @@
     <Filter Include="SFML\include">
       <UniqueIdentifier>{3f7e7734-6827-4abd-9199-daaf448d628f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GLEW">
+      <UniqueIdentifier>{82283bb2-277c-4ac3-ac4e-455df3b83b73}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Logger.h">
@@ -282,6 +285,15 @@
     </ClCompile>
     <ClCompile Include="..\dependencies\SFML-2.0\src\Window\Win32\InputImpl.cpp">
       <Filter>SFML\src\window\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\dependencies\glew-1.9.0\src\visualinfo.c">
+      <Filter>GLEW</Filter>
+    </ClCompile>
+    <ClCompile Include="..\dependencies\glew-1.9.0\src\glew.c">
+      <Filter>GLEW</Filter>
+    </ClCompile>
+    <ClCompile Include="..\dependencies\glew-1.9.0\src\glewinfo.c">
+      <Filter>GLEW</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

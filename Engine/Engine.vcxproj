@@ -42,12 +42,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <SourcePath>$(ProjectDir)\src;$(SourcePath)</SourcePath>
-    <LibraryPath>$(FBX_2013_3)\lib\vs2010\x86;$(SolutionDir)\dependencies\glew-1.9.0\lib;$(SolutionDir)\dependencies\FreeImage\Dist;$(SolutionDir)\dependencies\pugixml-1.2\scripts\vs2010\x32;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)\dependencies\FreeImage\Dist;$(LibraryPath)</LibraryPath>
     <IncludePath>$(ProjectDir);$(ProjectDir)\include;$(FBX_2013_3)\include;$(SolutionDir)\dependencies\FreeImage\Dist;$(SolutionDir)\dependencies\glew-1.9.0\include;$(SolutionDir)\dependencies\glm-0.9.4.1;$(SolutionDir)\dependencies\Lua-5.1\include;$(SolutionDir)\dependencies\pugixml-1.2\src;$(SolutionDir)\dependencies\SFML-2.0\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(ProjectDir);$(ProjectDir)\include;$(FBX_2013_3)\include;$(SolutionDir)\dependencies\FreeImage\Dist;$(SolutionDir)\dependencies\glew-1.9.0\include;$(SolutionDir)\dependencies\glm-0.9.4.1;$(SolutionDir)\dependencies\Lua-5.1\include;$(SolutionDir)\dependencies\pugixml-1.2\src;$(SolutionDir)\dependencies\SFML-2.0\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(BOOST_1_52_0)\stage\lib;$(SolutionDir)\dependencies\FreeImage\Dist;$(SolutionDir)\dependencies\glew-1.5.6\lib;$(SolutionDir)\dependencies\pugixml-1.2\scripts\vs2010\x32;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(BOOST_1_52_0)\stage\lib;$(SolutionDir)\dependencies\FreeImage\Dist;$(LibraryPath)</LibraryPath>
     <SourcePath>$(ProjectDir)\src;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -55,7 +55,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;SFML_STATIC;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>
       </AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -68,7 +68,7 @@
       <IgnoreSpecificDefaultLibraries>MSVCRTD</IgnoreSpecificDefaultLibraries>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;FreeImage.lib;glu32.lib;wininet.lib;winmm.lib</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;FreeImage.lib;wininet.lib;winmm.lib</AdditionalDependencies>
       <AdditionalOptions>/MT %(AdditionalOptions)</AdditionalOptions>
     </Lib>
   </ItemDefinitionGroup>
@@ -79,7 +79,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;SFML_STATIC;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Cpp0xSupport>true</Cpp0xSupport>
     </ClCompile>
     <Link>
@@ -89,7 +89,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;FreeImage.lib;glu32.lib;wininet.lib;winmm.lib</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;FreeImage.lib;wininet.lib;winmm.lib</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>msvcprt</IgnoreSpecificDefaultLibraries>
     </Lib>
   </ItemDefinitionGroup>
@@ -125,6 +125,9 @@
     <ClInclude Include="include\VertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\dependencies\glew-1.9.0\src\glew.c" />
+    <ClCompile Include="..\dependencies\glew-1.9.0\src\glewinfo.c" />
+    <ClCompile Include="..\dependencies\glew-1.9.0\src\visualinfo.c" />
     <ClCompile Include="..\dependencies\SFML-2.0\src\System\Clock.cpp" />
     <ClCompile Include="..\dependencies\SFML-2.0\src\System\Err.cpp" />
     <ClCompile Include="..\dependencies\SFML-2.0\src\System\Lock.cpp" />
