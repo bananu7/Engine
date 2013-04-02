@@ -68,7 +68,7 @@
       <IgnoreSpecificDefaultLibraries>MSVCRTD</IgnoreSpecificDefaultLibraries>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;FreeImage.lib;glu32.lib;wininet.lib;pugixmld.lib;winmm.lib</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;FreeImage.lib;glu32.lib;wininet.lib;winmm.lib</AdditionalDependencies>
       <AdditionalOptions>/MT %(AdditionalOptions)</AdditionalOptions>
     </Lib>
   </ItemDefinitionGroup>
@@ -89,7 +89,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;FreeImage.lib;glu32.lib;wininet.lib;pugixml.lib;winmm.lib</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;FreeImage.lib;glu32.lib;wininet.lib;winmm.lib</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>msvcprt</IgnoreSpecificDefaultLibraries>
     </Lib>
   </ItemDefinitionGroup>
