@@ -24,24 +24,30 @@ else:
     env = Environment(ENV = os.environ)
 
 env.Append(CPPFLAGS="-Wall -g -std=c++11 ")
-env.Append(CPPFLAGS="-fdiagnostics-show-caret")
+#env.Append(CPPFLAGS="-fdiagnostics-show-caret")
 env.Append(CPPDEFINES="GLEW_NO_GLU")
 env.Append(CPPPATH=["Engine/include/"])
 
 cpp_files = Glob("Engine/src/*.cpp")
+cpp_files += Glob("dependencies/glew-1.9.0/src/glew.c")
+
 lib = env.StaticLibrary(target='Engine', source = cpp_files)
 
 #SFML subpart
 
 env.Append(CPPPATH="dependencies/SFML-2.0/include/")
-env.Append(CPPDEFINES="SFML_STATIC")
+env.Append(CPPDEFINES=[
+    "SFML_STATIC",
+    "GLEW_STATIC"
+])
 
+# SFML is compiled from sources, so we need to add it
 sfml_files = Glob("dependencies/SFML-2.0/src/System/*.cpp")
 sfml_files += Glob("dependencies/SFML-2.0/src/Window/*.cpp")
 
 if platform.system() == 'Windows':
-    sfml_files += Glob("dependencies/SFML-2.0/src/System/Windows/*.cpp")
-    sfml_files += Glob("dependencies/SFML-2.0/src/Window/Windows/*.cpp")
+    sfml_files += Glob("dependencies/SFML-2.0/src/System/Win32/*.cpp")
+    sfml_files += Glob("dependencies/SFML-2.0/src/Window/Win32/*.cpp")
 else:
     sfml_files += Glob("dependencies/SFML-2.0/src/System/Unix/*.cpp")
     sfml_files += Glob("dependencies/SFML-2.0/src/Window/Linux/*.cpp")
