@@ -11,12 +11,12 @@ class Image
 {
     gl_id m_TexId;
 
-    static Image _internalLoad(std::vector<unsigned char>&& data);
+    static Image _internalLoad(std::vector<unsigned char>&& data, bool srgb);
 
 public:
     template<class Range>
-    static Image Load (Range&& range) {
-        return std::move(_internalLoad(std::vector<unsigned char>(boost::begin(range), boost::end(range))));
+    static Image Load (Range&& range, bool loadAsSRGB = false) {
+        return std::move(_internalLoad(std::vector<unsigned char>(boost::begin(range), boost::end(range)), loadAsSRGB));
     }
     
     /// Binds to currently active texture unit and doesn't change it.

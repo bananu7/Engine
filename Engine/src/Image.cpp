@@ -33,12 +33,15 @@ inline std::unique_ptr<T, Deleter> make_unique_raw(T* t, Deleter&& d) {
     return std::unique_ptr<T, Deleter>(t, std::forward<Deleter>(d));
 }
 
-Image Image::_internalLoad(std::vector<unsigned char>&& vd)
+Image Image::_internalLoad(std::vector<unsigned char>&& vd, bool srgb)
 {
     Image temporary;
     
     // FIXME
     GLenum internal_format = GL_RGBA;
+    if (srgb)
+        internal_format = GL_SRGB8_ALPHA8;
+        
     GLuint image_format = GL_BGRA;
     GLuint level = 0;
     GLuint border = 0;
