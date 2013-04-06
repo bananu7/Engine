@@ -53,7 +53,7 @@ Image Image::_internalLoad(std::vector<unsigned char>&& vd, bool srgb)
 
     //if still unknown, try to guess the file format from the file extension
     //if(fif == FIF_UNKNOWN) 
-    //	fif = FreeImage_GetFIFFromFilename(filename);
+    //    fif = FreeImage_GetFIFFromFilename(filename);
     //if still unkown, return failure
     if(fif == FIF_UNKNOWN)
         throw runtime_error("Failed to deduce image filetype");
@@ -63,11 +63,11 @@ Image Image::_internalLoad(std::vector<unsigned char>&& vd, bool srgb)
         throw runtime_error("This image type is not supported");
 
     //auto dib = std::unique_ptr<FIBITMAP, FreeImageBitmapDeleter>(
-    //	FreeImage_LoadFromMemory(fif, fm.get()), FreeImageBitmapDeleter());
+    //    FreeImage_LoadFromMemory(fif, fm.get()), FreeImageBitmapDeleter());
 
     auto dib = make_unique_raw(FreeImage_LoadFromMemory(fif, fm.get()), FreeImageBitmapDeleter());
 
-    //	dib = FreeImage_Load(fif, path);
+    //    dib = FreeImage_Load(fif, path);
 
     //if the image failed to load, return failure
     if(!dib)

@@ -11,39 +11,39 @@
 class CGUIElement
 {
 protected:
-	bool					m_Hidden;
-	int						m_ID;
-	float					m_X,m_Y;
-	Program*				m_Shader;
-	VertexBuffer			m_VerticesVbo;
-	VertexBuffer			m_NormalsVbo;
-	VertexBuffer			m_UVsVbo;
-	VertexAttributeArray	m_Vao;
+    bool                    m_Hidden;
+    int                        m_ID;
+    float                    m_X,m_Y;
+    Program*                m_Shader;
+    VertexBuffer            m_VerticesVbo;
+    VertexBuffer            m_NormalsVbo;
+    VertexBuffer            m_UVsVbo;
+    VertexAttributeArray    m_Vao;
 
 public:
-	virtual void Draw() { } // must be declared in child!
+    virtual void Draw() { } // must be declared in child!
 
-	int GetID();
-	float GetPositionX();
-	float GetPositionY();
-	void Move(float X, float Y);
-	bool IsHidden() { return m_Hidden; }
-	void Hide() { m_Hidden = 1; }
-	void Show() { m_Hidden = 0; }
+    int GetID();
+    float GetPositionX();
+    float GetPositionY();
+    void Move(float X, float Y);
+    bool IsHidden() { return m_Hidden; }
+    void Hide() { m_Hidden = 1; }
+    void Show() { m_Hidden = 0; }
 
-	friend class CGUI;
-	friend class CBox;
-	friend class CFont;
-	friend class CGraph;
+    friend class CGUI;
+    friend class CBox;
+    friend class CFont;
+    friend class CGraph;
 
-	CGUIElement():
-		m_VerticesVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW),
-		m_NormalsVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW),
-		m_UVsVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW)
-	{
-		Show();
-	}
-	//~CGUIElement(void);
+    CGUIElement():
+        m_VerticesVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW),
+        m_NormalsVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW),
+        m_UVsVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW)
+    {
+        Show();
+    }
+    //~CGUIElement(void);
 };
 
 //forward declaration of CGUIElement children
@@ -52,74 +52,74 @@ class CFont;
 class CGraph;
 
 class CGUI :
-	public CSingleton<CGUI>
+    public CSingleton<CGUI>
 {
 protected:
-	int							m_ElementsCount;
-	float						m_Width;
-	float						m_Height;
-	std::map<int,CGUIElement*>	m_Elements;
-	CMatrix4					m_Ortho;
+    int                            m_ElementsCount;
+    float                        m_Width;
+    float                        m_Height;
+    std::map<int,CGUIElement*>    m_Elements;
+    CMatrix4                    m_Ortho;
 
 public:
-	void Draw();
+    void Draw();
 
-	template <typename T> T* AddElement(const T &Data)
-	{
-		T* TempPtr = new T(Data);
-		CGUIElement* TempBasePtr = dynamic_cast<CGUIElement*>(TempPtr);
-		//T* TempBasePtr = TempPtr;
-		if (TempBasePtr)
-		{
-			TempBasePtr->m_ID = m_ElementsCount++;
-			TempBasePtr->m_Hidden= 0;
-			m_Elements.insert
-				(std::make_pair(TempBasePtr->GetID(),TempBasePtr));
-			return TempPtr;
-		}
-		return false;
-	}
-	template <typename T> T* AddElement()
-	{
-		T* TempPtr = new T();
-		TempPtr->m_ID = m_ElementsCount++;
-		m_Elements.insert
-			(std::make_pair(m_ElementsCount,TempPtr));
-		return TempPtr;
-	}
-	//template <typename T> bool AddElement();
-	bool RemoveElement(int ID);
-	CGUIElement* GetElement(int ID);
+    template <typename T> T* AddElement(const T &Data)
+    {
+        T* TempPtr = new T(Data);
+        CGUIElement* TempBasePtr = dynamic_cast<CGUIElement*>(TempPtr);
+        //T* TempBasePtr = TempPtr;
+        if (TempBasePtr)
+        {
+            TempBasePtr->m_ID = m_ElementsCount++;
+            TempBasePtr->m_Hidden= 0;
+            m_Elements.insert
+                (std::make_pair(TempBasePtr->GetID(),TempBasePtr));
+            return TempPtr;
+        }
+        return false;
+    }
+    template <typename T> T* AddElement()
+    {
+        T* TempPtr = new T();
+        TempPtr->m_ID = m_ElementsCount++;
+        m_Elements.insert
+            (std::make_pair(m_ElementsCount,TempPtr));
+        return TempPtr;
+    }
+    //template <typename T> bool AddElement();
+    bool RemoveElement(int ID);
+    CGUIElement* GetElement(int ID);
 
-	float GetWidth();
-	float GetHeight();
-	CMatrix4* GetProjectionMatrix();
+    float GetWidth();
+    float GetHeight();
+    CMatrix4* GetProjectionMatrix();
 
-	bool Inititalise(float Width, float Height);
-	CGUI();
-	//~CGUI(void);
+    bool Inititalise(float Width, float Height);
+    CGUI();
+    //~CGUI(void);
 
 };
 
 class CBox:
-	public CGUIElement
+    public CGUIElement
 {
 protected:
-	CColor						m_Color;
-	float						m_Width;
-	float						m_Height;
+    CColor                        m_Color;
+    float                        m_Width;
+    float                        m_Height;
 
 public:
-	void Draw();
-	float GetWidth();
-	float GetHeight();
-	CColor GetColor();
+    void Draw();
+    float GetWidth();
+    float GetHeight();
+    CColor GetColor();
 
-	void SetColor(CColor Color);
-	void Move(float X, float Y);
-	void Resize(float Width, float Height);
+    void SetColor(CColor Color);
+    void Move(float X, float Y);
+    void Resize(float Width, float Height);
 
-	CBox(float X, float Y,
-		 float Width, float Height,
-		 CColor Color);
+    CBox(float X, float Y,
+         float Width, float Height,
+         CColor Color);
 };

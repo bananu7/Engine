@@ -69,7 +69,7 @@ void init ()
 
 void initShaders()
 {
-	programId = glCreateProgram();
+    programId = glCreateProgram();
  
     shaderIds[VERTEX_SHADER_ID] = glCreateShader(GL_VERTEX_SHADER);
     shaderIds[TESSELATION_SHADER_ID] = glCreateShader(GL_TESS_EVALUATION_SHADER);
@@ -88,20 +88,20 @@ void initShaders()
             "#version 400 core"
           NL"precision highp float;"
           NL"layout(location = 0) in vec3 position;"
-		  NL"out vec3 out_position;"
+          NL"out vec3 out_position;"
           NL"void main () {"
-		  NL"    out_position = position;"
+          NL"    out_position = position;"
           NL"    gl_Position = vec4(position, 1.0);"
           NL"}";
 
     ShaderSources[FRAGMENT_SHADER_ID] =  
             "#version 400 core"
-		  NL"in vec3 out_position;"
-		  NL"uniform float bias;"
-		  NL"out vec4 out_Color;"
+          NL"in vec3 out_position;"
+          NL"uniform float bias;"
+          NL"out vec4 out_Color;"
           NL"void main () {"
         //NL"    out_Color = vec4(0.0, 1.0, 0.0, 1.0);"
-		  NL"    out_Color = vec4(out_position.zxy + bias, 1.0);"
+          NL"    out_Color = vec4(out_position.zxy + bias, 1.0);"
           NL"}";
  
     ShaderSources[GEOMETRY_SHADER_ID] =
@@ -143,7 +143,7 @@ void initShaders()
         glAttachShader(programId, shaderIds[i]);
     }
 
-	glBindFragDataLocation(programId, 0, "out_Color");
+    glBindFragDataLocation(programId, 0, "out_Color");
 
     CheckForError();
  
@@ -167,61 +167,61 @@ Program Shader;
 
 class CRenderPass
 {
-	// input - vertices
-	// vertex shader 1
-	// fragment shader 1 -- we have to assume nontrivial
-	// output stage - either screen or fbo
+    // input - vertices
+    // vertex shader 1
+    // fragment shader 1 -- we have to assume nontrivial
+    // output stage - either screen or fbo
 
-	/*
-		shader.output += shadertarget::Screen
-		shader.output += shadertarget::Fbo(myFbo);
+    /*
+        shader.output += shadertarget::Screen
+        shader.output += shadertarget::Fbo(myFbo);
 
-		Using different output pretty much means:
-		it's always one FBO, with multiple color attachments
+        Using different output pretty much means:
+        it's always one FBO, with multiple color attachments
 
-			Buffer.attach(texture for attch0, text for attch1 ... etc)
-			glDrawBuffers(COLOR_ATTCH_0, COLOR_ATTCH_1 ...etc)
-	
+            Buffer.attach(texture for attch0, text for attch1 ... etc)
+            glDrawBuffers(COLOR_ATTCH_0, COLOR_ATTCH_1 ...etc)
+    
 
-		if the shader has fbo output, it has to be remembered which color attachments it's using
-	*/
+        if the shader has fbo output, it has to be remembered which color attachments it's using
+    */
 
-	std::list<Program> shaders;
+    std::list<Program> shaders;
 };
 
 void initShadersEngine()
 {
-	CSimpleDirectLoader::TDataMap Data;
-	std::string Vert = 
+    CSimpleDirectLoader::TDataMap Data;
+    std::string Vert = 
             "#version 400 core"
           NL"precision highp float;"
           NL"layout(location = 0) in vec3 position;"
-		  NL"out vec3 out_position;"
+          NL"out vec3 out_position;"
           NL"void main () {"
-		  NL"    out_position = position;"
+          NL"    out_position = position;"
           NL"    gl_Position = vec4(position, 1.0);"
           NL"}";
-	
-	std::string Frag = 
+    
+    std::string Frag = 
             "#version 400 core"
-		  NL"in vec3 out_position;"
-		  NL"uniform float bias;"
-		  NL"out vec4 out_Color;"
+          NL"in vec3 out_position;"
+          NL"uniform float bias;"
+          NL"out vec4 out_Color;"
           NL"void main () {"
         //NL"    out_Color = vec4(0.0, 1.0, 0.0, 1.0);"
-		  NL"    out_Color = vec4(out_position.zxy + bias, 1.0);"
+          NL"    out_Color = vec4(out_position.zxy + bias, 1.0);"
           NL"}";
 
-	using uc = unsigned char;
+    using uc = unsigned char;
 
-	Data["frag"] = vector<uc> (Frag.begin(), Frag.end());
-	Data["vert"] = vector<uc> (Vert.begin(), Vert.end());
+    Data["frag"] = vector<uc> (Frag.begin(), Frag.end());
+    Data["vert"] = vector<uc> (Vert.begin(), Vert.end());
  
-	auto Loader = CSimpleDirectLoader(Data);
-	string Result = Shader.Load(Loader);
-	if (!Result.empty())
-		_CrtDbgBreak();
-	Shader.Bind();
+    auto Loader = CSimpleDirectLoader(Data);
+    string Result = Shader.Load(Loader);
+    if (!Result.empty())
+        _CrtDbgBreak();
+    Shader.Bind();
 }
 
 #ifdef _WINDOWS
@@ -234,14 +234,14 @@ int main(int argc, char** argv)
 #endif
 
 {
-	#ifdef _WINDOWS
+    #ifdef _WINDOWS
     int argc = 1;
     char* argv[] = {"program.exe"};
-	#endif
+    #endif
     glutInit(&argc, argv);
     
     glutInitContextVersion (4,0);
-	glutInitContextFlags(GLUT_FORWARD_COMPATIBLE);
+    glutInitContextFlags(GLUT_FORWARD_COMPATIBLE);
     glutInitContextProfile(GLUT_CORE_PROFILE);
     glutCreateWindow("GLUT Test");
  
@@ -249,7 +249,7 @@ int main(int argc, char** argv)
     GLenum err=glewInit();
   if(err!=GLEW_OK)
     {
-  	std::cout<<"glewInit failed, aborting.";
+      std::cout<<"glewInit failed, aborting.";
         _CrtDbgBreak();
     }
     // Explicit check for GLEW error
@@ -259,8 +259,8 @@ int main(int argc, char** argv)
         _CrtDbgBreak();
  
     init();
-	//initShaders();
-	initShadersEngine();
+    //initShaders();
+    initShadersEngine();
  
     glutKeyboardFunc(&keyboard);
     glutDisplayFunc(&display);

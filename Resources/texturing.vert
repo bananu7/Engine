@@ -10,8 +10,8 @@ out vec2 TexCoord;
 
 void main(void)
 {
-	gl_Position = ProjectionMatrix * ViewMatrix * ModelMatrix * in_Position;
+    gl_Position = ProjectionMatrix * ViewMatrix * ModelMatrix * in_Position;
 
-	TexCoord = in_TexCoord;
+    TexCoord = in_TexCoord;
 }
 

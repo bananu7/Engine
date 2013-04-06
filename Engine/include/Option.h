@@ -4,22 +4,22 @@ namespace engine {
 
 struct SOption
 {
-	union
-	{
-		float		Float;
-		int			Int;
-	} Number;
+    union
+    {
+        float        Float;
+        int            Int;
+    } Number;
 
-	std::string String;
+    std::string String;
 
-	SOption () { }
-	SOption (float f) { Number.Float = f; }
-	SOption (int i) { Number.Int = i; }
-	SOption (std::string s) { String = s; }
+    SOption () { }
+    SOption (float f) { Number.Float = f; }
+    SOption (int i) { Number.Int = i; }
+    SOption (std::string s) { String = s; }
 
-	operator float() { return Number.Float; }
-	operator int() { return Number.Int; }
-	operator std::string() { return String; }
+    operator float() { return Number.Float; }
+    operator int() { return Number.Int; }
+    operator std::string() { return String; }
 };
 
 } // namespace engine

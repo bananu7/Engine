@@ -6,21 +6,21 @@ class CModelFbx;
 class CPhysicsEntity;
 
 class CPlayer :
-	public CEntity
+    public CEntity
 {
-	float			m_MaxAcceleration;
-	CModelFbx*		m_ModelFbx;
-	CPhysicsEntity* m_PhysicsObject;
-	CImage*			m_Texture;
+    float            m_MaxAcceleration;
+    CModelFbx*        m_ModelFbx;
+    CPhysicsEntity* m_PhysicsObject;
+    CImage*            m_Texture;
 
 public:
-	void Acc();
-	void Dec();
-	void Turn (bool left);
-	void Update ();
-	void Draw();
+    void Acc();
+    void Dec();
+    void Turn (bool left);
+    void Update ();
+    void Draw();
 
-	CPlayer(void);
-	~CPlayer(void);
+    CPlayer(void);
+    ~CPlayer(void);
 };
 

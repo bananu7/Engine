@@ -9775,7 +9775,7 @@ int main (void)
     display == NULL ? getenv("DISPLAY") : display, visual);
 #endif
   fprintf(f, "Running on a %s from %s\n", 
-	  glGetString(GL_RENDERER), glGetString(GL_VENDOR));
+      glGetString(GL_RENDERER), glGetString(GL_VENDOR));
   fprintf(f, "OpenGL version %s is supported\n", glGetString(GL_VERSION));
   glewInfo();
 #if defined(_WIN32)

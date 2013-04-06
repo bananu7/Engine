@@ -29,8 +29,8 @@ public:
     int GetSubMeshCount() const { return mSubMeshes.GetCount(); }
 
 private:
-	VertexBuffer m_VertsVbo, m_NormalsVbo, m_TexCoordsVbo, m_IndexVbo;
-	VertexAttributeArray m_Vao;
+    VertexBuffer m_VertsVbo, m_NormalsVbo, m_TexCoordsVbo, m_IndexVbo;
+    VertexAttributeArray m_Vao;
 
     // For every material, record the offsets in every VBO and triangle counts
     struct SubMesh

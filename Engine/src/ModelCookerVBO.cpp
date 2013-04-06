@@ -61,7 +61,7 @@ bool ModelCookerVBO::Cook(const ModelData& modelData)
     for (auto Cmp = Components.begin(); Cmp != Components.end(); ++Cmp)
     {
         for (auto Grp = Cmp->Groups.begin(); Grp != Cmp->Groups.end(); ++Grp)
-        {			
+        {            
             for (auto Face = Grp->Faces.begin(); Face != Grp->Faces.end(); ++Face)
             {
                 // Uzywam 3 buforow, bo sa bardziej elastycznym rozwiazaniem

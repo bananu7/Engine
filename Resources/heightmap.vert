@@ -17,15 +17,15 @@ out vec3 EyeV;
 
 void main(void)
 {
-	mat3 NormalMatrix = transpose(inverse(mat3(ModelMatrix)));
+    mat3 NormalMatrix = transpose(inverse(mat3(ModelMatrix)));
 
-	gl_Position = ProjectionMatrix * ViewMatrix * in_Position * ModelMatrix;
+    gl_Position = ProjectionMatrix * ViewMatrix * in_Position * ModelMatrix;
 
-	TexCoord = in_TexCoord;
-	Height = in_Position.y;
-	vec3 MVert = (ViewMatrix * in_Position).xyz;
-	Normal = NormalMatrix * in_Normal;
-	LightDir = vec3(LightPosition - MVert);
-	EyeV = -MVert;
-	//TexMap = in_TexMap;
+    TexCoord = in_TexCoord;
+    Height = in_Position.y;
+    vec3 MVert = (ViewMatrix * in_Position).xyz;
+    Normal = NormalMatrix * in_Normal;
+    LightDir = vec3(LightPosition - MVert);
+    EyeV = -MVert;
+    //TexMap = in_TexMap;
 }

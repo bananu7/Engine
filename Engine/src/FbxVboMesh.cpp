@@ -17,23 +17,23 @@ const int NORMAL_STRIDE = 3;
 const int UV_STRIDE = 2;
 
 CFbxVboMesh::CFbxVboMesh() : mHasNormal(false), mHasUV(false), mAllByControlPoint(true),
-	m_VertsVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::DYNAMIC_DRAW),
-	m_NormalsVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW),
-	m_TexCoordsVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW),
-	m_IndexVbo(VertexBuffer::INDEX_BUFFER, VertexBuffer::STATIC_DRAW)
+    m_VertsVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::DYNAMIC_DRAW),
+    m_NormalsVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW),
+    m_TexCoordsVbo(VertexBuffer::DATA_BUFFER, VertexBuffer::STATIC_DRAW),
+    m_IndexVbo(VertexBuffer::INDEX_BUFFER, VertexBuffer::STATIC_DRAW)
 {
 }
 
 CFbxVboMesh::~CFbxVboMesh()
 {
-//	FbxArrayDelete(mSubMeshes);
+//    FbxArrayDelete(mSubMeshes);
 
-	for(int i=0; i < mSubMeshes.GetCount(); i++)
-	{
-		delete mSubMeshes[i];
-	}
-	
-	mSubMeshes.Clear();
+    for(int i=0; i < mSubMeshes.GetCount(); i++)
+    {
+        delete mSubMeshes[i];
+    }
+    
+    mSubMeshes.Clear();
 
 }
 
@@ -255,50 +255,50 @@ bool CFbxVboMesh::Initialize(const FbxMesh *pMesh)
         mSubMeshes[lMaterialIndex]->TriangleCount += 1;
     }
 
-	m_Vao.Bind();
+    m_Vao.Bind();
 
-	m_IndexVbo.Bind();
+    m_IndexVbo.Bind();
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, lPolygonCount * TRIANGLE_VERTEX_COUNT * sizeof(unsigned int), lIndices, GL_STATIC_DRAW);
 
     // Save vertex attributes into GPU
-	m_VertsVbo.Bind();
+    m_VertsVbo.Bind();
     glBufferData(GL_ARRAY_BUFFER, lPolygonVertexCount * VERTEX_STRIDE * sizeof(float), lVertices, GL_STATIC_DRAW);
     delete [] lVertices;
 
     if (mHasNormal)
     {
-		m_NormalsVbo.Bind();
+        m_NormalsVbo.Bind();
         glBufferData(GL_ARRAY_BUFFER, lPolygonVertexCount * NORMAL_STRIDE * sizeof(float), lNormals, GL_STATIC_DRAW);
         delete [] lNormals;
     }
     
     if (mHasUV)
     {
-		m_TexCoordsVbo.Bind();
+        m_TexCoordsVbo.Bind();
         glBufferData(GL_ARRAY_BUFFER, lPolygonVertexCount * UV_STRIDE * sizeof(float), lUVs, GL_STATIC_DRAW);
         delete [] lUVs;
     }
     
-	m_Vao.Bind();
+    m_Vao.Bind();
 
     // Set vertex position array.
     m_VertsVbo.Bind();
     glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0);
-	glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(0);
 
     // Set normal array.
     if (mHasNormal)
     {
-		m_NormalsVbo.Bind();
+        m_NormalsVbo.Bind();
         glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
-		glEnableVertexAttribArray(1);
+        glEnableVertexAttribArray(1);
     }
     
     // Set UV array.
     if (mHasUV)
     {
         m_TexCoordsVbo.Bind();
-		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, 0);
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, 0);
         glEnableVertexAttribArray(2);
     }
 
@@ -351,7 +351,7 @@ void CFbxVboMesh::UpdateVertexPosition(const FbxMesh * pMesh, const FbxVector4 *
     // Transfer into GPU.
     if (lVertices)
     {
-		m_VertsVbo.Bind();
+        m_VertsVbo.Bind();
         glBufferData(GL_ARRAY_BUFFER, lVertexCount * VERTEX_STRIDE * sizeof(float), lVertices, GL_DYNAMIC_DRAW);
         delete [] lVertices;
     }
@@ -368,26 +368,26 @@ void CFbxVboMesh::Draw(int pMaterialIndex) const
 
 void CFbxVboMesh::BeginDraw()
 {
-	m_Vao.Bind();
+    m_Vao.Bind();
 
     // Set vertex position array.
     m_VertsVbo.Bind();
     glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0);
-	glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(0);
 
     // Set normal array.
     if (mHasNormal)
     {
-		m_NormalsVbo.Bind();
+        m_NormalsVbo.Bind();
         glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
-		glEnableVertexAttribArray(1);
+        glEnableVertexAttribArray(1);
     }
     
     // Set UV array.
     if (mHasUV)
     {
         m_TexCoordsVbo.Bind();
-		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, 0);
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, 0);
         glEnableVertexAttribArray(2);
     }
 

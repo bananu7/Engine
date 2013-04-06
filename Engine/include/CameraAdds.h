@@ -4,54 +4,50 @@
 
 namespace engine {
 
-// Kamera do ustawiania celu i pozycji
+// Camera focusing on specified object
 class CameraSimple:
-	public Camera
+    public Camera
 {
 public:
-	glm::vec3 Target, Position;
-	
-	void CalculateView();
+    glm::vec3 Target, Position;
+    
+    void CalculateView();
 };
 
-// Kamera do latania jak przy komendzie 'fly' w FPS-ach
+// Flying camera with First-Person perspective
 class CameraFly :
-	public Camera
+    public Camera
 {
 public:
-	// Kierunek, w jaki patrzymy
-	// X - obrot wokol osi Y - w radianach
-	// Y - obrot wokol osi X
-	glm::vec2 LookDir;
-	glm::vec3 Position;
+    glm::vec2 LookDir;
+    glm::vec3 Position;
 
-	void CalculateView();
-	void Fly (float len);
-	void Strafe (float left);
+    void CalculateView();
+    void Fly (float len);
+    void Strafe (float left);
 };
 
 class CCameraTrack :
-	public Camera
+    public Camera
 {
 public:
-	glm::vec3 Target;
-	float Direction, Radius;
+    glm::vec3 Target;
+    float Direction, Radius;
 
-	void CalculateView();
+    void CalculateView();
 };
 
-// Kamera do obracania sie wokol obiektu - dobra to testow i podgladow
+// Camera rotating around given target
 class CameraSpherical :
-	public Camera
+    public Camera
 {
 public:
 };
 
-// Kamera, ktora automatycznie ustala wysokosc, na jakiej sie znajdujemy
-// na podstawie terenu
+// Camera which sets height appropriately based on ground height sampler
 class CameraWalk
 {
-	// sampler do ziemi
+// add height sampler
 public:
 };
 

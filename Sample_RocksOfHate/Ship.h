@@ -1,17 +1,17 @@
 #pragma once
 #include "entity.h"
 class CShip :
-	public CEntity
+    public CEntity
 {
-	float m_MaxAcceleration;
+    float m_MaxAcceleration;
 
 public:
-	void Acc();
-	void Dec();
-	void Turn (bool left);
-	void Update ();
+    void Acc();
+    void Dec();
+    void Turn (bool left);
+    void Update ();
 
-	CShip(void);
-	~CShip(void);
+    CShip(void);
+    ~CShip(void);
 };
 

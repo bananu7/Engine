@@ -9,11 +9,11 @@ out vec2 TexCoord;
 
 void main(void)
 {
-	vec4 Position = in_Position;
-	Position.z = 0;
-	Position.w = 1; 
-	gl_Position = ProjectionMatrix *
-				  Position;
-				  
-	TexCoord = in_TexCoord;
+    vec4 Position = in_Position;
+    Position.z = 0;
+    Position.w = 1; 
+    gl_Position = ProjectionMatrix *
+                  Position;
+                  
+    TexCoord = in_TexCoord;
 }

@@ -2,10 +2,10 @@
 #include "Entity.h"
 
 class CRock : 
-	public CEntity
+    public CEntity
 {
 public:
-	CRock(void);
-	~CRock(void);
+    CRock(void);
+    ~CRock(void);
 };
 

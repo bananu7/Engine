@@ -5,7 +5,7 @@ class Particle;
 class CParticleSystem
 {
 public:
-	CParticleSystem(void);
-	~CParticleSystem(void);
+    CParticleSystem(void);
+    ~CParticleSystem(void);
 };
 

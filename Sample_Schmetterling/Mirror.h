@@ -6,18 +6,18 @@ class Program;
 
 class CMirror
 {
-	unsigned int m_TextureNum, m_DepthBufferNum;
-	Framebuffer m_Fbo;
-	VertexBuffer m_Vbo, m_TexVbo;
-	Program* m_Shader;
+    unsigned int m_TextureNum, m_DepthBufferNum;
+    Framebuffer m_Fbo;
+    VertexBuffer m_Vbo, m_TexVbo;
+    Program* m_Shader;
 
 public:
-	void Init();
-	void Bind();
-	void Unbind();
-	void Draw();
+    void Init();
+    void Bind();
+    void Unbind();
+    void Draw();
 
-	CMirror(Program* shader);
-	~CMirror(void);
+    CMirror(Program* shader);
+    ~CMirror(void);
 };
 

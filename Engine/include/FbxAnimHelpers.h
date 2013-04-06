@@ -10,26 +10,26 @@ void ComputeShapeDeformation(FbxMesh* pMesh,
                              FbxAnimLayer * pAnimLayer,
                              FbxVector4* pVertexArray);
 void ComputeClusterDeformation(FbxAMatrix& pGlobalPosition, 
-							   FbxMesh* pMesh,
-							   FbxCluster* pCluster, 
-							   FbxAMatrix& pVertexTransformMatrix,
-							   FbxTime pTime, 
-							   FbxPose* pPose);
+                               FbxMesh* pMesh,
+                               FbxCluster* pCluster, 
+                               FbxAMatrix& pVertexTransformMatrix,
+                               FbxTime pTime, 
+                               FbxPose* pPose);
 void ComputeLinearDeformation(FbxAMatrix& pGlobalPosition, 
-							  FbxMesh* pMesh, 
-							  FbxTime& pTime, 
-							  FbxVector4* pVertexArray,
-							  FbxPose* pPose);
+                              FbxMesh* pMesh, 
+                              FbxTime& pTime, 
+                              FbxVector4* pVertexArray,
+                              FbxPose* pPose);
 void ComputeDualQuaternionDeformation(FbxAMatrix& pGlobalPosition, 
-									  FbxMesh* pMesh, 
-									  FbxTime& pTime, 
-									  FbxVector4* pVertexArray,
-									  FbxPose* pPose);
+                                      FbxMesh* pMesh, 
+                                      FbxTime& pTime, 
+                                      FbxVector4* pVertexArray,
+                                      FbxPose* pPose);
 void ComputeSkinDeformation(FbxAMatrix& pGlobalPosition, 
-							FbxMesh* pMesh, 
-							FbxTime& pTime, 
-							FbxVector4* pVertexArray,
-							FbxPose* pPose);
+                            FbxMesh* pMesh, 
+                            FbxTime& pTime, 
+                            FbxVector4* pVertexArray,
+                            FbxPose* pPose);
 
 void ReadVertexCacheData(FbxMesh* pMesh, 
                          FbxTime& pTime, 

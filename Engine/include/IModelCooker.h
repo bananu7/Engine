@@ -11,22 +11,22 @@ class ModelData;
 class ModelCooker //interface
 {
 protected:
-	struct CookedComponent 
-	{
-		//CTransform	Transform;
-		float Scale;
-		const glm::vec3 Center;
+    struct CookedComponent 
+    {
+        //CTransform    Transform;
+        float Scale;
+        const glm::vec3 Center;
 
-		CookedComponent(glm::vec3 center) :
-			Center(std::move(center)) { }
-	};
+        CookedComponent(glm::vec3 center) :
+            Center(std::move(center)) { }
+    };
 
 public:
-	virtual bool Cook (const ModelData& data) = 0;
-	virtual void Draw () = 0;
+    virtual bool Cook (const ModelData& data) = 0;
+    virtual void Draw () = 0;
 
-	ModelCooker(void) { }
-	virtual ~ModelCooker(void) { }
+    ModelCooker(void) { }
+    virtual ~ModelCooker(void) { }
 };
 
 } // namespace engine

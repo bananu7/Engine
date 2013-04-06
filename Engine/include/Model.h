@@ -16,23 +16,23 @@ class Program;
 class CNode 
 {
 public:
-	glm::vec3 m_Rotation, m_Position, m_Scale;
+    glm::vec3 m_Rotation, m_Position, m_Scale;
 };
 
 class Model :
-	protected CNode
+    protected CNode
 {
 protected:
-	unsigned int m_DefaultGroup;
-	boost::ptr_vector<VertexBuffer> m_Vbos;
+    unsigned int m_DefaultGroup;
+    boost::ptr_vector<VertexBuffer> m_Vbos;
 
 public:
-	std::shared_ptr<Program> Shader;
+    std::shared_ptr<Program> Shader;
 
-	void Draw () const;
-	void Draw (glm::vec3 const& pos, glm::vec3 const& rot, glm::vec3 const& scale) const;
+    void Draw () const;
+    void Draw (glm::vec3 const& pos, glm::vec3 const& rot, glm::vec3 const& scale) const;
 
-	Model(ModelData const& data);
+    Model(ModelData const& data);
 };
 
 } // namespace engine
