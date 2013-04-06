@@ -1,11 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sample_SFML", "Sample_SFML\Sample_SFML.vcxproj", "{07291257-B603-4148-8B77-9C2E26630779}"
-	ProjectSection(ProjectDependencies) = postProject
-		{72FB8CF7-682D-4505-B521-3997FA9A26C2} = {72FB8CF7-682D-4505-B521-3997FA9A26C2}
-	EndProjectSection
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sample_GL", "Sample_GL\Sample_GL.vcxproj", "{8F977C10-417D-4D45-9323-16974F5D7A0C}"
 	ProjectSection(ProjectDependencies) = postProject
 		{72FB8CF7-682D-4505-B521-3997FA9A26C2} = {72FB8CF7-682D-4505-B521-3997FA9A26C2}
@@ -34,10 +29,6 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{07291257-B603-4148-8B77-9C2E26630779}.Debug|Win32.ActiveCfg = Debug|Win32
-		{07291257-B603-4148-8B77-9C2E26630779}.Debug|Win32.Build.0 = Debug|Win32
-		{07291257-B603-4148-8B77-9C2E26630779}.Release|Win32.ActiveCfg = Release|Win32
-		{07291257-B603-4148-8B77-9C2E26630779}.Release|Win32.Build.0 = Release|Win32
 		{8F977C10-417D-4D45-9323-16974F5D7A0C}.Debug|Win32.ActiveCfg = Debug|Win32
 		{8F977C10-417D-4D45-9323-16974F5D7A0C}.Debug|Win32.Build.0 = Debug|Win32
 		{8F977C10-417D-4D45-9323-16974F5D7A0C}.Release|Win32.ActiveCfg = Release|Win32

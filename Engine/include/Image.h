@@ -3,14 +3,11 @@
 #include <string>
 #include <Misc.h>
 #include <boost/range.hpp>
-#include "gl_id.h"
+#include "Texture.hpp"
 
 namespace engine {
 
-class Image
-{
-    gl_id m_TexId;
-
+class Image : public Texture<texture_desc::Type::Texture_2D> {
     static Image _internalLoad(std::vector<unsigned char>&& data, bool srgb);
 
 public:
@@ -18,22 +15,17 @@ public:
     static Image Load (Range&& range, bool loadAsSRGB = false) {
         return std::move(_internalLoad(std::vector<unsigned char>(boost::begin(range), boost::end(range)), loadAsSRGB));
     }
-    
-    /// Binds to currently active texture unit and doesn't change it.
-    void Bind ();
-    /// Binds to given texture unit, active texture unit is changed to the one given
-    void Bind (int textureUnitNum);
 
     void Unload (void) { }
 
     int GetWidth();
 
-    inline unsigned GetTexture () const { return m_TexId; }
-
-    Image();
-    Image(Image&& other);
-    Image& operator=(Image&& other);
-    ~Image();
+    Image() = default;
+    Image(Image&& other) : Texture(std::move(other)) { };
+    Image& operator= (Image&& other) {
+        Texture::operator=(std::move(other));
+        return *this;
+    }
 };
 
 } // namespace engine

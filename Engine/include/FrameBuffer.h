@@ -3,6 +3,7 @@
 #include <GL/glew.h>
 #include <iostream>
 #include "gl_id.h"
+#include "Texture.hpp"
 
 /*!
 Framebuffer Class. This class encapsulates the Framebuffer
@@ -62,57 +63,97 @@ Performance Notes:
 
 namespace engine {
 
+namespace fbo_desc {
+    enum class Attachment : GLenum {
+        Color_0 = GL_COLOR_ATTACHMENT0,
+        Color_1 = GL_COLOR_ATTACHMENT1,
+        Color_2 = GL_COLOR_ATTACHMENT2,
+        Color_3 = GL_COLOR_ATTACHMENT3,
+        Color_4 = GL_COLOR_ATTACHMENT4,
+        Color_5 = GL_COLOR_ATTACHMENT5,
+        Color_6 = GL_COLOR_ATTACHMENT6,
+        Color_7 = GL_COLOR_ATTACHMENT7,
+        Color_8 = GL_COLOR_ATTACHMENT8,
+        Color_9 = GL_COLOR_ATTACHMENT9,
+        Color_10 = GL_COLOR_ATTACHMENT10,
+        Depth = GL_DEPTH_ATTACHMENT,
+        Stencil = GL_STENCIL_ATTACHMENT,
+        DepthAndStencil = GL_DEPTH_STENCIL_ATTACHMENT
+    };
+}
+
 class Framebuffer
 {
 public:
-  /// Ctor/Dtor
-  Framebuffer();
-  virtual ~Framebuffer();
+    /// Ctor/Dtor
+    Framebuffer();
+    virtual ~Framebuffer();
 
-  /// Bind this FBO as current render target
-  void Bind();
+    /// Bind this FBO as current render target
+    void Bind();
 
-  /// Bind a texture to the "attachment" point of this FBO
-  virtual void AttachTexture( GLenum texTarget, 
-                              GLuint texId,
-                              GLenum attachment = GL_COLOR_ATTACHMENT0_EXT,
-                              int mipLevel      = 0,
-                              int zSlice        = 0 );
+    /// Bind a texture to the "attachment" point of this FBO
+    template<texture_desc::Type target>
+    void AttachTexture( Texture<target> const& texture,
+                        fbo_desc::Attachment attachment,
+                        int mipLevel      = 0,
+                        int zSlice        = 0 ) {
+        /*GLenum attachment = GL_COLOR_ATTACHMENT0;
+        switch (texture.getFormat()) {
+        case texture_desc::Format::Depth:
+            attachment = GL_DEPTH_ATTACHMENT;
+            
+        }*/
 
-  /// Bind an array of textures to multiple "attachment" points of this FBO
-  ///  - By default, the first 'numTextures' attachments are used,
-  ///    starting with GL_COLOR_ATTACHMENT0_EXT
-  virtual void AttachTextures( int numTextures, 
-                               GLenum texTarget[], 
-                               GLuint texId[],
-                               GLenum attachment[] = NULL,
-                               int mipLevel[]      = NULL,
-                               int zSlice[]        = NULL );
+        AttachTexture(static_cast<GLenum>(target),
+                      texture.getId(),
+                      static_cast<GLenum>(attachment),
+                      mipLevel,
+                      zSlice);
+    }
 
-  /// Bind a render buffer to the "attachment" point of this FBO
-  virtual void AttachRenderBuffer( GLuint buffId,
-                                   GLenum attachment = GL_COLOR_ATTACHMENT0_EXT );
+    /// "Raw" version
+    /// Bind a texture to the "attachment" point of this FBO
+    void AttachTexture( GLenum texTarget, 
+                        GLuint texId,
+                        GLenum attachment,
+                        int mipLevel      = 0,
+                        int zSlice        = 0 );
 
-  /// Bind an array of render buffers to corresponding "attachment" points
-  /// of this FBO.
-  /// - By default, the first 'numBuffers' attachments are used,
-  ///   starting with GL_COLOR_ATTACHMENT0_EXT
-  virtual void AttachRenderBuffers( int numBuffers, GLuint buffId[],
+    /// Bind an array of textures to multiple "attachment" points of this FBO
+    ///  - By default, the first 'numTextures' attachments are used,
+    ///    starting with GL_COLOR_ATTACHMENT0_EXT
+    /*virtual void AttachTextures( int numTextures, 
+                                GLenum texTarget[], 
+                                GLuint texId[],
+                                GLenum attachment[] = NULL,
+                                int mipLevel[]      = NULL,
+                                int zSlice[]        = NULL );*/
+
+    /// Bind a render buffer to the "attachment" point of this FBO
+    virtual void AttachRenderBuffer( GLuint buffId,
+                                    GLenum attachment);
+
+    /// Bind an array of render buffers to corresponding "attachment" points
+    /// of this FBO.
+    /// - By default, the first 'numBuffers' attachments are used,
+    ///   starting with GL_COLOR_ATTACHMENT0_EXT
+    virtual void AttachRenderBuffers( int numBuffers, GLuint buffId[],
                                     GLenum attachment[] = NULL );
 
-  /// Free any resource bound to the "attachment" point of this FBO
-  void Unattach( GLenum attachment );
+    /// Free any resource bound to the "attachment" point of this FBO
+    void Unattach( GLenum attachment );
 
-  /// Free any resources bound to any attachment points of this FBO
-  void UnattachAll();
+    /// Free any resources bound to any attachment points of this FBO
+    void UnattachAll();
 
-  /// Is this FBO currently a valid render target?
-  ///  - Sends output to std::cerr by default but can
-  ///    be a user-defined C++ stream
-  ///
-  /// NOTE : This function works correctly in debug build
-  ///        mode but always returns "true" if NDEBUG is
-  ///        is defined (optimized builds)
+    /// Is this FBO currently a valid render target?
+    ///  - Sends output to std::cerr by default but can
+    ///    be a user-defined C++ stream
+    ///
+    /// NOTE : This function works correctly in debug build
+    ///        mode but always returns "true" if NDEBUG is
+    ///        is defined (optimized builds)
 #ifndef NDEBUG
   bool IsValid( std::ostream& ostr = std::cerr );
 #else
@@ -121,7 +162,7 @@ public:
   }
 #endif
 
-  /// BEGIN : Accessors
+    /// BEGIN : Accessors
     /// Is attached type GL_RENDERBUFFER_EXT or GL_TEXTURE?
     GLenum GetAttachedType( GLenum attachment );
 
@@ -137,10 +178,10 @@ public:
 
     /// Which z-slice is currently attached to "attachment?"
     GLint  GetAttachedZSlice( GLenum attachment );
-  /// END : Accessors
+    /// END : Accessors
 
 
-  /// BEGIN : Static methods global to all FBOs
+    /// BEGIN : Static methods global to all FBOs
     /// Return number of color attachments permitted
     static int GetMaxColorAttachments();
 
@@ -154,18 +195,18 @@ public:
     ///     "Unbind" would likely lead to a large number of unnecessary
     ///     FBO enablings/disabling.
     static void Disable();
-  /// END : Static methods global to all FBOs
+    /// END : Static methods global to all FBOs
 
 protected:
-  void  _GuardedBind();
-  void  _GuardedUnbind();
-  void  _FramebufferTextureND( GLenum attachment, GLenum texTarget, 
-                               GLuint texId, int mipLevel, int zSlice );
-  static GLuint _GenerateFboId();
+    void  _GuardedBind();
+    void  _GuardedUnbind();
+    void  _FramebufferTextureND( GLenum attachment, GLenum texTarget, 
+                                GLuint texId, int mipLevel, int zSlice );
+    static GLuint _GenerateFboId();
 
 private:
-  gl_id m_fboId;
-  gl_id m_savedFboId;
+    gl_id m_fboId;
+    gl_id m_savedFboId;
 };
 
 } // namespace engine

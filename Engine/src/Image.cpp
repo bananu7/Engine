@@ -38,13 +38,12 @@ Image Image::_internalLoad(std::vector<unsigned char>&& vd, bool srgb)
     Image temporary;
     
     // FIXME
-    GLenum internal_format = GL_RGBA;
+    auto internalFormat = texture_desc::InternalFormat::RGBA;
     if (srgb)
-        internal_format = GL_SRGB8_ALPHA8;
+        internalFormat = texture_desc::InternalFormat::SRGBA;
         
-    GLuint image_format = GL_BGRA;
+    auto format = texture_desc::Format::BGRA;
     GLuint level = 0;
-    GLuint border = 0;
     
     auto fm = make_unique_raw(FreeImage_OpenMemory(vd.data(), vd.size()), FreeImageMemoryDeleter());
 
@@ -85,52 +84,23 @@ Image Image::_internalLoad(std::vector<unsigned char>&& vd, bool srgb)
     if((bits == 0) || (width == 0) || (height == 0))
         throw runtime_error("Image checking failed");
 
-    //generate an OpenGL texture ID for this texture
-    glGenTextures(1, temporary.m_TexId.get_ptr());
     //bind to the new texture ID
-    temporary.Bind();
+    temporary.bind();
+
+    temporary.imageData(width, height, format, internalFormat, texture_desc::DataType::UnsignedByte, bits);
     //store the texture data for OpenGL use
-    glTexImage2D(GL_TEXTURE_2D, level, internal_format, width, height,
-        border, image_format, GL_UNSIGNED_BYTE, bits);
     
     //return success
     return std::move(temporary);
 }
 
-void Image::Bind()
-{
-    glBindTexture(GL_TEXTURE_2D, m_TexId);
-}
-
-void Image::Bind(int textureUnitNum)
-{
-    glActiveTexture (GL_TEXTURE0 + textureUnitNum);
-    glBindTexture(GL_TEXTURE_2D, m_TexId);
-}
-
 int Image::GetWidth()
 {
     int size;
+    bind();
     glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &size);
     return size;
 }
 
-Image::Image() 
-{
-}
-
-Image::Image(Image&& other) : m_TexId(std::move(other.m_TexId)) {
-}
-
-Image& Image::operator= (Image&& other) {
-    m_TexId = std::move(other.m_TexId);
-    return *this;
-}
-
-
-Image::~Image()
-{
-    glDeleteTextures( 1, m_TexId.get_ptr() );
-}
 
 } // namespace engine

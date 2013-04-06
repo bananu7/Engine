@@ -113,7 +113,7 @@ public:
         m_id = std::move(other.m_id);
     }
     
-    template<typename T>
+    //template<typename T>
     friend class Shader;
 
     explicit operator bool() { return Status().empty(); }
@@ -133,7 +133,7 @@ public:
         m_id = std::move(other.m_id);
     }
 
-    template<typename T>
+    //template<typename T>
     friend class Shader;
     //friend class Shader;
 

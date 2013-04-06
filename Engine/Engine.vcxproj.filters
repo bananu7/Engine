@@ -9,18 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Header Files\Misc">
-      <UniqueIdentifier>{79067ca1-b879-4b79-9772-423fe1ddaa48}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Model">
-      <UniqueIdentifier>{0a25f70d-c4e0-432f-b94d-0e0c482c2e28}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Model\Fbx">
-      <UniqueIdentifier>{f944c833-a46c-4fc5-bcc4-52b90ff89b3d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Resources">
-      <UniqueIdentifier>{b8caa925-e1b4-4153-8fff-13fafd787644}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SFML">
       <UniqueIdentifier>{8949899d-6d7f-4d6a-87d0-3cb5add56d6f}</UniqueIdentifier>
     </Filter>
@@ -45,49 +33,19 @@
     <Filter Include="GLEW">
       <UniqueIdentifier>{82283bb2-277c-4ac3-ac4e-455df3b83b73}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Fbx">
+      <UniqueIdentifier>{f944c833-a46c-4fc5-bcc4-52b90ff89b3d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Logger.h">
-      <Filter>Header Files\Misc</Filter>
-    </ClInclude>
-    <ClInclude Include="include\LuaVM.h">
-      <Filter>Header Files\Misc</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Misc.h">
-      <Filter>Header Files\Misc</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Option.h">
-      <Filter>Header Files\Misc</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Camera.h">
-      <Filter>Header Files\Misc</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ResManager.h">
-      <Filter>Header Files\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Resource.h">
-      <Filter>Header Files\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Shader.h">
-      <Filter>Header Files\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GameObject.h">
-      <Filter>Header Files\Misc</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Image.h">
-      <Filter>Header Files\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="include\CameraAdds.h">
-      <Filter>Header Files\Misc</Filter>
-    </ClInclude>
     <ClInclude Include="include\FbxAnimHelpers.h">
-      <Filter>Header Files\Model\Fbx</Filter>
+      <Filter>Header Files\Fbx</Filter>
     </ClInclude>
     <ClInclude Include="include\FbxVboMesh.h">
-      <Filter>Header Files\Model\Fbx</Filter>
+      <Filter>Header Files\Fbx</Filter>
     </ClInclude>
     <ClInclude Include="include\GetPosition.h">
-      <Filter>Header Files\Model\Fbx</Filter>
+      <Filter>Header Files\Fbx</Filter>
     </ClInclude>
     <ClInclude Include="include\IModelCooker.h">
       <Filter>Header Files</Filter>
@@ -119,9 +77,6 @@
     <ClInclude Include="include\VertexBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Engine.h">
-      <Filter>Header Files\Misc</Filter>
-    </ClInclude>
     <ClInclude Include="..\dependencies\SFML-2.0\include\SFML\System.hpp">
       <Filter>SFML\include</Filter>
     </ClInclude>
@@ -131,8 +86,50 @@
     <ClInclude Include="include\Config.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Texture.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ResManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CameraAdds.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="include\gl_id.h">
-      <Filter>Header Files\Misc</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Logger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LuaVM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Misc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Option.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TextureEnums.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -295,8 +292,8 @@
     <ClCompile Include="..\dependencies\glew-1.9.0\src\glewinfo.c">
       <Filter>GLEW</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
+    <ClCompile Include="src\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

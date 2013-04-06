@@ -121,6 +121,8 @@
     <ClInclude Include="include\Resource.h" />
     <ClInclude Include="include\Shader.h" />
     <ClInclude Include="include\ShaderSet.h" />
+    <ClInclude Include="include\Texture.hpp" />
+    <ClInclude Include="include\TextureEnums.hpp" />
     <ClInclude Include="include\VertexAttributeArray.h" />
     <ClInclude Include="include\VertexBuffer.h" />
   </ItemGroup>
@@ -183,11 +185,9 @@
     <ClCompile Include="src\ShaderSet.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="src\Texture.cpp" />
     <ClCompile Include="src\VertexAttributeArray.cpp" />
     <ClCompile Include="src\VertexBuffer.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
