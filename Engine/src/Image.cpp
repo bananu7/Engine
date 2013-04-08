@@ -16,18 +16,6 @@ namespace engine {
 using std::string;
 using std::runtime_error;
 
-struct FreeImageMemoryDeleter {
-    void operator()(FIMEMORY* mem) {
-        FreeImage_CloseMemory(mem);
-    }
-};
-
-struct FreeImageBitmapDeleter {
-    void operator()(FIBITMAP* dib) {
-        FreeImage_Unload(dib);
-    }
-};
-
 template<typename T, typename Deleter>
 inline std::unique_ptr<T, Deleter> make_unique_raw(T* t, Deleter&& d) {
     return std::unique_ptr<T, Deleter>(t, std::forward<Deleter>(d));
@@ -45,7 +33,7 @@ Image Image::_internalLoad(std::vector<unsigned char>&& vd, bool srgb)
     auto format = texture_desc::Format::BGRA;
     GLuint level = 0;
     
-    auto fm = make_unique_raw(FreeImage_OpenMemory(vd.data(), vd.size()), FreeImageMemoryDeleter());
+    auto fm = make_unique_raw(FreeImage_OpenMemory(vd.data(), vd.size()), &FreeImage_CloseMemory);
 
     //check the file signature and deduce its format
     FREE_IMAGE_FORMAT fif = FreeImage_GetFileTypeFromMemory(fm.get(), vd.size());
@@ -64,7 +52,7 @@ Image Image::_internalLoad(std::vector<unsigned char>&& vd, bool srgb)
     //auto dib = std::unique_ptr<FIBITMAP, FreeImageBitmapDeleter>(
     //    FreeImage_LoadFromMemory(fif, fm.get()), FreeImageBitmapDeleter());
 
-    auto dib = make_unique_raw(FreeImage_LoadFromMemory(fif, fm.get()), FreeImageBitmapDeleter());
+    auto dib = make_unique_raw(FreeImage_LoadFromMemory(fif, fm.get()), &FreeImage_Unload);
 
     //    dib = FreeImage_Load(fif, path);
 
