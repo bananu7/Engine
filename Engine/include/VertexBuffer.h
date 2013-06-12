@@ -5,8 +5,6 @@
 
 namespace engine {
 
-struct CVertex;
-
 class VertexBuffer
 {
 public:
