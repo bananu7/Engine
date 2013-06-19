@@ -62,7 +62,7 @@ mat4 Camera::CreateModelview(vec3 const& eye, vec3 const& center)
 
 void Camera::CalculateProjection()
 {
-    m_ProjectionMatrix = CreateProjection(45, 16.f/10.f, 0.01f, 2000.f);
+    m_ProjectionMatrix = CreateProjection(70, 16.f/10.f, 0.01f, 2000.f);
 }
 void Camera::CalculateView()
 {

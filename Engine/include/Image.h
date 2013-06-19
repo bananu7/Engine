@@ -8,12 +8,12 @@
 namespace engine {
 
 class Image : public Texture<texture_desc::Type::Texture_2D> {
-    static Image _internalLoad(std::vector<unsigned char>&& data, bool srgb);
+    static Image _internalLoad(std::vector<char>&& data, bool srgb);
 
 public:
     template<class Range>
     static Image Load (Range&& range, bool loadAsSRGB = false) {
-        return std::move(_internalLoad(std::vector<unsigned char>(boost::begin(range), boost::end(range)), loadAsSRGB));
+        return std::move(_internalLoad(std::vector<char>(boost::begin(range), boost::end(range)), loadAsSRGB));
     }
 
     void Unload (void) { }

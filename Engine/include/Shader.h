@@ -202,6 +202,14 @@ public:
     Program() : m_id(0) {
     }
 
+    Program(Program&& p) {
+        m_vertexAttribs = std::move(p.m_vertexAttribs);
+        m_fragmentShader = std::move(p.m_fragmentShader);
+        m_vertexShader = std::move(p.m_vertexShader);
+        m_uniformCache = std::move(p.m_uniformCache);
+        m_id = std::move(p.m_id);
+    }
+
     ~Program() {
         glDeleteProgram(m_id);
     }

@@ -23,7 +23,7 @@ if platform.system() == 'Windows':
 else:
     env = Environment(ENV = os.environ)
 
-env.Append(CPPFLAGS="-Wall -g -std=c++11 ")
+env.Append(CPPFLAGS="-std=c++11 ")
 #env.Append(CPPFLAGS="-fdiagnostics-show-caret")
 env.Append(CPPDEFINES="GLEW_NO_GLU")
 env.Append(CPPPATH=["Engine/include/"])

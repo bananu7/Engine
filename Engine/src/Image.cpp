@@ -21,7 +21,7 @@ inline std::unique_ptr<T, Deleter> make_unique_raw(T* t, Deleter&& d) {
     return std::unique_ptr<T, Deleter>(t, std::forward<Deleter>(d));
 }
 
-Image Image::_internalLoad(std::vector<unsigned char>&& vd, bool srgb)
+Image Image::_internalLoad(std::vector<char>&& vd, bool srgb)
 {
     Image temporary;
     
@@ -33,7 +33,7 @@ Image Image::_internalLoad(std::vector<unsigned char>&& vd, bool srgb)
     auto format = texture_desc::Format::BGRA;
     GLuint level = 0;
     
-    auto fm = make_unique_raw(FreeImage_OpenMemory(vd.data(), vd.size()), &FreeImage_CloseMemory);
+    auto fm = make_unique_raw(FreeImage_OpenMemory((BYTE*)(vd.data()), vd.size()), &FreeImage_CloseMemory);
 
     //check the file signature and deduce its format
     FREE_IMAGE_FORMAT fif = FreeImage_GetFileTypeFromMemory(fm.get(), vd.size());
